@@ -1,0 +1,43 @@
+@import "../Utils/config.scss";
+.hero-Container{
+
+    background: url("../../Assets/LandingPage/landing-PageImage.png") center/cover;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    padding:0 2rem;
+    h3, p{
+        color:$textColor1;
+    }
+    p{
+        text-align: left;
+    }
+    h3{
+        font-size: 1.3rem;
+        margin:0 0;
+        width:90%;
+        text-align: left;
+        @media(min-width:550px){
+            width:80%;
+            font-size: 1.5rem;
+        }
+        @media(min-width:768px){
+            width:70%;
+        }
+        @media(min-width:1024px){
+            width:50%;
+            font-size: 1.7rem;
+        }
+    }
+    button {
+        border-radius: 0.2rem;
+        background-color: $tertiaryColor;
+        transition: 300ms ease-out;
+        &:hover {
+          background-color: $primaryColor;
+          color: $textColor2;
+        }
+      }
+}

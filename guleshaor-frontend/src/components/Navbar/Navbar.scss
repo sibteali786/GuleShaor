@@ -1,0 +1,55 @@
+@import "../Utils/config.scss";
+.navContainer {
+  z-index:10;
+  margin: 0 0;
+  padding: 1rem 0;
+  background-color: #252c3330;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width:100%;
+    a {
+    text-decoration: none;
+    color: $textColor1;
+    text-transform: uppercase;
+  }
+  .logo{
+      margin-left:2rem;
+  }
+  .pagesDesktop {
+
+    a {
+      margin: 0 0.5rem;
+      padding:0.5rem 0.5rem;
+      border-radius: 4px;
+    }
+    a.active{
+      color:#000;
+      background-color: $textColor1;
+
+    }
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .logSign-Desktop {
+    display: flex;
+    align-items: center;
+      margin-right:2rem;
+    a {
+      margin: 0 0.5rem;
+    }
+    button {
+      border-radius: 1.2rem;
+      background-color: $tertiaryColor;
+      transition: 300ms ease-out;
+      &:hover {
+        background-color: $primaryColor;
+        color: $textColor2;
+      }
+    }
+  }
+}

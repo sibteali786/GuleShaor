@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  },
+  "name": "guleshaor",
+  "version": "1.0.0",
+  "description": "A Social media App",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node guleshaor-backend/server.js",
+    "server": "nodemon guleshaor-backend/server.js",
+    "client": "npm start --prefix guleshaor-frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client \""
+  },
+  "author": "GuleShaor",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
+  }
+}
