@@ -18,16 +18,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       }
     ],
     about:{
@@ -58,16 +61,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
       }
     ],
     about:{
@@ -98,16 +104,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       }
     ],
     about:{
@@ -138,16 +147,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       }
     ],
     about:{
@@ -178,16 +190,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       }
     ],
     about:{
@@ -218,16 +233,19 @@ const users = [
     },
     courses:[
       {
-        name:"abc1",
-        poster:"/images/Rectangle6.png"
+        name:"Introduction to Astronomy",
+        poster:"/images/Rectangle6.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc2",
-        poster:"/images/Rectangle7.png"
+        name:"How to approach Astrology",
+        poster:"/images/Rectangle7.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       },
       {
-        name:"abc3",
-        poster:"/images/Rectangle8.png"
+        name:"What to expect learning Astrology",
+        poster:"/images/Rectangle8.png",
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
       }
     ],
     about:{

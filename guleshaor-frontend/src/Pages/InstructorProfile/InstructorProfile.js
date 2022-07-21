@@ -169,7 +169,7 @@ const InstructorProfile = () => {
             </Container>
             <Container maxWidth="md" className="span-5">
               <h2>Offered Courses</h2>
-              <div style={{ display: "flex", direction: "row" }}>
+              <div >
                 {mentor.courses.map((course, idx) => (
                   <Courses key={idx} course={course} mentor={mentor} />
                 ))}
