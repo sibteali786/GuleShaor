@@ -38,16 +38,13 @@ const Courses = ({ course, mentor }) => {
             <h2> Description</h2>
             <ul>
               <li>
-                <strong>Height : </strong>5 Ft{" "}
+                <strong>{Object.keys(course.description)[0]} : </strong>{course.description.chapters}{" "}
               </li>
               <li>
-                <strong>Shade : </strong>Olive green
+                <strong>{Object.keys(course.description)[1]} :</strong>{course.description.hours}
               </li>
               <li>
-                <strong>Decoration: </strong>balls and bells
-              </li>
-              <li>
-                <strong>Material: </strong>Eco-Friendly
+                <strong>{Object.keys(course.description)[2]} : </strong>{course.description.type}
               </li>
             </ul>
           </div>

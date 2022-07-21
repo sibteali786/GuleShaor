@@ -20,17 +20,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{
@@ -63,17 +78,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{
@@ -106,17 +136,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{
@@ -149,17 +194,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{
@@ -192,17 +252,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{
@@ -235,17 +310,32 @@ const users = [
       {
         name:"Introduction to Astronomy",
         poster:"/images/Rectangle6.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"How to approach Astrology",
         poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       },
       {
         name:"What to expect learning Astrology",
         poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod."
+        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
+        description:{
+          chapters:"2",
+          hours:"3",
+          type:"Project Based"
+        }
       }
     ],
     about:{

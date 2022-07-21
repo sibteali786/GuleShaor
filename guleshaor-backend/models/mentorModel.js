@@ -38,6 +38,11 @@ const mentorSchema = new mongoose.Schema({
     {
         name: { type: String },
         posters: { type: String },
+        description:{
+          chapters:{type:String},
+          hours:{type:String},
+          type:{type:String}
+        }
     }
     ],
   about:{
