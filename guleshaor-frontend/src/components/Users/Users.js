@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Users.scss";
-const Users = ({ user }) => {
+const Users = ({ mentor }) => {
   return (
     <div className="card-container">
-      <span className={ user.usertype === "Pro" ? "Pro" : "Free"}>{user.usertype}</span>
-      <Link to={`/mentors/${user.id}`}>
-      <img className="round" src={user.profilePicture} alt={user.name} />
+      <span className={ mentor.mentorDetails.usertype === "Pro" ? "Pro" : "Free"}>{mentor.mentorDetails.usertype}</span>
+      <Link to={`/mentors/${mentor.id}`}>
+      <img className="round" src={mentor.mentorDetails.profilePicture} alt={mentor.name} />
       </Link>
-      <h3>{user.name}</h3>
-      <h6>{user.username}</h6>
-      {user.smallDescription.split("<br/>").map((text,idx) => (
+      <h3>{mentor.name}</h3>
+      <h6>{mentor.mentorDetails.username}</h6>
+      {mentor.mentorDetails.career.split("<br/>").map((text,idx) => (
         <p key={idx}>{text}</p>
       ))}
       <div className="buttons">
@@ -20,7 +20,7 @@ const Users = ({ user }) => {
       <div className="skills">
         <h6>Skills</h6>
         <ul>
-          {user.skills.map((skill, idx) => (
+          {mentor.about.skills.map((skill, idx) => (
             <li key={idx}>{skill}</li>
           ))}
         </ul>
