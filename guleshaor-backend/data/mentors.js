@@ -2,10 +2,10 @@ import bcrypt from 'bcryptjs';
 
 const users = [
   {
-    id:"1",
+    
     name: "Admin User",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -60,10 +60,9 @@ const users = [
     isAdmin: true,
   },
   {
-    id:"2",
     name: "Sibteali Baqar",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -118,10 +117,9 @@ const users = [
     isAdmin: false,
   },
   {
-    id:"3",
     name: "Izza Gul Awan",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -176,10 +174,9 @@ const users = [
     isAdmin: false,
   },
   {
-    id:"4",
     name: "Abdullah Wasi",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -229,15 +226,14 @@ const users = [
       skills:["astrology",'painting','programming','writing'],
     },
     studentDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
-    email: "izza@example.com",
+    email: "wasi@example.com",
     password: bcrypt.hashSync('123456',10), // password will be generated using bcrypt library
     isAdmin: false,
   },
   {
-    id:"5",
     name: "Ahmad Khan",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -287,15 +283,14 @@ const users = [
       skills:["astrology",'painting','programming','writing'],
     },
     studentDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
-    email: "izza@example.com",
+    email: "ahmad@example.com",
     password: bcrypt.hashSync('123456',10), // password will be generated using bcrypt library
     isAdmin: false,
   },
   {
-    id:"6",
     name: "Daniyal Rao",
     mentorDetails:{
-      usertype:"Pro",
+      userType:"Pro",
       username:"@admin",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
@@ -345,7 +340,7 @@ const users = [
       skills:["astrology",'painting','programming','writing'],
     },
     studentDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
-    email: "izza@example.com",
+    email: "dani@example.com",
     password: bcrypt.hashSync('123456',10), // password will be generated using bcrypt library
     isAdmin: false,
   },

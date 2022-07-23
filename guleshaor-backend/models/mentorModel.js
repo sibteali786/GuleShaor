@@ -5,6 +5,7 @@ const mentorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique:true
   },
   mentorDetails: {
     userType: {
@@ -63,7 +64,10 @@ const mentorSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
     required: true,
+    default:false
   },
+},{
+  timestamps:true
 });
 
 //Export the model

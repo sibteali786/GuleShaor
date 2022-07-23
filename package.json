@@ -17,7 +17,9 @@
     "start": "node guleshaor-backend/server.js",
     "server": "nodemon guleshaor-backend/server.js",
     "client": "npm start --prefix guleshaor-frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client \""
+    "dev": "concurrently \"npm run server\" \"npm run client \"",
+    "data:import": "node guleshaor-backend/seeder",
+    "data:destroy": "node guleshaor-backend/seeder -d"
   },
   "author": "GuleShaor",
   "license": "MIT",
