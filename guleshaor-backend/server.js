@@ -13,7 +13,7 @@ const app = express();
 
 
 //using productRoutes and userRoutes
-app.use("/api/mentors",mentorRoutes)
+// app.use("/api/mentors",mentorRoutes)
 
 app.get('/',(req,res)=>{
     res.send("Api is running")

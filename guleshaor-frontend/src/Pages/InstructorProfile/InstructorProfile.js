@@ -24,7 +24,7 @@ const InstructorProfile = () => {
   const [mentor, setMentor] = useState({});
   useEffect(() => {
     const fetchMentor = async () => {
-      const { data } = await axios.get(`/api/users/${match.id}`);
+      const { data } = await axios.get(`/api/mentors/${match.id}`);
       setMentor(data);
       setInputFields(data.about.skills)
     };

@@ -9,7 +9,7 @@ const Mentors = () => {
     const [mentors, setMentors] = useState([]);
     useEffect(() => {
       const fetchMentors = async () => {
-        const {data} = await axios.get('/api/users');
+        const {data} = await axios.get('/api/mentors');
         setMentors(data);
       }
 

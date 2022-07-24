@@ -4,7 +4,7 @@ import "./Users.scss";
 const Users = ({ mentor }) => {
   return (
     <div className="card-container">
-      <span className={ mentor.mentorDetails.usertype === "Pro" ? "Pro" : "Free"}>{mentor.mentorDetails.usertype}</span>
+      <span className={ mentor.mentorDetails.userType === "Pro" ? "Pro" : "Free"}>{mentor.mentorDetails.userType}</span>
       <Link to={`/mentors/${mentor.id}`}>
       <img className="round" src={mentor.mentorDetails.profilePicture} alt={mentor.name} />
       </Link>
