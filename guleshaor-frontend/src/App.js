@@ -10,10 +10,12 @@ import Services from "./Pages/Services/Services";
 import InstructorProfile from "./Pages/InstructorProfile/InstructorProfile";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import Mentors from "./Pages/Mentors/Mentors";
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <Navbar />
+    <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -23,10 +25,11 @@ function App() {
         <Route path="/profileUser" element={<UserProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
-      </Routes>
+        </Routes>
       <Footer />
     </div>
-  );
+    </BrowserRouter>
+    );
 }
 
 export default App;

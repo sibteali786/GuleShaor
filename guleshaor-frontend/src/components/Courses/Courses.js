@@ -1,7 +1,5 @@
-import { Container } from "@mui/material";
 import React from "react";
 import "./Courses.scss";
-import { Player, BigPlayButton } from "video-react";
 const Courses = ({ course, mentor }) => {
   return (
     <>
