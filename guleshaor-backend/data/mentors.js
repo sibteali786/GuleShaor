@@ -10,7 +10,7 @@ const users = [
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["Astrology"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -62,12 +62,12 @@ const users = [
   {
     name: "Sibteali Baqar",
     mentorDetails:{
-      userType:"Pro",
-      username:"@admin",
-      career:"UI/UX Designer and Computer Engineer",
+      userType:"Free",
+      username:"@sibteali",
+      career:"Web Developer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["History","Software","AI and ML"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -75,7 +75,7 @@ const users = [
     },
     courses:[
       {
-        name:"Introduction to Astronomy",
+        name:"History as a subject",
         poster:"/images/Rectangle6.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         description:{
@@ -85,7 +85,7 @@ const users = [
         }
       },
       {
-        name:"How to approach Astrology",
+        name:"Intro to Programming",
         poster:"/images/Rectangle7.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         description:{
@@ -95,7 +95,7 @@ const users = [
         }
       },
       {
-        name:"What to expect learning Astrology",
+        name:"Javascript ES6",
         poster:"/images/Rectangle8.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         description:{
@@ -106,10 +106,10 @@ const users = [
       }
     ],
     about:{
-      heading:'How Astrology changed my life',
+      heading:'What i perceived History to be ',
       details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
-      hobbies:["Astrology","Gamer"],
-      skills:["astrology",'painting','programming','writing'],
+      hobbies:["Programmer","Gamer","Reader"],
+      skills:["Coding",'writing','singing','travelling'],
     },
     studentDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "sibteali@example.com",
@@ -119,12 +119,12 @@ const users = [
   {
     name: "Izza Gul Awan",
     mentorDetails:{
-      userType:"Pro",
-      username:"@admin",
-      career:"UI/UX Designer and Computer Engineer",
+      userType:"Free",
+      username:"@izza",
+      career:"Content Writer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["Leadership"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -132,7 +132,7 @@ const users = [
     },
     courses:[
       {
-        name:"Introduction to Astronomy",
+        name:"What is Marketing",
         poster:"/images/Rectangle6.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
         description:{
@@ -142,7 +142,7 @@ const users = [
         }
       },
       {
-        name:"How to approach Astrology",
+        name:"An Introduction to Team Building",
         poster:"/images/Rectangle7.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
         description:{
@@ -151,22 +151,12 @@ const users = [
           type:"Project Based"
         }
       },
-      {
-        name:"What to expect learning Astrology",
-        poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
-        description:{
-          chapters:"2",
-          hours:"3",
-          type:"Project Based"
-        }
-      }
     ],
     about:{
-      heading:'How Astrology changed my life',
+      heading:'How to servive post pandemic market ?',
       details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
-      hobbies:["Astrology","Gamer"],
-      skills:["astrology",'painting','programming','writing'],
+      hobbies:["Content Writing","Qirat"],
+      skills:["Writer",'Singing','programming','cricket'],
     },
     studentDescription:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "izza@example.com",
@@ -176,12 +166,12 @@ const users = [
   {
     name: "Abdullah Wasi",
     mentorDetails:{
-      userType:"Pro",
-      username:"@admin",
+      userType:"Free",
+      username:"@wasi",
       career:"UI/UX Designer and Computer Engineer",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["Astrology"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -233,12 +223,12 @@ const users = [
   {
     name: "Ahmad Khan",
     mentorDetails:{
-      userType:"Pro",
-      username:"@admin",
-      career:"UI/UX Designer and Computer Engineer",
+      userType:"Free",
+      username:"@akhan",
+      career:"Bussinessman and Volunteer",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["Frienship"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -246,7 +236,7 @@ const users = [
     },
     courses:[
       {
-        name:"Introduction to Astronomy",
+        name:"What is it we have to offer",
         poster:"/images/Rectangle6.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
         description:{
@@ -255,29 +245,9 @@ const users = [
           type:"Project Based"
         }
       },
-      {
-        name:"How to approach Astrology",
-        poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
-        description:{
-          chapters:"2",
-          hours:"3",
-          type:"Project Based"
-        }
-      },
-      {
-        name:"What to expect learning Astrology",
-        poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
-        description:{
-          chapters:"2",
-          hours:"3",
-          type:"Project Based"
-        }
-      }
     ],
     about:{
-      heading:'How Astrology changed my life',
+      heading:'Being a Bussinessman',
       details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies:["Astrology","Gamer"],
       skills:["astrology",'painting','programming','writing'],
@@ -292,10 +262,10 @@ const users = [
     mentorDetails:{
       userType:"Pro",
       username:"@admin",
-      career:"UI/UX Designer and Computer Engineer",
+      career:"Web and Android Developer and CS graduate",
       profilePicture: "/images/profilePic.png",
       otherImages:["/images/Rectangle1.png","/images/Rectangle2.png","/images/Rectangle3.png","/images/Rectangle4.png"],
-      favourite_subject:["Astrology"],
+      favouriteSubjects:["Programming"],
     },
     introVideo:{
       video:"https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -303,7 +273,7 @@ const users = [
     },
     courses:[
       {
-        name:"Introduction to Astronomy",
+        name:"Introduction to JAVA",
         poster:"/images/Rectangle6.png",
         details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
         description:{
@@ -312,29 +282,9 @@ const users = [
           type:"Project Based"
         }
       },
-      {
-        name:"How to approach Astrology",
-        poster:"/images/Rectangle7.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
-        description:{
-          chapters:"2",
-          hours:"3",
-          type:"Project Based"
-        }
-      },
-      {
-        name:"What to expect learning Astrology",
-        poster:"/images/Rectangle8.png",
-        details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem eaque beatae ratione corporis asperiores nesciunt odio obcaecati doloribus tempora quod.",
-        description:{
-          chapters:"2",
-          hours:"3",
-          type:"Project Based"
-        }
-      }
     ],
     about:{
-      heading:'How Astrology changed my life',
+      heading:'Post college experiences',
       details:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies:["Astrology","Gamer"],
       skills:["astrology",'painting','programming','writing'],

@@ -2,7 +2,7 @@ import express  from "express";
 import users from './data/mentors.js'
 import dotenv from "dotenv"
 import connectDB from "./config/db.js";
-
+import mentorRoutes from "./routes/mentorRoutes.js"
 // for environment variables 
 dotenv.config()
 
@@ -10,15 +10,20 @@ dotenv.config()
 connectDB()
 // Initialize the express
 const app = express();
+
+
+//using productRoutes and userRoutes
+app.use("/api/mentors",mentorRoutes)
+
 app.get('/',(req,res)=>{
     res.send("Api is running")
 })
 
-app.get('/api/users',(req,res)=>{
+app.get('/api/mentors',(req,res)=>{
     res.json(users);
 })
 
-app.get('/api/users/:id',(req,res)=>{
+app.get('/api/mentors/:id',(req,res)=>{
     const user = users.find(p => p.id === req.params.id)
     res.send(user) 
 })
