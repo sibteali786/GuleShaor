@@ -26,8 +26,8 @@ function App() {
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
         </Routes>
-      <Footer />
-    </div>
+        <Footer />
+        </div>
     </BrowserRouter>
     );
 }

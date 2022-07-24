@@ -7,6 +7,7 @@ import {
   IconButton,
   Grid,
   Collapse,
+  Stack,
 } from "@mui/material";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
@@ -17,20 +18,21 @@ import ImageListItem from "@mui/material/ImageListItem";
 import AddIcon from "@mui/icons-material/Add";
 import { Link, useParams } from "react-router-dom";
 import { Player, BigPlayButton } from "video-react";
-import axios from "axios";
 import Courses from "../../components/Courses/Courses";
+import { useDispatch, useSelector } from "react-redux";
+import { listMentorDetails } from "../../actions/mentorActions";
+import Loader from "../../components/Loader/Loader";
+import Message from "../../components/Message/Message";
 const InstructorProfile = () => {
+  const dispatch = useDispatch();
+  const mentorDetail = useSelector(state => state.mentorDetail);
+  const {loading, error, mentor} = mentorDetail; 
   const match = useParams();
-  const [mentor, setMentor] = useState({});
   useEffect(() => {
-    const fetchMentor = async () => {
-      const { data } = await axios.get(`/api/mentors/${match.id}`);
-      setMentor(data);
-      setInputFields(data.about.skills)
-    };
-
-    fetchMentor();
-    console.log(Object.keys(mentor).length);
+    dispatch(listMentorDetails(match.id))
+    if(Object.keys(mentor).length !== 0){
+      setInputFields(mentor.about.skills)
+    }
     // eslint-disable-next-line
   }, []);
   const [inputFields, setInputFields] = useState([]);
@@ -50,9 +52,8 @@ const InstructorProfile = () => {
   };
   return (
     <div>
-      {Object.keys(mentor).length === 0 ? (
-        <h1>Loading</h1>
-      ) : (
+      {Object.keys(mentor).length === 0 ? <Loader/> : 
+        loading ? <Loader/> : error ? <Message>{error}</Message> : (
         <div className="Instrcutor-container">
           <div className="backgroundPicture"></div>
           <Container maxWidth="lg" className="grids">
@@ -170,11 +171,11 @@ const InstructorProfile = () => {
             </Container>
             <Container maxWidth="md" className="span-5">
               <h2>Offered Courses</h2>
-              <div >
-                {mentor.courses.map((course, idx) => (
-                  <Courses key={idx} course={course} mentor={mentor} />
+              <Stack spacing={1}>
+                {mentor.courses.map((course) => (
+                  <Courses key={course._id} course={course} mentor={mentor} />
                 ))}
-              </div>
+              </Stack>
             </Container>
             <Container maxWidth="md" className="span-6">
               <h2>Students</h2>

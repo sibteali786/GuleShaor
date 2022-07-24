@@ -5,7 +5,7 @@ const Users = ({ mentor }) => {
   return (
     <div className="card-container">
       <span className={ mentor.mentorDetails.userType === "Pro" ? "Pro" : "Free"}>{mentor.mentorDetails.userType}</span>
-      <Link to={`/mentors/${mentor.id}`}>
+      <Link to={`/mentors/${mentor._id}`}>
       <img className="round" src={mentor.mentorDetails.profilePicture} alt={mentor.name} />
       </Link>
       <h3>{mentor.name}</h3>
