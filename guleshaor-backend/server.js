@@ -3,6 +3,7 @@ import users from './data/mentors.js'
 import dotenv from "dotenv"
 import connectDB from "./config/db.js";
 import mentorRoutes from "./routes/mentorRoutes.js"
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 // for environment variables 
 dotenv.config()
 
@@ -12,12 +13,14 @@ connectDB()
 const app = express();
 
 
-//using productRoutes and userRoutes
-// app.use("/api/mentors",mentorRoutes)
-
 app.get('/',(req,res)=>{
     res.send("Api is running")
 })
+//using productRoutes and userRoutes
+app.use("/api/mentors",mentorRoutes)
+app.use(notFound)
+app.use(errorHandler)
+
 
 app.get('/api/mentors',(req,res)=>{
     res.json(users);
