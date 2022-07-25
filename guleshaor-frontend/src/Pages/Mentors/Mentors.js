@@ -4,13 +4,17 @@ import "./Mentors.scss"
 import Users from '../../components/Users/Users'
 import { useDispatch, useSelector } from "react-redux";
 import Message from '../../components/Message/Message'
+import {useLocation} from 'react-router-dom';
 import {listMentors} from "../../actions/mentorActions";
 import Loader from '../../components/Loader/Loader';
 const Mentors = () => {
+  const location = useLocation();
+  
     const dispatch = useDispatch();
     const mentorList = useSelector(state => state.mentorList)
     const {loading, error, mentors} = mentorList;
     useEffect(() => {
+      console.log(location);
       dispatch(listMentors());
     }, [dispatch])
   return (

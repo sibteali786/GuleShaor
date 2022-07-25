@@ -2,10 +2,14 @@ import {legacy_createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import { mentorDetailsReducer, mentorListReducer } from './Reducers/mentorReducer';
+import { studentDetailsReducer, studentListReducer } from './Reducers/studentReducer';
 
 const reducer = combineReducers({
     mentorList:mentorListReducer,
-    mentorDetail:mentorDetailsReducer
+    mentorDetail:mentorDetailsReducer,
+    studentList:studentListReducer,
+    studentDetail:studentDetailsReducer,
+
 });
 
 const initialState = {};

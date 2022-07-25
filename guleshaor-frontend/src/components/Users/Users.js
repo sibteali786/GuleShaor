@@ -1,18 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Users.scss";
+import { useLocation } from "react-router-dom";
 const Users = ({ mentor }) => {
+  console.log(mentor);
+  const location = useLocation();
   return (
     <div className="card-container">
-      <span className={ mentor.mentorDetails.userType === "Pro" ? "Pro" : "Free"}>{mentor.mentorDetails.userType}</span>
+      <span
+        className={
+          location.pathname === "/mentors"
+            ? mentor.mentorDetails.userType === "Pro"
+              ? "Pro"
+              : "Free"
+            : mentor.studentDetails.userType === "Pro"
+            ? "Pro"
+            : "Free"
+        }
+      >
+        { location.pathname === "/mentors" ?
+         (mentor.mentorDetails.userType) : (mentor.studentDetails.userType)}
+      </span>
       <Link to={`/mentors/${mentor._id}`}>
-      <img className="round" src={mentor.mentorDetails.profilePicture} alt={mentor.name} />
+        <img
+          className="round"
+          src={
+            location.pathname === "/mentors"
+              ? mentor.mentorDetails.profilePicture
+              : mentor.studentDetails.profilePicture
+          }
+          alt={mentor.name}
+        />
       </Link>
       <h3>{mentor.name}</h3>
-      <h6>{mentor.mentorDetails.username}</h6>
-      {mentor.mentorDetails.career.split("<br/>").map((text,idx) => (
-        <p key={idx}>{text}</p>
-      ))}
+      <h6>
+        {location.pathname === "/mentors"
+          ? mentor.mentorDetails.username
+          : mentor.studentDetails.username}
+      </h6>
+      {location.pathname === "/mentors" ? (
+        mentor.mentorDetails.career
+          .split("<br/>")
+          .map((text, idx) => <p key={idx}>{text}</p>)
+      ) : (
+        <p>{mentor.studentDetails.career}</p>
+      )}
       <div className="buttons">
         <button className="primary">Message</button>
         <button className="primary ghost">Following</button>

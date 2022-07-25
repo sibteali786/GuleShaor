@@ -11,6 +11,7 @@ import InstructorProfile from "./Pages/InstructorProfile/InstructorProfile";
 import StudentProfile from "./Pages/StudentProfile/StudentProfile";
 import Mentors from "./Pages/Mentors/Mentors";
 import { BrowserRouter } from "react-router-dom";
+import Students from "./Pages/Students/Students";
 function App() {
   return (
     <BrowserRouter>
@@ -22,7 +23,8 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
-        <Route path="/profileUser" element={<StudentProfile />} />
+        <Route path="/students" element={<Students />} />
+        <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
         </Routes>
