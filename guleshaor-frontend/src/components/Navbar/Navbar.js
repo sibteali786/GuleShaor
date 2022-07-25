@@ -23,9 +23,9 @@ const items = [
     to: "/team",
   },
   {
-    name: "Collaborate",
+    name: "Students",
     color: "#673ab7",
-    to: "/collaborate",
+    to: "/students",
   },
   {
     name: "Services",

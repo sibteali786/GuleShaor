@@ -21,7 +21,7 @@ const Users = ({ mentor }) => {
         { location.pathname === "/mentors" ?
          (mentor.mentorDetails.userType) : (mentor.studentDetails.userType)}
       </span>
-      <Link to={`/mentors/${mentor._id}`}>
+      <Link to={location.pathname === "/mentors" ? `/mentors/${mentor._id}` : `/students/${mentor._id}` }>
         <img
           className="round"
           src={

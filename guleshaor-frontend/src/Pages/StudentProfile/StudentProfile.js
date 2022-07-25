@@ -9,31 +9,40 @@ import {
   Collapse,
 } from "@mui/material";
 import "./../../../node_modules/video-react/dist/video-react.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
 import profileImage from "../../Assets/ProfilesImages/Profile Pic.png";
-import instructorImages from "../../Assets/ProfilesImages/instructorImages";
-import Rectangle5 from "../../Assets/ProfilesImages/Rectangle 5.png";
 import user1 from "../../Assets/ProfilesImages/Ellipse1.png";
 import user2 from "../../Assets/ProfilesImages/Ellipse2.png";
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Player, BigPlayButton } from "video-react";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../components/Loader/Loader";
+import Message from "../../components/Message/Message";
+import { listStudentDetails } from "../../actions/studentActions";
 const UserProfile = () => {
-  const [inputFields, setInputFields] = useState([
-    {
-      inputValue: "#photography",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const studentDetail = useSelector(state => state.studentDetail);
+  const {loading, error, student} = studentDetail; 
+  const match = useParams();
+  useEffect(() => {
+    dispatch(listStudentDetails(match.id))
+    if(Object.keys(student).length !== 0){
+      setInputFields(student.about.skills)
+    }
+    // eslint-disable-next-line
+  }, []);
+  const [inputFields, setInputFields] = useState([]);
   const [inputValue, setinputValue] = useState("");
   const handleAddFields = () => {
     if (inputValue === "") {
       console.log("Not Allowed");
     } else {
-      setInputFields([...inputFields, { inputValue }]);
+      setInputFields([...inputFields,  inputValue ]);
     }
   };
   // For collapsing the read more panel
@@ -43,18 +52,22 @@ const UserProfile = () => {
     setChecked((prev) => !prev);
   };
   return (
-    <div className="Instrcutor-container">
-      <div className="backgroundPicture"></div>
-      <Container maxWidth="lg" className="grids">
-        <Grid
-          container
+    <>
+    {
+      Object.keys(student).length === 0 ? <Loader/> : 
+        loading ? <Loader/> : error ? <Message>{error}</Message> : (
+          <div className="Instrcutor-container">
+    <div className="backgroundPicture"></div>
+    <Container maxWidth="lg" className="grids">
+    <Grid
+    container
           spacing={2}
           alignItems="flex-start"
           justifyContent="space-between"
           style={{ marginTop: "0px" }}
           className="span-1"
         >
-          <Grid item className="instName">
+        <Grid item className="instName">
             <ButtonBase
               sx={{
                 width: 150,
@@ -62,14 +75,15 @@ const UserProfile = () => {
                 position: "relative",
                 top: "-10vh",
               }}
-            >
-              <img alt="complex" src={profileImage} style={{ width: "100%" }} />
+            > 
+              <img alt={student.name} src={student.studentDetails.profilePicture} style={{ width: "100%" }} />
             </ButtonBase>
             <Grid item style={{ marginLeft: "2rem" }}>
-              <h3>John Doe</h3>
-              <a href="email:johnDoe">@johndoe</a>
-              <p>Astrophotographer 🌌</p>
-              <p>Gamer 👾</p>
+              <h3>{student.name}</h3>
+              <a href="email:johnDoe">{student.studentDetails.username}</a>
+              {student.about.hobbies.map((hobby, idx) => (
+                <p key={idx}>{hobby}</p>
+              ))}
             </Grid>
           </Grid>
           <Grid item>
@@ -87,28 +101,10 @@ const UserProfile = () => {
           className="span-3"
         >
           <Collapse in={checked} collapsedSize={200}>
-            <h2>How Astrophotography changed my life</h2>
+            <h2>{student.about.heading}</h2>
             <Typography variant="body2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
-              turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus
-              nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
-              tellus elit sed risus. Maecenas eget condimentum velit, sit amet
-              feugiat lectus. Class aptent taciti sociosqu ad litora torquent
-              per conubia nostra, per inceptos himenaeos. Praesent auctor purus
-              luctus enim egestas, ac scelerisque ante pulvinar. Donec ut
-              rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur
-              vel bibendum lorem. Morbi convallis convallis diam sit amet
-              lacinia. Aliquam in elementum tellus. Curabitur tempor quis eros
-              tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut
-              vulputate nisi. Integer in felis sed leo vestibulum venenatis.
-              Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum
-              vestibulum. Morbi a eleifend magna. Nam metus lacus, porttitor eu
-              mauris a, blandit ultrices nibh. Mauris sit amet magna non ligula
-              vestibulum eleifend. Nulla varius volutpat turpis sed lacinia. Nam
-              eget mi in purus lobortis eleifend. Sed nec ante dictum sem
-              condimentum ullamcorper quis venenatis nisi. Proin vitae facilisis
-              nisi, ac posuere leo.
-            </Typography>
+            {student.about.details}
+              </Typography>
           </Collapse>
 
           <div
@@ -132,7 +128,7 @@ const UserProfile = () => {
                   margin: "0.2rem",
                 }}
               >
-                {inputField.inputValue}
+                #{inputField}
               </Button>
             ))}
             <TextField
@@ -157,38 +153,37 @@ const UserProfile = () => {
               variant="text"
               style={{ fontWeight: "bold", color: "#196AA0" }}
               onClick={handleChange}
-            >
+              >
               Read More
             </Button>
           </div>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <Button
-              variant="text"
-              style={{ fontWeight: "bold", color: "#196AA0" }}
+            variant="text"
+            style={{ fontWeight: "bold", color: "#196AA0" }}
             >
-              More Posts by John Doe
-            </Button>
-          </Link>
-        </Container>
-        <Container maxWidth="sm" className="span-4">
+              More Posts by {student.name}
+              </Button>
+              </Link>
+              </Container>
+              <Container maxWidth="sm" className="span-4">
           <h2>Videos</h2>
           <Player
             playsInline
-            poster={Rectangle5}
-            src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+            poster={student.introVideo.videoPoster} src={student.introVideo.video}
           >
             <BigPlayButton position="center" />
-          </Player>
-        </Container>
+            </Player>
+            </Container>
         <Container maxWidth="sm" className="span-2">
           <h4>Photos</h4>
           <ImageList cols={2} rowHeight={164}>
-            {instructorImages.map((item) => (
-              <ImageListItem key={item.img}>
+            {student.studentDetails.otherImages.map((image,idx) => (
+              <ImageListItem key={idx}>
                 <img
-                  src={item.img}
-                  srcSet={item.img}
-                  alt={item.title}
+                  src={image}
+                  srcSet={image}
+                  alt={student.name}
                   loading="lazy"
                 />
               </ImageListItem>
@@ -197,12 +192,12 @@ const UserProfile = () => {
           <Button
             variant="text"
             style={{ fontWeight: "bold", color: "#196AA0" }}
-          >
+            >
             More +
-          </Button>
-        </Container>
-        <Container maxWidth="md" className="span-5">
-          <div className="PostSection">
+            </Button>
+            </Container>
+            <Container maxWidth="md" className="span-5">
+            <div className="PostSection">
             <img
               alt="complex"
               src={profileImage}
@@ -215,23 +210,23 @@ const UserProfile = () => {
               nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum
               tellus elit sed risus.
             </Typography>
-          </div>
+            </div>
           <div className="comments">
             <Grid container flexDirection="column">
               <Grid item display="flex" alignItems="center">
-                <img
-                  alt="complex"
+              <img
+              alt="complex"
                   src={user1}
                   style={{ marginRight: "1rem" }}
-                />
-                <Grid item>
+                  />
+                  <Grid item>
                   <h3>Luigi Gonzales</h3>
                   <p>5 days ago</p>
                 </Grid>
               </Grid>
               <div
-                style={{
-                  backgroundColor: "#F1F1F1",
+              style={{
+                backgroundColor: "#F1F1F1",
                   padding: "0.4rem",
                   borderRadius: "0.5rem",
                   margin: "0.6rem 0",
@@ -253,7 +248,7 @@ const UserProfile = () => {
                 <Grid item>
                   <h3>Luigi Gonzales</h3>
                   <p>5 days ago</p>
-                </Grid>
+                  </Grid>
               </Grid>
               <div
                 style={{
@@ -306,12 +301,12 @@ const UserProfile = () => {
                   <Grid item>
                     <h3>Luigi Gonzales</h3>
                     <p>5 days ago</p>
-                  </Grid>
-                </Grid>
-                <div
-                  style={{
-                    backgroundColor: "#F1F1F1",
-                    padding: "0.4rem",
+                    </Grid>
+                    </Grid>
+                    <div
+                    style={{
+                      backgroundColor: "#F1F1F1",
+                      padding: "0.4rem",
                     borderRadius: "0.5rem",
                     margin: "0.6rem 0",
                   }}
@@ -321,13 +316,17 @@ const UserProfile = () => {
                 <div style={{ marginLeft: "auto" }}>
                   <i class="fa fa-thumbs-up"></i> 7
                 </div>
-              </Grid>
+                </Grid>
             </div>
           </div>
           <div></div>
         </Container>
       </Container>
     </div>
+        )
+    }
+    
+    </>
   );
 };
 
