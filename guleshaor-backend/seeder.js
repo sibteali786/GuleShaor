@@ -4,6 +4,8 @@ import colors from 'colors'
 import mentors from './data/mentors.js';
 import Mentor from "./models/mentorModel.js";
 import connectDB from './config/db.js';
+import Student from './models/studentModel.js';
+import students from './data/student.js';
 
 dotenv.config();
 connectDB();
@@ -12,10 +14,29 @@ const importData = async () => {
     try {
         // deleting all the collections so as to avoid importing things which are already in db
         await Mentor.deleteMany();
+        await Student.deleteMany();
+        // inserting mentors into database and storing whats returned into a variable 
+        const mentorsInDB = await Mentor.insertMany(mentors);   // users we created locally
+        // extracting the random mentor ids from Mentor model to assign to a student
+        const sampleStudents = students.map(student => {
+            const randomMentors = []
+            let size = Math.floor(Math.random() * (mentorsInDB.length)) + 1
+            console.log("Size of the for loop : ",size);
+            let loop = 0;
+            while (loop < size) {
+                let i = Math.floor(Math.random() * (mentorsInDB.length))
+                if(!randomMentors.includes(mentorsInDB[i]._id)){
+                    randomMentors.push(mentorsInDB[i]._id)
+                }else{
+                    continue
+                }
+                loop++
+            }
+            console.log(randomMentors)
+            return {...student, mentors:randomMentors} // spreading to get everything back along with user as Admin user
+        })
 
-        // inserting users into database and storing whats returned into a variable 
-        await Mentor.insertMany(mentors);   // users we created locally
-
+        await Student.insertMany(sampleStudents)
         console.log("Data Imported".green.inverse);
         process.exit();
     } catch (error) {
