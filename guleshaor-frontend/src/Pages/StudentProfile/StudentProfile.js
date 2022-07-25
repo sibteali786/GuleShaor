@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState } from "react";
-import "./UserProfile.scss";
+import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used

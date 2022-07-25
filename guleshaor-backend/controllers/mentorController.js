@@ -20,7 +20,7 @@ const getMentorById = asyncHandler(async (req,res) => {
         res.json(mentor)
     } else {
         res.status(404)
-        throw new Error('Product not Found')
+        throw new Error('Mentor not Found')
     }
 }) 
 

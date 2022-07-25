@@ -8,7 +8,7 @@ import FAQ from "./Pages/FAQ/FAQ";
 import Referrals from "./Pages/Referrals/Referrals";
 import Services from "./Pages/Services/Services";
 import InstructorProfile from "./Pages/InstructorProfile/InstructorProfile";
-import UserProfile from "./Pages/UserProfile/UserProfile";
+import StudentProfile from "./Pages/StudentProfile/StudentProfile";
 import Mentors from "./Pages/Mentors/Mentors";
 import { BrowserRouter } from "react-router-dom";
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
-        <Route path="/profileUser" element={<UserProfile />} />
+        <Route path="/profileUser" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
         </Routes>
