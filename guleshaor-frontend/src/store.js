@@ -1,7 +1,7 @@
 import {legacy_createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import { mentorDetailsReducer, mentorListReducer } from './Reducers/mentorReducer';
+import { mentorDetailsReducer, mentorListReducer, studentsOfMentorReducer } from './Reducers/mentorReducer';
 import { studentDetailsReducer, studentListReducer } from './Reducers/studentReducer';
 
 const reducer = combineReducers({
@@ -9,7 +9,7 @@ const reducer = combineReducers({
     mentorDetail:mentorDetailsReducer,
     studentList:studentListReducer,
     studentDetail:studentDetailsReducer,
-
+    studentsOfMentors:studentsOfMentorReducer
 });
 
 const initialState = {};

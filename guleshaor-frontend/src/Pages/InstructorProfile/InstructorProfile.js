@@ -20,18 +20,24 @@ import { Link, useParams } from "react-router-dom";
 import { Player, BigPlayButton } from "video-react";
 import Courses from "../../components/Courses/Courses";
 import { useDispatch, useSelector } from "react-redux";
-import { listMentorDetails } from "../../actions/mentorActions";
+import {
+  listMentorDetails,
+  listStudentsOfMentor,
+} from "../../actions/mentorActions";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 const InstructorProfile = () => {
   const dispatch = useDispatch();
-  const mentorDetail = useSelector(state => state.mentorDetail);
-  const {loading, error, mentor} = mentorDetail; 
+  const mentorDetail = useSelector((state) => state.mentorDetail);
+  const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
+  const { loading, error, mentor } = mentorDetail;
+  const { loadingStudents, errorStudents, students } = studentsOfMentors;
   const match = useParams();
   useEffect(() => {
-    dispatch(listMentorDetails(match.id))
-    if(Object.keys(mentor).length !== 0){
-      setInputFields(mentor.about.skills)
+    dispatch(listMentorDetails(match.id));
+    dispatch(listStudentsOfMentor(match.id));
+    if (Object.keys(mentor).length !== 0) {
+      setInputFields(mentor.about.skills);
     }
     // eslint-disable-next-line
   }, []);
@@ -52,8 +58,13 @@ const InstructorProfile = () => {
   };
   return (
     <div>
-      {Object.keys(mentor).length === 0 ? <Loader/> : 
-        loading ? <Loader/> : error ? <Message>{error}</Message> : (
+      {Object.keys(mentor).length === 0 ? (
+        <Loader />
+      ) : loading && loadingStudents ? (
+        <Loader />
+      ) : error && errorStudents ? (
+        <Message>{error}</Message>
+      ) : (
         <div className="Instrcutor-container">
           <div className="backgroundPicture"></div>
           <Container maxWidth="lg" className="grids">
@@ -178,19 +189,50 @@ const InstructorProfile = () => {
               </Stack>
             </Container>
             <Container maxWidth="md" className="span-6">
-              <h2>Students</h2>
-              <Typography variant="body2">{mentor.studentDescription}</Typography>
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <h2>Students</h2>
+                </Grid>
+                <Grid container item xs={12} alignItems="center">
+                  {students.map((student, index) => {
+                    if (index <= 4) {
+                      return (
+                        <Grid item xs={1} key={student._id} style={{marginRight:"-1rem"}}>
+                        <img
+                        src={student.studentDetails.profilePicture}
+                        alt={student.name}
+                        />
+                        </Grid>
+                      );
+                    } else {
+                      return false;
+                    }
+                  })}
+                  <Grid item xs={7} style={{paddingLeft:"2.5rem",fontFamily:"Montserrat",color:"#5F5F5F"}}>
+                    <span>and {(Object.keys(students).length) - 5 } others!</span>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body2">
+                    {mentor.studentDescription}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Container>
             <Container maxWidth="sm" className="span-4">
               <h2>Videos</h2>
-              <Player playsInline poster={mentor.introVideo.videoPoster} src={mentor.introVideo.video}>
+              <Player
+                playsInline
+                poster={mentor.introVideo.videoPoster}
+                src={mentor.introVideo.video}
+              >
                 <BigPlayButton position="center" />
               </Player>
             </Container>
             <Container maxWidth="sm" className="span-2">
               <h4>Photos</h4>
               <ImageList cols={2} rowHeight={164}>
-                {mentor.mentorDetails.otherImages.map((image,idx) => (
+                {mentor.mentorDetails.otherImages.map((image, idx) => (
                   <ImageListItem key={idx}>
                     <img
                       src={image}
