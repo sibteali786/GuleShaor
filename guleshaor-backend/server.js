@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import connectDB from "./config/db.js";
 import mentorRoutes from "./routes/mentorRoutes.js"
 import studentRoutes from "./routes/studentRoutes.js"
+import studentsMentorRoutes from "./routes/studentsMentorRoutes.js"
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 // for environment variables 
 dotenv.config()
@@ -18,6 +19,7 @@ app.get('/',(req,res)=>{
 //using productRoutes and userRoutes
 app.use("/api/mentors",mentorRoutes)
 app.use("/api/students",studentRoutes)
+app.use("/api/getAllStudents",studentsMentorRoutes)
 app.use(notFound)
 app.use(errorHandler)
 

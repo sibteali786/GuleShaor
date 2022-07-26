@@ -6,5 +6,4 @@ const router = express.Router();
 
 router.route("/").get(getMentors);
 router.route("/:id").get(getMentorById); 
-
 export default router;

@@ -53,6 +53,10 @@ const mentorSchema = new mongoose.Schema({
     hobbies:[{type:String}],
     skills:[{type:String}]
   },
+  studentDescription:{
+    type:String,
+  }
+  ,
   email: {
     type: String,
     required: true,
