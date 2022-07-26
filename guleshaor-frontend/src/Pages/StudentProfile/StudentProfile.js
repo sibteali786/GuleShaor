@@ -35,7 +35,7 @@ const UserProfile = () => {
       setInputFields(student.about.skills)
     }
     // eslint-disable-next-line
-  }, []);
+  }, [student]);
   const [inputFields, setInputFields] = useState([]);
   const [inputValue, setinputValue] = useState("");
   const handleAddFields = () => {

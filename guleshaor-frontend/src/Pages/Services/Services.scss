@@ -1,130 +1,209 @@
 @import "../../components/Utils/config.scss";
+
 .service-container {
-  background-color: #88868a1c;  
-  h2 {
+  background-color: #88868a1c;
+
+  h1 {
     color: #f8f9fa;
-    
+    font-family: "Gotham";
+    font-weight: 400;
+    font-size: clamp(2rem,5vw,3rem);
   }
-  .svg-container{
-  position: relative;
-  background-color: #30363c;
-  height: 30vh;
-  font-family: $fontfmily1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .custom-shape-divider-top-1653762327 {
+
+  .svg-container {
+    position: relative;
+    background-color: #43474c;
+    height: 40vh;
+    padding-top: 2rem;
+    font-family: $fontfmily1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .custom-shape-divider-top-1653762327 {
       position: absolute;
-      top:30vh;
+      top: 45vh;
       left: 0;
       width: 100%;
       overflow: hidden;
       line-height: 0;
-  }
-
-  .custom-shape-divider-top-1653762327 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    // z-index:-10;
-    z-index:-10;
-  }
-
-  .custom-shape-divider-top-1653762327 .shape-fill {
-    fill: #252c33;
-  }
-
-}
-  .cardsDiv {
-    display: flex;
-    position: relative;
-    top: -10vh;
-    flex-direction: row;
-    justify-content: space-evenly;  
-    margin: 2rem;
-    @media (max-width: 650px) {
-        flex-direction: column;
-        justify-content: space-evenly;
     }
+
+    .custom-shape-divider-top-1653762327 svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      // z-index:-10;
+      z-index: -10;
+    }
+
+    .custom-shape-divider-top-1653762327 .shape-fill {
+      fill: #30363c;
+    }
+
+  }
+
+  .cardsDiv {
+    .flicking-viewport {
+      margin-left: auto;
+      margin-right: auto;
+      transition: height .5s;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      .is-circle{
+        background-color: #30363c;
+        border-radius: 50%;
+      }
+      .flicking-arrow-next{
+        height: 45px;
+        width: 45px;
+        &:after,&:before{
+          width: 18px;
+          right: 15px;
+          @media(min-width: 768px){
+            width:24px;
+            right: 22px;
+          }
+        }
+      @media (min-width:768px){
+        height: 64px;
+        width: 64px;
+        
+        }
+    }
+    .flicking-arrow-prev{
+      height: 45px;
+      width: 45px;
+      &:after,&:before{
+        width: 18px;
+        left: 15px;
+        @media(min-width: 768px){
+          width:24px;
+          left: 22px;
+        }
+      }
+    @media (min-width:768px){
+      height: 64px;
+      width: 64px;
+      
+      }
+  }
+      .flicking-camera {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        position: relative;
+        width: 1000px;
+        @media (min-width:768px){
+          width: 1500px;
+
+        }
+        @media (min-width:1024px){
+          width: 2000px;
+
+        }
+        will-change: transform;
+        z-index: 1;
+      }
+    }
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
     .MuiCard-root {
       box-shadow: none;
       background: #ffffff;
-      border-radius:2.6rem;
-      @media (min-width:1024px){
-        border-radius: 2rem;  
-      }
-      margin: 2rem 0; 
+
+
+      margin: 2rem 1rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 100%;
+      height: fit-content;
 
-      @media (min-width: 650px) {
-        width: 160px;
-      }
-      @media (min-width: 768px) {
-        width: 220px;
-      }
-      @media (min-width: 1024px) {
-        width: 300px;
-      }
-      .MuiCardContent-root{
-        @media(max-width:768px){
-          padding:0;
+      .MuiCardContent-root {
+        @media(max-width:768px) {
+          padding: 0;
         }
       }
+
       .MuiCardMedia-root {
         border-radius: none;
         object-position: center;
-        @media (min-width: 650px) {
-          height: 106px;
+        height: 200px;
+        @media (min-width:768px){
+          height: 250px;
         }
-        @media (min-width: 768px) {
-          height: 146px;
-          border-radius: 1rem;
-        }
-        @media (min-width: 1024px) {
-          height: 190px;
-          border-radius: 2rem;
+        @media (min-width:1024px){
+          height: 300px;
         }
       }
     }
+
     .MuiTypography-h5 {
       font-family: $fontfamily2;
-      font-size: clamp(1rem, 2vw, 2rem);
+      font-size: clamp(0.8rem, 2vw, 1.8rem);
       color: #414042;
       font-weight: 500;
+      text-align: center;
     }
+
     .MuiTypography-body2 {
       font-family: $fontfamily2;
-      font-size: clamp(0.7rem, 2vw, 1rem);
+      font-size: clamp(0.6rem, 1vw, 1rem);
       color: #414042;
+      @media (max-width:768px){
+        padding: 1rem;
+      }
     }
   }
 }
-.cardExpandSection{
-  display:grid;
+
+.cardExpandSection {
+  display: grid;
   justify-content: space-between;
   align-items: center;
-  grid-template-columns: 0.45fr 0.45fr 0.1fr  ;
-  padding:2rem;
-  background:#FFFFFF;
+  grid-template-columns: 0.45fr 0.45fr 0.1fr;
+  padding: 2rem;
+  background: #FFFFFF;
   border-radius: 2rem;
-  p{
-    font-size: clamp(0.4rem,2vw,0.7rem);
+  font-family: "Montserrat";
+  div{
+    font-family: "Montserrat";
     grid-column: 1/5;
-    text-align: left;
-    @media(min-width:768px){
+    text-align: center;
+    font-size: clamp(1.5rem,3vw,2.5rem);
+    @media(min-width:768px) {
       grid-column: 1/3;
     }
   }
-  img{
-    grid-column:1/5;
-    height:400px;
-    width:auto;
-    @media(min-width:768px){
-      grid-column: 4/5;  
-      height:400px;
+  p {
+    font-size: clamp(0.6rem, 3vw, 1rem);
+    grid-column: 1/5;
+    text-align: left;
+
+    @media(min-width:768px) {
+      grid-column: 1/3;
+    }
+  }
+
+  img {
+    grid-column: 1/5;
+    width: auto;
+    height: 200px;
+    @media(min-width:450px) {
+      height: 300px;
+      grid-column: 4/5;
+    }
+    @media(min-width:768px) {
+      height: 450px;
+      grid-column: 4/5;
     }
   }
 }
+

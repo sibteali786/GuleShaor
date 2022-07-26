@@ -40,7 +40,7 @@ const InstructorProfile = () => {
       setInputFields(mentor.about.skills);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [mentor]);
   const [inputFields, setInputFields] = useState([]);
   const [inputValue, setinputValue] = useState("");
   const handleAddFields = () => {
