@@ -213,7 +213,7 @@ const InstructorProfile = () => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body2">
+                  <Typography variant="body2" style={{fontFamily:"Montserrat",color:"#5F5F5F",fontWeight:"bold"}}>
                     {mentor.studentDescription}
                   </Typography>
                 </Grid>
