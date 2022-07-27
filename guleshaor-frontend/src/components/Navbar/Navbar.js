@@ -32,6 +32,11 @@ const items = [
     color: "#3f51b5",
     to: "/service",
   },
+  {
+    name: "Resources",
+    color: "#3f51b5",
+    to: "/resources",
+  },
 ];
 const Navbar = () => {
   const $root = useRef();
