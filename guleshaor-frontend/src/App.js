@@ -14,6 +14,7 @@ import { BrowserRouter } from "react-router-dom";
 import Students from "./Pages/Students/Students";
 import Team from "./Pages/Team/Team";
 import Resources from "./Pages/Resources/Resources";
+import LogInSignIn from "./Pages/LogInSignIn/LogInSignIn";
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/logSignIn" element={<LogInSignIn />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/students" element={<Students />} />
         <Route path="/students/:id" element={<StudentProfile />} />

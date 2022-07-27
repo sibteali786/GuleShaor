@@ -112,8 +112,8 @@ const Navbar = () => {
       </div>
 
       <div className="logSign-Desktop">
-        <Link to="/login">Log In</Link>
-        <Link to="/signIn"> 
+        <Link to="/logSignIn">Log In</Link>
+        <Link to="/logSignIn"> 
           <Button variant="contained">Sign In</Button>
         </Link>
         <Link to="/">
