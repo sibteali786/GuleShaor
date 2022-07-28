@@ -16,12 +16,12 @@
   "type": "module",
   "scripts": {
     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --force --prefix frontend && npm run build --prefix frontend",
-    "start": "node guleshaor-backend/server.js",
-    "server": "nodemon guleshaor-backend/server.js",
-    "client": "npm start --prefix guleshaor-frontend",
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client \"",
-    "data:import": "node guleshaor-backend/seeder",
-    "data:destroy": "node guleshaor-backend/seeder -d"
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "author": "GuleShaor",
   "license": "MIT",
