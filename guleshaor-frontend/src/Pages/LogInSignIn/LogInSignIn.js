@@ -19,7 +19,7 @@ const LogInSignIn = () => {
     <div className="logInSignIn-container">
       <div class="container" id="container1">
         <div class="form-container sign-up-container">
-          <form action="#">
+          <form action="#" className="form">
             <h1>Create Account</h1>
             <div class="social-container">
               <a href="#" class="social">
@@ -40,7 +40,7 @@ const LogInSignIn = () => {
           </form>
         </div>
         <div class="form-container sign-in-container">
-          <form action="#">
+          <form action="#" className="form">
             <h1>Sign in</h1>
             <div class="social-container">
               <a href="#" class="social">
