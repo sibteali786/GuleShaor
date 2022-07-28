@@ -16,7 +16,7 @@
   "type": "module",
   "scripts": {
     "build":"cd guleshaor-frontend && npm run build",
-    "install-guleshaor-frontend":"cd guleshaor-frontend && npm install",
+    "install-guleshaor-frontend":"cd guleshaor-frontend && npm install --force",
     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm run install-guleshaor-frontend && npm run buil",
     "start": "node guleshaor-backend/server.js",
     "server": "nodemon guleshaor-backend/server.js",
