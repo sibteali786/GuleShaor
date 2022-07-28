@@ -13,11 +13,6 @@ const items = [
     to: "/mentors",
   },
   {
-    name: "Pricing",
-    color: "#e91e63",
-    to: "/pricing",
-  },
-  {
     name: "Team",
     color: "#9c27b0",
     to: "/team",
