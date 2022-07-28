@@ -1,1 +1,1 @@
-web : node guleshaor-backend/server.js
+web: node guleshaor-backend/server.js
