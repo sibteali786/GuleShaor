@@ -127,7 +127,7 @@ const Navbar = () => {
       <div id="webapp_cover" onClick={toggleDrawer('right', true)}>
         <div id="menu_button">
           <input type="checkbox" id="menu_checkbox" />
-          <label for="menu_checkbox" id="menu_label">
+          <label htmlFor="menu_checkbox" id="menu_label">
             <div id="menu_text_bar"></div>
           </label>
         </div>
