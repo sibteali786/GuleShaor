@@ -1,5 +1,5 @@
 import mongoose from "mongoose"; // Erase if already required
-
+import bcrypt from "bcryptjs";
 // Declare the Schema of the Mongo model
 var studentSchema = new mongoose.Schema(
   {
@@ -65,6 +65,11 @@ var studentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// defining custom methods for user model
+studentSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 //Export the model
 const student = mongoose.model("Student", studentSchema);
