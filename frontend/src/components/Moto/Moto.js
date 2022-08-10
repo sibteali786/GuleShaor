@@ -54,7 +54,7 @@ const Moto = () => {
     <div className="moto-container">
       <div className="WhoWeAre">
         <div className="span-1">
-          <h3 >who we are</h3>
+          <h3>who we are</h3>
           <div className="imageDiv">
             <img src={motoAsset1} alt="our purpose" />
           </div>
@@ -62,38 +62,35 @@ const Moto = () => {
         <div className="span-2">
           <h4>Our philosophy</h4>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            imperdiet consectetur erat scelerisque. Ac malesuada amet facilisi
-            sed enim. Habitant et consequat morbi lectus nibh in facilisis massa
-            pretium. Porttitor et sed quis maecenas ultricies vitae fermentum
-            habitasse. Turpis quam enim elit mauris volutpat tincidunt tortor,
-            ut. Ac lacus montes, purus a leo enim. Natoque et egestas risus enim
-            iaculis massa. Odio ornare lacus justo, vitae mattis massa. Lacus
-            nec lectus eget leo, aliquet nisi pellentesque arcu malesuada. In
-            facilisis varius suscipit at libero aliquam malesuada. Amet hac nibh
-            donec feugiat feugiat. Natoque et egestas risus enim iaculis massa.
-            Est in est imperdiet.
+            Pakistan has an extraordinary asset in the shape of a youth bulge,
+            which means that the largest segment of our population consists of
+            young people - around 63%. This youth bulge can translate into
+            economic gains only if the youth have skills consistent with the
+            requirements of a modern economy. Because of increasing population
+            growth, Pakistan is facing difficulty in providing sufficient
+            employment opportunities. The issue is becoming more serious with
+            rapidly changing economies that require more innovative skills.
           </p>
         </div>
         <div className="span-3">
           <p>
-            Odio ornare lacus justo, vitae mattis massa. Lacus nec lectus eget
-            leo, aliquet nisi pellentesque arcu malesuada. In facilisis varius
-            suscipit at libero aliquam malesuada. Amet hac nibh donec feugiat
-            feugiat. Natoque et egestas risus enim iaculis massa. Est in est
-            imperdiet arcu donec maecenas ac eget. Praesent enim, neque placerat
-            quis tristique mauris laoreet etiam ut. Quis et vitae magna eu, in
-            in. Aliquam quis nisl nulla lectus aliquam urna. Aenean ut faucibus
-            placerat praesent vestibulum fusce ullamcorper. Id sed convallis
-            nulla neque in sed. Sit sapien duis at mattis amet nulla maecenas
-            eget justo.
+            Our students getting professional education need to be updated about
+            the latest market trends, their personalities need to be flexible
+            and adaptive in order to exploit the market opportunities both at
+            national and international level. So we are creating a demand-driven
+            training system responsive to requirements of the job market that
+            will enable youth to not depend on the government but make a living
+            through freelancing and entrepreneurship. The system provides not
+            only expert industrial mentorship and career counseling but also the
+            awareness of free high quality learning resources over the internet
+            and career opportunities.
           </p>
-          <Button variant="contained">Get In Touch</Button>
+          <Button variant="contained">Learn More</Button>
         </div>
       </div>
       <div className="WhatWeDo">
         <h3>what we do</h3>
-        <h2>MAKE, MENTOR & TEACH THE LEADERS OF TOMORROW</h2>
+        <h2>DIRECT, MENTOR & BUILD THE LEADERS OF TOMORROW</h2>
         <Slider {...settings} style={{ padding: "0 0" }}>
           <div>
             <img src={carousel1} alt="purpose" />
@@ -115,7 +112,7 @@ const Moto = () => {
       <div className="letsColloborate">
         {/* Its better to convert the text part to collapse so that it can be accesed if needed. Pending Task */}
         <h3>let’s colloborate</h3>
-        <h2>HELP US BRING CHANGE TO PEOPLE’S LIVES</h2>
+        <h2>SUPPORT OUR YOUTH</h2>
         <div className="cards">
           <Card>
             <CardActionArea>
@@ -145,14 +142,13 @@ const Moto = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Service Exchange
+                  Resource Alliance
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  We work with organisations, education providers, charities and
-                  youth projects to deliver our services. We support our
-                  partners by referring young people to services for additional
-                  support. They work with us by referring young people with an
-                  interest in or studying construction.
+                  We support our students by referring them to our partners for
+                  additional support. They provide them with free learning
+                  resources, such as academic and skill-building courses and
+                  assets.
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -166,7 +162,7 @@ const Moto = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Volunteering Oppurtunities
+                  University Student Chapter
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   If you would like to work with us as a volunteer we would love
@@ -178,11 +174,10 @@ const Moto = () => {
             </CardActionArea>
           </Card>
         </div>
-        <div style={{textAlign:"center"}}>
-
-        <Button id="buttonSection3" variant="contained">
-          Collaborate
-        </Button>
+        <div style={{ textAlign: "center" }}>
+          <Button id="buttonSection3" variant="contained">
+            Collaborate
+          </Button>
         </div>
       </div>
     </div>

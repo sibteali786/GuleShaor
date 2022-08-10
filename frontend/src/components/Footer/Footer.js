@@ -48,7 +48,7 @@ const Footer = () => {
           <IconButton aria-label="form-icon">
             <EmailIcon />
           </IconButton>
-          <h4>For a Better Tommorow</h4>
+          <h4>FOR A BETTER FUTURE OF PAKISTAN.</h4>
           <form onSubmit={handleSubmit}>
             <div className="span-1">
               <FormControl>

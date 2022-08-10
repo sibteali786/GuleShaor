@@ -1,43 +1,60 @@
 @import "../Utils/config.scss";
-.hero-Container{
+
+.hero-Container {
 
     background: url("../../Assets/LandingPage/landing-PageImage.png") center/cover;
-    height:100vh;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background-blend-mode: color;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start; 
-    padding:0 2rem;
-    h3, p{
-        color:$textColor1;
+    align-items: flex-start;
+    padding: 0 2rem;
+
+    h3,
+    p {
+        color: $textColor1;
     }
-    p{
+
+    p {
         text-align: left;
     }
-    h3{
+
+    h3 {
         font-size: 1.3rem;
-        margin:0 0;
-        width:90%;
+        margin: 0 0;
+        width: 90%;
         text-align: left;
-        @media(min-width:550px){
-            width:80%;
+
+        @media(min-width:550px) {
+            width: 80%;
             font-size: 1.5rem;
         }
-        @media(min-width:768px){
-            width:70%;
+
+        @media(min-width:768px) {
+            width: 70%;
         }
-        @media(min-width:1024px){
-            width:50%;
+
+        @media(min-width:1024px) {
+            width: 50%;
             font-size: 1.7rem;
         }
     }
+
+    a {
+        text-decoration: none;
+    }
+
     button {
         border-radius: 0.2rem;
         background-color: $tertiaryColor;
         transition: 300ms ease-out;
+
         &:hover {
-          background-color: $primaryColor;
-          color: $textColor2;
+            background-color: $primaryColor;
+            color: $textColor2;
         }
-      }
+    }
 }

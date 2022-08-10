@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="hero-Container">
-      <h3>EMPOWERING YOUTH THROUGH CAPACITY BUILDING.</h3>
+      <h3>EMPOWERING YOUTH FOR FINANCIAL INDEPENDENCE.</h3>
       <p>
-        Counselling services that nurture, support and entertain young minds.
+        Providing a demand-driven training system responsive to latest
+        industrial trends.
       </p>
       <Link to="/logSignIn">
         <Button variant="contained">Register</Button>

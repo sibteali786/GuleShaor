@@ -14,30 +14,33 @@ import { BrowserRouter } from "react-router-dom";
 import Students from "./Pages/Students/Students";
 import Team from "./Pages/Team/Team";
 import Resources from "./Pages/Resources/Resources";
-import LogInSignIn from "./Pages/LogInSignIn/LogInSignIn";
+import LogInSignIn from "./Pages/LogIn/LogIn";
+import Signup from "./Pages/SignUp/Signup";
+import LogIn from "./Pages/LogIn/LogIn";
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-    <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/referral" element={<Referrals />} />
-        <Route path="/service" element={<Services />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/logSignIn" element={<LogInSignIn />} />
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/students/:id" element={<StudentProfile />} />
-        <Route path="/mentors" element={<Mentors />} />
-        <Route path="/mentors/:id" element={<InstructorProfile />} />
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/referral" element={<Referrals />} />
+          <Route path="/service" element={<Services />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/students/:id" element={<StudentProfile />} />
+          <Route path="/mentors" element={<Mentors />} />
+          <Route path="/mentors/:id" element={<InstructorProfile />} />
         </Routes>
         <Footer />
-        </div>
+      </div>
     </BrowserRouter>
-    );
+  );
 }
 
 export default App;
