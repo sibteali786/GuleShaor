@@ -1,12 +1,19 @@
-import { CardContent, Grid, CardMedia, Card, Typography, Button } from "@mui/material";
+import {
+  CardContent,
+  Grid,
+  CardMedia,
+  Card,
+  Typography,
+  Button,
+} from "@mui/material";
 import React from "react";
 import "./Resources.scss";
 import Flicking from "@egjs/react-flicking";
-import resource from "../../Assets/Resources/resources.png";
+import resource from "../../Assets/Service/service2.jpg";
 const Resources = () => {
   return (
     <div className="resource-container">
-      <Grid container spacing={2} alignItems="center" className='headers'>
+      <Grid container spacing={2} alignItems="center" className="headers">
         <Grid item xs={12} md={6}>
           <h1>Free Student Resources</h1>
         </Grid>
@@ -36,7 +43,11 @@ const Resources = () => {
             </Card>
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Flicking circular={true} circularFallback= "bound" horizontal={false}>
+            <Flicking
+              circular={true}
+              circularFallback="bound"
+              horizontal={false}
+            >
               <div className="weather-panel">
                 <CardMedia title="Resource" image={resource} />
                 <Card>
@@ -76,9 +87,7 @@ const Resources = () => {
             </Flicking>
           </Grid>
         </Grid>
-        <Button variant="contained" >
-          Load More
-        </Button>
+        <Button variant="contained">Load More</Button>
       </div>
       <div className="courses">
         <h2>Developer Assets</h2>
@@ -97,7 +106,11 @@ const Resources = () => {
             </Card>
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Flicking circular={true} horizontal={false} circularFallback= "bound">
+            <Flicking
+              circular={true}
+              horizontal={false}
+              circularFallback="bound"
+            >
               <div className="weather-panel">
                 <CardMedia title="Resource" image={resource} />
                 <Card>
@@ -137,9 +150,7 @@ const Resources = () => {
             </Flicking>
           </Grid>
         </Grid>
-        <Button variant="contained" >
-          Load More
-        </Button>
+        <Button variant="contained">Load More</Button>
       </div>
       <div className="courses">
         <h2>Free Templates</h2>
@@ -158,7 +169,11 @@ const Resources = () => {
             </Card>
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Flicking circular={true} horizontal={false} circularFallback= "bound">
+            <Flicking
+              circular={true}
+              horizontal={false}
+              circularFallback="bound"
+            >
               <div className="weather-panel">
                 <CardMedia title="Resource" image={resource} />
                 <Card>
@@ -198,9 +213,7 @@ const Resources = () => {
             </Flicking>
           </Grid>
         </Grid>
-        <Button variant="contained" >
-          Load More
-        </Button>
+        <Button variant="contained">Load More</Button>
       </div>
     </div>
   );

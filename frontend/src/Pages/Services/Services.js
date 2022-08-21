@@ -13,10 +13,10 @@ import { Arrow } from "@egjs/flicking-plugins";
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/flicking-plugins/dist/flicking-plugins.css";
 // Card Images
-import card1 from "./../../Assets/Service/service1.png";
-import card2 from "./../../Assets/Service/service2.png";
-import card3 from "./../../Assets/Service/service3.png";
-import card4 from "./../../Assets/Service/lowerSectionImage.png";
+import card1 from "./../../Assets/Service/service1.jpg";
+import card2 from "./../../Assets/Service/service2.jpg";
+import card3 from "./../../Assets/Service/service3.jpg";
+import card4 from "./../../Assets/Service/lowerSectionImage.jpg";
 
 const Services = () => {
   const [cardActivate, setCardActivate] = useState(0);
@@ -56,12 +56,12 @@ const Services = () => {
           className="flicking-viewport"
           plugins={_plugins}
           horizontal={true}
-          circularFallback= "bound"
-          circular= {true}
-          align= "prev"
-          panelsPerView ={-1}
+          circularFallback="bound"
+          circular={true}
+          align="prev"
+          panelsPerView={-1}
           autoResize={true}
-        > 
+        >
           <Card>
             <CardContent>
               <CardMedia
@@ -89,7 +89,7 @@ const Services = () => {
               <i class="fa-solid fa-angle-down"></i>
             </Button>
           </Card>
-          
+
           <Card>
             <CardContent>
               <CardMedia

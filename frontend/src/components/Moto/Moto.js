@@ -1,8 +1,8 @@
 import React from "react";
 import "./Moto.scss";
 import Button from "@mui/material/Button";
-import motoAsset1 from "./../../Assets/Moto_Assets/Image.png";
-import carousel1 from "./../../Assets/Moto_Assets/Rectangle 5 (2).png";
+import motoAsset1 from "./../../Assets/Moto_Assets/Image.jpg";
+import carousel1 from "./../../Assets/Moto_Assets/Rectangle 5 (2).jpg";
 // carousel imports
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
