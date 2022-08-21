@@ -1,0 +1,73 @@
+@import "../../components/Utils/config.scss";
+@import "../../components/Utils/mixins";
+
+.pricingContainer {
+    padding: 4rem 2rem;
+
+    h2 {
+        text-align: center;
+        @include headings(medium);
+    }
+
+    .types {
+        display: flex;
+        flex-direction: column;
+
+        span {
+            @include paragraph(normal);
+            font-weight: 500;
+
+            i {
+                color: $secondaryColor;
+            }
+        }
+
+        @media (min-width:500px) {
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+    }
+
+    .billingType {
+        text-align: center;
+        margin: 2rem 0;
+
+        &:hover {
+
+            &::before {
+                content: "get 3 months free";
+                height: fit-content;
+                width: fit-content;
+                padding: 2rem 4rem;
+                position: fixed;
+                background-color: rgba($color: $secondaryColor, $alpha: 0.9);
+                top: 20vh;
+                right: 10vw;
+                border-radius: 0.4rem;
+                color: $textColor2;
+                opacity: 0;
+                animation: appear 0.3s ease-in-out forwards;
+                z-index: 100;
+                @include headings(medium);
+
+                @keyframes appear {
+                    0% {
+                        opacity: 0.25;
+                    }
+
+                    80% {
+                        opacity: 0.5;
+                    }
+
+                    100% {
+                        opacity: 1;
+                    }
+                }
+            }
+
+        }
+
+
+
+    }
+}

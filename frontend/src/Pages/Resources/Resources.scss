@@ -1,71 +1,88 @@
-.resource-container{
-    padding:4rem 2rem;
-    h1{
-        font-size: clamp(2.3rem,4vw,4rem);
-        color:#414042;
+@import "../../components/Utils/mixins";
+
+.resource-container {
+    padding: 4rem 2rem;
+
+    h1 {
+        @include headings(large);
         font-family: "Gotham";
         text-align: left;
     }
 
-    h2{
-        color: #414042;
-        font-weight: 500;        
-        @media(max-width:768px){
+    h2 {
+        font-weight: 500;
+        @include headings(special);
+
+        @media(max-width:768px) {
             margin-top: 2rem;
         }
 
     }
 
-    hr{
+    hr {
         margin: 0 0 1rem 0;
-        color:#252C33;
+        color: #252C33;
         opacity: 0.5;
     }
-    p{
-        color:#252C33;
-        font-size: clamp(0.5rem,1.5vw,0.8rem);
+
+    p {
+        color: #252C33;
+        font-size: clamp(0.5rem, 1.5vw, 0.8rem);
         font-weight: 500;
     }
-    p,h6{text-align: left;}
-    .MuiCard-root{
-        max-width: 550px;
-    }
-    .MuiCardMedia-root{
-        height: clamp(250px,25vh,400px);
+
+    p,
+    h6 {
+        text-align: left;
     }
 
-    .weather-panel{
+    .MuiCard-root {
+        max-width: 550px;
+    }
+
+    .MuiCardMedia-root {
+        height: clamp(250px, 25vh, 400px);
+    }
+
+    .weather-panel {
         display: flex;
         margin: 1rem 0;
-        h5{
-            font-size: clamp(0.6rem,2vw,1rem);
+
+        h5 {
+            font-size: clamp(0.6rem, 2vw, 1rem);
         }
-        .MuiCard-root{
+
+        .MuiCard-root {
             display: flex;
             flex-direction: row;
             max-width: fit-content;
         }
-        .MuiCardMedia-root{
+
+        .MuiCardMedia-root {
             height: auto;
             width: 100%;
-        }   
+        }
     }
-    .courses{
+
+    .courses {
         margin: 2rem 4rem;
-        text-align: center;       
+        text-align: center;
     }
-    .headers{
-        padding:  0 4rem;
+
+    .headers {
+        padding: 0 4rem;
     }
-    .courseCards{
+
+    .courseCards {
         height: 400px;
         overflow-y: hidden;
     }
 
-    button{
+    button {
         background-color: #FAD5A5;
-        color:#252C33;
-        &:hover{
+        color: #252C33;
+
+        &:hover {
             background-color: #252C33;
             color: #fff;
         }

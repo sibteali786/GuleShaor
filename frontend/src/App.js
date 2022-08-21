@@ -14,9 +14,9 @@ import { BrowserRouter } from "react-router-dom";
 import Students from "./Pages/Students/Students";
 import Team from "./Pages/Team/Team";
 import Resources from "./Pages/Resources/Resources";
-import LogInSignIn from "./Pages/LogIn/LogIn";
 import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
+import Pricing from "./Pages/Pricing/Pricing";
 function App() {
   return (
     <BrowserRouter>
@@ -28,6 +28,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/referral" element={<Referrals />} />
           <Route path="/service" element={<Services />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/team" element={<Team />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signup" element={<Signup />} />

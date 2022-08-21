@@ -42,8 +42,18 @@ const items = [
   },
   {
     name: "Resources",
-    color: "#3f51b5",
+    color: "#B93160",
     to: "/resources",
+  },
+  {
+    name: "FAQs",
+    color: "#0078AA",
+    to: "/faq",
+  },
+  {
+    name: "Referrals",
+    color: "#7F5283",
+    to: "/referral",
   },
 ];
 const Navbar = () => {

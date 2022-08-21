@@ -1,0 +1,30 @@
+@mixin headings($size) {
+    color: #414042;
+
+    @if $size ==large {
+        font-size: clamp(2.3rem, 4vw, 4rem);
+    }
+
+    @else if $size ==medium {
+        font-size: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    @else if $size ==small {
+        font-size: clamp(0.8rem, 3vw, 1.6rem);
+    }
+
+    @else if $size ==special {
+        font-size: clamp(1.2rem, 4vw, 2rem);
+    }
+
+    @else {
+        font-size: clamp(1.5rem, 6vw, 4rem);
+    }
+}
+
+
+@mixin paragraph($size) {
+    @if $size ==normal {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+    }
+}
