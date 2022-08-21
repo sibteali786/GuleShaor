@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Users.scss";
 import { useLocation } from "react-router-dom";
 const Users = ({ mentor }) => {
-  console.log(mentor);
   const location = useLocation();
   return (
     <div className="card-container">
@@ -18,10 +17,17 @@ const Users = ({ mentor }) => {
             : "Free"
         }
       >
-        { location.pathname === "/mentors" ?
-         (mentor.mentorDetails.userType) : (mentor.studentDetails.userType)}
+        {location.pathname === "/mentors"
+          ? mentor.mentorDetails.userType
+          : mentor.studentDetails.userType}
       </span>
-      <Link to={location.pathname === "/mentors" ? `/mentors/${mentor._id}` : `/students/${mentor._id}` }>
+      <Link
+        to={
+          location.pathname === "/mentors"
+            ? `/mentors/${mentor._id}`
+            : `/students/${mentor._id}`
+        }
+      >
         <img
           className="round"
           src={
@@ -52,7 +58,7 @@ const Users = ({ mentor }) => {
       <div className="skills">
         <h6>Skills</h6>
         <ul>
-          {mentor.about.skills.map((skill, idx) => (
+          {mentor.about.skills.slice(0, 3).map((skill, idx) => (
             <li key={idx}>{skill}</li>
           ))}
         </ul>

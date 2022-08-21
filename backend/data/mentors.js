@@ -306,7 +306,7 @@ const users = [
       userType: "Pro",
       username: "@admin",
       career: "Web and Android Developer and CS graduate",
-      profilePicture: "/images/profilePic.jpg",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",

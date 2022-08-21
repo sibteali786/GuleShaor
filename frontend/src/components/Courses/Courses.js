@@ -4,45 +4,46 @@ const Courses = ({ course, mentor }) => {
   return (
     <>
       <div id="container">
-        <div class="product-details">
+        <div className="product-details">
           <h1>{course.name}</h1>
-          <span class="hint-star star">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-half" aria-hidden="true"></i>
+          <span className="hint-star star">
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star-half" aria-hidden="true"></i>
           </span>
 
-          <p class="information">
-            {course.details}
-          </p>
+          <p className="information">{course.details}</p>
 
-          <div class="control">
-            <button class="btn">
-              <span class="price">$250</span>
-              <span class="shopping-cart">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <div className="control">
+            <button className="btn">
+              <span className="price">$250</span>
+              <span className="shopping-cart">
+                <i className="fa fa-shopping-cart" aria-hidden="true"></i>
               </span>
-              <span class="buy">Get now</span>
+              <span className="buy">Get now</span>
             </button>
           </div>
         </div>
 
-        <div class="product-image">
+        <div className="product-image">
           <img src={course.poster} alt="" />
 
-          <div class="info">
+          <div className="info">
             <h2> Description</h2>
             <ul>
               <li>
-                <strong>{Object.keys(course.description)[0]} : </strong>{course.description.chapters}{" "}
+                <strong>{Object.keys(course.description)[0]} : </strong>
+                {course.description.chapters}{" "}
               </li>
               <li>
-                <strong>{Object.keys(course.description)[1]} :</strong>{course.description.hours}
+                <strong>{Object.keys(course.description)[1]} :</strong>
+                {course.description.hours}
               </li>
               <li>
-                <strong>{Object.keys(course.description)[2]} : </strong>{course.description.type}
+                <strong>{Object.keys(course.description)[2]} : </strong>
+                {course.description.type}
               </li>
             </ul>
           </div>
