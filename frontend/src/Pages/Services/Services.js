@@ -77,12 +77,12 @@ const Services = () => {
         >
           <SwiperSlide>
             <Card>
+              <CardMedia
+                component="img"
+                image={card2}
+                alt="A person lecturing"
+              />
               <CardContent>
-                <CardMedia
-                  component="img"
-                  image={card2}
-                  alt="A person lecturing"
-                />
                 <Typography gutterBottom variant="h5" component="div">
                   Referall & Direct Partnerships
                 </Typography>
@@ -106,12 +106,12 @@ const Services = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Card>
+              <CardMedia
+                component="img"
+                image={card3}
+                alt="A person lecturing"
+              />
               <CardContent>
-                <CardMedia
-                  component="img"
-                  image={card3}
-                  alt="A person lecturing"
-                />
                 <Typography gutterBottom variant="h5" component="div">
                   Service Exchange
                 </Typography>
@@ -136,12 +136,12 @@ const Services = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Card>
+              <CardMedia
+                component="img"
+                image={card1}
+                alt="A person lecturing"
+              />
               <CardContent>
-                <CardMedia
-                  component="img"
-                  image={card1}
-                  alt="A person lecturing"
-                />
                 <Typography gutterBottom variant="h5" component="div">
                   Volunteering Oppurtunities
                 </Typography>

@@ -16,10 +16,12 @@ import Resources from "./Pages/Resources/Resources";
 import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
+import Favicon from "react-favicon";
 function App() {
   const location = useLocation();
   return (
     <div className="App">
+      <Favicon url="images/logo.svg"></Favicon>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
