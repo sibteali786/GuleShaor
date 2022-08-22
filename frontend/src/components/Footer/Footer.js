@@ -26,7 +26,7 @@ const interestedIn_options = [
   { label: "Commerce", value: "Commerce" },
   { label: "Medical", value: "Medical" },
 ];
-const Footer = () => {
+const Footer = ({ isForm }) => {
   const [formValues, setFormValues] = useState(defaultValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,115 +41,129 @@ const Footer = () => {
   };
 
   return (
-    <div className="footer-container">
-      <div className="form-footer">
-        <p id="headingStylish">work with us</p>
-        <div className="form-div">
-          <IconButton aria-label="form-icon">
-            <EmailIcon />
-          </IconButton>
-          <h4>FOR A BETTER FUTURE OF PAKISTAN.</h4>
-          <form onSubmit={handleSubmit}>
-            <div className="span-1">
-              <FormControl>
-                <FormLabel>Name</FormLabel>
-                <TextField
-                  id="name-input"
-                  name="name"
-                  type="Text"
-                  value={formValues.name}
-                  onChange={handleInputChange}
-                  variant="standard"
-                  size="small"
-                />
-                <FormHelperText>E.g: Sibteali Baqar</FormHelperText>
-              </FormControl>
-            </div>
-            <div className="span-2">
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <TextField
-                  id="email-input"
-                  name="email"
-                  type="email"
-                  value={formValues.email}
-                  onChange={handleInputChange}
-                  variant="standard"
-                  size="small"
-                />
-                <FormHelperText>E.g: abc@gmail.com</FormHelperText>
-              </FormControl>
-            </div>
-            <div className="span-3">
-              <FormControl>
-                <FormLabel>Phone</FormLabel>
-                <TextField
-                  id="phone-input"
-                  name="phone"
-                  type="number"
-                  value={formValues.phone}
-                  onChange={handleInputChange}
-                  variant="standard"
-                  size="small"
-                />
-                <FormHelperText>E.g: +9212..</FormHelperText>
-              </FormControl>
-            </div>
-            <div className="span-4">
-              <FormControl>
-                <FormLabel>Organization</FormLabel>
-                <TextField
-                  id="organization-input"
-                  name="organization"
-                  type="Text"
-                  value={formValues.organization}
-                  onChange={handleInputChange}
-                  variant="standard"
-                  size="small"
-                />
-                <FormHelperText>E.g: NUST</FormHelperText>
-              </FormControl>
-            </div>
-            <div className="span-5">
-              <FormControl>
-                <FormLabel>Intrested In</FormLabel>
+    <div
+      className="footer-container"
+      style={
+        isForm
+          ? {
+              background:
+                "linear-gradient(181deg, rgba(188, 222, 255, 1) 18%, rgba(255, 229, 194, 1) 72%, rgba(250, 213, 165, 1) 88%);",
+            }
+          : { background: "#FAD5A5" }
+      }
+    >
+      {isForm ? (
+        <div className="form-footer">
+          <p id="headingStylish">work with us</p>
+          <div className="form-div">
+            <IconButton aria-label="form-icon">
+              <EmailIcon />
+            </IconButton>
+            <h4>FOR A BETTER FUTURE OF PAKISTAN.</h4>
+            <form onSubmit={handleSubmit}>
+              <div className="span-1">
+                <FormControl>
+                  <FormLabel>Name</FormLabel>
+                  <TextField
+                    id="name-input"
+                    name="name"
+                    type="Text"
+                    value={formValues.name}
+                    onChange={handleInputChange}
+                    variant="standard"
+                    size="small"
+                  />
+                  <FormHelperText>E.g: Sibteali Baqar</FormHelperText>
+                </FormControl>
+              </div>
+              <div className="span-2">
+                <FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <TextField
+                    id="email-input"
+                    name="email"
+                    type="email"
+                    value={formValues.email}
+                    onChange={handleInputChange}
+                    variant="standard"
+                    size="small"
+                  />
+                  <FormHelperText>E.g: abc@gmail.com</FormHelperText>
+                </FormControl>
+              </div>
+              <div className="span-3">
+                <FormControl>
+                  <FormLabel>Phone</FormLabel>
+                  <TextField
+                    id="phone-input"
+                    name="phone"
+                    type="number"
+                    value={formValues.phone}
+                    onChange={handleInputChange}
+                    variant="standard"
+                    size="small"
+                  />
+                  <FormHelperText>E.g: +9212..</FormHelperText>
+                </FormControl>
+              </div>
+              <div className="span-4">
+                <FormControl>
+                  <FormLabel>Organization</FormLabel>
+                  <TextField
+                    id="organization-input"
+                    name="organization"
+                    type="Text"
+                    value={formValues.organization}
+                    onChange={handleInputChange}
+                    variant="standard"
+                    size="small"
+                  />
+                  <FormHelperText>E.g: NUST</FormHelperText>
+                </FormControl>
+              </div>
+              <div className="span-5">
+                <FormControl>
+                  <FormLabel>Intrested In</FormLabel>
 
-                <TextField
-                  id="interestedin-input"
-                  select
-                  value={formValues.interestedIn}
-                  onChange={handleInputChange}
-                  helperText="Please select your currency"
-                  variant="standard"
-                  size="small"
-                >
-                  {interestedIn_options.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </FormControl>
-            </div>
-            <div className="span-6">
-              <FormControl>
-                <FormLabel>Message</FormLabel>
-                <TextField
-                  id="message-input"
-                  name="message"
-                  type="Text"
-                  value={formValues.message}
-                  onChange={handleInputChange}
-                  variant="standard"
-                  multiline
-                  maxRows={6}
-                  size="small"
-                />
-              </FormControl>
-            </div>
-          </form>
+                  <TextField
+                    id="interestedin-input"
+                    select
+                    value={formValues.interestedIn}
+                    onChange={handleInputChange}
+                    helperText="Please select your currency"
+                    variant="standard"
+                    size="small"
+                  >
+                    {interestedIn_options.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </FormControl>
+              </div>
+              <div className="span-6">
+                <FormControl>
+                  <FormLabel>Message</FormLabel>
+                  <TextField
+                    id="message-input"
+                    name="message"
+                    type="Text"
+                    value={formValues.message}
+                    onChange={handleInputChange}
+                    variant="standard"
+                    multiline
+                    maxRows={6}
+                    size="small"
+                  />
+                </FormControl>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
       <div className="linkSection">
         <div className="span-1">
           <h4>GuleShaor</h4>

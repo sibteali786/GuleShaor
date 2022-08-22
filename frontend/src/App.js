@@ -1,7 +1,7 @@
 import "./App.scss";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import FAQ from "./Pages/FAQ/FAQ";
@@ -10,7 +10,6 @@ import Services from "./Pages/Services/Services";
 import InstructorProfile from "./Pages/InstructorProfile/InstructorProfile";
 import StudentProfile from "./Pages/StudentProfile/StudentProfile";
 import Mentors from "./Pages/Mentors/Mentors";
-import { BrowserRouter } from "react-router-dom";
 import Students from "./Pages/Students/Students";
 import Team from "./Pages/Team/Team";
 import Resources from "./Pages/Resources/Resources";
@@ -18,29 +17,28 @@ import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 function App() {
+  const location = useLocation();
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/referral" element={<Referrals />} />
-          <Route path="/service" element={<Services />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/students" element={<Students />} />
-          <Route path="/students/:id" element={<StudentProfile />} />
-          <Route path="/mentors" element={<Mentors />} />
-          <Route path="/mentors/:id" element={<InstructorProfile />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/referral" element={<Referrals />} />
+        <Route path="/service" element={<Services />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/students" element={<Students />} />
+        <Route path="/students/:id" element={<StudentProfile />} />
+        <Route path="/mentors" element={<Mentors />} />
+        <Route path="/mentors/:id" element={<InstructorProfile />} />
+      </Routes>
+      <Footer isForm={location.pathname === "/" ? true : false} />
+    </div>
   );
 }
 
