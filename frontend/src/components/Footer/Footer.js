@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -27,6 +27,7 @@ const interestedIn_options = [
   { label: "Medical", value: "Medical" },
 ];
 const Footer = ({ isForm }) => {
+  const location = useLocation();
   const [formValues, setFormValues] = useState(defaultValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,19 +38,18 @@ const Footer = ({ isForm }) => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Hello Form is Clicked");
   };
 
   return (
     <div
       className="footer-container"
       style={
-        isForm
-          ? {
+        location.pathname !== "/"
+          ? { background: "#FAD5A5" }
+          : {
               background:
-                "linear-gradient(181deg, rgba(188, 222, 255, 1) 18%, rgba(255, 229, 194, 1) 72%, rgba(250, 213, 165, 1) 88%);",
+                "linear-gradient(181deg, rgba(188, 222, 255, 1) 18%, rgba(255, 229, 194, 1) 72%, rgba(250, 213, 165, 1) 88%)",
             }
-          : { background: "#FAD5A5" }
       }
     >
       {isForm ? (
