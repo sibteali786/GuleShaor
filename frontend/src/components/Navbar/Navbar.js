@@ -252,7 +252,7 @@ const Navbar = () => {
             <i className="fas fa-x"></i>
           </div>
         </div>
-        <Link to="/">
+        <Link to="/" onClick={toggleDrawer("right", false)}>
           <Logo className="logo-mobile" />
         </Link>
         {userInfo ? (
@@ -338,7 +338,11 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-        <div ref={$root} className="menu-mobile">
+        <div
+          ref={$root}
+          className="menu-mobile"
+          onClick={toggleDrawer("right", false)}
+        >
           {items.map((item, index) => (
             <NavLink
               key={item.name}

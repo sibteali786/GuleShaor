@@ -5,6 +5,7 @@ import profile from "../../Assets/Team/Profile Pic.png";
 import sibteali from "../../Assets/Team/sibteali.png";
 import izza from "../../Assets/Team/izza.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
 
 // Import Swiper styles
 import "swiper/css";
@@ -90,26 +91,36 @@ const Team = () => {
           className="mySwiper"
           style={{ margin: "0" }}
         >
-          {teams.map((team, index) => (
-            <SwiperSlide style={{ overflow: "visible" }}>
-              <img className="img img-1" src={team.profilePic} />
+          {teams.map((team) => (
+            <SwiperSlide style={{ overflow: "visible" }} key={uuidv4()}>
+              <img
+                className="img img-1"
+                src={team.profilePic}
+                alt="team profiles"
+              />
               <div className="name">{team.name}</div>
               <div className="title">{team.designation}</div>
               <div className="desc">{team.about}</div>
               <div className="actions">
                 {team.socialMedia.map((s) => (
-                  <a href={s} className="link" target="_blank" rel="noreferrer">
+                  <a
+                    href={s}
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    key={uuidv4()}
+                  >
                     <button className="actionButton">
                       {s.includes("github") ? (
-                        <i class="fa-brands fa-github"></i>
+                        <i className="fa-brands fa-github"></i>
                       ) : s.includes("linkedin") ? (
-                        <i class="fa-brands fa-linkedin"></i>
+                        <i className="fa-brands fa-linkedin"></i>
                       ) : s.includes("medium") ? (
-                        <i class="fa-brands fa-medium"></i>
+                        <i className="fa-brands fa-medium"></i>
                       ) : s.includes("instagram") ? (
-                        <i class="fa-brands fa-instagram"></i>
+                        <i className="fa-brands fa-instagram"></i>
                       ) : (
-                        <i class="fa-regular fa-eye"></i>
+                        <i className="fa-regular fa-eye"></i>
                       )}
                     </button>
                   </a>
