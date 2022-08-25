@@ -3,10 +3,10 @@
 
 .hero-Container {
 
-    background: url("../../Assets/LandingPage/landing-PageImage.jpg") center/cover;
+    background: url("../../../public/images/backgroundImage1.jpg") center/cover;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     background-blend-mode: color;
-    background-color: rgba(0, 0, 0, 0.5);
+    // background-color: rgba(0, 0, 0, 0.5);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,16 +16,23 @@
 
     h3,
     p {
-        color: $textColor1;
+        color: $tertiaryColor;
     }
 
     p {
         text-align: left;
+
+        @media (min-width:768px) {
+            width: 60%;
+        }
+
+        @media (min-width:1024px) {
+            width: 40%;
+        }
     }
 
     h3 {
         @include headings(special);
-        color: $textColor1;
         margin: 0 0;
         width: 90%;
         text-align: left;

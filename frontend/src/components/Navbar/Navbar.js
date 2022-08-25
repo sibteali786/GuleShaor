@@ -235,10 +235,7 @@ const Navbar = () => {
       </div>
       <div id="webapp_cover" onClick={toggleDrawer("right", true)}>
         <div id="menu_button">
-          <input type="checkbox" id="menu_checkbox" />
-          <label htmlFor="menu_checkbox" id="menu_label">
-            <div id="menu_text_bar"></div>
-          </label>
+          <i className="fas fa-bars"></i>
         </div>
       </div>
       <Drawer
@@ -247,6 +244,14 @@ const Navbar = () => {
         onClose={toggleDrawer("right", false)}
         className="mobile"
       >
+        <div
+          className="webapp_cover-mobile"
+          onClick={toggleDrawer("right", false)}
+        >
+          <div id="menu_button_mobile">
+            <i className="fas fa-x"></i>
+          </div>
+        </div>
         <Link to="/">
           <Logo className="logo-mobile" />
         </Link>

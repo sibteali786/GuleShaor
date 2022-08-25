@@ -165,7 +165,10 @@ const Services = () => {
           </SwiperSlide>
         </Swiper>
       </div>
-      <div style={{ padding: "2rem" }}>
+      <div
+        className="cardExpand-Container"
+        style={{ padding: "2rem", height: "100vh" }}
+      >
         {(() => {
           if (cardActivate === 0) {
             return (
