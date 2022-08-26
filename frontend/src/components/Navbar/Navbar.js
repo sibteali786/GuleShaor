@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect, createRef } from "react";
+import React, { useState } from "react";
 import "./Navbar.scss";
 import { ReactComponent as Logo } from "./../../Assets/LandingPage/logo.svg";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import profileImage from "../../Assets/ProfilesImages/Profile Pic.png";
-import gsap from "gsap";
 import {
   Avatar,
   Divider,
@@ -27,40 +26,30 @@ const items = [
   },
   {
     name: "Team",
-    color: "#9c27b0",
     to: "/team",
   },
   {
     name: "Students",
-    color: "#673ab7",
     to: "/students",
   },
   {
     name: "Services",
-    color: "#3f51b5",
     to: "/service",
   },
   {
     name: "Resources",
-    color: "#B93160",
     to: "/resources",
   },
   {
     name: "FAQs",
-    color: "#0078AA",
     to: "/faq",
   },
   {
     name: "Referrals",
-    color: "#7F5283",
     to: "/referral",
   },
 ];
 const Navbar = () => {
-  const $root = useRef();
-  const $indicator1 = useRef();
-  const $indicator2 = useRef();
-  const $items = useRef(items.map(createRef));
   const [active, setActive] = useState(0);
   const location = useLocation();
   const [state, setState] = React.useState({
@@ -82,39 +71,6 @@ const Navbar = () => {
 
     setState({ [anchor]: open });
   };
-  useEffect(() => {
-    const animate = () => {
-      const menuOffset = $root.current.getBoundingClientRect();
-      const activeItem = $items.current[active].current;
-      const { width, height, top, left } = activeItem.getBoundingClientRect();
-
-      const settings = {
-        x: left - menuOffset.x,
-        y: top - menuOffset.y,
-        width: width,
-        height: height,
-        backgroundColor: `${
-          location.pathname === "/" ? "transparent" : items[active].color
-        }`,
-        ease: "elastic.out(.7, .7)",
-        duration: 0.8,
-      };
-
-      gsap.to($indicator1.current, {
-        ...settings,
-      });
-
-      gsap.to($indicator2.current, {
-        ...settings,
-        duration: 1,
-      });
-    };
-    animate();
-    window.addEventListener("resize", animate);
-    return () => {
-      window.removeEventListener("resize", animate);
-    };
-  }, [active, location]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -128,11 +84,10 @@ const Navbar = () => {
       <Link to="/">
         <Logo className="logo" />
       </Link>
-      <div ref={$root} className="menu">
+      <div className="menu">
         {items.map((item, index) => (
           <NavLink
             key={item.name}
-            ref={$items.current[index]}
             className={`item`}
             onClick={() => {
               setActive(index);
@@ -146,8 +101,6 @@ const Navbar = () => {
             {item.name}
           </NavLink>
         ))}
-        <div ref={$indicator1} className="indicator" />
-        <div ref={$indicator2} className="indicator" />
       </div>
       <div>
         {userInfo ? (
@@ -331,22 +284,18 @@ const Navbar = () => {
             </Menu>
           </div>
         ) : (
-          <div className="logSign-Desktop">
-            <Link to="/login">Log In</Link>
-            <Link to="/signup">
+          <div className="logSign-mobile">
+            <Link to="/login" onClick={toggleDrawer("right", false)}>
+              Log In
+            </Link>
+            <Link to="/signup" onClick={toggleDrawer("right", false)}>
               <Button variant="contained">Sign In</Button>
             </Link>
           </div>
         )}
-        <div
-          ref={$root}
-          className="menu-mobile"
-          onClick={toggleDrawer("right", false)}
-        >
+        <div className="menu-mobile" onClick={toggleDrawer("right", false)}>
           {items.map((item, index) => (
             <NavLink
-              key={item.name}
-              ref={$items.current[index]}
               className={`item-mobile`}
               onClick={() => {
                 setActive(index);
@@ -362,8 +311,6 @@ const Navbar = () => {
               {item.name}
             </NavLink>
           ))}
-          <div ref={$indicator1} className="indicator-mobile" />
-          <div ref={$indicator2} className="indicator-mobile" />
         </div>
       </Drawer>
     </div>

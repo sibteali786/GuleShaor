@@ -91,6 +91,30 @@
     align-items: center;
   }
 
+  .active {
+    background-color: #fff;
+    color: #252c33 !important;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background-color: #252c33 !important;
+      transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover {
+      &:before {
+        left: 0;
+        right: auto;
+        width: 100%;
+      }
+    }
+  }
+
   .item {
     padding: 0.5rem 1rem;
     cursor: pointer;
@@ -101,31 +125,24 @@
     font-size: clamp(0.7rem, 0.5vw, 1rem);
     position: relative;
 
-    // &:before {
-    //   content: '';
-    //   position: absolute;
-    //   bottom: 0;
-    //   right: 0;
-    //   width: 0;
-    //   height: 2px;
-    //   background-color: $secondaryColor;
-    //   transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    // }
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background-color: $secondaryColor;
+      transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
 
-    // &:hover {
-    //   &:before {
-    //     left: 0;
-    //     right: auto;
-    //     width: 100%;
-    //   }
-    // }
-
-
-
-  }
-
-  .active {
-    color: #fff;
+    &:hover {
+      &:before {
+        left: 0;
+        right: auto;
+        width: 100%;
+      }
+    }
   }
 
   .indicator {
@@ -176,6 +193,12 @@
 
     }
 
+    .active {
+      background-color: #252c33;
+      color: #fff !important;
+
+    }
+
     .item-mobile {
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -185,11 +208,6 @@
       text-transform: uppercase;
       font-size: clamp(0.8rem, 1vw, 1.2rem);
 
-
-    }
-
-    .active {
-      color: #000;
     }
 
     .indicator-mobile {
@@ -221,5 +239,26 @@
 .iconsMenu {
   @media (max-width:900px) {
     display: none;
+  }
+}
+
+.logSign-mobile {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+    color: #252c33;
+  }
+
+  button {
+    border-radius: 0.4rem;
+    background-color: $tertiaryColor;
+    transition: 300ms ease-out;
+
+    &:hover {
+      background-color: $primaryColor;
+      color: $textColor2;
+    }
   }
 }
