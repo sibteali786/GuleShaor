@@ -1,4 +1,4 @@
-.Instrcutor-container {
+.student-container {
     .backgroundPicture {
         background: url("../../Assets/ProfilesImages/Profile\ Background.jpg") center/cover;
         height: 50vh;
@@ -28,7 +28,6 @@
     .grids {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        row-gap: 1rem;
 
         @media(min-width:768px) {
             row-gap: 2rem;

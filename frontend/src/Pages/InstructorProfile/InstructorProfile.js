@@ -39,8 +39,7 @@ const InstructorProfile = () => {
     if (Object.keys(mentor).length !== 0) {
       setInputFields(mentor.about.skills);
     }
-    // eslint-disable-next-line
-  }, [mentor]);
+  }, []);
   const [inputFields, setInputFields] = useState([]);
   const [inputValue, setinputValue] = useState("");
   const handleAddFields = () => {
@@ -91,7 +90,10 @@ const InstructorProfile = () => {
                     style={{ width: "100%" }}
                   />
                 </ButtonBase>
-                <Grid item style={{ marginLeft: "2rem" }}>
+                <Grid
+                  item
+                  style={{ marginLeft: "2rem", height: "fit-content" }}
+                >
                   <h3>{mentor.name}</h3>
                   <a href="email:johnDoe">{mentor.mentorDetails.username}</a>
                   {mentor.about.hobbies.map((hobby, idx) => (
@@ -197,23 +199,45 @@ const InstructorProfile = () => {
                   {students.map((student, index) => {
                     if (index <= 4) {
                       return (
-                        <Grid item xs={1} key={student._id} style={{marginRight:"-1rem"}}>
-                        <img
-                        src={student.studentDetails.profilePicture}
-                        alt={student.name}
-                        />
+                        <Grid
+                          item
+                          xs={1}
+                          key={student._id}
+                          style={{ marginRight: "-1rem" }}
+                        >
+                          <img
+                            src={student.studentDetails.profilePicture}
+                            alt={student.name}
+                          />
                         </Grid>
                       );
                     } else {
                       return false;
                     }
                   })}
-                  <Grid item xs={7} style={{paddingLeft:"2.5rem",fontFamily:"Montserrat",color:"#5F5F5F"}}>
-                    <span>and {(Object.keys(students).length) - 5 } others!</span>
+                  <Grid
+                    item
+                    xs={7}
+                    style={{
+                      paddingLeft: "2.5rem",
+                      fontFamily: "Montserrat",
+                      color: "#5F5F5F",
+                    }}
+                  >
+                    <span style={{ color: "#252C33", fontWeight: "500" }}>
+                      and {Math.abs(5 - Object.keys(students).length)} others!
+                    </span>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body2" style={{fontFamily:"Montserrat",color:"#5F5F5F",fontWeight:"bold"}}>
+                  <Typography
+                    variant="body2"
+                    style={{
+                      fontFamily: "Montserrat",
+                      color: "#5F5F5F",
+                      fontWeight: "bold",
+                    }}
+                  >
                     {mentor.studentDescription}
                   </Typography>
                 </Grid>
