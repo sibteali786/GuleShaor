@@ -348,3 +348,5 @@ const users = [
 ];
 
 export default users;
+
+// TODO: modify required and optional fields in the schema
