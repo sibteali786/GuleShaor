@@ -6,7 +6,7 @@
     background: url("../../../public/images/backgroundImage1.jpg") center/cover;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     background-blend-mode: color;
-    // background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 
     h3,
     p {
-        color: $tertiaryColor;
+        color: #fff;
     }
 
     p {
@@ -34,6 +34,7 @@
 
     h3 {
         @include headings(special);
+        color: #fff;
         margin: 0 0;
         width: 90%;
         text-align: left;
