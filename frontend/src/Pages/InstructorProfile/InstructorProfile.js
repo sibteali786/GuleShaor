@@ -8,6 +8,8 @@ import {
   Grid,
   Collapse,
   Stack,
+  Avatar,
+  AvatarGroup,
 } from "@mui/material";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
@@ -76,20 +78,16 @@ const InstructorProfile = () => {
               className="span-1"
             >
               <Grid item className="instName">
-                <ButtonBase
+                <Avatar
+                  alt={mentor.name}
+                  src={mentor.mentorDetails.profilePicture}
                   sx={{
-                    width: 150,
-                    height: 150,
+                    width: 120,
+                    height: 120,
                     position: "relative",
                     top: "-10vh",
                   }}
-                >
-                  <img
-                    alt={mentor.name}
-                    src={mentor.mentorDetails.profilePicture}
-                    style={{ width: "100%" }}
-                  />
-                </ButtonBase>
+                />
                 <Grid
                   item
                   style={{ marginLeft: "2rem", height: "fit-content" }}
@@ -196,38 +194,30 @@ const InstructorProfile = () => {
                   <h2>Students</h2>
                 </Grid>
                 <Grid container item xs={12} alignItems="center">
-                  {students.map((student, index) => {
-                    if (index <= 4) {
-                      return (
-                        <Grid
-                          item
-                          xs={1}
-                          key={student._id}
-                          style={{ marginRight: "-1rem" }}
-                        >
-                          <img
+                  <AvatarGroup
+                    total={
+                      Math.abs(5 - students.length) < 3
+                        ? students.length + Math.abs(5 - students.length)
+                        : Math.abs(5 - students.length)
+                    }
+                  >
+                    {students.map((student, index) => {
+                      if (index <= 2) {
+                        return (
+                          <Avatar
                             src={student.studentDetails.profilePicture}
                             alt={student.name}
+                            sx={{
+                              width: 50,
+                              height: 50,
+                            }}
                           />
-                        </Grid>
-                      );
-                    } else {
-                      return false;
-                    }
-                  })}
-                  <Grid
-                    item
-                    xs={7}
-                    style={{
-                      paddingLeft: "2.5rem",
-                      fontFamily: "Montserrat",
-                      color: "#5F5F5F",
-                    }}
-                  >
-                    <span style={{ color: "#252C33", fontWeight: "500" }}>
-                      and {Math.abs(5 - Object.keys(students).length)} others!
-                    </span>
-                  </Grid>
+                        );
+                      } else {
+                        return false;
+                      }
+                    })}
+                  </AvatarGroup>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography

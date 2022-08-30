@@ -134,31 +134,31 @@
     }
 }
 
-.span-6:hover img:not(:hover) {
-    filter: blur(5px);
-}
+// .span-6:hover img:not(:hover) {
+//     filter: blur(5px);
+// }
 
-.span-6 {
-    .MuiGrid-item {
-        &:nth-child(2) {
-            .MuiGrid-item {
-                transition: 0.2s ease-in-out;
+// .span-6 {
+//     .MuiGrid-item {
+//         &:nth-child(2) {
+//             .MuiGrid-item {
+//                 transition: 0.2s ease-in-out;
 
-                &:hover {
-                    transform: scale(1.6);
-                    cursor: pointer;
-                    z-index: 10;
-                }
-            }
+//                 &:hover {
+//                     transform: scale(1.6);
+//                     cursor: pointer;
+//                     z-index: 10;
+//                 }
+//             }
 
-            img {
-                width: 60px;
-                // transition: 0.2s ease-in-out;
-                // &:hover{
-                //     transform: scale(1.6);
-                //     cursor: pointer;
-                // }
-            }
-        }
-    }
-}
+//             img {
+//                 width: 60px;
+//                 // transition: 0.2s ease-in-out;
+//                 // &:hover{
+//                 //     transform: scale(1.6);
+//                 //     cursor: pointer;
+//                 // }
+//             }
+//         }
+//     }
+// }

@@ -7,6 +7,7 @@ import {
   IconButton,
   Grid,
   Collapse,
+  Avatar,
 } from "@mui/material";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
@@ -72,20 +73,16 @@ const UserProfile = () => {
               className="span-1"
             >
               <Grid item className="instName">
-                <ButtonBase
+                <Avatar
+                  alt={student.name}
+                  src={student.studentDetails.profilePicture}
                   sx={{
-                    width: 150,
-                    height: 150,
+                    width: 120,
+                    height: 120,
                     position: "relative",
                     top: "-10vh",
                   }}
-                >
-                  <img
-                    alt={student.name}
-                    src={student.studentDetails.profilePicture}
-                    style={{ width: "100%" }}
-                  />
-                </ButtonBase>
+                />
                 <Grid item style={{ marginLeft: "2rem" }}>
                   <h3>{student.name}</h3>
                   <a href="email:johnDoe">{student.studentDetails.username}</a>
@@ -205,10 +202,14 @@ const UserProfile = () => {
             </Container>
             <Container maxWidth="md" className="span-5">
               <div className="PostSection">
-                <img
+                <Avatar
                   alt="complex"
                   src={profileImage}
                   style={{ marginRight: "1rem" }}
+                  sx={{
+                    width: 100,
+                    height: 100,
+                  }}
                 />
 
                 <Typography variant="body2">
@@ -221,13 +222,16 @@ const UserProfile = () => {
               <div className="comments">
                 <Grid container flexDirection="column">
                   <Grid item display="flex" alignItems="center">
-                    <img
+                    <Avatar
                       alt="complex"
                       src={user1}
-                      style={{ marginRight: "1rem" }}
+                      sx={{
+                        width: 60,
+                        height: 60,
+                      }}
                     />
                     <Grid item>
-                      <h3>Luigi Gonzales</h3>
+                      <h3>L uigi Gonzales</h3>
                       <p>5 days ago</p>
                     </Grid>
                   </Grid>
@@ -247,10 +251,13 @@ const UserProfile = () => {
                 </Grid>
                 <Grid container flexDirection="column">
                   <Grid item display="flex" alignItems="center">
-                    <img
+                    <Avatar
                       alt="complex"
                       src={user2}
-                      style={{ marginRight: "1rem" }}
+                      sx={{
+                        width: 60,
+                        height: 60,
+                      }}
                     />
                     <Grid item>
                       <h3>Luigi Gonzales</h3>
@@ -274,10 +281,13 @@ const UserProfile = () => {
                 <div className="replies">
                   <Grid container flexDirection="column">
                     <Grid item display="flex" alignItems="center">
-                      <img
+                      <Avatar
                         alt="complex"
                         src={user1}
-                        style={{ marginRight: "1rem" }}
+                        sx={{
+                          width: 60,
+                          height: 60,
+                        }}
                       />
                       <Grid item>
                         <h3>Mary Jane</h3>
@@ -300,10 +310,13 @@ const UserProfile = () => {
                   </Grid>
                   <Grid container flexDirection="column">
                     <Grid item display="flex" alignItems="center">
-                      <img
+                      <Avatar
                         alt="complex"
                         src={user2}
-                        style={{ marginRight: "1rem" }}
+                        sx={{
+                          width: 60,
+                          height: 60,
+                        }}
                       />
                       <Grid item>
                         <h3>Luigi Gonzales</h3>
