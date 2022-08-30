@@ -20,19 +20,15 @@ var studentSchema = new mongoose.Schema(
     studentDetails: {
       userType: {
         type: String,
-        required: true,
       },
       username: {
         type: String,
-        required: true,
       },
       career: {
         type: String,
-        required: true,
       },
       profilePicture: {
         type: String,
-        required: true,
       },
       otherImages: [
         {

@@ -33,6 +33,7 @@ const InstructorProfile = () => {
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
   const { loadingStudents, errorStudents, students } = studentsOfMentors;
+  console.log(students);
   const match = useParams();
   useEffect(() => {
     dispatch(listMentorDetails(match.id));
@@ -196,13 +197,13 @@ const InstructorProfile = () => {
                 <Grid container item xs={12} alignItems="center">
                   <AvatarGroup
                     total={
-                      Math.abs(5 - students.length) < 3
+                      Math.abs(5 - students.length) < 5
                         ? students.length + Math.abs(5 - students.length)
                         : Math.abs(5 - students.length)
                     }
                   >
                     {students.map((student, index) => {
-                      if (index <= 2) {
+                      if (index <= 4) {
                         return (
                           <Avatar
                             src={student.studentDetails.profilePicture}

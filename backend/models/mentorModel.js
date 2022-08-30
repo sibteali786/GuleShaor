@@ -11,19 +11,15 @@ const mentorSchema = new mongoose.Schema(
     mentorDetails: {
       userType: {
         type: String,
-        required: true,
       },
       username: {
         type: String,
-        required: true,
       },
       career: {
         type: String,
-        required: true,
       },
       profilePicture: {
         type: String,
-        required: true,
       },
       otherImages: [
         {
@@ -68,7 +64,6 @@ const mentorSchema = new mongoose.Schema(
     },
     isAdmin: {
       type: Boolean,
-      required: true,
       default: false,
     },
   },
