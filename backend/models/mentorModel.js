@@ -11,47 +11,53 @@ const mentorSchema = new mongoose.Schema(
     mentorDetails: {
       userType: {
         type: String,
+        default: "",
       },
       username: {
         type: String,
+        default: "",
       },
       career: {
         type: String,
+        default: "",
       },
       profilePicture: {
         type: String,
+        default: "",
       },
       otherImages: [
         {
           type: String,
+          default: "",
         },
       ],
-      favouriteSubjects: [{ type: String }],
+      favouriteSubjects: [{ type: String, default: "" }],
     },
     introVideo: {
-      video: { type: String },
-      videoPoster: { type: String },
+      video: { type: String, default: "" },
+      videoPoster: { type: String, default: "" },
     },
     courses: [
       {
-        name: { type: String, required: true },
-        poster: { type: String, required: true },
-        details: { type: String, required: true },
+        name: { type: String, default: "" },
+        poster: { type: String, default: "" },
+        details: { type: String, default: "" },
         description: {
-          chapters: { type: String, required: true },
-          hours: { type: String, required: true },
-          type: { type: String, required: true },
+          chapters: { type: String, default: "" },
+          hours: { type: String, default: "" },
+          type: { type: String, default: "" },
         },
       },
     ],
     about: {
-      heading: { type: String },
-      details: { type: String },
-      hobbies: [{ type: String }],
-      skills: [{ type: String }],
+      heading: { type: String, default: "" },
+      details: { type: String, default: "" },
+      hobbies: [{ type: String, default: "" }],
+      skills: [{ type: String, default: "" }],
     },
     studentDescription: {
       type: String,
+      default: "",
     },
     email: {
       type: String,
@@ -75,6 +81,16 @@ const mentorSchema = new mongoose.Schema(
 mentorSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// encrypting password entered by user before saving it
+mentorSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  // do this when we are creating profile not updating it
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
 
 //Export the model
 const mentor = mongoose.model("Mentor", mentorSchema);

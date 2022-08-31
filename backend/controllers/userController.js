@@ -79,4 +79,62 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile };
+// @desc    Register a new User
+// @route   POST /api/users
+// @access  Public
+const registerUser = asyncHandler(async (req, res) => {
+  // we can use below line to access json data we send from the form or postman (initially)
+  const { name, email, password, userType } = req.body;
+
+  let userExists;
+  if (userType === "mentor") {
+    userExists = await Mentor.findOne({ email });
+  } else {
+    userExists = await Student.findOne({ email });
+  }
+
+  if (userExists) {
+    res.status(404);
+    throw new Error("User already exists");
+  }
+  // if user does not exist then we can create a new user
+  let user;
+  if (userType === "mentor") {
+    user = await Mentor.create({
+      name,
+      email,
+      password,
+    });
+  } else {
+    user = await Student.create({
+      name,
+      email,
+      password,
+    });
+  }
+
+  if (user) {
+    if (userType === "mentor") {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+    }
+  } else {
+    res.status(404);
+    throw new Error("Invalid User Data");
+  }
+});
+
+export { authUser, getUserProfile, registerUser };
