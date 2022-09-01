@@ -24,6 +24,7 @@ const Signup = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     // Dispatch Register
+    setMessage(""); // to remove error alert as its causing bad visuals
     if (password !== confirmPassword) {
       setMessage("Password do not match");
     } else {
@@ -109,7 +110,7 @@ const Signup = () => {
         </div>
       </div>
       <div className="svg">
-        <img src="/images/form.svg" alt="form svg" />
+        <img src="/images/signup.svg" alt="form svg" />
       </div>
     </div>
   );
@@ -117,4 +118,4 @@ const Signup = () => {
 
 export default Signup;
 
-// TODO:Add the relevant fields of the signup form derived from the backend models
+// TODO:The password did not match field error message should go away after some seconds. or should move away once we resubmit form.
