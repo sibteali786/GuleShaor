@@ -1,15 +1,14 @@
-import { Alert, AlertTitle } from '@mui/material';
-import React from 'react'
+import { Alert, AlertTitle } from "@mui/material";
+import React from "react";
 import "./Message.scss";
-const Message = ({children}) => {
+const Message = ({ children, variant }) => {
   return (
-    <div className='containerMessage'>
-    <Alert variant="filled" severity="error">
-    <AlertTitle>Error</AlertTitle>
-    {children}
-    </Alert>
+    <div className="containerMessage">
+      <Alert variant={variant || "filled"} severity="error">
+        {children}
+      </Alert>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;

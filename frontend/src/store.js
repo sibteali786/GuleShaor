@@ -10,7 +10,7 @@ import {
   studentDetailsReducer,
   studentListReducer,
 } from "./Reducers/studentReducer";
-import { userLoginReducer } from "./Reducers/userReducer";
+import { userLoginReducer, userRegisterReducer } from "./Reducers/userReducer";
 
 const reducer = combineReducers({
   mentorList: mentorListReducer,
@@ -19,6 +19,7 @@ const reducer = combineReducers({
   studentDetail: studentDetailsReducer,
   studentsOfMentors: studentsOfMentorReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const composeEnhancers = composeWithDevTools({

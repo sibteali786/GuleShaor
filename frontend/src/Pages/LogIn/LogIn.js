@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import "./LogIn.scss";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
 import Message from "../../components/Message/Message";
-import Loader from "../../components/Loader/Loader";
+import FormLoader from "../../components/FormLoader/FormLoader";
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,12 +29,12 @@ const LogIn = () => {
   }, [history, userInfo, redirect]);
   return (
     <div className="logInSignIn-container">
-      <div class="container" id="container1">
+      <div class="container-login" id="container1">
         <div class="form-container sign-in-container">
           <form onSubmit={submitHandler} className="form">
             <h1>Sign in</h1>
             {error && <Message>{error}</Message>}
-            {loading && <Loader />}
+            {loading && <FormLoader />}
             <div class="social-container">
               <a href="#" class="social">
                 <i class="fab fa-facebook-f"></i>
@@ -70,10 +71,13 @@ const LogIn = () => {
               </select>
             </div>
             <a href="#">Forgot your password?</a>
-            <button type="submit">Sign In</button>
-            <p>
-              New Customer? <button id="signUp">Register</button>
-            </p>
+            <SubmitButton type="submit" variant="contained">
+              Sign In
+            </SubmitButton>
+            <NavLink to="/signup">
+              New Customer?{" "}
+              <SubmitButton variant="contained">Register</SubmitButton>
+            </NavLink>
           </form>
         </div>
       </div>

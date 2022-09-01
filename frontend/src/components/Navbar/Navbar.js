@@ -181,7 +181,7 @@ const Navbar = () => {
           <div className="logSign-Desktop">
             <Link to="/login">Log In</Link>
             <Link to="/signup">
-              <Button variant="contained">Sign In</Button>
+              <Button variant="contained">Sign Up</Button>
             </Link>
           </div>
         )}
@@ -289,7 +289,7 @@ const Navbar = () => {
               Log In
             </Link>
             <Link to="/signup" onClick={toggleDrawer("right", false)}>
-              <Button variant="contained">Sign In</Button>
+              <Button variant="contained">Sign Up</Button>
             </Link>
           </div>
         )}
