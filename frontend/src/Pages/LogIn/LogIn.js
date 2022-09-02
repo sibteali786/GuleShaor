@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import "./LogIn.scss";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
 import Message from "../../components/Message/Message";
 import FormLoader from "../../components/FormLoader/FormLoader";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import { Typography } from "@mui/material";
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +30,9 @@ const LogIn = () => {
   }, [history, userInfo, redirect]);
   return (
     <div className="logInSignIn-container">
-      <div class="container-login" id="container1">
-        <div class="form-container sign-in-container">
-          <form onSubmit={submitHandler} className="form">
+      <div class="container-login" id="container1" style={{ width: "50%" }}>
+        <div class="form-container">
+          <form onSubmit={submitHandler} className="form-login">
             <h1>Sign in</h1>
             {error && <Message>{error}</Message>}
             {loading && <FormLoader />}
@@ -46,7 +47,7 @@ const LogIn = () => {
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </div>
-            <span>or use your account</span>
+            <Typography variant="body1">or use your account</Typography>
             <input
               type="email"
               placeholder="Email"
@@ -59,8 +60,10 @@ const LogIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <div style={{ display: "flex" }}>
-              <p style={{ margin: "0.6rem" }}>Choose user type :</p>
+            <div className="selectArea">
+              <Typography variant="body1" style={{ margin: "0.6rem" }}>
+                Choose user type{" "}
+              </Typography>
               <select
                 name="userType"
                 onChange={(e) => setUserType(e.target.value)}
@@ -71,15 +74,22 @@ const LogIn = () => {
               </select>
             </div>
             <a href="#">Forgot your password?</a>
-            <SubmitButton type="submit" variant="contained">
+            <SubmitButton
+              type="submit"
+              variant="contained"
+              size="small"
+              styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
+            >
               Sign In
             </SubmitButton>
             <NavLink to="/signup">
-              New Customer?{" "}
-              <SubmitButton variant="contained">Register</SubmitButton>
+              New Customer? <SubmitButton variant="text">Register</SubmitButton>
             </NavLink>
           </form>
         </div>
+      </div>
+      <div className="svg">
+        <img src="/images/form.svg" alt="form svg" />
       </div>
     </div>
   );

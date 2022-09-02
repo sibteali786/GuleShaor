@@ -57,7 +57,6 @@
         .selectArea {
             display: flex;
             flex-direction: column;
-            width: 100%;
 
             @media (min-width:400px) {
                 flex-direction: row;
@@ -85,7 +84,6 @@
 
     .social-container {
         margin: 20px 0;
-        width: 100%;
     }
 
     .social-container a {

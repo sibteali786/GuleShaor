@@ -86,7 +86,9 @@ const Signup = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <div className="selectArea">
-              <p style={{ margin: "0.6rem" }}>Choose user type</p>
+              <Typography variant="body1" style={{ margin: "0.6rem" }}>
+                Choose user type
+              </Typography>
               <select
                 name="userType"
                 onChange={(e) => setUserType(e.target.value)}
