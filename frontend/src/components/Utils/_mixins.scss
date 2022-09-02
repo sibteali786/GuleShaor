@@ -27,4 +27,8 @@
     @if $size ==normal {
         font-size: clamp(1rem, 2vw, 1.5rem);
     }
+
+    @else if $size ==small {
+        font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+    }
 }

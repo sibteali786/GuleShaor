@@ -16,7 +16,12 @@
     height: 100vh;
 
     h1 {
-        @include headings(special);
+        font-size: 1.5rem;
+        color: $tertiaryColor;
+
+        @media (min-width:600px) {
+            @include headings(small);
+        }
 
         @media (min-width:1024px) {
 
@@ -24,20 +29,6 @@
         }
 
         margin: 0;
-    }
-
-
-
-    h2 {
-        text-align: center;
-    }
-
-    p {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        letter-spacing: 0.5px;
-        margin: 20px 0 30px;
     }
 
     span {
@@ -56,8 +47,22 @@
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
-        padding: 0 50px;
         text-align: center;
+
+        p {
+            @include paragraph(small);
+            margin: 0.5rem 0;
+        }
+
+        .selectArea {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            @media (min-width:400px) {
+                flex-direction: row;
+            }
+        }
 
         input {
             background-color: #eee;
@@ -70,7 +75,9 @@
 
         select {
             border: none;
-            padding: 0.7rem 0.5rem;
+            padding: 0.7rem 0.7rem;
+            background-color: #eee;
+            border-radius: 0.4rem;
         }
     }
 
@@ -78,6 +85,7 @@
 
     .social-container {
         margin: 20px 0;
+        width: 100%;
     }
 
     .social-container a {

@@ -33,8 +33,6 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    console.log(password, confirmPassword);
-    console.log(userInfo);
     if (userInfo) {
       history(redirect);
     }
@@ -42,7 +40,7 @@ const Signup = () => {
 
   return (
     <div className="SignUp-container">
-      <div class="container-signup" id="container1">
+      <div class="container-signup" style={{ width: "50%" }} id="container1">
         <div class="sign-up-container">
           <form className="form-signup" onSubmit={submitHandler}>
             <h1>Create Account</h1>
@@ -60,7 +58,7 @@ const Signup = () => {
                 <i class="fab fa-linkedin-in"></i>
               </a>
             </div>
-            <Typography variant="subtitle1">
+            <Typography variant="body1">
               or use your email for registration
             </Typography>
             <input
@@ -87,8 +85,8 @@ const Signup = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <div style={{ display: "flex" }}>
-              <p style={{ margin: "0.6rem" }}>Choose user type :</p>
+            <div className="selectArea">
+              <p style={{ margin: "0.6rem" }}>Choose user type</p>
               <select
                 name="userType"
                 onChange={(e) => setUserType(e.target.value)}
@@ -99,12 +97,19 @@ const Signup = () => {
               </select>
             </div>
             <a href="#">Forgot your password?</a>
-            <SubmitButton type="submit" variant="contained">
+            <SubmitButton
+              type="submit"
+              variant="contained"
+              size="small"
+              styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
+            >
               Sign Up
             </SubmitButton>
             <NavLink to="/login">
               Already a user?{" "}
-              <SubmitButton variant="contained">LogIn</SubmitButton>
+              <SubmitButton variant="text" size="small">
+                LogIn
+              </SubmitButton>
             </NavLink>
           </form>
         </div>
