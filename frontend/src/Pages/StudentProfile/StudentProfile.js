@@ -230,7 +230,7 @@ const UserProfile = () => {
                       }}
                     />
                     <Grid item>
-                      <h3>L uigi Gonzales</h3>
+                      <h5>L uigi Gonzales</h5>
                       <p>5 days ago</p>
                     </Grid>
                   </Grid>
@@ -259,7 +259,7 @@ const UserProfile = () => {
                       }}
                     />
                     <Grid item>
-                      <h3>Luigi Gonzales</h3>
+                      <h5>Luigi Gonzales</h5>
                       <p>5 days ago</p>
                     </Grid>
                   </Grid>
@@ -289,7 +289,7 @@ const UserProfile = () => {
                         }}
                       />
                       <Grid item>
-                        <h3>Mary Jane</h3>
+                        <h5>Mary Jane</h5>
                         <p>5 days ago</p>
                       </Grid>
                     </Grid>
@@ -318,7 +318,7 @@ const UserProfile = () => {
                         }}
                       />
                       <Grid item>
-                        <h3>Luigi Gonzales</h3>
+                        <h5>Luigi Gonzales</h5>
                         <p>5 days ago</p>
                       </Grid>
                     </Grid>

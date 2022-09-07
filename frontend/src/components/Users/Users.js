@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Users.scss";
@@ -38,12 +39,12 @@ const Users = ({ mentor }) => {
           alt={mentor.name}
         />
       </Link>
-      <h3>{mentor.name}</h3>
-      <h6>
+      <h5>{mentor.name}</h5>
+      <a href="#" alt="username">
         {location.pathname === "/mentors"
           ? mentor.mentorDetails.username
           : mentor.studentDetails.username}
-      </h6>
+      </a>
       {location.pathname === "/mentors" ? (
         mentor.mentorDetails.career
           .split("<br/>")
