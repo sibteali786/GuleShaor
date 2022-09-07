@@ -166,6 +166,10 @@ const Navbar = () => {
               }}
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              style={{
+                textDecoration: "none !important",
+                color: "#252c33 !important",
+              }}
             >
               <MenuItem>
                 <Avatar /> Profile
@@ -175,10 +179,12 @@ const Navbar = () => {
               </MenuItem>
               <Divider />
               <MenuItem>
-                <ListItemIcon>
-                  <SettingsIcon fontSize="small" />
-                </ListItemIcon>
-                Settings
+                <Link to="/settings">
+                  <ListItemIcon>
+                    <SettingsIcon fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </Link>
               </MenuItem>
               <MenuItem onClick={() => logoutHandler()}>
                 <ListItemIcon>
@@ -272,6 +278,10 @@ const Navbar = () => {
               }}
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              style={{
+                textDecoration: "none !important",
+                color: "#252c33 !important",
+              }}
             >
               <MenuItem>
                 <Avatar /> Profile
@@ -281,10 +291,12 @@ const Navbar = () => {
               </MenuItem>
               <Divider />
               <MenuItem>
-                <ListItemIcon>
-                  <SettingsIcon fontSize="small" />
-                </ListItemIcon>
-                Settings
+                <Link to="/settings">
+                  <ListItemIcon>
+                    <SettingsIcon fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </Link>
               </MenuItem>
               <MenuItem onClick={() => logoutHandler()}>
                 <ListItemIcon>
