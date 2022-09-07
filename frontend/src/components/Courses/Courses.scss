@@ -113,7 +113,7 @@
 	margin-bottom: 1rem;
 }
 
-.btn {
+.buttonCourse {
 
 	transform: translateY(0px);
 	transition: 0.3s linear;
@@ -128,44 +128,43 @@
 	padding: 0;
 	margin: 0;
 	margin-bottom: 1rem;
+	font-family: 'Farsan', cursive;
 
+	span {
+		transition: transform 0.3s;
+		display: inline-block;
+		padding: 6px 16px;
+		font-size: 0.9rem;
+
+		@media (min-width:1024px) {
+
+			padding: 10px 20px;
+			font-size: 1.2rem;
+		}
+
+		margin:0;
+	}
 }
 
-.btn:hover {
+.buttonCourse:hover {
 	transform: translateY(-6px);
 	background: #1a66ff;
 }
 
-.btn span {
-	font-family: 'Farsan', cursive;
-	transition: transform 0.3s;
-	display: inline-block;
-	padding: 6px 16px;
-	font-size: 0.9rem;
 
-	@media (min-width:1024px) {
-
-		padding: 10px 20px;
-		font-size: 1.2rem;
-	}
-
-	margin:0;
-
-}
-
-.btn .price,
+.buttonCourse .price,
 .shopping-cart {
 	background: #333;
 	border: 0;
 	margin: 0;
 }
 
-.btn .price {
+.buttonCourse .price {
 	transform: translateX(-10%);
 	padding-right: 15px;
 }
 
-.btn .shopping-cart {
+.buttonCourse .shopping-cart {
 	transform: translateX(-100%);
 	position: absolute;
 	background: #333;
@@ -174,16 +173,16 @@
 	top: 0;
 }
 
-.btn .buy {
+.buttonCourse .buy {
 	z-index: 3;
 	font-weight: bolder;
 }
 
-.btn:hover .price {
+.buttonCourse:hover .price {
 	transform: translateX(-110%);
 }
 
-.btn:hover .shopping-cart {
+.buttonCourse:hover .shopping-cart {
 	transform: translateX(0%);
 }
 

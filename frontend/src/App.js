@@ -17,6 +17,7 @@ import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
+import Settings from "./Pages/Settings/Settings";
 function App() {
   const location = useLocation();
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />
     </div>

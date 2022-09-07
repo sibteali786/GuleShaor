@@ -17,7 +17,7 @@ const Courses = ({ course, mentor }) => {
           <p className="information">{course.details}</p>
 
           <div className="control">
-            <button className="btn">
+            <button className="buttonCourse">
               <span className="price">$250</span>
               <span className="shopping-cart">
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>

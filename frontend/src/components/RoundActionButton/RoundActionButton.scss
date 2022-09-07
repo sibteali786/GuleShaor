@@ -1,0 +1,9 @@
+.container-roundButton {
+    .styles {
+        &:hover {
+            background-color: #252C33 !important;
+            color: #F8F9FA !important;
+            transition: all 0.2s ease-in;
+        }
+    }
+}
