@@ -10,7 +10,7 @@ import RoundActionButton from "../../components/RoundActionButton/RoundActionBut
 const Settings = () => {
   const uploadHandler = () => {};
   return (
-    <Container fluid className="containerSettings">
+    <Container className="containerSettings">
       <Row className="py-5 px-0">
         <Col>
           <Row>
@@ -18,8 +18,12 @@ const Settings = () => {
               <Card className="card-settings">
                 <Card.Body>
                   <div className="e-profile">
-                    <Row>
-                      <Col xs={12} sm={2} className="mb-3">
+                    <Row className="d-flex flex-row align-items-center justify-content-end">
+                      <Col
+                        xs={12}
+                        sm={6}
+                        className="d-flex flex-column flex-sm-row align-items-center justify-content-start mb-3"
+                      >
                         <Badge
                           overlap="circular"
                           anchorOrigin={{
@@ -47,29 +51,17 @@ const Settings = () => {
                             }}
                           />
                         </Badge>
-                      </Col>
-                      <Col
-                        xs={12}
-                        sm={10}
-                        className="d-flex flex-column flex-sm-row justify-content-between mb-3"
-                      >
-                        <div className="text-left text-sm-left mb-2 mb-sm-0">
+                        <div className="text-left text-sm-left mb-2 mb-sm-0 ms-2">
                           <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
                             John Smith
                           </h4>
                           <p className="mb-0">@johnny.s</p>
-                          <div className="mt-4">
-                            <SubmitButton variant="outlined">
-                              <i className="fa fa-fw fa-camera"></i>
-                              <span className="ps-2">Change Photo</span>
-                            </SubmitButton>
-                          </div>
                         </div>
-                        <div className="text-center text-sm-right">
-                          <div className="text-muted fw-bold">
-                            <small>Joined 09 Dec 2017</small>
-                          </div>
-                        </div>
+                      </Col>
+                      <Col xs={12} sm={6} className="text-end text-sm-right">
+                        <small className=" text-muted fw-bold">
+                          Joined 09 Dec 2017
+                        </small>
                       </Col>
                     </Row>
                     <Form>
