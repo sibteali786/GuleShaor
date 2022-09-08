@@ -1,7 +1,7 @@
-import expressAsyncHandler from "express-async-handler";
-import jwt from "jsonwebtoken";
-import Mentor from "../models/mentorModel.js";
-import Student from "../models/studentModel.js";
+const expressAsyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken");
+const Mentor = require("../models/mentorModel.js");
+const Student = require("../models/studentModel.js");
 
 const protect = expressAsyncHandler(async (req, res, next) => {
   // console.log(req.headers.authorization);  // to check our authorization header
@@ -34,4 +34,4 @@ const protect = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+module.exports = { protect };

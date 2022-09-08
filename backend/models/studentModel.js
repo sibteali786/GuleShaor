@@ -1,5 +1,5 @@
-import mongoose from "mongoose"; // Erase if already required
-import bcrypt from "bcryptjs";
+const mongoose = require("mongoose"); // Erase if already required
+const bcrypt = require("bcryptjs");
 // Declare the Schema of the Mongo model
 var studentSchema = new mongoose.Schema(
   {
@@ -83,4 +83,4 @@ studentSchema.pre("save", async function (next) {
 
 //Export the model
 const student = mongoose.model("Student", studentSchema);
-export default student;
+module.exports = student;

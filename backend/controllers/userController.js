@@ -1,7 +1,7 @@
-import asyncHandler from "express-async-handler";
-import Student from "../models/studentModel.js";
-import Mentor from "../models/mentorModel.js";
-import generateToken from "../utils/generateToken.js";
+const asyncHandler = require("express-async-handler");
+const Student = require("../models/studentModel.js");
+const Mentor = require("../models/mentorModel.js");
+const generateToken = require("../utils/generateToken.js");
 
 // Define a type and on basis of it decide which schema to look for user existence.
 
@@ -137,4 +137,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser };
+module.exports = { authUser, getUserProfile, registerUser };

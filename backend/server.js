@@ -1,13 +1,13 @@
-import express from "express";
-import path from "path";
-import dotenv from "dotenv";
-import colors from "colors";
-import connectDB from "./config/db.js";
-import mentorRoutes from "./routes/mentorRoutes.js";
-import studentRoutes from "./routes/studentRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import studentsMentorRoutes from "./routes/studentsMentorRoutes.js";
-import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+const express = require("express");
+const path = require("path");
+const dotenv = require("dotenv");
+const colors = require("colors");
+const connectDB = require("./config/db.js");
+const mentorRoutes = require("./routes/mentorRoutes.js");
+const studentRoutes = require("./routes/studentRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
+const studentsMentorRoutes = require("./routes/studentsMentorRoutes.js");
+const { errorHandler, notFound } = require("./middleware/errorMiddleware.js");
 // for environment variables
 dotenv.config();
 
@@ -22,7 +22,6 @@ app.use("/api/mentors", mentorRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/getAllStudents", studentsMentorRoutes);
 
-const __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 

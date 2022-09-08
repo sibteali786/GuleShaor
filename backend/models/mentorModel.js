@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 // Declare the Schema of the Mongo model
 const mentorSchema = new mongoose.Schema(
   {
@@ -94,4 +94,4 @@ mentorSchema.pre("save", async function (next) {
 
 //Export the model
 const mentor = mongoose.model("Mentor", mentorSchema);
-export default mentor;
+module.exports = mentor;

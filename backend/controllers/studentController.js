@@ -1,5 +1,5 @@
-import Student from "./../models/studentModel.js";
-import asyncHandler from "express-async-handler";
+const Student = require("./../models/studentModel.js");
+const asyncHandler = require("express-async-handler");
 
 // @desc    Fetch all the Students
 // @route   GET /api/students
@@ -22,4 +22,4 @@ const getStudentById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getStudents, getStudentById };
+module.exports = { getStudents, getStudentById };
