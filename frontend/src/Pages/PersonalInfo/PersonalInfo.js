@@ -1,17 +1,20 @@
 import React from "react";
-import "./Setting.scss";
-import { Container, Row, Col, Button, Form, FormGroup } from "react-bootstrap";
+import "./PersonalInfo.scss";
+import { Row, Col, Form, FormGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { Avatar, Badge, IconButton } from "@mui/material";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import RoundActionButton from "../../components/RoundActionButton/RoundActionButton";
+import FormSteps from "../../components/FormSteps/FormSteps";
+import FormContainer from "../../components/FromContainer/FormContainer";
 
-const Settings = () => {
+const PersonalInfo = () => {
   const uploadHandler = () => {};
   return (
-    <Container className="containerSettings">
-      <Row className="py-5 px-0">
+    <FormContainer>
+      <FormSteps step1 step2 />
+      <Row className="py-1 px-0 back">
         <Col>
           <Row>
             <Col className="mb-3">
@@ -117,17 +120,53 @@ const Settings = () => {
                         </Col>
                       </Row>
                       <Row>
-                        <Col xs={12} sm={6} className="mb-3">
+                        <Col xs={12} className="mb-3">
                           <div className="mb-2">
-                            <b>Change Password</b>
+                            <b>More Info</b>
                           </div>
                           <Row>
                             <Col>
                               <FormGroup>
-                                <Form.Label>Current Password</Form.Label>
+                                <Form.Label>Mobile No</Form.Label>
                                 <Form.Control
-                                  type="password"
-                                  placeholder="••••••"
+                                  type="number"
+                                  placeholder="+92-312...."
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>WhatsApp No</Form.Label>
+                                <Form.Control
+                                  type="number"
+                                  placeholder="+92-312...."
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col xs={12} className="mb-3">
+                          <div className="mb-2">
+                            <b>Social Media Info</b>
+                          </div>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Facebook</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.facebook/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>LinkedIn</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.linekdin/Ali786"
                                 />
                               </FormGroup>
                             </Col>
@@ -135,10 +174,19 @@ const Settings = () => {
                           <Row>
                             <Col>
                               <FormGroup>
-                                <Form.Label>New Password</Form.Label>
+                                <Form.Label>Dev To</Form.Label>
                                 <Form.Control
-                                  type="password"
-                                  placeholder="••••••"
+                                  type="url"
+                                  placeholder="https://www.devto/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Medium</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.medium/Ali786"
                                 />
                               </FormGroup>
                             </Col>
@@ -146,15 +194,52 @@ const Settings = () => {
                           <Row>
                             <Col>
                               <FormGroup>
-                                <Form.Label>
-                                  Confirm{" "}
-                                  <span className="d-none d-xl-inline">
-                                    Password
-                                  </span>
-                                </Form.Label>
+                                <Form.Label>Behance</Form.Label>
                                 <Form.Control
-                                  type="password"
-                                  placeholder="••••••"
+                                  type="url"
+                                  placeholder="https://www.behance/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Dribble</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.dribble/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Github</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.github/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Instagram</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.Instagram/Ali786"
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col xs={6}>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Twitter</Form.Label>
+                                <Form.Control
+                                  type="url"
+                                  placeholder="https://www.twitter/Ali786"
                                 />
                               </FormGroup>
                             </Col>
@@ -176,8 +261,8 @@ const Settings = () => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </FormContainer>
   );
 };
 
-export default Settings;
+export default PersonalInfo;

@@ -8,7 +8,10 @@ import FormLoader from "../../components/FormLoader/FormLoader";
 import { Typography } from "@mui/material";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { register } from "../../actions/userActions";
+import FormContainer from "../../components/FromContainer/FormContainer";
+import FormSteps from "../../components/FormSteps/FormSteps";
 const Signup = () => {
+  const history = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +19,6 @@ const Signup = () => {
   const [userType, setUserType] = useState("mentor");
   const [message, setMessage] = useState("");
   const location = useLocation();
-  const history = useNavigate();
   const redirect = location.search ? location.search.split("=")[1] : "/";
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
@@ -34,92 +36,95 @@ const Signup = () => {
 
   useEffect(() => {
     if (userInfo) {
-      history(redirect);
+      history("/personalinfo");
     }
   }, [history, userInfo, redirect]);
 
   return (
-    <div className="SignUp-container">
-      <div class="container-signup" style={{ width: "50%" }} id="container1">
-        <div class="sign-up-container">
-          <form className="form-signup" onSubmit={submitHandler}>
-            <h1>Create Account</h1>
-            {message && <Message variant="outlined">{message}</Message>}
-            {error && <Message variant="outlined">{error}</Message>}
-            {loading && <FormLoader />}
-            <div class="social-container">
-              <a href="#" class="social">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social">
-                <i class="fab fa-google-plus-g"></i>
-              </a>
-              <a href="#" class="social">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-            <Typography variant="body1">
-              or use your email for registration
-            </Typography>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <div className="selectArea">
-              <Typography variant="body1" style={{ margin: "0.6rem" }}>
-                Choose user type
+    <FormContainer>
+      <FormSteps step1 />
+      <div className="SignUp-container">
+        <div class="container-signup" style={{ width: "50%" }} id="container1">
+          <div class="sign-up-container">
+            <form className="form-signup" onSubmit={submitHandler}>
+              <h1>Create Account</h1>
+              {message && <Message variant="outlined">{message}</Message>}
+              {error && <Message variant="outlined">{error}</Message>}
+              {loading && <FormLoader />}
+              <div class="social-container">
+                <a href="#" class="social">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social">
+                  <i class="fab fa-google-plus-g"></i>
+                </a>
+                <a href="#" class="social">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+              <Typography variant="body1">
+                or use your email for registration
               </Typography>
-              <select
-                name="userType"
-                onChange={(e) => setUserType(e.target.value)}
-                value={userType}
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div className="selectArea">
+                <Typography variant="body1" style={{ margin: "0.6rem" }}>
+                  Choose user type
+                </Typography>
+                <select
+                  name="userType"
+                  onChange={(e) => setUserType(e.target.value)}
+                  value={userType}
+                >
+                  <option value="mentor">Mentor</option>
+                  <option value="student">Student</option>
+                </select>
+              </div>
+              <a href="#">Forgot your password?</a>
+              <SubmitButton
+                type="submit"
+                variant="contained"
+                size="small"
+                styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
               >
-                <option value="mentor">Mentor</option>
-                <option value="student">Student</option>
-              </select>
-            </div>
-            <a href="#">Forgot your password?</a>
-            <SubmitButton
-              type="submit"
-              variant="contained"
-              size="small"
-              styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
-            >
-              Sign Up
-            </SubmitButton>
-            <NavLink to="/login">
-              Already a user?{" "}
-              <SubmitButton variant="text" size="small">
-                LogIn
+                Sign Up
               </SubmitButton>
-            </NavLink>
-          </form>
+              <NavLink to="/login">
+                Already a user?{" "}
+                <SubmitButton variant="text" size="small">
+                  LogIn
+                </SubmitButton>
+              </NavLink>
+            </form>
+          </div>
+        </div>
+        <div className="svg">
+          <img src="/images/signup.svg" alt="form svg" />
         </div>
       </div>
-      <div className="svg">
-        <img src="/images/signup.svg" alt="form svg" />
-      </div>
-    </div>
+    </FormContainer>
   );
 };
 

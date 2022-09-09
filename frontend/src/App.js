@@ -17,7 +17,7 @@ import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
-import Settings from "./Pages/Settings/Settings";
+import PersonalInfo from "./Pages/PersonalInfo/PersonalInfo";
 function App() {
   const location = useLocation();
   return (
@@ -34,13 +34,12 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/students" element={<Students />} />
         <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/personalinfo" element={<PersonalInfo />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />
     </div>
