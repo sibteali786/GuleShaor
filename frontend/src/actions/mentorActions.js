@@ -15,7 +15,7 @@ export const listMentors = () => async (dispatch) => {
   try {
     dispatch({ type: MENTOR_LIST_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/mentors`
+      `${process.env.REACT_APP_API_URL}api/mentors`
     );
     dispatch({
       type: MENTOR_LIST_SUCCESS,
@@ -36,7 +36,7 @@ export const listMentorDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: MENTOR_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/mentors/${id}`
+      `${process.env.REACT_APP_API_URL}api/mentors/${id}`
     );
     dispatch({
       type: MENTOR_DETAILS_SUCCESS,
@@ -57,7 +57,7 @@ export const listStudentsOfMentor = (id) => async (dispatch) => {
   try {
     dispatch({ type: STUDENTS_OF_MENTOR_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/getAllStudents/${id}`
+      `${process.env.REACT_APP_API_URL}api/getAllStudents/${id}`
     );
     dispatch({
       type: STUDENTS_OF_MENTOR_SUCCESS,

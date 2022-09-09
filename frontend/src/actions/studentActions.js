@@ -12,7 +12,7 @@ export const listStudents = () => async (dispatch) => {
   try {
     dispatch({ type: STUDENT_LIST_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/students`
+      `${process.env.REACT_APP_API_URL}api/students`
     );
     dispatch({
       type: STUDENT_LIST_SUCCESS,
@@ -33,7 +33,7 @@ export const listStudentDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: STUDENT_DETAILS_REQUEST });
     const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/students/${id}`
+      `${process.env.REACT_APP_API_URL}api/students/${id}`
     );
     dispatch({
       type: STUDENT_DETAILS_SUCCESS,

@@ -21,7 +21,7 @@ export const login = (email, password, userType) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/users/login`,
+      `${process.env.REACT_APP_API_URL}api/users/login`,
       { email, password, userType },
       config
     );
@@ -62,7 +62,7 @@ export const register =
       };
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/users`,
+        `${process.env.REACT_APP_API_URL}api/users`,
         { name, email, password, userType },
         config
       );

@@ -3,7 +3,6 @@
   "name": "guleshaor-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@egjs/flicking-plugins": "^4.4.0",
     "@egjs/react-flicking": "^4.9.1",
