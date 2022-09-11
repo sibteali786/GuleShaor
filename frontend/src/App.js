@@ -18,6 +18,8 @@ import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
 import PersonalInfo from "./Pages/PersonalInfo/PersonalInfo";
+import QualificationForm from "./Pages/Qualification/QualificationForm";
+import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
 function App() {
   const location = useLocation();
   return (
@@ -40,6 +42,8 @@ function App() {
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/:id" element={<InstructorProfile />} />
         <Route path="/personalinfo" element={<PersonalInfo />} />
+        <Route path="/qualification" element={<QualificationForm />} />
+        <Route path="/profileSetup" element={<ProfileSetup />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />
     </div>

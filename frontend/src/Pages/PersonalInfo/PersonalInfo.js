@@ -1,16 +1,54 @@
 import React from "react";
 import "./PersonalInfo.scss";
-import { Row, Col, Form, FormGroup } from "react-bootstrap";
+import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
-import { Avatar, Badge, IconButton } from "@mui/material";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import { Avatar, Badge } from "@mui/material";
 import RoundActionButton from "../../components/RoundActionButton/RoundActionButton";
 import FormSteps from "../../components/FormSteps/FormSteps";
 import FormContainer from "../../components/FromContainer/FormContainer";
-
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 const PersonalInfo = () => {
-  const uploadHandler = () => {};
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [userName, setUserName] = React.useState("");
+  const [about, setAbout] = React.useState("");
+  const [mobile, setMobile] = React.useState("");
+  const [whatsapp, setWhatsApp] = React.useState("");
+  const [facebookUrl, setFacebookUrl] = React.useState("");
+  const [linkedInUrl, setLinkedInUrl] = React.useState("");
+  const [devToUrl, setDevToUrl] = React.useState("");
+  const [behanceUrl, setBehanceUrl] = React.useState("");
+  const [dribbleUrl, setDribbleUrl] = React.useState("");
+  const [githubUrl, setGithubUrl] = React.useState("");
+  const [twitterUrl, setTwitterUrl] = React.useState("");
+  const [instagramUrl, setInstagramUrl] = React.useState("");
+  const [mediumUrl, setMediumUrl] = React.useState("");
+
+  // steps state
+  const [step, setStep] = React.useState(false);
+  const history = useNavigate();
+  //Form validation
+  const [validated, setValidated] = React.useState(false);
+  const submitHandler = (e) => {
+    // TODO: add submit handler
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    if (form.checkValidity() === true) {
+      e.preventDefault();
+      setStep(true);
+    }
+    if (step) {
+      history("/qualification");
+    }
+    setValidated(true);
+  };
   return (
     <FormContainer>
       <FormSteps step1 step2 />
@@ -21,53 +59,11 @@ const PersonalInfo = () => {
               <Card className="card-settings">
                 <Card.Body>
                   <div className="e-profile">
-                    <Row className="d-flex flex-row align-items-center justify-content-end">
-                      <Col
-                        xs={12}
-                        sm={6}
-                        className="d-flex flex-column flex-sm-row align-items-center justify-content-start mb-3"
-                      >
-                        <Badge
-                          overlap="circular"
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                          }}
-                          badgeContent={
-                            <RoundActionButton
-                              aria-label="upload picture"
-                              size="medium"
-                              styleCode={{
-                                background: "#fff",
-                                color: "#252C33",
-                              }}
-                              uploadHandler={uploadHandler}
-                            >
-                              <CameraAltIcon fontSize="medium" />
-                            </RoundActionButton>
-                          }
-                        >
-                          <Avatar
-                            sx={{
-                              width: 140,
-                              height: 140,
-                            }}
-                          />
-                        </Badge>
-                        <div className="text-left text-sm-left mb-2 mb-sm-0 ms-2">
-                          <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
-                            John Smith
-                          </h4>
-                          <p className="mb-0">@johnny.s</p>
-                        </div>
-                      </Col>
-                      <Col xs={12} sm={6} className="text-end text-sm-right">
-                        <small className=" text-muted fw-bold">
-                          Joined 09 Dec 2017
-                        </small>
-                      </Col>
-                    </Row>
-                    <Form>
+                    <Form
+                      noValidate
+                      validated={validated}
+                      onSubmit={submitHandler}
+                    >
                       <Row>
                         <Col>
                           <Row>
@@ -75,22 +71,39 @@ const PersonalInfo = () => {
                               <FormGroup>
                                 <Form.Label>Full Name</Form.Label>
                                 <Form.Control
-                                  ype="text"
+                                  required
+                                  type="text"
                                   name="name"
+                                  value={name}
                                   placeholder="John Smith"
-                                  value="John Smith"
+                                  onChange={(e) => setName(e.target.value)}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                  Please enter your Full Name!
+                                </Form.Control.Feedback>
                               </FormGroup>
                             </Col>
                             <Col>
                               <FormGroup>
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  name="username"
-                                  placeholder="johnny.s"
-                                  value="johnny.s"
-                                />
+                                <InputGroup>
+                                  <InputGroup.Text id="basic-addon1">
+                                    @
+                                  </InputGroup.Text>
+                                  <Form.Control
+                                    required
+                                    type="text"
+                                    name="username"
+                                    value={userName}
+                                    placeholder="johnny.s"
+                                    onChange={(e) =>
+                                      setUserName(e.target.value)
+                                    }
+                                  />
+                                  <Form.Control.Feedback type="invalid">
+                                    Please enter a valid username!
+                                  </Form.Control.Feedback>
+                                </InputGroup>
                               </FormGroup>
                             </Col>
                           </Row>
@@ -99,9 +112,16 @@ const PersonalInfo = () => {
                               <FormGroup>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
+                                  required
                                   type="text"
                                   placeholder="user@example.com"
+                                  name="email"
+                                  value={email}
+                                  onChange={(e) => setEmail(e.target.value)}
                                 ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                  Please enter a valid email!
+                                </Form.Control.Feedback>
                               </FormGroup>
                             </Col>
                           </Row>
@@ -110,10 +130,19 @@ const PersonalInfo = () => {
                               <FormGroup>
                                 <Form.Label>About</Form.Label>
                                 <Form.Control
+                                  required
                                   as="textarea"
                                   rows="5"
                                   placeholder="My Bio"
+                                  name="about"
+                                  value={about}
+                                  onChange={(e) => setAbout(e.target.value)}
                                 ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                  Please enter something about yourself, your
+                                  passion, goals and habits or whatever suits
+                                  you...
+                                </Form.Control.Feedback>
                               </FormGroup>
                             </Col>
                           </Row>
@@ -122,16 +151,23 @@ const PersonalInfo = () => {
                       <Row>
                         <Col xs={12} className="mb-3">
                           <div className="mb-2">
-                            <b>More Info</b>
+                            <b>Contact</b>
                           </div>
                           <Row>
                             <Col>
                               <FormGroup>
                                 <Form.Label>Mobile No</Form.Label>
                                 <Form.Control
+                                  required
                                   type="number"
                                   placeholder="+92-312...."
+                                  name="mobile"
+                                  value={mobile}
+                                  onChange={(e) => setMobile(e.target.value)}
                                 />
+                                <Form.Control.Feedback type="invalid">
+                                  Please enter a valid mobile number!
+                                </Form.Control.Feedback>
                               </FormGroup>
                             </Col>
                             <Col>
@@ -140,6 +176,9 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="number"
                                   placeholder="+92-312...."
+                                  name="whatsapp"
+                                  value={whatsapp}
+                                  onChange={(e) => setWhatsApp(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -148,8 +187,12 @@ const PersonalInfo = () => {
                       </Row>
                       <Row>
                         <Col xs={12} className="mb-3">
-                          <div className="mb-2">
-                            <b>Social Media Info</b>
+                          <div className="mb-2 form-text tex-muted d-flex flex-column">
+                            <b>Social Media</b>
+                            <small>
+                              *All the fields are optional, leave them empty if
+                              they are not applicable for you
+                            </small>
                           </div>
                           <Row>
                             <Col>
@@ -158,6 +201,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.facebook/Ali786"
+                                  name="facebookUrl"
+                                  value={facebookUrl}
+                                  onChange={(e) =>
+                                    setFacebookUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -167,6 +215,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.linekdin/Ali786"
+                                  name="linkedInUrl"
+                                  value={linkedInUrl}
+                                  onChange={(e) =>
+                                    setLinkedInUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -178,6 +231,9 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.devto/Ali786"
+                                  name="devToUrl"
+                                  value={devToUrl}
+                                  onChange={(e) => setDevToUrl(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -187,6 +243,9 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.medium/Ali786"
+                                  name="mediumUrl"
+                                  value={mediumUrl}
+                                  onChange={(e) => setMediumUrl(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -198,6 +257,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.behance/Ali786"
+                                  name="behanceUrl"
+                                  value={behanceUrl}
+                                  onChange={(e) =>
+                                    setBehanceUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -207,6 +271,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.dribble/Ali786"
+                                  name="dribbleUrl"
+                                  value={dribbleUrl}
+                                  onChange={(e) =>
+                                    setDribbleUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -218,6 +287,9 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.github/Ali786"
+                                  name="githubUrl"
+                                  value={githubUrl}
+                                  onChange={(e) => setGithubUrl(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -227,6 +299,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.Instagram/Ali786"
+                                  name="instagramUrl"
+                                  value={instagramUrl}
+                                  onChange={(e) =>
+                                    setInstagramUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -240,6 +317,11 @@ const PersonalInfo = () => {
                                 <Form.Control
                                   type="url"
                                   placeholder="https://www.twitter/Ali786"
+                                  name="twitterUrl"
+                                  value={twitterUrl}
+                                  onChange={(e) =>
+                                    setTwitterUrl(e.target.value)
+                                  }
                                 />
                               </FormGroup>
                             </Col>
@@ -248,8 +330,21 @@ const PersonalInfo = () => {
                       </Row>
                       <div>
                         <div className="col d-flex justify-content-end">
+                          <SubmitButton
+                            variant="outlined"
+                            startIcon={<ArrowBackIcon />}
+                          >
+                            Previous
+                          </SubmitButton>
                           <SubmitButton variant="outlined" type="submit">
-                            Save Changes
+                            Save
+                          </SubmitButton>
+                          <SubmitButton
+                            variant="outlined"
+                            endIcon={<ArrowForwardIcon />}
+                            disabled={!step ? true : false}
+                          >
+                            Next
                           </SubmitButton>
                         </div>
                       </div>
