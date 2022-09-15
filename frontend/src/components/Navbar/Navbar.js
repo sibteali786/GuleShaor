@@ -21,7 +21,6 @@ import { logout } from "../../actions/userActions";
 const items = [
   {
     name: "Mentors",
-    color: "#f44336",
     to: "/mentors",
   },
   {
@@ -319,6 +318,7 @@ const Navbar = () => {
         <div className="menu-mobile" onClick={toggleDrawer("right", false)}>
           {items.map((item, index) => (
             <NavLink
+              key={index}
               className={`item-mobile`}
               onClick={() => {
                 setActive(index);
