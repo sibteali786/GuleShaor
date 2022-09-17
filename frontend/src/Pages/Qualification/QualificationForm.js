@@ -1,47 +1,111 @@
 import React from "react";
-import { Card, Col, Form, FormGroup, InputGroup, Row } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Form,
+  FormGroup,
+  InputGroup,
+  Nav,
+  Row,
+} from "react-bootstrap";
 import FormSteps from "../../components/FormSteps/FormSteps";
 import FormContainer from "../../components/FromContainer/FormContainer";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import "./QualificationForm.scss";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { LinkContainer } from "react-router-bootstrap";
+import { Alert } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 const QualificationForm = () => {
-  const [schoolName, setSchoolName] = React.useState("");
-  const [mGrade, setMGrade] = React.useState("");
-  const [hSchoolName, setHSchoolName] = React.useState("");
-  const [universityName, setUniversityName] = React.useState("");
-  const [hGrade, setHGrade] = React.useState("");
-  const [gpa, setGpa] = React.useState(0);
-  const [cgpa, setCgpa] = React.useState(0);
-  const [degree, setDegree] = React.useState("");
+  const schema = yup.object().shape({
+    schoolName: yup
+      .string()
+      .required("School Name is required")
+      .min(3, "There must be at least 3 characters")
+      .max(50, "There must be at most 50 characters"),
+
+    schoolGrade: yup
+      .string()
+      .required("Matric / O-Levels Grade is required")
+      .min(1, "There must be at least 1 characters")
+      .max(50, "There must be at most 50 characters"),
+    highSchool: yup
+      .string()
+      .required("High School Name is required")
+      .min(3, "There must be at least 3 characters")
+      .max(50, "There must be at most 50 characters"),
+    highSchoolGrade: yup
+      .string()
+      .required("Matric / O-Levels Grade is required")
+      .min(1, "There must be at least 1 characters")
+      .max(50, "There must be at most 50 characters"),
+    gpa: yup
+      .number()
+      .required("GPA is required")
+      .min(1, "There must be at least 1 characters")
+      .max(4, "There must be at most 4 characters")
+      .positive(),
+    cgpa: yup
+      .number()
+      .required("CGPA is required")
+      .min(1, "There must be at least 1 characters")
+      .max(4, "There must be at most 4 characters")
+      .positive(),
+
+    universityName: yup
+      .string()
+      .required("University Name is required")
+      .min(4, "There must be at least 4 characters")
+      .max(50, "There must be at most 50 characters"),
+    degree: yup
+      .string()
+      .required("Degree Name is required")
+      .min(4, "There must be at least 4 characters")
+      .max(50, "There must be at most 50 characters"),
+  });
+  const form = useForm({
+    defaultValues: {
+      schoolName: "",
+      schoolGrade: "",
+      highSchool: "",
+      highSchoolGrade: "",
+      universityName: "",
+      gpa: 0.0,
+      cgpa: 0.0,
+      degree: "",
+    },
+    mode: "all",
+    resolver: yupResolver(schema),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { touchedFields, errors },
+    watch,
+  } = form;
+
+  const schoolName = watch("schoolName", "");
+  const schoolGrade = watch("schoolGrade", "");
+  const highSchool = watch("highSchool", "");
+  const universityName = watch("universityName", "");
+  const highSchoolGrade = watch("highSchoolGrade", "");
+  const gpa = watch("gpa", 0.0);
+  const cgpa = watch("cgpa", 0.0);
+  const degree = watch("degree", "");
   const [fieldOfInterest, setFieldOfInterest] = React.useState("");
   const [skills, setSkills] = React.useState("");
   // steps state
   const [step, setStep] = React.useState(false);
-  const history = useNavigate();
   //Form validation
-  const [validated, setValidated] = React.useState(false);
-
+  console.log(errors, touchedFields);
   // Form Submission
-  const submitHandler = (e) => {
+  const submitHandler = (data) => {
     // TODO: add submit handler
-    const form = e.currentTarget;
-    console.log(skills.split(","));
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    if (form.checkValidity() === true) {
-      e.preventDefault();
-      setStep(true);
-    }
-    if (step) {
-      history("/profileSetup");
-    }
-    setValidated(true);
+    console.log(data);
+    setStep(true);
   };
   return (
     <FormContainer>
@@ -53,11 +117,7 @@ const QualificationForm = () => {
               <Card className="card-settings">
                 <Card.Body>
                   <div className="e-profile">
-                    <Form
-                      noValidate
-                      validated={validated}
-                      onSubmit={submitHandler}
-                    >
+                    <Form onSubmit={handleSubmit(submitHandler)}>
                       <div className="mb-1 form-text text-muted d-flex flex-column">
                         <h5>Schooling</h5>
                         <small className=" mt-0 pt-0">
@@ -70,12 +130,22 @@ const QualificationForm = () => {
                           <FormGroup>
                             <Form.Label>School Name</Form.Label>
                             <Form.Control
+                              {...register("schoolName", { required: true })}
                               type="text"
                               name="schoolName"
-                              value={schoolName}
                               placeholder="Beaconhouse.."
-                              onChange={(e) => setSchoolName(e.target.value)}
                             />
+                            {touchedFields.schoolName && errors.schoolName && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.schoolName.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
 
@@ -83,12 +153,22 @@ const QualificationForm = () => {
                           <FormGroup>
                             <Form.Label>Matric / O-Levels Grade</Form.Label>
                             <Form.Control
+                              {...register("schoolGrade", { required: true })}
                               type="text"
-                              name="mGrade"
-                              value={mGrade}
+                              name="schoolGrade"
                               placeholder="A+"
-                              onChange={(e) => setMGrade(e.target.value)}
                             />
+                            {touchedFields.schoolGrade && errors.schoolGrade && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.schoolGrade.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -104,25 +184,47 @@ const QualificationForm = () => {
                           <FormGroup>
                             <Form.Label>High School Name</Form.Label>
                             <Form.Control
-                              required
+                              {...register("highSchool", { required: true })}
                               type="text"
                               placeholder="Army Public School/ College"
-                              name="hSchoolName"
-                              value={hSchoolName}
-                              onChange={(e) => setHSchoolName(e.target.value)}
+                              name="highSchool"
                             />
+                            {touchedFields.highSchool && errors.highSchool && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.highSchool.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                         <Col xs={12} sm={6}>
                           <FormGroup>
                             <Form.Label>Grade</Form.Label>
                             <Form.Control
+                              {...register("highSchoolGrade", {
+                                required: true,
+                              })}
                               type="text"
                               placeholder="A-"
-                              name="hGrade"
-                              value={hGrade}
-                              onChange={(e) => setHGrade(e.target.value)}
+                              name="highSchoolGrade"
                             />
+                            {touchedFields.highSchoolGrade &&
+                              errors.highSchoolGrade && (
+                                <div className="my-2">
+                                  <Alert
+                                    severity="error"
+                                    variant="outlined"
+                                    className="py-0 border-0"
+                                  >
+                                    {errors.highSchoolGrade.message}
+                                  </Alert>
+                                </div>
+                              )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -138,26 +240,47 @@ const QualificationForm = () => {
                           <FormGroup>
                             <Form.Label>University Name</Form.Label>
                             <Form.Control
+                              {...register("universityName", {
+                                required: true,
+                              })}
                               type="text"
                               placeholder="Nust"
                               name="universityName"
-                              value={universityName}
-                              onChange={(e) =>
-                                setUniversityName(e.target.value)
-                              }
                             />
+                            {touchedFields.universityName &&
+                              errors.universityName && (
+                                <div className="my-2">
+                                  <Alert
+                                    severity="error"
+                                    variant="outlined"
+                                    className="py-0 border-0"
+                                  >
+                                    {errors.universityName.message}
+                                  </Alert>
+                                </div>
+                              )}
                           </FormGroup>
                         </Col>
                         <Col xs={12} sm={6}>
                           <FormGroup>
                             <Form.Label>Degree</Form.Label>
                             <Form.Control
+                              {...register("degree", { required: true })}
                               type="text"
                               placeholder="Bachelor of Science"
-                              name="linkedInUrl"
-                              value={degree}
-                              onChange={(e) => setDegree(e.target.value)}
+                              name="degree"
                             />
+                            {touchedFields.degree && errors.degree && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.degree.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
@@ -166,61 +289,94 @@ const QualificationForm = () => {
                           <FormGroup>
                             <Form.Label>GPA last semester</Form.Label>
                             <Form.Control
-                              required
+                              {...register("gpa", { required: true })}
                               type="number"
                               placeholder="2.8"
                               step="0.1"
                               min="0"
                               max="4"
-                              name="devToUrl"
-                              value={gpa}
-                              onChange={(e) => setGpa(e.target.value)}
+                              name="gpa"
                             />
-                            <Form.Control.Feedback type="invalid">
-                              Please enter a valid grade point average out of
-                              4.0!
-                            </Form.Control.Feedback>
+                            {touchedFields.gpa && errors.gpa && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.gpa.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                         <Col xs={12} sm={6}>
                           <FormGroup>
                             <Form.Label>Cumulative GPA/ CGPA</Form.Label>
                             <Form.Control
-                              required
+                              {...register("cgpa", { required: true })}
                               type="number"
+                              placeholder="2.8"
                               step="0.1"
                               min="0"
                               max="4"
-                              placeholder="3.2"
-                              name="cpga"
-                              value={cgpa}
-                              onChange={(e) => setCgpa(e.target.value)}
+                              name="cgpa"
                             />
-                            <Form.Control.Feedback type="invalid">
-                              Please enter a valid grade point average out of
-                              4.0!
-                            </Form.Control.Feedback>
+                            {touchedFields.cgpa && errors.cgpa && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                >
+                                  {errors.cgpa.message}
+                                </Alert>
+                              </div>
+                            )}
                           </FormGroup>
                         </Col>
                       </Row>
                       <div>
                         <div className="col d-flex justify-content-end">
+                          <LinkContainer to="/personalInfo">
+                            <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
+                              Previous
+                            </Nav.Link>
+                          </LinkContainer>
                           <SubmitButton
                             variant="outlined"
-                            startIcon={<ArrowBackIcon />}
+                            type="submit"
+                            onClick={() => {
+                              setValue("schoolName", schoolName, {
+                                shouldTouch: true,
+                              });
+                              setValue("schoolGrade", schoolGrade, {
+                                shouldTouch: true,
+                              });
+                              setValue("highSchool", highSchool, {
+                                shouldTouch: true,
+                              });
+                              setValue("highSchoolGrade", highSchoolGrade, {
+                                shouldTouch: true,
+                              });
+                              setValue("universityName", universityName, {
+                                shouldTouch: true,
+                              });
+                              setValue("degree", degree, { shouldTouch: true });
+                              setValue("gpa", gpa, { shouldTouch: true });
+                              setValue("cgpa", cgpa, { shouldTouch: true });
+                            }}
                           >
-                            Previous
+                            Submit
                           </SubmitButton>
-                          <SubmitButton variant="outlined" type="submit">
-                            Save
-                          </SubmitButton>
-                          <SubmitButton
-                            variant="outlined"
-                            endIcon={<ArrowForwardIcon />}
-                            disabled={!step ? true : false}
-                          >
-                            Next
-                          </SubmitButton>
+                          <LinkContainer to="/profileSetup">
+                            <Nav.Link
+                              className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                              disabled={!step ? true : false}
+                            >
+                              Next
+                            </Nav.Link>
+                          </LinkContainer>
                         </div>
                       </div>
                     </Form>

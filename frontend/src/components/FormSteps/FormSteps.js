@@ -27,7 +27,7 @@ const FormSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step3 ? (
-          <LinkContainer to="/qulification">
+          <LinkContainer to="/qualification">
             <Nav.Link>Qulification</Nav.Link>
           </LinkContainer>
         ) : (
@@ -37,7 +37,7 @@ const FormSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step4 ? (
-          <LinkContainer to="/profilesetup">
+          <LinkContainer to="/profileSetup">
             <Nav.Link>Profile Setup</Nav.Link>
           </LinkContainer>
         ) : (

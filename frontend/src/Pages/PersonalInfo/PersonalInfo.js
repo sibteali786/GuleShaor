@@ -1,6 +1,6 @@
 import React from "react";
 import "./PersonalInfo.scss";
-import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
+import { Row, Col, Form, FormGroup, InputGroup, Nav } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormSteps from "../../components/FormSteps/FormSteps";
 import FormContainer from "../../components/FromContainer/FormContainer";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
+import { LinkContainer } from "react-router-bootstrap";
 const PersonalInfo = () => {
   // yup validation schema
   const schema = yup.object().shape(
@@ -192,7 +191,6 @@ const PersonalInfo = () => {
     register,
     handleSubmit,
     setValue,
-    setError,
     formState: { touchedFields, errors },
     watch,
   } = form;
@@ -215,13 +213,10 @@ const PersonalInfo = () => {
 
   // steps state
   const [step, setStep] = React.useState(false);
-  const history = useNavigate();
   const submitHandler = (data) => {
     // TODO: add submit handler
     console.log(data);
-    if (step) {
-      history("/qualification");
-    }
+    setStep(true);
   };
   return (
     <FormContainer>
@@ -601,12 +596,11 @@ const PersonalInfo = () => {
                         </Col>
                       </Row>
                       <div className="col d-flex justify-content-end">
-                        <SubmitButton
-                          variant="outlined"
-                          startIcon={<ArrowBackIcon />}
-                        >
-                          Previous
-                        </SubmitButton>
+                        <LinkContainer to="/signup">
+                          <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
+                            Previous
+                          </Nav.Link>
+                        </LinkContainer>
                         <SubmitButton
                           variant="outlined"
                           type="submit"
@@ -647,13 +641,14 @@ const PersonalInfo = () => {
                         >
                           Submit
                         </SubmitButton>
-                        <SubmitButton
-                          variant="outlined"
-                          endIcon={<ArrowForwardIcon />}
-                          disabled={!step ? true : false}
-                        >
-                          Next
-                        </SubmitButton>
+                        <LinkContainer to="/qualification">
+                          <Nav.Link
+                            className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                            disabled={!step ? true : false}
+                          >
+                            Next
+                          </Nav.Link>
+                        </LinkContainer>
                       </div>
                     </Form>
                   </div>
