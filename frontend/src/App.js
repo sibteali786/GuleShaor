@@ -20,6 +20,29 @@ import Favicon from "react-favicon";
 import PersonalInfo from "./Pages/PersonalInfo/PersonalInfo";
 import QualificationForm from "./Pages/Qualification/QualificationForm";
 import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
+// Import React FilePond
+import { FilePond, registerPlugin } from "react-filepond";
+
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginImageCrop from "filepond-plugin-image-crop";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// Register the plugins
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginImageResize,
+  FilePondPluginImageCrop,
+  FilePondPluginImageTransform
+);
 function App() {
   const location = useLocation();
   return (

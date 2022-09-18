@@ -8,7 +8,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormSteps from "../../components/FormSteps/FormSteps";
 import FormContainer from "../../components/FromContainer/FormContainer";
-import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 import { LinkContainer } from "react-router-bootstrap";
 const PersonalInfo = () => {
@@ -606,6 +605,10 @@ const PersonalInfo = () => {
                           type="submit"
                           onClick={() => {
                             setValue("name", name, { shouldTouch: true });
+                            setValue("email", email, { shouldTouch: true });
+                            setValue("userName", userName, {
+                              shouldTouch: true,
+                            });
                             setValue("about", about, {
                               shouldTouch: true,
                             });
@@ -614,6 +617,9 @@ const PersonalInfo = () => {
                               shouldTouch: true,
                             });
                             setValue("twitter", twitter, {
+                              shouldTouch: true,
+                            });
+                            setValue("medium", medium, {
                               shouldTouch: true,
                             });
                             setValue("facebook", facebook, {
