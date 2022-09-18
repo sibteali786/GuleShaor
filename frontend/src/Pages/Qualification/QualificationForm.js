@@ -341,7 +341,7 @@ const QualificationForm = () => {
                         </Col>
                       </Row>
                       <div>
-                        <div className="col d-flex justify-content-end">
+                        <div className="col d-flex justify-content-end mt-5">
                           <LinkContainer to="/qualification">
                             <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
                               Previous
