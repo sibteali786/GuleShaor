@@ -87,8 +87,6 @@ const QualificationForm = () => {
   const gpa = watch("gpa", 0.0);
   const cgpa = watch("cgpa", 0.0);
   const degree = watch("degree", "");
-  const [fieldOfInterest, setFieldOfInterest] = React.useState("");
-  const [skills, setSkills] = React.useState("");
   // steps state
   const [step, setStep] = React.useState(false);
   //Form validation
@@ -112,10 +110,6 @@ const QualificationForm = () => {
                     <Form onSubmit={handleSubmit(submitHandler)}>
                       <div className="mb-1 form-text text-muted d-flex flex-column">
                         <h5>Schooling</h5>
-                        <small className=" mt-0 pt-0">
-                          *All the fields are optional, leave them empty if they
-                          are not applicable for you
-                        </small>
                       </div>
                       <Row>
                         <Col xs={12} sm={6}>
@@ -127,6 +121,9 @@ const QualificationForm = () => {
                               name="schoolName"
                               placeholder="Beaconhouse.."
                             />
+                            <small className="form-text text-muted">
+                              For e.g : Army Public School
+                            </small>
                             {touchedFields.schoolName && errors.schoolName && (
                               <div className="my-2">
                                 <Alert
@@ -150,6 +147,9 @@ const QualificationForm = () => {
                               name="schoolGrade"
                               placeholder="A+"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : A-one
+                            </small>
                             {touchedFields.schoolGrade && errors.schoolGrade && (
                               <div className="my-2">
                                 <Alert
@@ -166,10 +166,6 @@ const QualificationForm = () => {
                       </Row>
                       <div className="mb-1 mt-3 form-text text-muted d-flex flex-column">
                         <h5>Fsc / I-Com / FA / A-Levels</h5>
-                        <small className=" mt-0 pt-0">
-                          *All the fields are optional, leave them empty if they
-                          are not applicable for you
-                        </small>
                       </div>
                       <Row>
                         <Col xs={12} sm={6}>
@@ -181,6 +177,9 @@ const QualificationForm = () => {
                               placeholder="Army Public School/ College"
                               name="highSchool"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : Government Degree College
+                            </small>
                             {touchedFields.highSchool && errors.highSchool && (
                               <div className="my-2">
                                 <Alert
@@ -205,6 +204,9 @@ const QualificationForm = () => {
                               placeholder="A-"
                               name="highSchoolGrade"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : B
+                            </small>
                             {touchedFields.highSchoolGrade &&
                               errors.highSchoolGrade && (
                                 <div className="my-2">
@@ -222,10 +224,6 @@ const QualificationForm = () => {
                       </Row>
                       <div className="mb-2 mt-3 form-text tex-muted d-flex flex-column">
                         <h5>Undergraduate Studies</h5>
-                        <small>
-                          *Some fields are optional, leave them empty if they
-                          are not applicable for you
-                        </small>
                       </div>
                       <Row>
                         <Col xs={12} sm={6}>
@@ -239,6 +237,11 @@ const QualificationForm = () => {
                               placeholder="Nust"
                               name="universityName"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : National University of Sciences and
+                              Technology
+                            </small>
+
                             {touchedFields.universityName &&
                               errors.universityName && (
                                 <div className="my-2">
@@ -262,6 +265,9 @@ const QualificationForm = () => {
                               placeholder="Bachelor of Science"
                               name="degree"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : Bachelor of Physics
+                            </small>
                             {touchedFields.degree && errors.degree && (
                               <div className="my-2">
                                 <Alert
@@ -289,6 +295,9 @@ const QualificationForm = () => {
                               max="4"
                               name="gpa"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : 3.6
+                            </small>
                             {touchedFields.gpa && errors.gpa && (
                               <div className="my-2">
                                 <Alert
@@ -314,6 +323,9 @@ const QualificationForm = () => {
                               max="4"
                               name="cgpa"
                             />
+                            <small className="form-text text-muted">
+                              For e.g : 2.9
+                            </small>
                             {touchedFields.cgpa && errors.cgpa && (
                               <div className="my-2">
                                 <Alert
@@ -330,7 +342,7 @@ const QualificationForm = () => {
                       </Row>
                       <div>
                         <div className="col d-flex justify-content-end">
-                          <LinkContainer to="/personalInfo">
+                          <LinkContainer to="/qualification">
                             <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
                               Previous
                             </Nav.Link>

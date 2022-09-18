@@ -138,6 +138,7 @@ const UserProfile = () => {
                   onChange={(e) => {
                     setinputValue(e.target.value);
                   }}
+                  style={{ borderRadius: "1rem" }}
                   size="small"
                 />
                 <IconButton

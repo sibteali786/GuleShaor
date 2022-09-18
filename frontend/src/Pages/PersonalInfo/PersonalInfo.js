@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PersonalInfo.scss";
 import { Row, Col, Form, FormGroup, InputGroup, Nav } from "react-bootstrap";
 import { Card } from "react-bootstrap";
@@ -10,7 +10,9 @@ import FormSteps from "../../components/FormSteps/FormSteps";
 import FormContainer from "../../components/FromContainer/FormContainer";
 import { Alert } from "@mui/material";
 import { LinkContainer } from "react-router-bootstrap";
+import { FilePond } from "react-filepond";
 const PersonalInfo = () => {
+  const [files, setFiles] = useState([]);
   // yup validation schema
   const schema = yup.object().shape(
     {
@@ -33,6 +35,12 @@ const PersonalInfo = () => {
         .required("User Name is required")
         .max(20, "Must be less than 20 characters")
         .min(3, "Must be at least 3 characters"),
+      image: yup
+        .mixed()
+        .required("Required")
+        .test("maxSize", "Image size must be less than 1 MB", (value) => {
+          return value?.size < 1024 * 1024 * 1;
+        }),
       about: yup
         .string()
         .required("About is required")
@@ -169,6 +177,7 @@ const PersonalInfo = () => {
       name: "",
       email: "",
       userName: "",
+      image: null,
       mobile: "",
       whatsApp: "",
       about: "",
@@ -197,6 +206,7 @@ const PersonalInfo = () => {
   const name = watch("name", "");
   const about = watch("about", "");
   const email = watch("email", "");
+  const image = watch("image", null);
   const mobile = watch("mobile", "");
   const userName = watch("userName", "");
   const whatsApp = watch("whatsApp", "");
@@ -210,6 +220,24 @@ const PersonalInfo = () => {
   const dribble = watch("dribble", "");
   const devto = watch("devto", "");
 
+  // handling image inputs
+  const onFilesUpdate = (e) => {
+    const t = new DataTransfer();
+    let loadedImage = null;
+    if (e.length !== 0 && e[0].file) {
+      setFiles(e);
+      t.items.add(e[0].file);
+      delete t.files[0]["_relativePath"];
+      loadedImage = t.files[0];
+    } else {
+      setFiles([]);
+    }
+    setValue("image", loadedImage, {
+      shouldTouch: true,
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  };
   // steps state
   const [step, setStep] = React.useState(false);
   const submitHandler = (data) => {
@@ -229,9 +257,74 @@ const PersonalInfo = () => {
                   <div className="e-profile">
                     <Form onSubmit={handleSubmit(submitHandler)}>
                       <Row>
+                        <Col xs={12} className="mb-3 ">
+                          <div>
+                            <FilePond
+                              {...register("image", { required: true })}
+                              files={files}
+                              onupdatefiles={onFilesUpdate}
+                              imagePreviewHeight={170}
+                              imageCropAspectRatio="1:1"
+                              imageResizeTargetWidth={200}
+                              imageResizeTargetHeight={200}
+                              stylePanelLayout="compact circle"
+                              styleLoadIndicatorPosition="center bottom"
+                              styleButtonRemoveItemPosition="center bottom"
+                              styleProgressIndicatorPosition="right bottom"
+                              styleButtonProcessItemPosition="right bottom"
+                              allowMultiple={false}
+                              maxFiles={1}
+                              maxFileSize="1MB"
+                              name="image"
+                              credits={false}
+                              allowFileTypeValidation={true}
+                              acceptedFileTypes={["image/*"]}
+                              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                              className="filepond--root filepond--panel-root"
+                            />
+                            <small className="form-text text-muted">
+                              For e.g : Your selfie or passport sized picture
+                              etc
+                            </small>
+                            {errors.image && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                  style={{ fontSize: "0.8rem" }}
+                                >
+                                  {errors.image.message}
+                                </Alert>
+                              </div>
+                            )}
+                          </div>
+                          {
+                            // TODO: data from backend for given user would go here
+                          }
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col xs={12} sm={6}>
+                          <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
+                            Sibteali Baqar
+                          </h4>
+                          <p className="mb-0">@sibteali786</p>
+                        </Col>
+                        <Col
+                          xs={12}
+                          sm={6}
+                          className="text-end text-sm-right pt-sm-2"
+                        >
+                          <small className="text-muted fw-bold">
+                            Joined 09 Dec 2017
+                          </small>
+                        </Col>
+                      </Row>
+                      <Row>
                         <Col>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Full Name</Form.Label>
                                 <Form.Control
@@ -252,7 +345,7 @@ const PersonalInfo = () => {
                                 )}
                               </FormGroup>
                             </Col>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Username</Form.Label>
                                 <InputGroup>
@@ -337,7 +430,7 @@ const PersonalInfo = () => {
                             <b>Contact</b>
                           </div>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Mobile No</Form.Label>
                                 <Form.Control
@@ -358,7 +451,7 @@ const PersonalInfo = () => {
                                 )}
                               </FormGroup>
                             </Col>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>WhatsApp No</Form.Label>
                                 <Form.Control
@@ -392,7 +485,7 @@ const PersonalInfo = () => {
                             </small>
                           </div>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Facebook</Form.Label>
                                 <Form.Control
@@ -413,7 +506,7 @@ const PersonalInfo = () => {
                                 )}
                               </FormGroup>
                             </Col>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>LinkedIn</Form.Label>
                                 <Form.Control
@@ -436,7 +529,7 @@ const PersonalInfo = () => {
                             </Col>
                           </Row>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Dev To</Form.Label>
                                 <Form.Control
@@ -501,7 +594,7 @@ const PersonalInfo = () => {
                                 )}
                               </FormGroup>
                             </Col>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Dribble</Form.Label>
                                 <Form.Control
@@ -524,7 +617,7 @@ const PersonalInfo = () => {
                             </Col>
                           </Row>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Github</Form.Label>
                                 <Form.Control
@@ -545,7 +638,7 @@ const PersonalInfo = () => {
                                 )}
                               </FormGroup>
                             </Col>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Instagram</Form.Label>
                                 <Form.Control
@@ -568,7 +661,7 @@ const PersonalInfo = () => {
                             </Col>
                           </Row>
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={12} sm={6}>
                           <Row>
                             <Col>
                               <FormGroup>
