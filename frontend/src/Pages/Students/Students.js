@@ -22,10 +22,11 @@ const Students = () => {
         <Grid
           container
           spacing={2}
+          rowSpacing={4}
           style={{ padding: "4rem 2rem", marginTop: "0" }}
         >
           {students.map((student) => (
-            <Grid key={student._id} item sm={6} md={4} lg={3}>
+            <Grid key={student._id} item xs={12} sm={6} md={4} lg={3}>
               <Users mentor={student} />
             </Grid>
           ))}

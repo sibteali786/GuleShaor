@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+const bcrypt = require("bcryptjs");
 
 const students = [
   {
@@ -177,5 +177,5 @@ const students = [
   },
 ];
 
-export default students;
+module.exports = students;
 // TODO: modify required and optional fields in the schema

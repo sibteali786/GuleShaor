@@ -64,23 +64,25 @@
 }
 
 .card-container .round {
-    border: 1px solid #03bfcb;
     border-radius: 50%;
-    padding: 7px;
 }
 
 button.primary {
     background-color: #FAD5A5;
-    border: 1px solid #FAD5A5;
+    border: 1px solid;
     border-radius: 3px;
     color: #231e39;
     font-family: Montserrat, sans-serif;
     font-weight: 500;
-}
+    font-size: 0.8rem;
+    transition: all 0.1s ease-in-out;
 
-button.primary.ghost {
-    background-color: transparent;
-    color: #231e39;
+    &:hover {
+        color: #FAD5A5;
+        background-color: #231e39;
+        border: 1px solid #FAD5A5;
+        transform: scale(1.2);
+    }
 }
 
 .skills {
@@ -101,6 +103,11 @@ button.primary.ghost {
     border-radius: 2px;
     display: inline-block;
     font-size: 12px;
-    margin: 0 7px 7px 0;
-    padding: 7px;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+        background-color: #231e39;
+        color: #FAD5A5;
+        cursor: pointer;
+    }
 }

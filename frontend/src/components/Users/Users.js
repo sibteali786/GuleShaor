@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const Users = ({ mentor }) => {
   const location = useLocation();
   return (
-    <div className="card-container">
+    <div className="card-container border rounded-2 shadow">
       <span
         className={
           location.pathname === "/mentors"
@@ -39,28 +39,31 @@ const Users = ({ mentor }) => {
           alt={mentor.name}
         />
       </Link>
-      <h5>{mentor.name}</h5>
-      <a href="#" alt="username">
+      <h5 className="fs-5 py-2">{mentor.name}</h5>
+      <a href="#" alt="username" className="link-secondary">
         {location.pathname === "/mentors"
           ? mentor.mentorDetails.username
           : mentor.studentDetails.username}
       </a>
       {location.pathname === "/mentors" ? (
-        mentor.mentorDetails.career
-          .split("<br/>")
-          .map((text, idx) => <p key={idx}>{text}</p>)
+        mentor.mentorDetails.career.split("<br/>").map((text, idx) => (
+          <p key={idx} className="py-1 my-0">
+            {text}
+          </p>
+        ))
       ) : (
-        <p>{mentor.studentDetails.career}</p>
+        <p className="py-1 my-0">{mentor.studentDetails.career}</p>
       )}
       <div className="buttons">
-        <button className="primary">Message</button>
-        <button className="primary ghost">Following</button>
+        <button className="primary mx-2">Message</button>
       </div>
       <div className="skills">
         <h6>Skills</h6>
         <ul>
           {mentor.about.skills.slice(0, 3).map((skill, idx) => (
-            <li key={idx}>{skill}</li>
+            <li className="py-1 px-2 mx-1 mb-2 rounded-1" key={idx}>
+              {skill}
+            </li>
           ))}
         </ul>
       </div>
