@@ -17,11 +17,11 @@ const mentorSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
-      career: {
+      designation: {
         type: String,
         default: "",
       },
-      profilePicture: {
+      image: {
         type: String,
         default: "",
       },
@@ -31,12 +31,42 @@ const mentorSchema = new mongoose.Schema(
           default: "",
         },
       ],
-      favouriteSubjects: [{ type: String, default: "" }],
+      preferredSubjects: [{ type: String, default: "" }],
     },
     introVideo: {
       video: { type: String, default: "" },
       videoPoster: { type: String, default: "" },
     },
+    certifications: [
+      {
+        name: {
+          type: String,
+          default: "",
+        },
+        issuingOrg: {
+          type: String,
+          default: "",
+        },
+        issueDate: {
+          type: String,
+          default: "",
+        },
+        expirationDate: {
+          type: String,
+          default: "",
+        },
+        credentialId: {
+          type: String,
+          default: "",
+        },
+        credentialUrl: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
+    // TODO: add a field for the mentor's availability
+    // TODO: Course fields have to be added or improved
     courses: [
       {
         name: { type: String, default: "" },
@@ -50,15 +80,45 @@ const mentorSchema = new mongoose.Schema(
       },
     ],
     about: {
-      heading: { type: String, default: "" },
       details: { type: String, default: "" },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
     },
-    studentDescription: {
+    experiences: [
+      {
+        company: { type: String, default: "" },
+        employmentType: { type: String, default: "" },
+        title: { type: String, default: "" },
+        startDate: { type: String, default: "" },
+        endDate: { type: String, default: "" },
+        description: { type: String, default: "" },
+        location: { type: String, default: "" },
+        industry: { type: String, default: "" },
+        topSkills: [
+          {
+            name: { type: String, default: "" },
+            howUsed: { type: String, default: "" },
+          },
+        ],
+        media: [
+          {
+            link: { type: String, default: "" },
+          },
+        ],
+      },
+    ],
+    aboutStudents: {
       type: String,
       default: "",
     },
+    feedback: [
+      {
+        studentName: { type: String, default: "" },
+        studentImage: { type: String, default: "" },
+        studentFeedback: { type: String, default: "" },
+        rating: { type: Number, default: 0 },
+      },
+    ],
     email: {
       type: String,
       required: true,

@@ -6,15 +6,15 @@ const users = [
     mentorDetails: {
       userType: "Pro",
       username: "@admin",
-      career: "UI/UX Designer and Computer Engineer",
-      profilePicture: "/images/profilePic.png",
+      designation: "UI/UX Designer and Computer Engineer",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["Astrology"],
+      preferredSubjects: ["Astrology"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -56,13 +56,12 @@ const users = [
       },
     ],
     about: {
-      heading: "How Astrology changed my life",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
       skills: ["astrology", "painting", "programming", "writing"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "admin@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
@@ -73,15 +72,15 @@ const users = [
     mentorDetails: {
       userType: "Free",
       username: "@sibteali",
-      career: "Web Developer and Computer Engineer",
-      profilePicture: "/images/profilePic.png",
+      designation: "Web Developer and Computer Engineer",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["History", "Software", "AI and ML"],
+      preferredSubjects: ["History", "Software", "AI and ML"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -120,13 +119,12 @@ const users = [
       },
     ],
     about: {
-      heading: "What i perceived History to be ",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Programmer", "Gamer", "Reader"],
       skills: ["Coding", "writing", "singing", "travelling"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "sibteali@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
@@ -137,15 +135,15 @@ const users = [
     mentorDetails: {
       userType: "Free",
       username: "@izza",
-      career: "Content Writer and Computer Engineer",
-      profilePicture: "/images/profilePic.png",
+      designation: "Content Writer and Computer Engineer",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["Leadership"],
+      preferredSubjects: ["Leadership"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -176,13 +174,12 @@ const users = [
       },
     ],
     about: {
-      heading: "How to servive post pandemic market ?",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Content Writing", "Qirat"],
       skills: ["Writer", "Singing", "programming", "cricket"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "izza@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
@@ -193,15 +190,15 @@ const users = [
     mentorDetails: {
       userType: "Free",
       username: "@wasi",
-      career: "UI/UX Designer and Computer Engineer",
-      profilePicture: "/images/profilePic.png",
+      designation: "UI/UX Designer and Computer Engineer",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["Astrology"],
+      preferredSubjects: ["Astrology"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -243,13 +240,12 @@ const users = [
       },
     ],
     about: {
-      heading: "How Astrology changed my life",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
       skills: ["astrology", "painting", "programming", "writing"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "wasi@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
@@ -260,15 +256,15 @@ const users = [
     mentorDetails: {
       userType: "Free",
       username: "@akhan",
-      career: "Bussinessman and Volunteer",
-      profilePicture: "/images/profilePic.png",
+      designation: "Bussinessman and Volunteer",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["Frienship"],
+      preferredSubjects: ["Frienship"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -288,13 +284,12 @@ const users = [
       },
     ],
     about: {
-      heading: "Being a Bussinessman",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
       skills: ["astrology", "painting", "programming", "writing"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "ahmad@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
@@ -305,15 +300,15 @@ const users = [
     mentorDetails: {
       userType: "Pro",
       username: "@admin",
-      career: "Web and Android Developer and CS graduate",
-      profilePicture: "/images/profilePic.png",
+      designation: "Web and Android Developer and CS graduate",
+      image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      favouriteSubjects: ["Programming"],
+      preferredSubjects: ["Programming"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
@@ -333,13 +328,12 @@ const users = [
       },
     ],
     about: {
-      heading: "Post college experiences",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
       skills: ["astrology", "painting", "programming", "writing"],
     },
-    studentDescription:
+    aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
     email: "dani@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library

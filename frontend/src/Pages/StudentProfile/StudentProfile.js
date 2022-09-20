@@ -74,7 +74,7 @@ const UserProfile = () => {
               <Grid item className="instName">
                 <Avatar
                   alt={student.name}
-                  src={student.studentDetails.profilePicture}
+                  src={student.studentDetails.image}
                   sx={{
                     width: 120,
                     height: 120,
@@ -105,7 +105,7 @@ const UserProfile = () => {
               className="span-3"
             >
               <Collapse in={checked} collapsedSize={200}>
-                <h2>{student.about.heading}</h2>
+                <h2>About</h2>
                 <Typography variant="body2">{student.about.details}</Typography>
               </Collapse>
 

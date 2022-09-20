@@ -26,7 +26,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        profilePicture: user.mentorDetails.profilePicture,
+        image: user.mentorDetails.image,
         token: generateToken(user._id), // not defined till now
         userType,
       });
@@ -35,7 +35,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        profilePicture: user.studentDetails.profilePicture,
+        image: user.studentDetails.image,
         token: generateToken(user._id), // not defined till now
         userType,
       });
@@ -61,7 +61,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        profilePicture: user.mentorDetails.profilePicture,
+        image: user.mentorDetails.image,
         userType,
       });
     } else {
@@ -69,7 +69,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        profilePicture: user.studentDetails.profilePicture,
+        image: user.studentDetails.image,
         userType,
       });
     }

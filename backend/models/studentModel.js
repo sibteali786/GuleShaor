@@ -26,11 +26,11 @@ var studentSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
-      career: {
+      designation: {
         type: String,
         default: "",
       },
-      profilePicture: {
+      image: {
         type: String,
         default: "",
       },
@@ -40,19 +40,77 @@ var studentSchema = new mongoose.Schema(
           default: "",
         },
       ],
-      favouriteSubjects: [{ type: String, default: "" }],
+      preferredSubjects: [{ type: String, default: "" }],
     },
     introVideo: {
       video: { type: String, default: "" },
       videoPoster: { type: String, default: "" },
     },
+    certifications: [
+      {
+        name: {
+          type: String,
+          default: "",
+        },
+        issuingOrg: {
+          type: String,
+          default: "",
+        },
+        issueDate: {
+          type: String,
+          default: "",
+        },
+        expirationDate: {
+          type: String,
+          default: "",
+        },
+        credentialId: {
+          type: String,
+          default: "",
+        },
+        credentialUrl: {
+          type: String,
+          default: "",
+        },
+      },
+    ],
     // The course ids which we are enrolled in
     about: {
-      heading: { type: String, default: "" },
       details: { type: String, default: "" },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
     },
+    experiences: [
+      {
+        company: { type: String, default: "" },
+        employmentType: { type: String, default: "" },
+        title: { type: String, default: "" },
+        startDate: { type: String, default: "" },
+        endDate: { type: String, default: "" },
+        description: { type: String, default: "" },
+        location: { type: String, default: "" },
+        industry: { type: String, default: "" },
+        topSkills: [
+          {
+            name: { type: String, default: "" },
+            howUsed: { type: String, default: "" },
+          },
+        ],
+        media: [
+          {
+            link: { type: String, default: "" },
+          },
+        ],
+      },
+    ],
+    endorsement: [
+      {
+        mentorName: { type: String, default: "" },
+        mentorImage: { type: String, default: "" },
+        mentorFeedback: { type: String, default: "" },
+        rating: { type: Number, default: 0 },
+      },
+    ],
     // all the mentors of the student
     mentors: [
       {

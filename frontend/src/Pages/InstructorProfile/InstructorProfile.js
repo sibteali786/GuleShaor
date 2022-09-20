@@ -81,7 +81,7 @@ const InstructorProfile = () => {
               <Grid item className="instName">
                 <Avatar
                   alt={mentor.name}
-                  src={mentor.mentorDetails.profilePicture}
+                  src={mentor.mentorDetails.image}
                   sx={{
                     width: 120,
                     height: 120,
@@ -115,7 +115,7 @@ const InstructorProfile = () => {
               className="span-3"
             >
               <Collapse in={checked} collapsedSize={150}>
-                <h2>{mentor.about.heading}</h2>
+                <h2>About</h2>
                 <Typography variant="body2">{mentor.about.details}</Typography>
               </Collapse>
               <div
@@ -206,7 +206,7 @@ const InstructorProfile = () => {
                       if (index <= 4) {
                         return (
                           <Avatar
-                            src={student.studentDetails.profilePicture}
+                            src={student.studentDetails.image}
                             alt={student.name}
                             sx={{
                               width: 50,
@@ -229,7 +229,7 @@ const InstructorProfile = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    {mentor.studentDescription}
+                    {mentor.aboutStudents}
                   </Typography>
                 </Grid>
               </Grid>

@@ -33,8 +33,8 @@ const Users = ({ mentor }) => {
           className="round"
           src={
             location.pathname === "/mentors"
-              ? mentor.mentorDetails.profilePicture
-              : mentor.studentDetails.profilePicture
+              ? mentor.mentorDetails.image
+              : mentor.studentDetails.image
           }
           alt={mentor.name}
         />
@@ -46,13 +46,13 @@ const Users = ({ mentor }) => {
           : mentor.studentDetails.username}
       </a>
       {location.pathname === "/mentors" ? (
-        mentor.mentorDetails.career.split("<br/>").map((text, idx) => (
+        mentor.mentorDetails.designation.split("<br/>").map((text, idx) => (
           <p key={idx} className="py-1 my-0">
             {text}
           </p>
         ))
       ) : (
-        <p className="py-1 my-0">{mentor.studentDetails.career}</p>
+        <p className="py-1 my-0">{mentor.studentDetails.designation}</p>
       )}
       <div className="buttons">
         <button className="primary mx-2">Message</button>
