@@ -34,6 +34,7 @@ import FilePondPluginImageTransform from "filepond-plugin-image-transform";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import NotFound404 from "./Pages/NotFound404/NotFound404";
 
 // Register the plugins
 registerPlugin(
@@ -67,6 +68,7 @@ function App() {
         <Route path="/personalinfo" element={<PersonalInfo />} />
         <Route path="/qualification" element={<QualificationForm />} />
         <Route path="/profileSetup" element={<ProfileSetup />} />
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />
     </div>
@@ -75,4 +77,5 @@ function App() {
 
 export default App;
 
-// TODO: Design a 404 not Found page to cater no listed routes
+// TODO: Design a 404 not Found page to cater non listed routes
+// TODO: https://codepen.io/salehriaz/pen/erJrZM for 404 page.
