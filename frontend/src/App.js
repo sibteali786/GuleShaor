@@ -35,6 +35,7 @@ import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import NotFound404 from "./Pages/NotFound404/NotFound404";
+import { useSelector } from "react-redux";
 
 // Register the plugins
 registerPlugin(
@@ -45,6 +46,8 @@ registerPlugin(
   FilePondPluginImageTransform
 );
 function App() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const location = useLocation();
   return (
     <div className="App">

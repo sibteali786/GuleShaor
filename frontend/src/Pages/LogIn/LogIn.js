@@ -30,21 +30,21 @@ const LogIn = () => {
   }, [history, userInfo, redirect]);
   return (
     <div className="logInSignIn-container">
-      <div class="container-login" id="container1" style={{ width: "50%" }}>
-        <div class="form-container">
+      <div className="container-login" id="container1" style={{ width: "50%" }}>
+        <div className="form-container">
           <form onSubmit={submitHandler} className="form-login">
             <h1>Sign in</h1>
             {error && <Message>{error}</Message>}
             {loading && <FormLoader />}
-            <div class="social-container">
-              <a href="#" class="social">
-                <i class="fab fa-facebook-f"></i>
+            <div className="social-container">
+              <a href="#" className="social">
+                <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="#" class="social">
-                <i class="fab fa-google-plus-g"></i>
+              <a href="#" className="social">
+                <i className="fab fa-google-plus-g"></i>
               </a>
-              <a href="#" class="social">
-                <i class="fab fa-linkedin-in"></i>
+              <a href="#" className="social">
+                <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
             <Typography variant="body1">or use your account</Typography>
