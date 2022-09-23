@@ -95,22 +95,47 @@ const Navbar = () => {
         <Logo className="logo" />
       </Link>
       <div className="menu">
-        {items.map((item, index) => (
-          <NavLink
-            key={item.name}
-            className={`item`}
-            onClick={() => {
-              setActive(index);
-            }}
-            to={item.to}
-            exact="true"
-            aciveclassname={`${
-              active === index && location.pathname === item.to ? "active" : ""
-            }`}
-          >
-            {item.name}
-          </NavLink>
-        ))}
+        {userInfo
+          ? items.map((item, index) => (
+              <NavLink
+                key={item.name}
+                className={`item`}
+                onClick={() => {
+                  setActive(index);
+                }}
+                to={item.to}
+                exact="true"
+                aciveclassname={`${
+                  active === index && location.pathname === item.to
+                    ? "active"
+                    : ""
+                }`}
+              >
+                {item.name}
+              </NavLink>
+            ))
+          : items
+              .filter(
+                (item) => item.name !== "Mentors" && item.name !== "Students"
+              )
+              .map((item, index) => (
+                <NavLink
+                  key={item.name}
+                  className={`item`}
+                  onClick={() => {
+                    setActive(index);
+                  }}
+                  to={item.to}
+                  exact="true"
+                  aciveclassname={`${
+                    active === index && location.pathname === item.to
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  {item.name}
+                </NavLink>
+              ))}
       </div>
       <div>
         {userInfo ? (
@@ -316,24 +341,47 @@ const Navbar = () => {
           </div>
         )}
         <div className="menu-mobile" onClick={toggleDrawer("right", false)}>
-          {items.map((item, index) => (
-            <NavLink
-              key={index}
-              className={`item-mobile`}
-              onClick={() => {
-                setActive(index);
-              }}
-              to={item.to}
-              exact="true"
-              aciveclassname={`${
-                active === index && location.pathname === item.to
-                  ? "active"
-                  : ""
-              }`}
-            >
-              {item.name}
-            </NavLink>
-          ))}
+          {userInfo
+            ? items.map((item, index) => (
+                <NavLink
+                  key={item.name}
+                  className={`item-mobile`}
+                  onClick={() => {
+                    setActive(index);
+                  }}
+                  to={item.to}
+                  exact="true"
+                  aciveclassname={`${
+                    active === index && location.pathname === item.to
+                      ? "active"
+                      : ""
+                  }`}
+                >
+                  {item.name}
+                </NavLink>
+              ))
+            : items
+                .filter(
+                  (item) => item.name !== "Mentors" && item.name !== "Students"
+                )
+                .map((item, index) => (
+                  <NavLink
+                    key={item.name}
+                    className={`item-mobile`}
+                    onClick={() => {
+                      setActive(index);
+                    }}
+                    to={item.to}
+                    exact="true"
+                    aciveclassname={`${
+                      active === index && location.pathname === item.to
+                        ? "active"
+                        : ""
+                    }`}
+                  >
+                    {item.name}
+                  </NavLink>
+                ))}
         </div>
       </Drawer>
     </div>

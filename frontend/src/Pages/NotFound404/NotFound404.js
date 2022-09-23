@@ -6,7 +6,12 @@ const NotFound404 = () => {
     <div className="bg-purple">
       <div className="stars">
         <div className="central-body">
-          <img className="image-404" src="images/404.svg" width="300px" />
+          <img
+            className="image-404"
+            src="images/404.svg"
+            width="300px"
+            alt="404"
+          />
           <Link to="/" className="btn-go-home">
             GO BACK HOME
           </Link>
@@ -16,20 +21,28 @@ const NotFound404 = () => {
             className="object_rocket"
             src="images/rocket_1.svg"
             width="40px"
+            alt="rocket"
           />
           <div className="earth-moon">
             <img
               className="object_earth"
               src="images/earth.svg"
               width="100px"
+              alt="earth"
             />
-            <img className="object_moon" src="images/moon_1.svg" width="80px" />
+            <img
+              className="object_moon"
+              src="images/moon_1.svg"
+              width="80px"
+              alt="moon"
+            />
           </div>
           <div className="box_astronaut">
             <img
               className="object_astronaut"
               src="images/astronaut_1.svg"
               width="140px"
+              alt="astronaut"
             />
           </div>
         </div>
