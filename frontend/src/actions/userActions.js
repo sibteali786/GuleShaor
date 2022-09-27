@@ -43,11 +43,6 @@ export const login = (email, password, userType) => async (dispatch) => {
   }
 };
 
-export const logout = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
-  dispatch({ type: USER_LOGOUT });
-};
-
 export const register =
   (name, email, password, userType) => async (dispatch) => {
     try {
@@ -71,6 +66,14 @@ export const register =
         type: USER_REGISTER_SUCCESS,
         payload: data,
       });
+
+      dispatch({
+        type: USER_LOGIN_SUCCESS,
+        payload: data,
+      });
+
+      // saving user in the local storage so as to restore session / page when it comes again after some time
+      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
@@ -81,3 +84,9 @@ export const register =
       });
     }
   };
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: USER_LOGOUT });
+  console.log(localStorage);
+};

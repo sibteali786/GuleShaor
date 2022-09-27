@@ -32,7 +32,7 @@ const composeEnhancers = composeWithDevTools({
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
-
+console.log(localStorage);
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };

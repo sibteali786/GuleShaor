@@ -20,15 +20,15 @@ var studentSchema = new mongoose.Schema(
     studentDetails: {
       userType: {
         type: String,
-        default: "",
+        default: "Free",
       },
       username: {
         type: String,
-        default: "",
+        default: "john123",
       },
       designation: {
         type: String,
-        default: "",
+        default: "MBA",
       },
       image: {
         type: String,
@@ -43,8 +43,11 @@ var studentSchema = new mongoose.Schema(
       preferredSubjects: [{ type: String, default: "" }],
     },
     introVideo: {
-      video: { type: String, default: "" },
-      videoPoster: { type: String, default: "" },
+      video: {
+        type: String,
+        default: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
+      },
+      videoPoster: { type: String, default: "/images/Rectangle5.jpg" },
     },
     certifications: [
       {
@@ -76,7 +79,11 @@ var studentSchema = new mongoose.Schema(
     ],
     // The course ids which we are enrolled in
     about: {
-      details: { type: String, default: "" },
+      details: {
+        type: String,
+        default:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
+      },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
     },

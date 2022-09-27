@@ -11,15 +11,15 @@ const mentorSchema = new mongoose.Schema(
     mentorDetails: {
       userType: {
         type: String,
-        default: "",
+        default: "Free",
       },
       username: {
         type: String,
-        default: "",
+        default: "ali786",
       },
       designation: {
         type: String,
-        default: "",
+        default: "Charted Accountant",
       },
       image: {
         type: String,
@@ -31,11 +31,14 @@ const mentorSchema = new mongoose.Schema(
           default: "",
         },
       ],
-      preferredSubjects: [{ type: String, default: "" }],
+      preferredSubjects: [{ type: String, default: "Science" }],
     },
     introVideo: {
-      video: { type: String, default: "" },
-      videoPoster: { type: String, default: "" },
+      video: {
+        type: String,
+        default: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
+      },
+      videoPoster: { type: String, default: "/images/Rectangle5.jpg" },
     },
     certifications: [
       {
@@ -80,7 +83,11 @@ const mentorSchema = new mongoose.Schema(
       },
     ],
     about: {
-      details: { type: String, default: "" },
+      details: {
+        type: String,
+        default:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
+      },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
     },
@@ -109,7 +116,8 @@ const mentorSchema = new mongoose.Schema(
     ],
     aboutStudents: {
       type: String,
-      default: "",
+      default:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
     },
     feedback: [
       {
