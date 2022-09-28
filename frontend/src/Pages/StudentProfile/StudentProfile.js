@@ -104,70 +104,79 @@ const UserProfile = () => {
               style={{ backgroundColor: "#F1F1F1", borderRadius: "1rem" }}
               className="span-3"
             >
-              <Collapse in={checked} collapsedSize={200}>
-                <h2>About</h2>
-                <Typography variant="body2">{student.about.details}</Typography>
-              </Collapse>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {inputFields.map((inputField, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    size="small"
+              {student.about.details ? (
+                <>
+                  <Collapse
+                    in={checked}
+                    collapsedSize={200}
+                    style={{ minHeight: "120px" }}
+                  >
+                    <h2>About</h2>
+                    <Typography variant="body2">
+                      {student.about.details}
+                    </Typography>
+                  </Collapse>
+                  <div
                     style={{
-                      color: "#76A4CE",
-                      backgroundColor: "#FFF",
-                      borderRadius: "1rem",
-                      margin: "0.2rem",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      flexWrap: "wrap",
                     }}
                   >
-                    #{inputField}
-                  </Button>
-                ))}
-                <TextField
-                  label="Skill"
-                  onChange={(e) => {
-                    setinputValue(e.target.value);
-                  }}
-                  style={{ borderRadius: "1rem" }}
-                  size="small"
-                />
-                <IconButton
-                  onClick={() => handleAddFields()}
-                  style={{
-                    color: "#76A4CE",
-                    backgroundColor: "#FFF",
-                    borderRadius: "2rem",
-                    margin: "0.5rem",
-                  }}
-                >
-                  <AddIcon />
-                </IconButton>
-                <Button
-                  variant="text"
-                  style={{ fontWeight: "bold", color: "#196AA0" }}
-                  onClick={handleChange}
-                >
-                  Read More
-                </Button>
-              </div>
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="text"
-                  style={{ fontWeight: "bold", color: "#196AA0" }}
-                >
-                  More Posts by {student.name}
-                </Button>
-              </Link>
+                    {inputFields.map((inputField, index) => (
+                      <Button
+                        key={index}
+                        variant="contained"
+                        size="small"
+                        style={{
+                          color: "#76A4CE",
+                          backgroundColor: "#FFF",
+                          borderRadius: "1rem",
+                          margin: "0.2rem",
+                        }}
+                      >
+                        #{inputField}
+                      </Button>
+                    ))}
+                    <TextField
+                      label="Skill"
+                      onChange={(e) => {
+                        setinputValue(e.target.value);
+                      }}
+                      style={{ borderRadius: "1rem" }}
+                      size="small"
+                    />
+                    <IconButton
+                      onClick={() => handleAddFields()}
+                      style={{
+                        color: "#76A4CE",
+                        backgroundColor: "#FFF",
+                        borderRadius: "2rem",
+                        margin: "0.5rem",
+                      }}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                    <Button
+                      variant="text"
+                      style={{ fontWeight: "bold", color: "#196AA0" }}
+                      onClick={handleChange}
+                    >
+                      Read More
+                    </Button>
+                  </div>
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <Button
+                      variant="text"
+                      style={{ fontWeight: "bold", color: "#196AA0" }}
+                    >
+                      More Posts by {student.name}
+                    </Button>
+                  </Link>
+                </>
+              ) : null}
             </Container>
             <Container maxWidth="sm" className="span-4">
               <h2>Videos</h2>
@@ -180,25 +189,29 @@ const UserProfile = () => {
               </Player>
             </Container>
             <Container maxWidth="sm" className="span-2">
-              <h4>Photos</h4>
-              <ImageList cols={2} rowHeight={164}>
-                {student.studentDetails.otherImages.map((image, idx) => (
-                  <ImageListItem key={idx}>
-                    <img
-                      src={image}
-                      srcSet={image}
-                      alt={student.name}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-              <Button
-                variant="text"
-                style={{ fontWeight: "bold", color: "#196AA0" }}
-              >
-                More +
-              </Button>
+              {student.studentDetails.otherImages.length > 0 ? (
+                <>
+                  <h4>Photos</h4>
+                  <ImageList cols={2} rowHeight={164}>
+                    {student.studentDetails.otherImages.map((image, idx) => (
+                      <ImageListItem key={idx}>
+                        <img
+                          src={image}
+                          srcSet={image}
+                          alt={student.name}
+                          loading="lazy"
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                  <Button
+                    variant="text"
+                    style={{ fontWeight: "bold", color: "#196AA0" }}
+                  >
+                    More +
+                  </Button>
+                </>
+              ) : null}
             </Container>
             <Container maxWidth="md" className="span-5">
               <div className="PostSection">

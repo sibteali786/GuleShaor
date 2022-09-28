@@ -1,5 +1,4 @@
 import {
-  Container,
   Button,
   Typography,
   TextField,
@@ -10,6 +9,7 @@ import {
   Avatar,
   AvatarGroup,
 } from "@mui/material";
+import { Col, Container, Row } from "react-bootstrap";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
 import "./InstructorProfile.scss";
@@ -58,6 +58,7 @@ const InstructorProfile = () => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
+  console.log(mentor.courses);
   return (
     <div>
       {Object.keys(mentor).length === 0 ? (
@@ -67,206 +68,247 @@ const InstructorProfile = () => {
       ) : error && errorStudents ? (
         <Message>{error}</Message>
       ) : (
-        <div className="Instrcutor-container">
+        <>
           <div className="backgroundPicture"></div>
-          <Container maxWidth="lg" className="grids">
-            <Grid
-              container
-              spacing={2}
-              alignItems="flex-start"
-              justifyContent="space-between"
-              style={{ marginTop: "0px" }}
-              className="span-1"
-            >
-              <Grid item className="instName">
-                <Avatar
-                  alt={mentor.name}
-                  src={mentor.mentorDetails.image}
-                  sx={{
-                    width: 120,
-                    height: 120,
-                    position: "relative",
-                    top: "-10vh",
-                  }}
-                />
-                <Grid
-                  item
-                  style={{ marginLeft: "2rem", height: "fit-content" }}
-                >
-                  <h3>{mentor.name}</h3>
-                  <a href="email:johnDoe">{mentor.mentorDetails.username}</a>
-                  {mentor.about.hobbies.map((hobby, idx) => (
-                    <p key={idx}>{hobby}</p>
-                  ))}
-                </Grid>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#196AA0", borderRadius: "1.3rem" }}
-                >
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Container
-              maxWidth="md"
-              style={{ backgroundColor: "#F1F1F1", borderRadius: "1rem" }}
-              className="span-3"
-            >
-              <Collapse in={checked} collapsedSize={150}>
-                <h2>About</h2>
-                <Typography variant="body2">{mentor.about.details}</Typography>
-              </Collapse>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {inputFields.map((inputField, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    size="small"
-                    style={{
-                      color: "#76A4CE",
-                      backgroundColor: "#FFF",
-                      borderRadius: "1rem",
-                      margin: "0.2rem",
-                    }}
-                  >
-                    #{inputField}
-                  </Button>
-                ))}
-                <TextField
-                  label="Skill"
-                  onChange={(e) => {
-                    setinputValue(e.target.value);
-                  }}
-                  size="small"
-                />
-                <IconButton
-                  onClick={() => handleAddFields()}
-                  style={{
-                    color: "#76A4CE",
-                    backgroundColor: "#FFF",
-                    borderRadius: "2rem",
-                    margin: "0.5rem",
-                  }}
-                >
-                  <AddIcon />
-                </IconButton>
-                <Button
-                  variant="text"
-                  style={{ fontWeight: "bold", color: "#196AA0" }}
-                  onClick={handleChange}
-                >
-                  Read More
-                </Button>
-              </div>
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="text"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#196AA0",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  More Posts by {mentor.name}
-                </Button>
-              </Link>
-            </Container>
-            <Container maxWidth="md" className="span-5">
-              <h2>Offered Courses</h2>
-              <Stack spacing={1}>
-                {mentor.courses.map((course) => (
-                  <Courses key={course._id} course={course} mentor={mentor} />
-                ))}
-              </Stack>
-            </Container>
-            <Container maxWidth="md" className="span-6">
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <h2>Students</h2>
-                </Grid>
-                <Grid container item xs={12} alignItems="center">
-                  <AvatarGroup
-                    total={
-                      Math.abs(5 - students.length) < 5
-                        ? students.length + Math.abs(5 - students.length)
-                        : Math.abs(5 - students.length)
-                    }
-                  >
-                    {students.map((student, index) => {
-                      if (index <= 4) {
-                        return (
-                          <Avatar
-                            src={student.studentDetails.image}
-                            alt={student.name}
-                            sx={{
-                              width: 50,
-                              height: 50,
-                            }}
-                          />
-                        );
-                      } else {
-                        return false;
-                      }
-                    })}
-                  </AvatarGroup>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography
-                    variant="body2"
-                    style={{
-                      fontFamily: "Montserrat",
-                      color: "#5F5F5F",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {mentor.aboutStudents}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Container>
-            <Container maxWidth="sm" className="span-4">
-              <h2>Videos</h2>
-              <Player
-                playsInline
-                poster={mentor.introVideo.videoPoster}
-                src={mentor.introVideo.video}
-              >
-                <BigPlayButton position="center" />
-              </Player>
-            </Container>
-            <Container maxWidth="sm" className="span-2">
-              <h4>Photos</h4>
-              <ImageList cols={2} rowHeight={164}>
-                {mentor.mentorDetails.otherImages.map((image, idx) => (
-                  <ImageListItem key={idx}>
-                    <img
-                      src={image}
-                      srcSet={image}
+          <div className="mx-auto px-[4rem]">
+            <div className="w-4/6">
+              <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 px-2">
+                <Col xs={12}>
+                  <Row style={{ height: "50px" }}>
+                    <Avatar
                       alt={mentor.name}
-                      loading="lazy"
+                      src={mentor.mentorDetails.image}
+                      style={{
+                        transform: "translateY(-50px)",
+                        width: "120px",
+                        height: "100px",
+                      }}
                     />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-              <Button
-                variant="text"
-                style={{ fontWeight: "bold", color: "#196AA0" }}
+                  </Row>
+                  <Row>
+                    <Col xs={12} className="instName">
+                      <div style={{ height: "fit-content" }}>
+                        <h3>{mentor.name}</h3>
+                        <a href="email:johnDoe">
+                          {mentor.mentorDetails.username}
+                        </a>
+                        {mentor.about.hobbies.map((hobby, idx) => (
+                          <p className="text-gray-500 my-0" key={idx}>
+                            {hobby}
+                          </p>
+                        ))}
+                      </div>
+                    </Col>
+                    <Col
+                      xs={12}
+                      className="d-flex justify-start align-start mt-2 mb-4"
+                    >
+                      <Button
+                        variant="contained"
+                        className="py-1 hover:text-black "
+                        style={{
+                          backgroundColor: "#196AA0",
+                          borderRadius: "1.3rem",
+                        }}
+                      >
+                        Follow
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <Row
+                className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-2"
+                style={{ backgroundColor: "#F1F1F1" }}
               >
-                More +
-              </Button>
-            </Container>
-          </Container>
-        </div>
+                {mentor.about.details ? (
+                  <>
+                    {
+                      // TODO: resolve skills box disappear when reload mentor page
+                    }
+                    <Collapse in={checked} collapsedSize={120}>
+                      <h2 className="mb-4">About</h2>
+                      <Typography variant="body2">
+                        {mentor.about.details}
+                      </Typography>
+                    </Collapse>
+                    <div
+                      className="my-3"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {inputFields.map((inputField, index) => (
+                        <Button
+                          key={index}
+                          variant="contained"
+                          size="small"
+                          style={{
+                            color: "#76A4CE",
+                            backgroundColor: "#FFF",
+                            borderRadius: "1rem",
+                            margin: "0.2rem",
+                          }}
+                        >
+                          #{inputField}
+                        </Button>
+                      ))}
+                      <TextField
+                        label="Skill"
+                        onChange={(e) => {
+                          setinputValue(e.target.value);
+                        }}
+                        size="small"
+                      />
+                      <IconButton
+                        onClick={() => handleAddFields()}
+                        style={{
+                          color: "#76A4CE",
+                          backgroundColor: "#FFF",
+                          borderRadius: "2rem",
+                          margin: "0.5rem",
+                        }}
+                      >
+                        <AddIcon />
+                      </IconButton>
+                      <Button
+                        variant="text"
+                        style={{ fontWeight: "bold", color: "#196AA0" }}
+                        onClick={handleChange}
+                      >
+                        Read More
+                      </Button>
+                    </div>
+                    <Link to="/profile" style={{ textDecoration: "none" }}>
+                      <Button
+                        variant="text"
+                        style={{
+                          fontWeight: "bold",
+                          color: "#196AA0",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        More Posts by {mentor.name}
+                      </Button>
+                    </Link>
+                  </>
+                ) : null}
+              </Row>
+              <Row>
+                {mentor.courses.length > 0 ? (
+                  <>
+                    <h2>Offered Courses</h2>
+                    <Stack spacing={1}>
+                      {mentor.courses.map((course) => (
+                        <Courses
+                          key={course._id}
+                          course={course}
+                          mentor={mentor}
+                        />
+                      ))}
+                    </Stack>
+                  </>
+                ) : null}
+              </Row>
+              <Row>
+                <Grid container spacing={1}>
+                  <Grid item xs={12}>
+                    <h2>Students</h2>
+                  </Grid>
+                  <Grid container item xs={12} alignItems="center">
+                    <AvatarGroup
+                      total={
+                        Math.abs(5 - students.length) < 5
+                          ? students.length + Math.abs(5 - students.length)
+                          : Math.abs(5 - students.length)
+                      }
+                    >
+                      {students.map((student, index) => {
+                        if (index <= 4) {
+                          return (
+                            <Avatar
+                              src={student.studentDetails.image}
+                              alt={student.name}
+                              sx={{
+                                width: 50,
+                                height: 50,
+                              }}
+                            />
+                          );
+                        } else {
+                          return false;
+                        }
+                      })}
+                    </AvatarGroup>
+                  </Grid>
+                  <Grid item xs={12}>
+                    {mentor.aboutStudents ? (
+                      <Typography
+                        variant="body2"
+                        style={{
+                          fontFamily: "Montserrat",
+                          color: "#5F5F5F",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {mentor.aboutStudents}
+                      </Typography>
+                    ) : null}
+                  </Grid>
+                </Grid>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <Row>
+                    <Col xs={12} className="span-4">
+                      <h2>Videos</h2>
+                      <Player
+                        playsInline
+                        poster={mentor.introVideo.videoPoster}
+                        src={mentor.introVideo.video}
+                      >
+                        <BigPlayButton position="center" />
+                      </Player>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={12} className="span-2">
+                      {mentor.mentorDetails.otherImages.length > 0 ? (
+                        <>
+                          <h4>Photos</h4>
+                          <ImageList cols={2} rowHeight={164}>
+                            {mentor.mentorDetails.otherImages.map(
+                              (image, idx) => (
+                                <ImageListItem key={idx}>
+                                  <img
+                                    src={image}
+                                    srcSet={image}
+                                    alt={mentor.name}
+                                    loading="lazy"
+                                  />
+                                </ImageListItem>
+                              )
+                            )}
+                          </ImageList>
+                          <Button
+                            variant="text"
+                            style={{ fontWeight: "bold", color: "#196AA0" }}
+                          >
+                            More +
+                          </Button>
+                        </>
+                      ) : null}
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

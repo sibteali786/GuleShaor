@@ -12,7 +12,6 @@
   top: 0;
   width: 100%;
   transition: all 0.3s ease-in-out;
-  padding: 0.5rem 0;
 
   a {
     text-decoration: none;
@@ -22,14 +21,10 @@
     letter-spacing: 0.1rem;
   }
 
-  .logo {
-    margin-left: 2rem;
-  }
 
   .logSign-Desktop {
     display: flex;
     align-items: center;
-    margin-right: 2rem;
 
     a {
       margin: 0 0.5rem;

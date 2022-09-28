@@ -30,7 +30,7 @@ const Users = ({ mentor }) => {
         }
       >
         <img
-          className="round"
+          className="round d-inline"
           src={
             location.pathname === "/mentors"
               ? mentor.mentorDetails.image
@@ -39,23 +39,29 @@ const Users = ({ mentor }) => {
           alt={mentor.name}
         />
       </Link>
-      <h5 className="fs-5 py-2">{mentor.name}</h5>
-      <a href="#" alt="username" className="link-secondary">
+      <h5 className="xs:text-lg md:text-xl my-1">{mentor.name}</h5>
+      <a
+        href="#"
+        alt="username"
+        className="text-gray-500 hover:text-blue-800 my-1"
+      >
         {location.pathname === "/mentors"
           ? mentor.mentorDetails.username
           : mentor.studentDetails.username}
       </a>
       {location.pathname === "/mentors" ? (
         mentor.mentorDetails.designation.split("<br/>").map((text, idx) => (
-          <p key={idx} className="py-1 my-0">
+          <p key={idx} className="py-1 my-0 xs:text-md md:text-lg">
             {text}
           </p>
         ))
       ) : (
-        <p className="py-1 my-0">{mentor.studentDetails.designation}</p>
+        <p className="py-1 my-0 xs:text-md md:text-lg">
+          {mentor.studentDetails.designation}
+        </p>
       )}
       <div className="buttons">
-        <button className="primary mx-2">Message</button>
+        <button className="primary mx-2 px-1">Message</button>
       </div>
       <div className="skills">
         <h6>Skills</h6>

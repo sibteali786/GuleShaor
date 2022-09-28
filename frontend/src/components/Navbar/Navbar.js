@@ -90,7 +90,7 @@ const Navbar = () => {
     setAnchorEl(null);
   };
   return (
-    <div className="navContainer" id="navbar">
+    <div className="navContainer px-[4rem] py-2" id="navbar">
       <Link to="/">
         <Logo className="logo" />
       </Link>
