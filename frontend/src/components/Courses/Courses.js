@@ -3,7 +3,7 @@ import "./Courses.scss";
 const Courses = ({ course, mentor }) => {
   return (
     <>
-      <div id="container">
+      <div id="container" className="xs:shadow-md md:shadow-lg">
         <div className="product-details">
           <h1>{course.name}</h1>
           <span className="hint-star star">

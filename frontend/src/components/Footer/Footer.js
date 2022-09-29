@@ -42,7 +42,7 @@ const Footer = ({ isForm }) => {
 
   return (
     <div
-      className="footer-container"
+      className="footer-container px-[4rem] py-[2rem]"
       style={
         location.pathname !== "/"
           ? { background: "#FAD5A5" }

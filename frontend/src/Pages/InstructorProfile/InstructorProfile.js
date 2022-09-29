@@ -80,7 +80,7 @@ const InstructorProfile = () => {
                       src={mentor.mentorDetails.image}
                       style={{
                         transform: "translateY(-50px)",
-                        width: "120px",
+                        width: "fit-content",
                         height: "100px",
                       }}
                     />
@@ -88,8 +88,10 @@ const InstructorProfile = () => {
                   <Row>
                     <Col xs={12} className="instName">
                       <div style={{ height: "fit-content" }}>
-                        <h3>{mentor.name}</h3>
-                        <a href="email:johnDoe">
+                        <h3 className="xs:text-xl md:text-2xl">
+                          {mentor.name}
+                        </h3>
+                        <a href="email:johnDoe" className="no-underline">
                           {mentor.mentorDetails.username}
                         </a>
                         {mentor.about.hobbies.map((hobby, idx) => (
@@ -127,7 +129,7 @@ const InstructorProfile = () => {
                       // TODO: resolve skills box disappear when reload mentor page
                     }
                     <Collapse in={checked} collapsedSize={120}>
-                      <h2 className="mb-4">About</h2>
+                      <h3 className="mb-4">About</h3>
                       <Typography variant="body2">
                         {mentor.about.details}
                       </Typography>
@@ -198,10 +200,10 @@ const InstructorProfile = () => {
                   </>
                 ) : null}
               </Row>
-              <Row>
+              <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4">
                 {mentor.courses.length > 0 ? (
                   <>
-                    <h2>Offered Courses</h2>
+                    <h3 className="mb-5">Offered Courses</h3>
                     <Stack spacing={1}>
                       {mentor.courses.map((course) => (
                         <Courses
@@ -214,10 +216,10 @@ const InstructorProfile = () => {
                   </>
                 ) : null}
               </Row>
-              <Row>
+              <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
                 <Grid container spacing={1}>
                   <Grid item xs={12}>
-                    <h2>Students</h2>
+                    <h2 className="mb-4">Students</h2>
                   </Grid>
                   <Grid container item xs={12} alignItems="center">
                     <AvatarGroup
@@ -261,49 +263,42 @@ const InstructorProfile = () => {
                   </Grid>
                 </Grid>
               </Row>
-              <Row>
-                <Col xs={12}>
-                  <Row>
-                    <Col xs={12} className="span-4">
-                      <h2>Videos</h2>
-                      <Player
-                        playsInline
-                        poster={mentor.introVideo.videoPoster}
-                        src={mentor.introVideo.video}
+              <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <Col xs={12} lg={6} className="span-4">
+                  <h3>Videos</h3>
+                  <Player
+                    playsInline
+                    poster={mentor.introVideo.videoPoster}
+                    src={mentor.introVideo.video}
+                  >
+                    <BigPlayButton position="center" />
+                  </Player>
+                </Col>
+
+                <Col xs={12} lg={6} className="span-2">
+                  {mentor.mentorDetails.otherImages.length > 0 ? (
+                    <>
+                      <h3>Photos</h3>
+                      <ImageList cols={2} rowHeight={164}>
+                        {mentor.mentorDetails.otherImages.map((image, idx) => (
+                          <ImageListItem key={idx}>
+                            <img
+                              src={image}
+                              srcSet={image}
+                              alt={mentor.name}
+                              loading="lazy"
+                            />
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
+                      <Button
+                        variant="text"
+                        style={{ fontWeight: "bold", color: "#196AA0" }}
                       >
-                        <BigPlayButton position="center" />
-                      </Player>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={12} className="span-2">
-                      {mentor.mentorDetails.otherImages.length > 0 ? (
-                        <>
-                          <h4>Photos</h4>
-                          <ImageList cols={2} rowHeight={164}>
-                            {mentor.mentorDetails.otherImages.map(
-                              (image, idx) => (
-                                <ImageListItem key={idx}>
-                                  <img
-                                    src={image}
-                                    srcSet={image}
-                                    alt={mentor.name}
-                                    loading="lazy"
-                                  />
-                                </ImageListItem>
-                              )
-                            )}
-                          </ImageList>
-                          <Button
-                            variant="text"
-                            style={{ fontWeight: "bold", color: "#196AA0" }}
-                          >
-                            More +
-                          </Button>
-                        </>
-                      ) : null}
-                    </Col>
-                  </Row>
+                        More +
+                      </Button>
+                    </>
+                  ) : null}
                 </Col>
               </Row>
             </div>

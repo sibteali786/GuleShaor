@@ -88,7 +88,7 @@ const Moto = () => {
           <Button variant="contained">Learn More</Button>
         </div>
       </div>
-      <div className="WhatWeDo">
+      <div className="WhatWeDo px-[8rem]">
         <h3>what we do</h3>
         <h2>DIRECT, MENTOR & BUILD THE LEADERS OF TOMORROW</h2>
         <Slider {...settings} style={{ padding: "0 0" }}>
@@ -109,7 +109,7 @@ const Moto = () => {
           </div>
         </Slider>
       </div>
-      <div className="letsColloborate">
+      <div className="letsColloborate py-[2rem] px-[4rem] sm:px-[2rem]">
         {/* Its better to convert the text part to collapse so that it can be accesed if needed. Pending Task */}
         <h3>let’s colloborate</h3>
         <h2>SUPPORT OUR YOUTH</h2>
