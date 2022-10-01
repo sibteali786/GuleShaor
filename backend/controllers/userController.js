@@ -137,4 +137,65 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { authUser, getUserProfile, registerUser };
+// Updating or creating profile for mentor and student
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const userType = req.user.userType;
+  let user;
+  if (userType === "mentor") {
+    user = await Mentor.findById(req.user._id);
+  } else if (userType === "student") {
+    user = await Student.findById(req.user._id);
+  }
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body?.password) {
+      user.password = req.body?.password;
+    }
+    if (userType === "mentor") {
+      user.mentorDetails = req.body?.mentorDetails || user?.mentorDetails;
+      user.introVideo = req.body?.introVideo || user?.introVideo;
+      // TODO:Mutate this array to retain previous values
+      user.about = req.body?.about || user?.about;
+      user.courses = req.body?.courses || user?.courses;
+      user.certifications = req.body?.certifications || user?.certifications;
+      user.experiences = req.body?.experiences || user?.experiences;
+      user.aboutStudents = req.body?.aboutStudents || user?.aboutStudents;
+      user.feedback = req.body?.feedback || user?.feedback;
+    } else if (userType === "student") {
+      user.studentDetails = req.body?.studentDetails || user?.studentDetails;
+      user.introVideo = req.body?.introVideo || user?.introVideo;
+      user.about.details = req.body?.about?.details || user?.about?.details;
+      // TODO:Mutate this array to retain previous values
+      user.about = req.body?.about || user?.about;
+      user.certifications = req.body?.certifications || user?.certifications;
+      user.experiences = req.body?.experiences || user?.experiences;
+      user.experiences = req.body?.experiences || user?.experiences;
+      user.endorsement = req.body?.endorsement || user?.endorsement;
+    }
+
+    const updatedUser = await user.save();
+    if (userType === "mentor") {
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        image: updatedUser.mentorDetails.image,
+        token: generateToken(updatedUser._id),
+      });
+    } else if (userType === "student") {
+      res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        image: updatedUser.studentDetails.image,
+        token: generateToken(updatedUser._id),
+      });
+    }
+  }
+});
+module.exports = { authUser, getUserProfile, registerUser, updateUserProfile };

@@ -1,7 +1,7 @@
 import "./App.scss";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import FAQ from "./Pages/FAQ/FAQ";
@@ -67,8 +67,17 @@ function App() {
         <Route path="/students" element={<Students />} />
         <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
-        <Route path="/mentors/:id" element={<InstructorProfile />} />
-        <Route path="/personalinfo" element={<PersonalInfo />} />
+        <Route
+          path="/mentors/:id"
+          className="px-[4rem]"
+          element={<InstructorProfile />}
+        />
+        <Route
+          path="/personalinfo"
+          element={
+            !userInfo ? <Navigate replace to="/login" /> : <PersonalInfo />
+          }
+        />
         <Route path="/qualification" element={<QualificationForm />} />
         <Route path="/profileSetup" element={<ProfileSetup />} />
         <Route path="*" element={<NotFound404 />} />

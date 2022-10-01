@@ -2,14 +2,12 @@
 @import "../../components/Utils/config.scss";
 
 .team-container {
-  padding: 6rem 2rem;
   height: 100vh;
   overflow: hidden;
 
   h1 {
     @include headings(large);
     font-family: "Gotham";
-    text-align: center;
   }
 
   p {
@@ -17,7 +15,7 @@
     font-size: clamp(0.8rem, 2vw, 1rem);
     font-weight: 400;
     margin: 0;
-    text-align: center;
+
   }
 
 

@@ -69,15 +69,16 @@ const InstructorProfile = () => {
         <Message>{error}</Message>
       ) : (
         <>
-          <div className="backgroundPicture"></div>
-          <div className="mx-auto px-[4rem]">
-            <div className="w-4/6">
-              <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 px-2">
-                <Col xs={12}>
+          <div className="px-[4rem] profileContainer">
+            <div className="w-4/6 pt-[6rem]">
+              <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
+                <div className="backgroundPicture"></div>
+                <Col xs={12} className="px-4">
                   <Row style={{ height: "50px" }}>
                     <Avatar
                       alt={mentor.name}
                       src={mentor.mentorDetails.image}
+                      className="profileImage"
                       style={{
                         transform: "translateY(-50px)",
                         width: "fit-content",

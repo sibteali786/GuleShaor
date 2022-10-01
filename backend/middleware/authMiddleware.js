@@ -13,10 +13,16 @@ const protect = expressAsyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      if (req.body.userType === "mentor") {
+      if (
+        req.body.mentorDetails.userType === "mentor" ||
+        req.query.userType === "mentor"
+      ) {
         req.user = await Mentor.findById(decoded.id).select("-password");
         req.user = { ...req.user._doc, userType: "mentor" };
-      } else {
+      } else if (
+        req.body.mentorDetails.userType === "mentor" ||
+        req.query.userType === "student"
+      ) {
         req.user = await Student.findById(decoded.id).select("-password");
         req.user = { ...req.user._doc, userType: "student" };
       }

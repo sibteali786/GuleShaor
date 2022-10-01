@@ -24,7 +24,7 @@ const Team = () => {
         "https://github.com/sibteali786",
         "https://www.linkedin.com/in/syed-sibteali-baqar-03167a17a/",
         "https://medium.com/@sibteali786",
-        "https://sibtealibqar.netlify.app/",
+        "https://sibtealibaqar.me",
       ],
     },
     {
@@ -51,20 +51,13 @@ const Team = () => {
     <Grid
       container
       justifyContent="center"
-      className="team-container"
+      className="team-container px-[4rem] py-[6rem]"
       alignItems="center"
       spacing={3}
       style={{ marginTop: "0" }}
     >
-      <Grid
-        item
-        container
-        xs={12}
-        md={6}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Grid item>
+      <Grid item container xs={12} md={6} alignItems="center">
+        <Grid item className="text-left">
           <h1>The Team</h1>
         </Grid>
         <Grid item>

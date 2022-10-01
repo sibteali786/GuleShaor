@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PersonalInfo.scss";
 import { Row, Col, Form, FormGroup, InputGroup, Nav } from "react-bootstrap";
 import { Card } from "react-bootstrap";
@@ -11,6 +11,9 @@ import FormContainer from "../../components/FromContainer/FormContainer";
 import { Alert } from "@mui/material";
 import { LinkContainer } from "react-router-bootstrap";
 import { FilePond } from "react-filepond";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getUserDetails } from "../../actions/userActions";
 const PersonalInfo = () => {
   const [files, setFiles] = useState([]);
   // yup validation schema
@@ -207,8 +210,8 @@ const PersonalInfo = () => {
   const about = watch("about", "");
   const email = watch("email", "");
   const image = watch("image", null);
-  const mobile = watch("mobile", "");
   const userName = watch("userName", "");
+  const mobile = watch("mobile", "");
   const whatsApp = watch("whatsApp", "");
   const twitter = watch("twitter", "");
   const facebook = watch("facebook", "");
@@ -245,6 +248,28 @@ const PersonalInfo = () => {
     console.log(data);
     setStep(true);
   };
+  // user Details
+  const userDetails = useSelector((state) => state.userDetails);
+  const {
+    loading: loadingUserDetails,
+    error: errorUserDetails,
+    user,
+  } = userDetails;
+  const [userType, setUserType] = useState("mentor");
+  // User login info after we visit it here
+  const history = useNavigate();
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+  useEffect(() => {
+    if (!user?.name) {
+      dispatch(getUserDetails("profile"));
+    } else {
+      setValue("name", user.name);
+      setValue("email", user.email);
+    }
+  }, [dispatch, history, userInfo, user, setValue]);
+
   return (
     <FormContainer>
       <FormSteps step1 step2 />

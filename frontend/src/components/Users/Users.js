@@ -5,6 +5,7 @@ import "./Users.scss";
 import { useLocation } from "react-router-dom";
 const Users = ({ mentor }) => {
   const location = useLocation();
+  console.log(mentor.mentorDetails.designation.split("<br/> "));
   return (
     <div className="card-container border rounded-2 shadow">
       <span
@@ -50,11 +51,9 @@ const Users = ({ mentor }) => {
           : mentor.studentDetails.username}
       </a>
       {location.pathname === "/mentors" ? (
-        mentor.mentorDetails.designation.split("<br/>").map((text, idx) => (
-          <p key={idx} className="py-1 my-0 xs:text-md md:text-lg">
-            {text}
-          </p>
-        ))
+        <p className="py-1 my-0 xs:text-md md:text-lg">
+          {mentor.mentorDetails.designation}
+        </p>
       ) : (
         <p className="py-1 my-0 xs:text-md md:text-lg">
           {mentor.studentDetails.designation}

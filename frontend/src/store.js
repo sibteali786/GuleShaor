@@ -10,7 +10,11 @@ import {
   studentDetailsReducer,
   studentListReducer,
 } from "./Reducers/studentReducer";
-import { userLoginReducer, userRegisterReducer } from "./Reducers/userReducer";
+import {
+  userDetailsReducer,
+  userLoginReducer,
+  userRegisterReducer,
+} from "./Reducers/userReducer";
 
 const reducer = combineReducers({
   mentorList: mentorListReducer,
@@ -20,6 +24,7 @@ const reducer = combineReducers({
   studentsOfMentors: studentsOfMentorReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
 });
 
 const composeEnhancers = composeWithDevTools({
@@ -32,7 +37,6 @@ const composeEnhancers = composeWithDevTools({
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
-console.log(localStorage);
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
 };

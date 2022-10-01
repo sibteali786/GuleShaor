@@ -90,6 +90,34 @@ const mentorSchema = new mongoose.Schema(
       },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
+      education: {
+        school: {
+          name: { type: String, default: "" },
+          grade: { type: String, default: "" },
+        },
+        college: {
+          name: { type: String, default: "" },
+          grade: { type: String, default: "" },
+        },
+        university: {
+          name: { type: String, default: "" },
+          degree: { type: String, default: "" },
+        },
+      },
+      contact: {
+        mobile: { type: String, default: "" },
+        whatsapp: { type: String, default: "" },
+      },
+      socialMedia: {
+        facebook: { type: String, default: "" },
+        twitter: { type: String, default: "" },
+        instagram: { type: String, default: "" },
+        linkedin: { type: String, default: "" },
+        devto: { type: String, default: "" },
+        dribble: { type: String, default: "" },
+        behance: { type: String, default: "" },
+        github: { type: String, default: "" },
+      },
     },
     experiences: [
       {
