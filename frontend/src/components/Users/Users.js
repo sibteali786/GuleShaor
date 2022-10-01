@@ -52,11 +52,11 @@ const Users = ({ mentor }) => {
       </a>
       {location.pathname === "/mentors" ? (
         <p className="py-1 my-0 xs:text-md md:text-lg">
-          {mentor.mentorDetails.designation}
+          {mentor?.mentorDetails?.designation}
         </p>
       ) : (
         <p className="py-1 my-0 xs:text-md md:text-lg">
-          {mentor.studentDetails.designation}
+          {mentor?.studentDetails?.designation}
         </p>
       )}
       <div className="buttons">
