@@ -5,7 +5,6 @@ import "./Users.scss";
 import { useLocation } from "react-router-dom";
 const Users = ({ mentor }) => {
   const location = useLocation();
-  console.log(mentor.mentorDetails.designation.split("<br/> "));
   return (
     <div className="card-container border rounded-2 shadow">
       <span
