@@ -58,7 +58,7 @@ const InstructorProfile = () => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
-  console.log(mentor.courses);
+  console.log(mentor?.mentorDetails?.image);
   return (
     <div>
       {Object.keys(mentor).length === 0 ? (
@@ -77,7 +77,7 @@ const InstructorProfile = () => {
                   <Row style={{ height: "50px" }}>
                     <Avatar
                       alt={mentor.name}
-                      src={mentor.mentorDetails.image}
+                      src={"/" + mentor.mentorDetails.image}
                       className="profileImage"
                       style={{
                         transform: "translateY(-50px)",

@@ -2,11 +2,11 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const FormSteps = ({ step1, step2, step3, step4 }) => {
+const FormSteps = ({ step }) => {
   return (
-    <Nav className="justify-content-center mb-4 mt-5">
+    <Nav className="justify-content-center mb-4 mt-[4rem]">
       <Nav.Item>
-        {step1 ? (
+        {step === 1 ? (
           <LinkContainer to="/signup">
             <Nav.Link>Sign up</Nav.Link>
           </LinkContainer>
@@ -16,7 +16,7 @@ const FormSteps = ({ step1, step2, step3, step4 }) => {
       </Nav.Item>
 
       <Nav.Item>
-        {step2 ? (
+        {step === 2 ? (
           <LinkContainer to="/personalinfo">
             <Nav.Link>Personal Info</Nav.Link>
           </LinkContainer>
@@ -26,7 +26,7 @@ const FormSteps = ({ step1, step2, step3, step4 }) => {
       </Nav.Item>
 
       <Nav.Item>
-        {step3 ? (
+        {step === 3 ? (
           <LinkContainer to="/qualification">
             <Nav.Link>Qualification</Nav.Link>
           </LinkContainer>
@@ -36,7 +36,7 @@ const FormSteps = ({ step1, step2, step3, step4 }) => {
       </Nav.Item>
 
       <Nav.Item>
-        {step4 ? (
+        {step === 4 ? (
           <LinkContainer to="/profileSetup">
             <Nav.Link>Profile Setup</Nav.Link>
           </LinkContainer>

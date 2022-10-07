@@ -54,23 +54,65 @@ const getUserProfile = asyncHandler(async (req, res) => {
   } else {
     user = await Student.findById(req.user._id);
   }
-
   if (user) {
     if (userType === "mentor") {
       res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        image: user.mentorDetails.image,
+        _id: user?._id,
+        name: user?.name,
+        username: user?.mentorDetails?.username,
+        email: user?.email,
+        image: user?.mentorDetails?.image,
+        about: user?.about?.details,
+        mobile: user?.about?.contact?.mobile,
+        whatsapp: user?.about?.contact?.whatsapp,
+        facebook: user?.about?.socialMedia?.facebook,
+        instagram: user?.about?.socialMedia?.instagram,
+        twitter: user?.about?.socialMedia?.twitter,
+        linkedin: user?.about?.socialMedia?.linkedin,
+        devto: user?.about?.socialMedia?.devto,
+        github: user?.about?.socialMedia?.github,
+        behance: user?.about?.socialMedia?.behance,
+        dribble: user?.about?.socialMedia?.dribble,
+        medium: user?.about?.socialMedia?.medium,
+        school: user?.about?.education?.school?.name,
+        schoolGrade: user?.about?.education?.school?.grade,
+        college: user?.about?.education?.college?.name,
+        collegeGrade: user?.about?.education?.college?.grade,
+        university: user?.about?.education?.university?.name,
+        gpa: user?.about?.education?.university?.gpa,
+        cgpa: user?.about?.education?.university?.cgpa,
+        degree: user?.about?.education?.university?.degree,
         userType,
+        token: generateToken(user._id),
       });
     } else {
       res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        image: user.studentDetails.image,
-        userType,
+        _id: user?._id,
+        name: user?.name,
+        username: user?.studentDetails?.username,
+        email: user?.email,
+        image: user?.studentDetails?.image,
+        about: user?.about?.details,
+        mobile: user?.about?.contact?.mobile,
+        whatsapp: user?.about?.contact?.whatsapp,
+        facebook: user?.about?.socialMedia?.facebook,
+        instagram: user?.about?.socialMedia?.instagram,
+        twitter: user?.about?.socialMedia?.twitter,
+        linkedin: user?.about?.socialMedia?.linkedin,
+        devto: user?.about?.socialMedia?.devto,
+        github: user?.about?.socialMedia?.github,
+        behance: user?.about?.socialMedia?.behance,
+        dribble: user?.about?.socialMedia?.dribble,
+        medium: user?.about?.socialMedia?.medium,
+        school: user?.about?.education?.school?.name,
+        schoolGrade: user?.about?.education?.school?.grade,
+        college: user?.about?.education?.college?.name,
+        collegeGrade: user?.about?.education?.college?.grade,
+        university: user?.about?.education?.university?.name,
+        gpa: user?.about?.education?.university?.gpa,
+        cgpa: user?.about?.education?.university?.cgpa,
+        degree: user?.about?.education?.university?.degree,
+        token: generateToken(user._id),
       });
     }
   } else {
@@ -121,6 +163,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
+        userType,
       });
     } else {
       res.status(201).json({
@@ -129,6 +172,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
+        userType,
       });
     }
   } else {
@@ -185,7 +229,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         name: updatedUser.name,
         email: updatedUser.email,
         image: updatedUser.mentorDetails.image,
-        token: generateToken(updatedUser._id),
+        userType,
       });
     } else if (userType === "student") {
       res.json({
@@ -193,7 +237,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         name: updatedUser.name,
         email: updatedUser.email,
         image: updatedUser.studentDetails.image,
-        token: generateToken(updatedUser._id),
+        userType,
       });
     }
   }

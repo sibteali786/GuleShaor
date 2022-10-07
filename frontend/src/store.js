@@ -11,6 +11,7 @@ import {
   studentListReducer,
 } from "./Reducers/studentReducer";
 import {
+  updateUserDetailsReducer,
   userDetailsReducer,
   userLoginReducer,
   userRegisterReducer,
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  userUpdateDetails: updateUserDetailsReducer,
 });
 
 const composeEnhancers = composeWithDevTools({
@@ -37,8 +39,17 @@ const composeEnhancers = composeWithDevTools({
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
+// const userDetailsFromStorage = localStorage.getItem("userUpdatedDetails")
+//   ? JSON.parse(localStorage.getItem("userUpdatedDetails"))
+//   : null;
+const UserDetailsFromStorage = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  // userUpdateDetails: { userUpdatedDetails: userDetailsFromStorage },
+  userDetails: { user: UserDetailsFromStorage },
 };
 const store = legacy_createStore(
   reducer,

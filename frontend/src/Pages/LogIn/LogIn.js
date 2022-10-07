@@ -5,7 +5,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
 import Message from "../../components/Message/Message";
-import FormLoader from "../../components/FormLoader/FormLoader";
+import FormLoader from "../../components/MutliStepForms/FormLoader/FormLoader";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { Typography } from "@mui/material";
 const LogIn = () => {
