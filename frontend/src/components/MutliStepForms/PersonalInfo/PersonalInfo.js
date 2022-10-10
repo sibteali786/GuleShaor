@@ -7,16 +7,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert } from "@mui/material";
-import { LinkContainer } from "react-router-bootstrap";
 import { FilePond } from "react-filepond";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   getUserDetails,
   updateUserDetails,
 } from "../../../actions/userActions";
 import axios from "axios";
-const PersonalInfo = ({ UserDetails, setUserDetails }) => {
+const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
   // TODO:improve the size of image
@@ -244,7 +242,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails }) => {
   const [step, setStep] = React.useState(false);
   const submitHandler = async (data) => {
     // TODO: add submit handler
-    console.log(data);
     UserDetails = {
       name: data?.name,
       email: data?.email,
@@ -272,12 +269,10 @@ const PersonalInfo = ({ UserDetails, setUserDetails }) => {
         },
       },
     };
-    try {
-      dispatch(updateUserDetails(UserDetails));
-      setStep(true);
-    } catch (error) {
-      console.error(error.message);
-    }
+    setUserDetails({
+      ...UserDetails,
+    });
+    nextStep();
   };
   // user Details
   const userDetails = useSelector((state) => state.userDetails);
@@ -310,24 +305,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails }) => {
       setValue("behance", user.behance);
       setValue("dribble", user.dribble);
       setValue("devto", user.devto);
-      var userPersonalInfo = {
-        name: user.name,
-        email: user.email,
-        mobile: user.mobile,
-        whatsApp: user.whatsapp,
-        about: user.about,
-        userName: user.username,
-        facebook: user.facebook,
-        twitter: user.twitter,
-        instagram: user.instagram,
-        medium: user.medium,
-        linkedIn: user.linkedin,
-        github: user.github,
-        behance: user.behance,
-        dribble: user.dribble,
-        devto: user.devto,
-      };
-      setUserDetails(userPersonalInfo);
     }
   }, [dispatch, userInfo, user, setUserDetails, setValue]);
 
@@ -796,11 +773,12 @@ const PersonalInfo = ({ UserDetails, setUserDetails }) => {
                       </Col>
                     </Row>
                     <div className="col d-flex justify-content-end mt-5">
-                      <LinkContainer to="/signup">
-                        <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
-                          Previous
-                        </Nav.Link>
-                      </LinkContainer>
+                      <button
+                        className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                        onClick={() => prevStep()}
+                      >
+                        Previous
+                      </button>
                       <SubmitButton
                         variant="outlined"
                         type="submit"
@@ -848,14 +826,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails }) => {
                       >
                         Submit
                       </SubmitButton>
-                      <LinkContainer to="/qualification">
-                        <Nav.Link
-                          className="py-1 px-3 bg-gradient bg-dark rounded-1"
-                          disabled={!step ? true : false}
-                        >
-                          Next
-                        </Nav.Link>
-                      </LinkContainer>
                     </div>
                   </Form>
                 </div>

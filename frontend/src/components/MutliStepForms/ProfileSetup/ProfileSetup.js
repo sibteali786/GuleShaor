@@ -7,8 +7,10 @@ import { Alert } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./ProfileSetup.scss";
 import SubmitButton from "../../SubmitButton/SubmitButton";
+import { useDispatch } from "react-redux";
+import { updateUserDetails } from "../../../actions/userActions";
 
-const ProfileSetup = () => {
+const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   const schema = yup.object().shape({
     technical: yup.string().optional().min(3).max(100),
     interpersonal: yup.string().optional().min(3).max(100),
@@ -20,7 +22,9 @@ const ProfileSetup = () => {
         "Must be a valid website address",
         (website) =>
           !website ||
-          /^([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(website)
+          /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
+            website
+          )
       ),
     videoLink: yup
       .string()
@@ -30,7 +34,9 @@ const ProfileSetup = () => {
         "Must be a valid youtube link",
         (website) =>
           !website ||
-          /^([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(website)
+          /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
+            website
+          )
       ),
   });
   const form = useForm({
@@ -56,11 +62,30 @@ const ProfileSetup = () => {
   const interpersonal = watch("interpersonal", "");
   const portfolioLink = watch("portfolioLink", "");
   const videoLink = watch("videoLink", "");
-
+  const dispatch = useDispatch();
   // Form Submission
   const submitHandler = (data) => {
     // TODO: add submit handler
-    console.log(data);
+    if (data) {
+      setUserDetails({
+        ...UserDetails,
+        mentorDetails: {
+          ...UserDetails?.mentorDetails,
+          technical: data?.technical.split(","),
+          interpersonal: data?.interpersonal.split(","),
+          portfolioLink: data?.portfolioLink,
+        },
+        introVideo: {
+          video: data?.videoLink,
+        },
+      });
+    }
+    try {
+      dispatch(updateUserDetails(UserDetails));
+      nextStep();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <Form
@@ -88,15 +113,18 @@ const ProfileSetup = () => {
               name="technical"
               placeholder="Python, Flask..."
             />
+            <small className="form-text text-muted">
+              Note: Python, Flask, Node, Express, MongoDB, MySQL etc.
+            </small>
           </FormGroup>
-          {touchedFields.schoolName && errors.schoolName && (
+          {touchedFields.technical && errors.technical && (
             <div className="my-2">
               <Alert
                 severity="error"
                 variant="outlined"
                 className="py-0 border-0"
               >
-                {errors.schoolName.message}
+                {errors.technical.message}
               </Alert>
             </div>
           )}
@@ -114,6 +142,9 @@ const ProfileSetup = () => {
               name="interpersonal"
               placeholder="Management, Leadership..."
             />
+            <small className="form-text text-muted">
+              Note: Leadership, Team Management, Communication, etc.
+            </small>
           </FormGroup>
         </Col>
       </Row>
@@ -182,11 +213,12 @@ const ProfileSetup = () => {
         </Col>
       </Row>
       <div className="col d-flex justify-content-end mt-5">
-        <LinkContainer to="/personalInfo">
-          <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
-            Previous
-          </Nav.Link>
-        </LinkContainer>
+        <button
+          className="py-1 px-3 bg-gradient bg-dark rounded-1"
+          onClick={() => prevStep()}
+        >
+          Previous
+        </button>
         <SubmitButton
           variant="outlined"
           type="submit"

@@ -21,7 +21,6 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
-  var user = {};
   const submitHandler = (e) => {
     e.preventDefault();
     // Dispatch Register
@@ -29,13 +28,11 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
     if (password !== confirmPassword) {
       setMessage("Password do not match");
     } else {
-      user = {
+      setUserDetails({
         name,
         email,
-        password,
         userType,
-      };
-      setUserDetails(user);
+      });
       dispatch(register(name, email, password, userType));
       nextStep();
     }

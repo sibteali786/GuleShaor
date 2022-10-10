@@ -6,7 +6,7 @@ import SubmitButton from "../../SubmitButton/SubmitButton";
 import "./QualificationForm.scss";
 import * as yup from "yup";
 import { LinkContainer } from "react-router-bootstrap";
-import { Alert } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,12 @@ import {
   getUserDetails,
   updateUserDetails,
 } from "../../../actions/userActions";
-const QualificationForm = () => {
+const QualificationForm = ({
+  nextStep,
+  prevStep,
+  UserDetails,
+  setUserDetails,
+}) => {
   const schema = yup.object().shape({
     schoolName: yup
       .string()
@@ -104,12 +109,11 @@ const QualificationForm = () => {
   // Form Submission
   const submitHandler = (data) => {
     // TODO: add submit handler
-    console.log(data);
-    const user = {
-      mentorDetails: {
-        userType: "mentor",
-      },
+
+    setUserDetails({
+      ...UserDetails,
       about: {
+        ...UserDetails.about,
         education: {
           school: { name: data?.schoolName, grade: data?.schoolGrade },
           college: { name: data?.highSchool, grade: data?.highSchoolGrade },
@@ -121,14 +125,8 @@ const QualificationForm = () => {
           },
         },
       },
-    };
-    try {
-      dispatch(updateUserDetails(user));
-      setStep(true);
-    } catch (error) {
-      console.error(error.message);
-    }
-    setStep(true);
+    });
+    nextStep();
   };
   useEffect(() => {
     if (!user?.name) {
@@ -388,11 +386,12 @@ const QualificationForm = () => {
                     </Row>
                     <div>
                       <div className="col d-flex justify-content-end mt-5">
-                        <LinkContainer to="/personalInfo">
-                          <Nav.Link className="py-1 px-3 bg-gradient bg-dark rounded-1">
-                            Previous
-                          </Nav.Link>
-                        </LinkContainer>
+                        <button
+                          className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                          onClick={() => prevStep()}
+                        >
+                          Previous
+                        </button>
                         <SubmitButton
                           variant="outlined"
                           type="submit"
@@ -419,14 +418,6 @@ const QualificationForm = () => {
                         >
                           Submit
                         </SubmitButton>
-                        <LinkContainer to="/profileSetup">
-                          <Nav.Link
-                            className="py-1 px-3 bg-gradient bg-dark rounded-1"
-                            disabled={!step ? true : false}
-                          >
-                            Next
-                          </Nav.Link>
-                        </LinkContainer>
                       </div>
                     </div>
                   </Form>

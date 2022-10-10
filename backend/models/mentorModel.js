@@ -25,6 +25,9 @@ const mentorSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
+      interpersonal: [{ type: String, default: "" }],
+      technical: [{ type: String, default: "" }],
+      portfolioLink: { type: String, default: "" },
       otherImages: [
         {
           type: String,

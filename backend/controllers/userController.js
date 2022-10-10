@@ -200,6 +200,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if (req.body?.password) {
       user.password = req.body?.password;
     }
+    console.log(req.body);
     if (userType === "mentor") {
       user.mentorDetails = req.body?.mentorDetails || user?.mentorDetails;
       user.introVideo = req.body?.introVideo || user?.introVideo;
@@ -223,6 +224,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save();
+
     if (userType === "mentor") {
       res.json({
         _id: updatedUser._id,
