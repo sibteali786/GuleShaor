@@ -221,7 +221,7 @@ const Navbar = () => {
         ) : (
           <div className="logSign-Desktop">
             <Link to="/login">Log In</Link>
-            <Link to="/signup">
+            <Link to="/profile-forms">
               <Button variant="contained">Sign Up</Button>
             </Link>
           </div>
@@ -335,7 +335,7 @@ const Navbar = () => {
             <Link to="/login" onClick={toggleDrawer("right", false)}>
               Log In
             </Link>
-            <Link to="/signup" onClick={toggleDrawer("right", false)}>
+            <Link to="/profile-forms" onClick={toggleDrawer("right", false)}>
               <Button variant="contained">Sign Up</Button>
             </Link>
           </div>

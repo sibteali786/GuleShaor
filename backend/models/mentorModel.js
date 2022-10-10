@@ -15,7 +15,7 @@ const mentorSchema = new mongoose.Schema(
       },
       username: {
         type: String,
-        default: "ali786",
+        default: "",
       },
       designation: {
         type: String,
@@ -25,6 +25,9 @@ const mentorSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
+      interpersonal: [{ type: String, default: "" }],
+      technical: [{ type: String, default: "" }],
+      portfolioLink: { type: String, default: "" },
       otherImages: [
         {
           type: String,
@@ -85,8 +88,7 @@ const mentorSchema = new mongoose.Schema(
     about: {
       details: {
         type: String,
-        default:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
+        default: "",
       },
       hobbies: [{ type: String, default: "" }],
       skills: [{ type: String, default: "" }],
@@ -102,6 +104,8 @@ const mentorSchema = new mongoose.Schema(
         university: {
           name: { type: String, default: "" },
           degree: { type: String, default: "" },
+          cgpa: { type: String, default: "" },
+          gpa: { type: String, default: "" },
         },
       },
       contact: {
@@ -113,6 +117,7 @@ const mentorSchema = new mongoose.Schema(
         twitter: { type: String, default: "" },
         instagram: { type: String, default: "" },
         linkedin: { type: String, default: "" },
+        medium: { type: String, default: "" },
         devto: { type: String, default: "" },
         dribble: { type: String, default: "" },
         behance: { type: String, default: "" },

@@ -17,9 +17,6 @@ import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
-import PersonalInfo from "./Pages/PersonalInfo/PersonalInfo";
-import QualificationForm from "./Pages/Qualification/QualificationForm";
-import ProfileSetup from "./Pages/ProfileSetup/ProfileSetup";
 // Import React FilePond
 import { FilePond, registerPlugin } from "react-filepond";
 
@@ -36,6 +33,10 @@ import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import NotFound404 from "./Pages/NotFound404/NotFound404";
 import { useSelector } from "react-redux";
+import MultiStepForm from "./components/MutliStepForms/MultiStepForm";
+import PersonalInfo from "./components/MutliStepForms/PersonalInfo/PersonalInfo";
+import QualificationForm from "./components/MutliStepForms/Qualification/QualificationForm";
+import ProfileSetup from "./components/MutliStepForms/ProfileSetup/ProfileSetup";
 
 // Register the plugins
 registerPlugin(
@@ -72,14 +73,25 @@ function App() {
           className="px-[4rem]"
           element={<InstructorProfile />}
         />
+        <Route path="profile-forms" element={<MultiStepForm />} />
         <Route
           path="/personalinfo"
           element={
             !userInfo ? <Navigate replace to="/login" /> : <PersonalInfo />
           }
         />
-        <Route path="/qualification" element={<QualificationForm />} />
-        <Route path="/profileSetup" element={<ProfileSetup />} />
+        <Route
+          path="/qualification"
+          element={
+            !userInfo ? <Navigate replace to="/login" /> : <QualificationForm />
+          }
+        />
+        <Route
+          path="/profileSetup"
+          element={
+            !userInfo ? <Navigate replace to="/login" /> : <ProfileSetup />
+          }
+        />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />

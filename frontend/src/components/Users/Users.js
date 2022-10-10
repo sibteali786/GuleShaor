@@ -64,7 +64,7 @@ const Users = ({ mentor }) => {
       <div className="skills">
         <h6>Skills</h6>
         <ul>
-          {mentor.about.skills.slice(0, 3).map((skill, idx) => (
+          {mentor.mentorDetails.technical.slice(0, 5).map((skill, idx) => (
             <li className="py-1 px-2 mx-1 mb-2 rounded-1" key={idx}>
               {skill}
             </li>

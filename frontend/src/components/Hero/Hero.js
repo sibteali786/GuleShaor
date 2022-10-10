@@ -11,7 +11,7 @@ const Hero = () => {
         Providing a demand-driven training system responsive to latest
         industrial trends.
       </p>
-      <Link to="/logSignIn">
+      <Link to="/profile-forms">
         <Button variant="contained">Register</Button>
       </Link>
     </div>

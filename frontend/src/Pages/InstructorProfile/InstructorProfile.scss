@@ -14,7 +14,9 @@
         }
     }
 
-    // padding: 0 2rem;
+    .MuiAccordionSummary-content {
+        margin: 0 0;
+    }
 
     .grids {
         display: grid;
