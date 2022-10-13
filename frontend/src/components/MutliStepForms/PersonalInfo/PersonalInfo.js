@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PersonalInfo.scss";
-import { Row, Col, Form, FormGroup, InputGroup, Nav } from "react-bootstrap";
+import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { useForm } from "react-hook-form";
@@ -9,10 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert } from "@mui/material";
 import { FilePond } from "react-filepond";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserDetails,
-  updateUserDetails,
-} from "../../../actions/userActions";
+import { getUserDetails } from "../../../actions/userActions";
 import axios from "axios";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);

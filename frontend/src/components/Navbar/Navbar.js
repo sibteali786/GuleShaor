@@ -67,6 +67,9 @@ const Navbar = () => {
   });
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
+  const { userUpdatedDetails } = userUpdateDetails;
+  console.log(userUpdatedDetails.image);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
@@ -150,7 +153,12 @@ const Navbar = () => {
                 aria-expanded={open ? "true" : undefined}
               >
                 <img
-                  src={profileImage}
+                  className="rounded-full"
+                  src={
+                    userUpdatedDetails
+                      ? "/" + userUpdatedDetails?.image
+                      : profileImage
+                  }
                   style={{ height: "50px", width: "auto" }}
                   alt="profile pic"
                 />
@@ -262,7 +270,12 @@ const Navbar = () => {
                 style={{ margin: 0 }}
               >
                 <img
-                  src={profileImage}
+                  className="rounded-full"
+                  src={
+                    userUpdatedDetails
+                      ? "/" + userUpdatedDetails?.image
+                      : profileImage
+                  }
                   style={{ height: "50px", width: "auto" }}
                   alt="profile pic"
                 />
