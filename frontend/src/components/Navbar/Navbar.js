@@ -69,7 +69,7 @@ const Navbar = () => {
   const { userInfo } = userLogin;
   const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
   const { userUpdatedDetails } = userUpdateDetails;
-  console.log(userUpdatedDetails.image);
+  console.log(userUpdatedDetails?.image);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
