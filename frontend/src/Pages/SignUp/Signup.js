@@ -138,14 +138,9 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
       nextStep();
     }
   };
-  console.log(errors);
   return (
     <div className="SignUp-container">
-      <div
-        className="container-signup"
-        style={{ width: "50%" }}
-        id="container1"
-      >
+      <div className="container-signup" id="container1">
         <div className="sign-up-container">
           <form className="form-signup" onSubmit={handleSubmit(submitHandler)}>
             <h1>Create Account</h1>
@@ -282,8 +277,8 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
               onClick={() => {
                 setValue("name", name, { shouldTouch: true });
-                setValue("name", email, { shouldTouch: true });
-                setValue("name", password, { shouldTouch: true });
+                setValue("email", email, { shouldTouch: true });
+                setValue("password", password, { shouldTouch: true });
               }}
             >
               Sign Up

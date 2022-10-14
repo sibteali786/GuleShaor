@@ -157,6 +157,8 @@ const Navbar = () => {
                   src={
                     userUpdatedDetails
                       ? "/" + userUpdatedDetails?.image
+                      : userInfo?.image
+                      ? "/" + userInfo?.image
                       : profileImage
                   }
                   style={{ height: "50px", width: "auto" }}
@@ -274,6 +276,8 @@ const Navbar = () => {
                   src={
                     userUpdatedDetails
                       ? "/" + userUpdatedDetails?.image
+                      : userInfo?.image
+                      ? "/" + userInfo?.image
                       : profileImage
                   }
                   style={{ height: "50px", width: "auto" }}
