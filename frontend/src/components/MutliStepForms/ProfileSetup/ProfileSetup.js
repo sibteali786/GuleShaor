@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, FormGroup, Form, Nav } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -66,27 +66,17 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   // Form Submission
   const submitHandler = (data) => {
     // TODO: add submit handler
-    if (data) {
-      setUserDetails({
-        ...UserDetails,
-        mentorDetails: {
-          ...UserDetails?.mentorDetails,
-          technical: data?.technical.split(","),
-          interpersonal: data?.interpersonal.split(","),
-          portfolioLink: data?.portfolioLink,
-        },
-        introVideo: {
-          video: data?.videoLink,
-        },
-      });
-    }
-    try {
-      dispatch(updateUserDetails(UserDetails));
-      nextStep();
-    } catch (error) {
-      console.log(error.message);
+
+    if (UserDetails?.mentorDetails?.technical?.length > 0) {
+      try {
+        dispatch(updateUserDetails(UserDetails));
+        nextStep();
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
+
   return (
     <Form
       onSubmit={handleSubmit(submitHandler)}

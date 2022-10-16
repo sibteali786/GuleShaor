@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PersonalInfo.scss";
-import { Row, Col, Form, FormGroup, InputGroup, Nav } from "react-bootstrap";
+import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { useForm } from "react-hook-form";
@@ -9,11 +9,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert } from "@mui/material";
 import { FilePond } from "react-filepond";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getUserDetails,
-  updateUserDetails,
-} from "../../../actions/userActions";
+import { getUserDetails } from "../../../actions/userActions";
 import axios from "axios";
+import SnakBar from "../../SnakBar/SnakBar";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
@@ -202,6 +200,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     register,
     handleSubmit,
     setValue,
+    setFocus,
     formState: { touchedFields, errors },
     watch,
   } = form;
@@ -239,9 +238,21 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     setImageFile(loadedImage);
   };
   // steps state
-  const [step, setStep] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const submitHandler = async (data) => {
     // TODO: add submit handler
+
     UserDetails = {
       name: data?.name,
       email: data?.email,
@@ -290,551 +301,594 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     if (!user?.name) {
       dispatch(getUserDetails("profile"));
     } else {
-      setValue("name", user.name);
-      setValue("email", user.email);
-      setValue("mobile", user.mobile);
-      setValue("whatsApp", user.whatsapp);
-      setValue("about", user.about);
-      setValue("userName", user.username);
-      setValue("facebook", user.facebook);
-      setValue("twitter", user.twitter);
-      setValue("instagram", user.instagram);
-      setValue("medium", user.medium);
-      setValue("linkedIn", user.linkedin);
-      setValue("github", user.github);
-      setValue("behance", user.behance);
-      setValue("dribble", user.dribble);
-      setValue("devto", user.devto);
+      if (UserDetails?.mentorDetails?.username && UserDetails?.about) {
+        setValue("name", UserDetails.name);
+        setValue("email", UserDetails.email);
+        setValue("mobile", UserDetails?.about?.contact?.mobile);
+        setValue("whatsApp", UserDetails?.about?.contact?.mobile);
+        setValue("about", UserDetails?.about?.details);
+        setValue("userName", UserDetails?.mentorDetails?.username);
+        setValue("facebook", UserDetails?.about?.socialMedia?.facebook);
+        setValue("twitter", UserDetails?.about?.socialMedia?.twitter);
+        setValue("instagram", UserDetails?.about?.socialMedia?.instagram);
+        setValue("medium", UserDetails?.about?.socialMedia?.medium);
+        setValue("linkedIn", UserDetails?.about?.socialMedia?.linkedin);
+        setValue("github", UserDetails?.about?.socialMedia?.github);
+        setValue("behance", UserDetails?.about?.socialMedia?.behance);
+        setValue("dribble", UserDetails?.about?.socialMedia?.dribble);
+        setValue("devto", UserDetails?.about?.socialMedia?.devto);
+      } else if (
+        user?.username &&
+        user?.about &&
+        user?.mobile &&
+        user?.whatsapp
+      ) {
+        setValue("name", user.name);
+        setValue("email", user.email);
+        setValue("mobile", user.mobile);
+        setValue("whatsApp", user.whatsapp);
+        setValue("about", user.about);
+        setValue("userName", user.username);
+        setValue("facebook", user.facebook);
+        setValue("twitter", user.twitter);
+        setValue("instagram", user.instagram);
+        setValue("medium", user.medium);
+        setValue("linkedIn", user.linkedin);
+        setValue("github", user.github);
+        setValue("behance", user.behance);
+        setValue("dribble", user.dribble);
+        setValue("devto", user.devto);
+      }
     }
-  }, [dispatch, userInfo, user, setUserDetails, setValue]);
 
+    if (Object.keys(errors).length !== 0) {
+      handleClick();
+    }
+    if (errors.image) {
+      scroll();
+    }
+  }, [dispatch, userInfo, user, setUserDetails, setValue, UserDetails, errors]);
+  const scroll = () => {
+    const section = document.querySelector("#imageFile");
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   return (
-    <Row className="py-1 px-0 back">
-      <Col>
-        <Row>
-          <Col className="mb-3">
-            <Card className="card-settings">
-              <Card.Body>
-                <div className="e-profile">
-                  <Form onSubmit={handleSubmit(submitHandler)}>
-                    <Row>
-                      <Col xs={12} className="mb-3 ">
-                        <div>
-                          <FilePond
-                            {...register("image", { required: true })}
-                            files={files}
-                            onupdatefiles={onFilesUpdate}
-                            imagePreviewHeight={170}
-                            imageCropAspectRatio="1:1"
-                            imageResizeTargetWidth={200}
-                            imageResizeTargetHeight={200}
-                            stylePanelLayout="compact circle"
-                            styleLoadIndicatorPosition="center bottom"
-                            styleButtonRemoveItemPosition="center bottom"
-                            styleProgressIndicatorPosition="right bottom"
-                            styleButtonProcessItemPosition="right bottom"
-                            allowMultiple={false}
-                            maxFiles={1}
-                            maxFileSize="1MB"
-                            name="image"
-                            credits={false}
-                            allowFileTypeValidation={true}
-                            allowFileSizeValidation={true}
-                            minFileSize="1MB"
-                            acceptedFileTypes={["image/*"]}
-                            labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                            className="filepond--root filepond--panel-root"
-                            server={{
-                              process: (fieldName, file, metadata, load) => {
-                                const formData = new FormData();
-                                formData.append(fieldName, file, file.name);
+    <>
+      <SnakBar
+        open={open}
+        handleClose={handleClose}
+        typeOfAlert="error"
+        message="Submission Error"
+      />
+      <Row className="py-1 px-0 back">
+        <Col>
+          <Row>
+            <Col className="mb-3">
+              <Card className="card-settings">
+                <Card.Body>
+                  <div className="e-profile">
+                    <Form onSubmit={handleSubmit(submitHandler)}>
+                      <Row>
+                        <Col xs={12} className="mb-3 ">
+                          <div>
+                            <FilePond
+                              {...register("image", { required: true })}
+                              id="imageFile"
+                              files={files}
+                              onupdatefiles={onFilesUpdate}
+                              imagePreviewHeight={170}
+                              imageCropAspectRatio="1:1"
+                              imageResizeTargetWidth={200}
+                              imageResizeTargetHeight={200}
+                              stylePanelLayout="compact circle"
+                              styleLoadIndicatorPosition="center bottom"
+                              styleButtonRemoveItemPosition="center bottom"
+                              styleProgressIndicatorPosition="right bottom"
+                              styleButtonProcessItemPosition="right bottom"
+                              allowMultiple={false}
+                              maxFiles={1}
+                              maxFileSize="1MB"
+                              name="image"
+                              credits={false}
+                              allowFileTypeValidation={true}
+                              allowFileSizeValidation={true}
+                              minFileSize="1MB"
+                              acceptedFileTypes={["image/*"]}
+                              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                              className="filepond--root filepond--panel-root"
+                              server={{
+                                process: (fieldName, file, metadata, load) => {
+                                  const formData = new FormData();
+                                  formData.append(fieldName, file, file.name);
 
-                                axios
-                                  .post(
-                                    `${process.env.REACT_APP_API_URL}api/upload`,
-                                    formData
-                                  )
-                                  .then((response) => {
-                                    load(JSON.stringify(response.data));
-                                    setValue("image", response?.data, {
-                                      shouldTouch: true,
-                                      shouldValidate: true,
-                                      shouldDirty: true,
+                                  axios
+                                    .post(
+                                      `${process.env.REACT_APP_API_URL}api/upload`,
+                                      formData
+                                    )
+                                    .then((response) => {
+                                      load(JSON.stringify(response.data));
+                                      setValue("image", response?.data, {
+                                        shouldTouch: true,
+                                        shouldValidate: true,
+                                        shouldDirty: true,
+                                      });
+                                    })
+                                    .catch((error) => {
+                                      console.log(error);
                                     });
-                                  })
-                                  .catch((error) => {
-                                    console.log(error);
-                                  });
-                              },
-                            }}
-                          />
-                          <small className="form-text text-muted">
-                            For e.g : Your selfie or passport sized picture etc
+                                },
+                              }}
+                            />
+                            <small className="form-text text-muted">
+                              For e.g : Your selfie or passport sized picture
+                              etc
+                            </small>
+                            {errors.image && (
+                              <div className="my-2">
+                                <Alert
+                                  severity="error"
+                                  variant="outlined"
+                                  className="py-0 border-0"
+                                  style={{ fontSize: "0.8rem" }}
+                                >
+                                  {errors.image.message}
+                                </Alert>
+                              </div>
+                            )}
+                          </div>
+                          {
+                            // TODO: data from backend for given user would go here
+                          }
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col xs={12} sm={6}>
+                          <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
+                            {name}
+                          </h4>
+                          <p className="mb-0">{userName}</p>
+                        </Col>
+                        <Col
+                          xs={12}
+                          sm={6}
+                          className="text-end text-sm-right pt-sm-2"
+                        >
+                          <small className="text-muted fw-bold">
+                            Joined 09 Dec 2017
                           </small>
-                          {errors.image && (
-                            <div className="my-2">
-                              <Alert
-                                severity="error"
-                                variant="outlined"
-                                className="py-0 border-0"
-                                style={{ fontSize: "0.8rem" }}
-                              >
-                                {errors.image.message}
-                              </Alert>
-                            </div>
-                          )}
-                        </div>
-                        {
-                          // TODO: data from backend for given user would go here
-                        }
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={12} sm={6}>
-                        <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
-                          {name}
-                        </h4>
-                        <p className="mb-0">{userName}</p>
-                      </Col>
-                      <Col
-                        xs={12}
-                        sm={6}
-                        className="text-end text-sm-right pt-sm-2"
-                      >
-                        <small className="text-muted fw-bold">
-                          Joined 09 Dec 2017
-                        </small>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Row>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Full Name</Form.Label>
-                              <Form.Control
-                                {...register("name", { required: true })}
-                                name="name"
-                                placeholder="John Smith"
-                              />
-                              {touchedFields.name && errors.name && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.name.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Username</Form.Label>
-                              <InputGroup>
-                                <InputGroup.Text id="basic-addon1">
-                                  @
-                                </InputGroup.Text>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Full Name</Form.Label>
                                 <Form.Control
-                                  {...register("userName", {
-                                    required: true,
-                                  })}
-                                  name="userName"
-                                  placeholder="johnny.s"
+                                  {...register("name", { required: true })}
+                                  name="name"
+                                  placeholder="John Smith"
                                 />
-                              </InputGroup>
-                              {touchedFields.userName && errors.userName && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.userName.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col>
-                            <FormGroup>
-                              <Form.Label>Email</Form.Label>
-                              <Form.Control
-                                {...register("email", { required: true })}
-                                name="email"
-                                placeholder="user@example.com"
-                              ></Form.Control>
-                              {touchedFields.email && errors.email && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.email.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col className="mb-3">
-                            <FormGroup>
-                              <Form.Label>About</Form.Label>
-                              <Form.Control
-                                {...register("about", { required: true })}
-                                as="textarea"
-                                rows="5"
-                                placeholder="My Bio"
-                                name="about"
-                              ></Form.Control>
-                              {touchedFields.about && errors.about && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.about.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={12} className="mb-3">
-                        <div className="mb-2">
-                          <b>Contact</b>
-                        </div>
-                        <Row>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Mobile No</Form.Label>
-                              <Form.Control
-                                {...register("mobile", { required: true })}
-                                placeholder="+92-312...."
-                                name="mobile"
-                              />
-                              {touchedFields.mobile && errors.mobile && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.mobile.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>WhatsApp No</Form.Label>
-                              <Form.Control
-                                {...register("whatsApp", { required: true })}
-                                placeholder="+92-312...."
-                                name="whatsApp"
-                              />
-                              {touchedFields.whatsApp && errors.whatsApp && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.whatsApp.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col xs={12} className="mb-3">
-                        <div className="mb-2 form-text tex-muted d-flex flex-column">
-                          <b>Social Media</b>
-                          <small>
-                            *All the fields are optional, leave them empty if
-                            they are not applicable for you
-                          </small>
-                        </div>
-                        <Row>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Facebook</Form.Label>
-                              <Form.Control
-                                {...register("facebook")}
-                                placeholder="https://www.facebook/Ali786"
-                                name="facebook"
-                              />
-                              {touchedFields.facebook && errors.facebook && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.facebook.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>LinkedIn</Form.Label>
-                              <Form.Control
-                                {...register("linkedIn")}
-                                placeholder="https://www.linekdin/Ali786"
-                                name="linkedIn"
-                              />
-                              {touchedFields.linkedIn && errors.linkedIn && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.linkedIn.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Dev To</Form.Label>
-                              <Form.Control
-                                {...register("devto")}
-                                placeholder="https://www.devto/ali786"
-                                name="devto"
-                              />
-                              {touchedFields.devto && errors.devto && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.devto.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col>
-                            <FormGroup>
-                              <Form.Label>Medium</Form.Label>
-                              <Form.Control
-                                {...register("medium")}
-                                placeholder="https://www.medium/Ali786"
-                                name="medium"
-                              />
-                              {touchedFields.medium && errors.medium && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.medium.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col>
-                            <FormGroup>
-                              <Form.Label>Behance</Form.Label>
-                              <Form.Control
-                                {...register("behance")}
-                                placeholder="https://www.behance/Ali786"
-                                name="behance"
-                              />
-                              {touchedFields.behance && errors.behance && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.behance.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Dribble</Form.Label>
-                              <Form.Control
-                                {...register("dribble")}
-                                placeholder="https://www.dribble/Ali786"
-                                name="dribble"
-                              />
-                              {touchedFields.dribble && errors.dribble && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.dribble.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Github</Form.Label>
-                              <Form.Control
-                                {...register("github")}
-                                placeholder="https://www.github/Ali786"
-                                name="github"
-                              />
-                              {touchedFields.github && errors.github && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.github.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                          <Col xs={12} sm={6}>
-                            <FormGroup>
-                              <Form.Label>Instagram</Form.Label>
-                              <Form.Control
-                                {...register("instagram")}
-                                placeholder="https://www.Instagram/Ali786"
-                                name="instagram"
-                              />
-                              {touchedFields.instagram && errors.instagram && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.instagram.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </Col>
-                      <Col xs={12} sm={6}>
-                        <Row>
-                          <Col>
-                            <FormGroup>
-                              <Form.Label>Twitter</Form.Label>
-                              <Form.Control
-                                {...register("twitter")}
-                                placeholder="https://www.twitter/Ali786"
-                                name="twitter"
-                              />
-                              {touchedFields.twitter && errors.twitter && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.twitter.message}
-                                  </Alert>
-                                </div>
-                              )}
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                    <div className="col d-flex justify-content-end mt-5">
-                      <button
-                        className="py-1 px-3 bg-gradient bg-dark rounded-1"
-                        onClick={() => prevStep()}
-                      >
-                        Previous
-                      </button>
-                      <SubmitButton
-                        variant="outlined"
-                        type="submit"
-                        onClick={() => {
-                          setValue("name", name, { shouldTouch: true });
-                          setValue("email", email, { shouldTouch: true });
-                          setValue("userName", userName, {
-                            shouldTouch: true,
-                          });
-                          setValue("about", about, {
-                            shouldTouch: true,
-                          });
-                          setValue("mobile", mobile, { shouldTouch: true });
-                          setValue("whatsApp", whatsApp, {
-                            shouldTouch: true,
-                          });
-                          setValue("twitter", twitter, {
-                            shouldTouch: true,
-                          });
-                          setValue("medium", medium, {
-                            shouldTouch: true,
-                          });
-                          setValue("facebook", facebook, {
-                            shouldTouch: true,
-                          });
-                          setValue("instagram", instagram, {
-                            shouldTouch: true,
-                          });
-                          setValue("linkedIn", linkedIn, {
-                            shouldTouch: true,
-                          });
-                          setValue("devto", devto, {
-                            shouldTouch: true,
-                          });
-                          setValue("dribble", dribble, {
-                            shouldTouch: true,
-                          });
-                          setValue("behance", behance, {
-                            shouldTouch: true,
-                          });
-                          setValue("github", github, {
-                            shouldTouch: true,
-                          });
-                        }}
-                      >
-                        Submit
-                      </SubmitButton>
-                    </div>
-                  </Form>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+                                {touchedFields.name && errors.name && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.name.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Username</Form.Label>
+                                <InputGroup>
+                                  <InputGroup.Text id="basic-addon1">
+                                    @
+                                  </InputGroup.Text>
+                                  <Form.Control
+                                    {...register("userName", {
+                                      required: true,
+                                    })}
+                                    name="userName"
+                                    placeholder="johnny.s"
+                                  />
+                                </InputGroup>
+                                {touchedFields.userName && errors.userName && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.userName.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                  {...register("email", { required: true })}
+                                  name="email"
+                                  placeholder="user@example.com"
+                                ></Form.Control>
+                                {touchedFields.email && errors.email && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.email.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col className="mb-3">
+                              <FormGroup>
+                                <Form.Label>About</Form.Label>
+                                <Form.Control
+                                  {...register("about", { required: true })}
+                                  as="textarea"
+                                  rows="5"
+                                  placeholder="My Bio"
+                                  name="about"
+                                ></Form.Control>
+                                {touchedFields.about && errors.about && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.about.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col xs={12} className="mb-3">
+                          <div className="mb-2">
+                            <b>Contact</b>
+                          </div>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Mobile No</Form.Label>
+                                <Form.Control
+                                  {...register("mobile", { required: true })}
+                                  placeholder="+92-312...."
+                                  name="mobile"
+                                />
+                                {touchedFields.mobile && errors.mobile && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.mobile.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>WhatsApp No</Form.Label>
+                                <Form.Control
+                                  {...register("whatsApp", { required: true })}
+                                  placeholder="+92-312...."
+                                  name="whatsApp"
+                                />
+                                {touchedFields.whatsApp && errors.whatsApp && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.whatsApp.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col xs={12} className="mb-3">
+                          <div className="mb-2 form-text tex-muted d-flex flex-column">
+                            <b>Social Media</b>
+                            <small>
+                              *All the fields are optional, leave them empty if
+                              they are not applicable for you
+                            </small>
+                          </div>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Facebook</Form.Label>
+                                <Form.Control
+                                  {...register("facebook")}
+                                  placeholder="https://www.facebook/Ali786"
+                                  name="facebook"
+                                />
+                                {touchedFields.facebook && errors.facebook && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.facebook.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>LinkedIn</Form.Label>
+                                <Form.Control
+                                  {...register("linkedIn")}
+                                  placeholder="https://www.linekdin/Ali786"
+                                  name="linkedIn"
+                                />
+                                {touchedFields.linkedIn && errors.linkedIn && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.linkedIn.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Dev To</Form.Label>
+                                <Form.Control
+                                  {...register("devto")}
+                                  placeholder="https://www.devto/ali786"
+                                  name="devto"
+                                />
+                                {touchedFields.devto && errors.devto && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.devto.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Medium</Form.Label>
+                                <Form.Control
+                                  {...register("medium")}
+                                  placeholder="https://www.medium/Ali786"
+                                  name="medium"
+                                />
+                                {touchedFields.medium && errors.medium && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.medium.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Behance</Form.Label>
+                                <Form.Control
+                                  {...register("behance")}
+                                  placeholder="https://www.behance/Ali786"
+                                  name="behance"
+                                />
+                                {touchedFields.behance && errors.behance && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.behance.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Dribble</Form.Label>
+                                <Form.Control
+                                  {...register("dribble")}
+                                  placeholder="https://www.dribble/Ali786"
+                                  name="dribble"
+                                />
+                                {touchedFields.dribble && errors.dribble && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.dribble.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Github</Form.Label>
+                                <Form.Control
+                                  {...register("github")}
+                                  placeholder="https://www.github/Ali786"
+                                  name="github"
+                                />
+                                {touchedFields.github && errors.github && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.github.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Instagram</Form.Label>
+                                <Form.Control
+                                  {...register("instagram")}
+                                  placeholder="https://www.Instagram/Ali786"
+                                  name="instagram"
+                                />
+                                {touchedFields.instagram && errors.instagram && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.instagram.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col xs={12} sm={6}>
+                          <Row>
+                            <Col>
+                              <FormGroup>
+                                <Form.Label>Twitter</Form.Label>
+                                <Form.Control
+                                  {...register("twitter")}
+                                  placeholder="https://www.twitter/Ali786"
+                                  name="twitter"
+                                />
+                                {touchedFields.twitter && errors.twitter && (
+                                  <div className="my-2">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.twitter.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <div className="col d-flex justify-content-end mt-5">
+                        <button
+                          className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                          onClick={() => prevStep()}
+                        >
+                          Previous
+                        </button>
+                        <SubmitButton
+                          variant="outlined"
+                          type="submit"
+                          onClick={() => {
+                            setValue("name", name, { shouldTouch: true });
+                            setValue("email", email, { shouldTouch: true });
+                            setValue("userName", userName, {
+                              shouldTouch: true,
+                            });
+                            setValue("about", about, {
+                              shouldTouch: true,
+                            });
+                            setValue("mobile", mobile, { shouldTouch: true });
+                            setValue("whatsApp", whatsApp, {
+                              shouldTouch: true,
+                            });
+                            setValue("twitter", twitter, {
+                              shouldTouch: true,
+                            });
+                            setValue("medium", medium, {
+                              shouldTouch: true,
+                            });
+                            setValue("facebook", facebook, {
+                              shouldTouch: true,
+                            });
+                            setValue("instagram", instagram, {
+                              shouldTouch: true,
+                            });
+                            setValue("linkedIn", linkedIn, {
+                              shouldTouch: true,
+                            });
+                            setValue("devto", devto, {
+                              shouldTouch: true,
+                            });
+                            setValue("dribble", dribble, {
+                              shouldTouch: true,
+                            });
+                            setValue("behance", behance, {
+                              shouldTouch: true,
+                            });
+                            setValue("github", github, {
+                              shouldTouch: true,
+                            });
+                          }}
+                        >
+                          Submit
+                        </SubmitButton>
+                      </div>
+                    </Form>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </>
   );
 };
 

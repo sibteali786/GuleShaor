@@ -5,15 +5,14 @@
 .logInSignIn-container {
 	background-color: #fff;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
 	font-family: 'Montserrat', sans-serif;
 	margin: 0;
-	padding-top: 5rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
-	height: 100vh;
+	background-color: transparent;
 
 	h1 {
 		font-size: 1.5rem;
@@ -62,31 +61,6 @@
 		margin: 0.5rem 0;
 	}
 
-	.selectArea {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-
-		@media (min-width:400px) {
-			flex-direction: row;
-		}
-	}
-
-	input {
-		background-color: #eee;
-		border: none;
-		padding: 12px 15px;
-		margin: 8px 0;
-		width: 100%;
-		max-width: 300px;
-	}
-
-	select {
-		border: none;
-		padding: 0.7rem 0.7rem;
-		background-color: #eee;
-		border-radius: 0.4rem;
-	}
 
 }
 

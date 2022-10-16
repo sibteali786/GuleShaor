@@ -18,7 +18,6 @@ const authUser = asyncHandler(async (req, res) => {
   } else {
     user = await Student.findOne({ email });
   }
-
   // if user exists then we have to match email and pass ( which is plain while the one in db is encrypted )
   if (user && (await user.matchPassword(password))) {
     if (userType === "mentor") {
@@ -200,7 +199,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if (req.body?.password) {
       user.password = req.body?.password;
     }
-    console.log(req.body);
     if (userType === "mentor") {
       user.mentorDetails = req.body?.mentorDetails || user?.mentorDetails;
       user.introVideo = req.body?.introVideo || user?.introVideo;
@@ -224,7 +222,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save();
-
     if (userType === "mentor") {
       res.json({
         _id: updatedUser._id,
