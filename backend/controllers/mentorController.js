@@ -5,7 +5,31 @@ const asyncHandler = require("express-async-handler");
 // @route   GET /api/mentors
 // @access  Public
 const getMentors = asyncHandler(async (req, res) => {
-  const mentors = await Mentor.find({}); // gets all the mentors from the database
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: "i",
+        },
+      }
+    : {};
+  // const mentors = await Mentor.find({ ...keyword }); // gets all the mentors from the database
+  const mentors = await Mentor.aggregate([
+    {
+      $unwind: "$mentorDetails",
+    },
+    {
+      $unwind: "$mentorDetails.designation",
+    },
+    {
+      $match: {
+        "mentorDetails.designation": {
+          $regex: req.query.keyword.trim(),
+          $options: "i",
+        },
+      },
+    },
+  ]);
   res.json(mentors);
 });
 

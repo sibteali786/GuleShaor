@@ -37,6 +37,8 @@ import MultiStepForm from "./components/MutliStepForms/MultiStepForm";
 import PersonalInfo from "./components/MutliStepForms/PersonalInfo/PersonalInfo";
 import QualificationForm from "./components/MutliStepForms/Qualification/QualificationForm";
 import ProfileSetup from "./components/MutliStepForms/ProfileSetup/ProfileSetup";
+import SearchBox from "./components/SearchBox/SearchBox";
+import Users from "./components/Users/Users";
 
 // Register the plugins
 registerPlugin(
@@ -48,7 +50,6 @@ registerPlugin(
 );
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   const location = useLocation();
   return (
     <div className="App">
@@ -68,30 +69,13 @@ function App() {
         <Route path="/students" element={<Students />} />
         <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
+        <Route path="/mentors/search/:keyword" element={<Mentors />} />
         <Route
           path="/mentors/:id"
           className="px-[4rem]"
           element={<InstructorProfile />}
         />
         <Route path="profile-forms" element={<MultiStepForm />} />
-        <Route
-          path="/personalinfo"
-          element={
-            !userInfo ? <Navigate replace to="/login" /> : <PersonalInfo />
-          }
-        />
-        <Route
-          path="/qualification"
-          element={
-            !userInfo ? <Navigate replace to="/login" /> : <QualificationForm />
-          }
-        />
-        <Route
-          path="/profileSetup"
-          element={
-            !userInfo ? <Navigate replace to="/login" /> : <ProfileSetup />
-          }
-        />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />
