@@ -93,7 +93,7 @@ const Navbar = () => {
     setAnchorEl(null);
   };
   return (
-    <div className="navContainer px-[4rem] py-1" id="navbar">
+    <div className="navContainer px-[4rem] py-2" id="navbar">
       <Link to="/">
         <Logo className="logo" />
       </Link>
@@ -151,6 +151,7 @@ const Navbar = () => {
                 aria-controls={open ? "account-menu" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
+                className="p-0"
               >
                 <img
                   className="rounded-full"
@@ -161,7 +162,7 @@ const Navbar = () => {
                       ? "/" + userInfo?.image
                       : profileImage
                   }
-                  style={{ height: "50px", width: "auto" }}
+                  style={{ height: "40px", width: "auto" }}
                   alt="profile pic"
                 />
               </IconButton>

@@ -251,6 +251,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               {...registerHook("userType", { required: true })}
               name="userType"
               value={userType}
+              size="sm"
             >
               <option value="mentor">Mentor</option>
               <option value="student">Student</option>

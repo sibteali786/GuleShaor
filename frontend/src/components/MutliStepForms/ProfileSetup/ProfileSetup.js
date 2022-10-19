@@ -80,8 +80,8 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
       ...UserDetails,
       mentorDetails: {
         ...UserDetails.mentorDetails,
-        technical: data?.technical,
-        interpersonal: data?.interpersonal,
+        technical: data?.technical.split(","),
+        interpersonal: data?.interpersonal.split(","),
         portfolioLink: data?.portfolioLink,
       },
       introVideo: {

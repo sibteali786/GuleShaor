@@ -110,7 +110,6 @@ const mentorSchema = new mongoose.Schema(
       },
       contact: {
         mobile: { type: String, default: "" },
-        whatsapp: { type: String, default: "" },
       },
       socialMedia: {
         facebook: { type: String, default: "" },
