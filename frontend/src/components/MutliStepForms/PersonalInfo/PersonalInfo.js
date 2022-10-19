@@ -318,26 +318,27 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         setValue("dribble", UserDetails?.about?.socialMedia?.dribble);
         setValue("devto", UserDetails?.about?.socialMedia?.devto);
       } else if (
-        user?.username &&
-        user?.about &&
-        user?.mobile &&
-        user?.whatsapp
+        user?.name ||
+        user?.about?.username ||
+        user?.about?.details ||
+        user?.about?.contact?.mobile ||
+        user?.about?.contact?.whatsapp
       ) {
-        setValue("name", user.name);
-        setValue("email", user.email);
-        setValue("mobile", user.mobile);
-        setValue("whatsApp", user.whatsapp);
-        setValue("about", user.about);
-        setValue("userName", user.username);
-        setValue("facebook", user.facebook);
-        setValue("twitter", user.twitter);
-        setValue("instagram", user.instagram);
-        setValue("medium", user.medium);
-        setValue("linkedIn", user.linkedin);
-        setValue("github", user.github);
-        setValue("behance", user.behance);
-        setValue("dribble", user.dribble);
-        setValue("devto", user.devto);
+        setValue("name", user?.name);
+        setValue("email", user?.email);
+        setValue("mobile", user?.about?.contact?.mobile);
+        setValue("whatsApp", user?.about?.contact?.whatsapp);
+        setValue("about", user?.about?.details);
+        setValue("userName", user?.mentorDetails?.username);
+        setValue("facebook", user?.about?.socialMedia?.facebook);
+        setValue("twitter", user?.about?.socialMedia?.twitter);
+        setValue("instagram", user?.about?.socialMedia?.instagram);
+        setValue("medium", user?.about?.socialMedia?.medium);
+        setValue("linkedIn", user?.about?.socialMedia?.linkedin);
+        setValue("github", user?.about?.socialMedia?.github);
+        setValue("behance", user?.about?.socialMedia?.behance);
+        setValue("dribble", user?.about?.socialMedia?.dribble);
+        setValue("devto", user?.about?.socialMedia?.devto);
       }
     }
 

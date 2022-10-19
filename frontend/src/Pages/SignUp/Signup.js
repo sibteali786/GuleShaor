@@ -139,7 +139,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
     }
   };
   return (
-    <div className="SignUp-container">
+    <div className="SignUp-container w-full">
       <div className="container-signup" id="container1">
         <div className="sign-up-container">
           <form className="form-signup" onSubmit={handleSubmit(submitHandler)}>
@@ -160,7 +160,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
             <Typography variant="body1">
               or use your email for registration
             </Typography>
-            <FormGroup className="my-2">
+            <FormGroup className="w-full ">
               <Form.Label className="w-full text-left">Name</Form.Label>
               <Form.Control
                 {...registerHook("name", { required: true })}
@@ -169,7 +169,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 value={name}
               />
               {touchedFields.name && errors.name && (
-                <div className="my-2">
+                <div className="w-full ">
                   <Alert
                     severity="error"
                     variant="outlined"
@@ -180,7 +180,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 </div>
               )}
             </FormGroup>
-            <FormGroup className="my-2">
+            <FormGroup className="w-full ">
               <Form.Label className="w-full text-left">Email</Form.Label>
 
               <Form.Control
@@ -190,7 +190,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 value={email}
               />
               {touchedFields.email && errors.email && (
-                <div className="my-2">
+                <div className="w-full ">
                   <Alert
                     severity="error"
                     variant="outlined"
@@ -201,7 +201,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 </div>
               )}
             </FormGroup>
-            <FormGroup className="my-2">
+            <FormGroup className="w-full ">
               <Form.Label className="w-full text-left">Password</Form.Label>
 
               <Form.Control
@@ -211,7 +211,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 value={password}
               />
               {touchedFields.password && errors.password && (
-                <div className="my-2">
+                <div className="w-full ">
                   <Alert
                     severity="error"
                     variant="outlined"
@@ -222,7 +222,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 </div>
               )}
             </FormGroup>
-            <FormGroup className="my-2">
+            <FormGroup className="w-full ">
               <Form.Label className="w-full text-left">
                 Confirm Password
               </Form.Label>
@@ -234,7 +234,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 value={confirmPassword}
               />
               {touchedFields.confirmPassword && errors.confirmPassword && (
-                <div className="my-2">
+                <div className="w-full ">
                   <Alert
                     severity="error"
                     variant="outlined"
@@ -245,30 +245,27 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 </div>
               )}
             </FormGroup>
-            <div className="selectArea">
-              <Typography variant="body1" style={{ margin: "0.6rem" }}>
-                Choose user type
-              </Typography>
-              <select
-                {...registerHook("userType", { required: true })}
-                name="userType"
-                value={userType}
-              >
-                <option value="mentor">Mentor</option>
-                <option value="student">Student</option>
-              </select>
-              {touchedFields.userType && errors.userType && (
-                <div className="my-2">
-                  <Alert
-                    severity="error"
-                    variant="outlined"
-                    className="py-0 border-0"
-                  >
-                    {errors.userType.message}
-                  </Alert>
-                </div>
-              )}
-            </div>
+            <Form.Label>Choose Your User Type</Form.Label>
+            <Form.Select
+              aria-label="Mentor"
+              {...registerHook("userType", { required: true })}
+              name="userType"
+              value={userType}
+            >
+              <option value="mentor">Mentor</option>
+              <option value="student">Student</option>
+            </Form.Select>
+            {touchedFields.userType && errors.userType && (
+              <div className="w-full ">
+                <Alert
+                  severity="error"
+                  variant="outlined"
+                  className="py-0 border-0"
+                >
+                  {errors.userType.message}
+                </Alert>
+              </div>
+            )}
             <a href="#">Forgot your password?</a>
             <SubmitButton
               type="submit"
