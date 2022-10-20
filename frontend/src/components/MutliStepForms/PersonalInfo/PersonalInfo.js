@@ -21,9 +21,14 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       name: yup
         .string()
         .required("First Name is required")
-        .min(3, "Must be less than 3 characters")
+        .min(3, "Must be greater than 3 characters")
         .max(20, "Must be less than 20 characters"),
       email: yup.string().email().required("Email is required"),
+      designation: yup
+        .string()
+        .required("Designation is required")
+        .min("3", "Must be greater than 3 characters")
+        .max("30", "Must be less than 30 characters"),
       mobile: yup
         .string()
         .trim()
@@ -47,14 +52,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         .string()
         .required("About is required")
         .min(5, "Must be at least 30 characters"),
-      whatsApp: yup
-        .string()
-        .trim()
-        .required("Required")
-        .matches(
-          /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$/,
-          "Format is not correct"
-        ),
       twitter: yup
         .string()
         .trim()
@@ -177,10 +174,10 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     defaultValues: {
       name: "",
       email: "",
+      designation: "",
       userName: "",
       image: null,
       mobile: "",
-      whatsApp: "",
       about: "",
       twitter: "",
       facebook: "",
@@ -208,10 +205,10 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const name = watch("name", "");
   const about = watch("about", "");
   const email = watch("email", "");
+  const designation = watch("designation", "");
   const image = watch("image", null);
   const userName = watch("userName", "");
   const mobile = watch("mobile", "");
-  const whatsApp = watch("whatsApp", "");
   const twitter = watch("twitter", "");
   const facebook = watch("facebook", "");
   const instagram = watch("instagram", "");
@@ -260,12 +257,12 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         userType: "mentor",
         username: userName,
         image: data?.image?.path.substring(16, data?.image?.path.length),
+        designation: data?.designation,
       },
       about: {
         details: data?.about,
         contact: {
           mobile: data?.mobile,
-          whatsapp: data?.whatsApp,
         },
         socialMedia: {
           twitter: data?.twitter,
@@ -305,7 +302,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         setValue("name", UserDetails.name);
         setValue("email", UserDetails.email);
         setValue("mobile", UserDetails?.about?.contact?.mobile);
-        setValue("whatsApp", UserDetails?.about?.contact?.mobile);
         setValue("about", UserDetails?.about?.details);
         setValue("userName", UserDetails?.mentorDetails?.username);
         setValue("facebook", UserDetails?.about?.socialMedia?.facebook);
@@ -318,26 +314,26 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         setValue("dribble", UserDetails?.about?.socialMedia?.dribble);
         setValue("devto", UserDetails?.about?.socialMedia?.devto);
       } else if (
-        user?.username &&
-        user?.about &&
-        user?.mobile &&
-        user?.whatsapp
+        user?.name ||
+        user?.about?.username ||
+        user?.about?.details ||
+        user?.about?.contact?.mobile ||
+        user?.mentorDetails?.designation
       ) {
-        setValue("name", user.name);
-        setValue("email", user.email);
-        setValue("mobile", user.mobile);
-        setValue("whatsApp", user.whatsapp);
-        setValue("about", user.about);
-        setValue("userName", user.username);
-        setValue("facebook", user.facebook);
-        setValue("twitter", user.twitter);
-        setValue("instagram", user.instagram);
-        setValue("medium", user.medium);
-        setValue("linkedIn", user.linkedin);
-        setValue("github", user.github);
-        setValue("behance", user.behance);
-        setValue("dribble", user.dribble);
-        setValue("devto", user.devto);
+        setValue("name", user?.name);
+        setValue("email", user?.email);
+        setValue("mobile", user?.about?.contact?.mobile);
+        setValue("about", user?.about?.details);
+        setValue("userName", user?.mentorDetails?.username);
+        setValue("facebook", user?.about?.socialMedia?.facebook);
+        setValue("twitter", user?.about?.socialMedia?.twitter);
+        setValue("instagram", user?.about?.socialMedia?.instagram);
+        setValue("medium", user?.about?.socialMedia?.medium);
+        setValue("linkedIn", user?.about?.socialMedia?.linkedin);
+        setValue("github", user?.about?.socialMedia?.github);
+        setValue("behance", user?.about?.socialMedia?.behance);
+        setValue("dribble", user?.about?.socialMedia?.dribble);
+        setValue("devto", user?.about?.socialMedia?.devto);
       }
     }
 
@@ -425,7 +421,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                               etc
                             </small>
                             {errors.image && (
-                              <div className="my-2">
+                              <div className="">
                                 <Alert
                                   severity="error"
                                   variant="outlined"
@@ -471,7 +467,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   placeholder="John Smith"
                                 />
                                 {touchedFields.name && errors.name && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -499,7 +495,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   />
                                 </InputGroup>
                                 {touchedFields.userName && errors.userName && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -513,7 +509,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             </Col>
                           </Row>
                           <Row>
-                            <Col>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
@@ -522,7 +518,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   placeholder="user@example.com"
                                 ></Form.Control>
                                 {touchedFields.email && errors.email && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -533,6 +529,59 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   </div>
                                 )}
                               </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Designation</Form.Label>
+                                <Form.Control
+                                  {...register("designation", {
+                                    required: true,
+                                  })}
+                                  name="designation"
+                                  placeholder="Software Engineer"
+                                ></Form.Control>
+                                {touchedFields.designation &&
+                                  errors.designation && (
+                                    <div className="">
+                                      <Alert
+                                        severity="error"
+                                        variant="outlined"
+                                        className="py-0 border-0"
+                                      >
+                                        {errors.designation.message}
+                                      </Alert>
+                                    </div>
+                                  )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={12} className="mb-3">
+                              <Row>
+                                <Col xs={12} sm={6}>
+                                  <FormGroup>
+                                    <Form.Label>Contact</Form.Label>
+                                    <Form.Control
+                                      {...register("mobile", {
+                                        required: true,
+                                      })}
+                                      placeholder="+92-312...."
+                                      name="mobile"
+                                    />
+                                    {touchedFields.mobile && errors.mobile && (
+                                      <div className="">
+                                        <Alert
+                                          severity="error"
+                                          variant="outlined"
+                                          className="py-0 border-0"
+                                        >
+                                          {errors.mobile.message}
+                                        </Alert>
+                                      </div>
+                                    )}
+                                  </FormGroup>
+                                </Col>
+                              </Row>
                             </Col>
                           </Row>
                           <Row>
@@ -547,7 +596,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="about"
                                 ></Form.Control>
                                 {touchedFields.about && errors.about && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -562,61 +611,13 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                           </Row>
                         </Col>
                       </Row>
+
                       <Row>
                         <Col xs={12} className="mb-3">
-                          <div className="mb-2">
-                            <b>Contact</b>
-                          </div>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Mobile No</Form.Label>
-                                <Form.Control
-                                  {...register("mobile", { required: true })}
-                                  placeholder="+92-312...."
-                                  name="mobile"
-                                />
-                                {touchedFields.mobile && errors.mobile && (
-                                  <div className="my-2">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.mobile.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>WhatsApp No</Form.Label>
-                                <Form.Control
-                                  {...register("whatsApp", { required: true })}
-                                  placeholder="+92-312...."
-                                  name="whatsApp"
-                                />
-                                {touchedFields.whatsApp && errors.whatsApp && (
-                                  <div className="my-2">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.whatsApp.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col xs={12} className="mb-3">
-                          <div className="mb-2 form-text tex-muted d-flex flex-column">
-                            <b>Social Media</b>
+                          <div className="mb-2 form-text d-flex flex-column">
+                            <b className="text-lg text-gray-500">
+                              Social Media
+                            </b>
                             <small>
                               *All the fields are optional, leave them empty if
                               they are not applicable for you
@@ -632,7 +633,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="facebook"
                                 />
                                 {touchedFields.facebook && errors.facebook && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -653,7 +654,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="linkedIn"
                                 />
                                 {touchedFields.linkedIn && errors.linkedIn && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -676,7 +677,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="devto"
                                 />
                                 {touchedFields.devto && errors.devto && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -697,7 +698,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="medium"
                                 />
                                 {touchedFields.medium && errors.medium && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -720,7 +721,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="behance"
                                 />
                                 {touchedFields.behance && errors.behance && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -741,7 +742,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="dribble"
                                 />
                                 {touchedFields.dribble && errors.dribble && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -764,7 +765,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="github"
                                 />
                                 {touchedFields.github && errors.github && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -785,7 +786,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="instagram"
                                 />
                                 {touchedFields.instagram && errors.instagram && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -810,7 +811,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   name="twitter"
                                 />
                                 {touchedFields.twitter && errors.twitter && (
-                                  <div className="my-2">
+                                  <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
@@ -841,13 +842,13 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             setValue("userName", userName, {
                               shouldTouch: true,
                             });
+                            setValue("designation", designation, {
+                              shouldTouch: true,
+                            });
                             setValue("about", about, {
                               shouldTouch: true,
                             });
                             setValue("mobile", mobile, { shouldTouch: true });
-                            setValue("whatsApp", whatsApp, {
-                              shouldTouch: true,
-                            });
                             setValue("twitter", twitter, {
                               shouldTouch: true,
                             });

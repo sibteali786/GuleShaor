@@ -1,8 +1,6 @@
 import {
   Button,
   Typography,
-  TextField,
-  IconButton,
   Grid,
   Collapse,
   Stack,
@@ -159,10 +157,6 @@ const InstructorProfile = () => {
                               <div className="my-2">
                                 <i className="fas fa-phone text-2xl"></i>{" "}
                                 {mentor?.about?.contact?.mobile}
-                              </div>
-                              <div className="my-2">
-                                <i className="fab fa-whatsapp text-green-500 text-3xl"></i>{" "}
-                                {mentor?.about?.contact?.whatsapp}
                               </div>
                             </AccordionDetails>
                           </Accordion>

@@ -11,26 +11,29 @@ import {
   STUDENTS_OF_MENTOR_SUCCESS,
 } from "../constants/mentorConstants";
 
-export const listMentors = () => async (dispatch) => {
-  try {
-    dispatch({ type: MENTOR_LIST_REQUEST });
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}api/mentors`
-    );
-    dispatch({
-      type: MENTOR_LIST_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: MENTOR_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+export const listMentors =
+  (keyword = "") =>
+  async (dispatch) => {
+    console.log(keyword);
+    try {
+      dispatch({ type: MENTOR_LIST_REQUEST });
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}api/mentors?keyword=${keyword}`
+      );
+      dispatch({
+        type: MENTOR_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: MENTOR_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const listMentorDetails = (id) => async (dispatch) => {
   try {

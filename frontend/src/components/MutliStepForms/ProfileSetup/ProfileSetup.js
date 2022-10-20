@@ -7,8 +7,12 @@ import { Alert } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./ProfileSetup.scss";
 import SubmitButton from "../../SubmitButton/SubmitButton";
-import { useDispatch } from "react-redux";
-import { updateUserDetails } from "../../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getUserDetails,
+  updateUserDetails,
+} from "../../../actions/userActions";
+import SnakBar from "../../SnakBar/SnakBar";
 
 const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   const schema = yup.object().shape({
@@ -63,11 +67,32 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   const portfolioLink = watch("portfolioLink", "");
   const videoLink = watch("videoLink", "");
   const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.userDetails);
+  const {
+    loading: loadingUserDetails,
+    error: errorUserDetails,
+    user,
+  } = userDetails;
   // Form Submission
   const submitHandler = (data) => {
     // TODO: add submit handler
-
-    if (UserDetails?.mentorDetails?.technical?.length > 0) {
+    setUserDetails({
+      ...UserDetails,
+      mentorDetails: {
+        ...UserDetails.mentorDetails,
+        technical: data?.technical.split(","),
+        interpersonal: data?.interpersonal.split(","),
+        portfolioLink: data?.portfolioLink,
+      },
+      introVideo: {
+        ...UserDetails.mentorDetails.introVideo,
+        video: data?.videoLink,
+      },
+    });
+    if (
+      UserDetails?.mentorDetails?.technical?.length > 0 &&
+      UserDetails?.mentorDetails?.interpersonal?.length > 0
+    ) {
       try {
         dispatch(updateUserDetails(UserDetails));
         nextStep();
@@ -76,161 +101,211 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
       }
     }
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  useEffect(() => {
+    if (!user?.name) {
+      dispatch(getUserDetails("profile"));
+    } else {
+      if (
+        UserDetails?.mentorDetails?.technical?.length > 0 &&
+        UserDetails?.mentorDetails?.interpersonal?.length > 0 &&
+        UserDetails?.mentorDetails?.portfolioLink?.length > 0 &&
+        UserDetails?.mentorDetails?.introVideo?.video?.length > 0
+      ) {
+        setValue("technical", UserDetails?.mentorDetails?.technical);
+        setValue("interpersonal", UserDetails?.mentorDetails?.interpersonal);
+        setValue("portfolioLink", UserDetails?.mentorDetails?.portfolioLink);
+        setValue("videoLink", UserDetails?.mentorDetails?.introVideo?.video);
+      } else if (
+        user?.mentorDetails?.technical?.length > 0 ||
+        user?.mentorDetails?.interpersonal?.length > 0 ||
+        user?.mentorDetails?.portfolioLink?.length > 0 ||
+        user?.mentorDetails?.introVideo?.video?.length > 0
+      ) {
+        setValue("technical", user?.mentorDetails?.technical);
+        setValue("interpersonal", user?.mentorDetails?.interpersonal);
+        setValue("portfolioLink", user?.mentorDetails?.portfolioLink);
+        setValue("videoLink", user?.mentorDetails?.introVideo?.video);
+      }
+    }
+    if (Object.keys(errors).length !== 0) {
+      handleClick();
+    }
+  }, [UserDetails, user, dispatch, setValue, errors]);
 
   return (
-    <Form
-      onSubmit={handleSubmit(submitHandler)}
-      style={{ height: "100vh" }}
-      className="back"
-    >
-      <Row>
-        <div className="mb-1 form-text text-muted d-flex flex-column">
-          <h5>Skills</h5>
-          <small className=" mt-0 pt-0">
-            *All the fields are optional, leave them empty if they are not
-            applicable for you
-          </small>
-        </div>
-        <Col xs={12} sm={6} className="mb-3">
-          <FormGroup>
-            {
-              // TODO: Add specific component for redenring skills inpout using laracast skills api
-            }
-            <Form.Label>Technical</Form.Label>
-            <Form.Control
-              {...register("technical")}
-              type="text"
-              name="technical"
-              placeholder="Python, Flask..."
-            />
-            <small className="form-text text-muted">
-              Note: Python, Flask, Node, Express, MongoDB, MySQL etc.
+    <>
+      <SnakBar
+        open={open}
+        handleClose={handleClose}
+        typeOfAlert="error"
+        message="Submission Error"
+      />
+      <Form
+        onSubmit={handleSubmit(submitHandler)}
+        style={{ height: "100vh" }}
+        className="back"
+      >
+        <Row>
+          <div className="mb-1 form-text text-muted d-flex flex-column">
+            <h5>Skills</h5>
+            <small className=" mt-0 pt-0">
+              *All the fields are optional, leave them empty if they are not
+              applicable for you
             </small>
-          </FormGroup>
-          {touchedFields.technical && errors.technical && (
-            <div className="my-2">
-              <Alert
-                severity="error"
-                variant="outlined"
-                className="py-0 border-0"
-              >
-                {errors.technical.message}
-              </Alert>
-            </div>
-          )}
-        </Col>
-
-        <Col xs={12} sm={6} className="mb-3">
-          <FormGroup>
-            {
-              // TODO: Add specific component for redenring skills inpout using laracast skills api
-            }
-            <Form.Label>Interperorsonal Skills</Form.Label>
-            <Form.Control
-              {...register("interpersonal")}
-              type="text"
-              name="interpersonal"
-              placeholder="Management, Leadership..."
-            />
-            <small className="form-text text-muted">
-              Note: Leadership, Team Management, Communication, etc.
-            </small>
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row>
-        <div className="mb-1 form-text text-muted d-flex flex-column">
-          <h5>Personal Branding</h5>
-          <small className="mt-0 pt-0">
-            *All the fields are optional, leave them empty if they are not
-            applicable for you
-          </small>
-        </div>
-        <Col xs={12} sm={6} className="mb-3">
-          <FormGroup>
-            {
-              // TODO: Add specific component for redenring skills inpout using laracast skills api
-            }
-            <Form.Label>Portfolio</Form.Label>
-            <Form.Control
-              {...register("portfolioLink")}
-              type="text"
-              name="portfolioLink"
-            />
-            <small className="form-text text-muted">
-              For e.g : https://www.adrian.com
-            </small>
-            {touchedFields.portfolioLink && errors.portfolioLink && (
+          </div>
+          <Col xs={12} sm={6} className="mb-3">
+            <FormGroup>
+              {
+                // TODO: Add specific component for redenring skills inpout using laracast skills api
+              }
+              <Form.Label>Technical</Form.Label>
+              <Form.Control
+                {...register("technical")}
+                type="text"
+                name="technical"
+                placeholder="Python, Flask..."
+              />
+              <small className="form-text text-muted">
+                Note: Python, Flask, Node, Express, MongoDB, MySQL etc.
+              </small>
+            </FormGroup>
+            {touchedFields.technical && errors.technical && (
               <div className="my-2">
                 <Alert
                   severity="error"
                   variant="outlined"
                   className="py-0 border-0"
                 >
-                  {errors.portfolioLink.message}
+                  {errors.technical.message}
                 </Alert>
               </div>
             )}
-          </FormGroup>
-        </Col>
+          </Col>
 
-        <Col xs={12} sm={6} className="mb-3">
-          <FormGroup>
-            {
-              // TODO: Add specific component for redenring skills inpout using laracast skills api
-            }
-            <Form.Label>Video Link</Form.Label>
-            <Form.Control
-              {...register("videoLink")}
-              type="text"
-              name="videoLink"
-            />
-            <small className="form-text text-muted">
-              For e.g : https://www.youtube.com/watch?v=1
+          <Col xs={12} sm={6} className="mb-3">
+            <FormGroup>
+              {
+                // TODO: Add specific component for redenring skills inpout using laracast skills api
+              }
+              <Form.Label>Interperorsonal Skills</Form.Label>
+              <Form.Control
+                {...register("interpersonal")}
+                type="text"
+                name="interpersonal"
+                placeholder="Management, Leadership..."
+              />
+              <small className="form-text text-muted">
+                Note: Leadership, Team Management, Communication, etc.
+              </small>
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <div className="mb-1 form-text text-muted d-flex flex-column">
+            <h5>Personal Branding</h5>
+            <small className="mt-0 pt-0">
+              *All the fields are optional, leave them empty if they are not
+              applicable for you
             </small>
-            {touchedFields.videoLink && errors.videoLink && (
-              <div className="my-2">
-                <Alert
-                  severity="error"
-                  variant="outlined"
-                  className="py-0 border-0"
-                >
-                  {errors.videoLink.message}
-                </Alert>
-              </div>
-            )}
-          </FormGroup>
-        </Col>
-      </Row>
-      <div className="col d-flex justify-content-end mt-5">
-        <button
-          className="py-1 px-3 bg-gradient bg-dark rounded-1"
-          onClick={() => prevStep()}
-        >
-          Previous
-        </button>
-        <SubmitButton
-          variant="outlined"
-          type="submit"
-          onClick={() => {
-            setValue("technical", technical, {
-              shouldTouch: true,
-            });
-            setValue("interpersonal", interpersonal, {
-              shouldTouch: true,
-            });
-            setValue("portfolioLink", portfolioLink, {
-              shouldTouch: true,
-            });
-            setValue("videoLink", videoLink, {
-              shouldTouch: true,
-            });
-          }}
-        >
-          Submit
-        </SubmitButton>
-      </div>
-    </Form>
+          </div>
+          <Col xs={12} sm={6} className="mb-3">
+            <FormGroup>
+              {
+                // TODO: Add specific component for redenring skills inpout using laracast skills api
+              }
+              <Form.Label>Portfolio</Form.Label>
+              <Form.Control
+                {...register("portfolioLink")}
+                type="text"
+                name="portfolioLink"
+              />
+              <small className="form-text text-muted">
+                For e.g : https://www.adrian.com
+              </small>
+              {touchedFields.portfolioLink && errors.portfolioLink && (
+                <div className="my-2">
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    className="py-0 border-0"
+                  >
+                    {errors.portfolioLink.message}
+                  </Alert>
+                </div>
+              )}
+            </FormGroup>
+          </Col>
+
+          <Col xs={12} sm={6} className="mb-3">
+            <FormGroup>
+              {
+                // TODO: Add specific component for redenring skills inpout using laracast skills api
+              }
+              <Form.Label>Video Link</Form.Label>
+              <Form.Control
+                {...register("videoLink")}
+                type="text"
+                name="videoLink"
+              />
+              <small className="form-text text-muted">
+                For e.g : https://www.youtube.com/watch?v=1
+              </small>
+              {touchedFields.videoLink && errors.videoLink && (
+                <div className="my-2">
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    className="py-0 border-0"
+                  >
+                    {errors.videoLink.message}
+                  </Alert>
+                </div>
+              )}
+            </FormGroup>
+          </Col>
+        </Row>
+        <div className="col d-flex justify-content-end mt-5">
+          <button
+            className="py-1 px-3 bg-gradient bg-dark rounded-1"
+            onClick={() => prevStep()}
+          >
+            Previous
+          </button>
+          <SubmitButton
+            variant="outlined"
+            type="submit"
+            onClick={() => {
+              setValue("technical", technical, {
+                shouldTouch: true,
+              });
+              setValue("interpersonal", interpersonal, {
+                shouldTouch: true,
+              });
+              setValue("portfolioLink", portfolioLink, {
+                shouldTouch: true,
+              });
+              setValue("videoLink", videoLink, {
+                shouldTouch: true,
+              });
+            }}
+          >
+            Submit
+          </SubmitButton>
+        </div>
+      </Form>
+    </>
   );
 };
 
