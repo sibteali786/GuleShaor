@@ -7,6 +7,10 @@ const Users = ({ mentor }) => {
   const location = useLocation();
   const params = useParams();
   const keyword = params?.keyword;
+  var imgPath = mentor?.mentorDetails?.image;
+  if (!imgPath.includes("/", 0)) {
+    imgPath = `/${imgPath}`;
+  }
   return (
     <div>
       <div className="card-container border rounded-2 shadow">
@@ -44,7 +48,7 @@ const Users = ({ mentor }) => {
               location.pathname === "/mentors" ||
               location.pathname?.replace("%20", " ") ===
                 `/mentors/search/${keyword}`
-                ? mentor?.mentorDetails?.image
+                ? imgPath
                 : mentor?.studentDetails?.image
             }
             alt={mentor?.name}
