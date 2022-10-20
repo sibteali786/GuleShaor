@@ -70,6 +70,11 @@ function App() {
         <Route path="/students/:id" element={<StudentProfile />} />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/search/:keyword" element={<Mentors />} />
+        <Route path="/mentors/page/:pageNumber" element={<Mentors />} />
+        <Route
+          path="/mentors/search/:keyword/page/:pageNumber"
+          element={<Mentors />}
+        />
         <Route
           path="/mentors/:id"
           className="px-[4rem]"

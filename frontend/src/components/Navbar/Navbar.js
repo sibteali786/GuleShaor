@@ -80,6 +80,10 @@ const Navbar = () => {
   } else {
     imgPath = userInfo?.image;
   }
+
+  if (!imgPath.includes("/", 0)) {
+    imgPath = `/${imgPath}`;
+  }
   console.log(
     userUpdatedDetails?.mentorDetails?.image,
     userDetails?.mentorDetails?.image,
@@ -227,16 +231,19 @@ const Navbar = () => {
               </MenuItem>
               <Divider />
               <MenuItem>
-                <Link to="/settings">
+                <Link
+                  to="/settings"
+                  className="text-gray-500 no-underline flex"
+                >
                   <ListItemIcon>
-                    <SettingsIcon fontSize="small" />
+                    <SettingsIcon />
                   </ListItemIcon>
-                  Settings
+                  <p className="m-0">Settings</p>
                 </Link>
               </MenuItem>
               <MenuItem onClick={() => logoutHandler()}>
                 <ListItemIcon>
-                  <Logout fontSize="small" />
+                  <Logout />
                 </ListItemIcon>
                 Logout
               </MenuItem>
@@ -346,11 +353,14 @@ const Navbar = () => {
               </MenuItem>
               <Divider />
               <MenuItem>
-                <Link to="/settings">
+                <Link
+                  to="/settings"
+                  className="text-gray-500 no-underline flex"
+                >
                   <ListItemIcon>
-                    <SettingsIcon fontSize="small" />
+                    <SettingsIcon />
                   </ListItemIcon>
-                  Settings
+                  <p className="m-0">Settings</p>
                 </Link>
               </MenuItem>
               <MenuItem onClick={() => logoutHandler()}>

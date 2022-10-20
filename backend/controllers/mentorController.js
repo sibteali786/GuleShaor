@@ -5,6 +5,9 @@ const asyncHandler = require("express-async-handler");
 // @route   GET /api/mentors
 // @access  Public
 const getMentors = asyncHandler(async (req, res) => {
+  const pageSize = 4; // 5 mentors per page
+  const page = Number(req?.query?.pageNumber) || 1; // if np page is mentioned then page 1 is default
+  // for name search
   const keyword = req.query.keyword
     ? {
         name: {
@@ -13,7 +16,25 @@ const getMentors = asyncHandler(async (req, res) => {
         },
       }
     : {};
+
   // const mentors = await Mentor.find({ ...keyword }); // gets all the mentors from the database
+  const count = await Mentor.aggregate([
+    {
+      $unwind: "$mentorDetails",
+    },
+    {
+      $unwind: "$mentorDetails.designation",
+    },
+    {
+      $match: {
+        "mentorDetails.designation": {
+          $regex: req.query.keyword.trim(),
+          $options: "i",
+        },
+      },
+    },
+    { $count: "Total" },
+  ]);
   const mentors = await Mentor.aggregate([
     {
       $unwind: "$mentorDetails",
@@ -29,8 +50,11 @@ const getMentors = asyncHandler(async (req, res) => {
         },
       },
     },
-  ]);
-  res.json(mentors);
+  ])
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  res.json({ mentors, page, pages: Math.ceil(count[0].Total / pageSize) });
 });
 
 // @desc    Fetch a specific mentor
