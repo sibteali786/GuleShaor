@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Users.scss";
 import { useLocation } from "react-router-dom";
+import Paginate from "../Paginate/Paginate";
 const Users = ({ mentor }) => {
   const location = useLocation();
   const params = useParams();
@@ -27,17 +28,13 @@ const Users = ({ mentor }) => {
               : "Free"
           }
         >
-          {location.pathname === "/mentors" ||
-          location.pathname?.replace("%20", " ") ===
-            `/mentors/search/${keyword}`
+          {location.pathname.includes("/mentors")
             ? mentor?.mentorDetails?.userType
             : mentor?.studentDetails?.userType}
         </span>
         <Link
           to={
-            location.pathname === "/mentors" ||
-            location.pathname?.replace("%20", " ") ===
-              `/mentors/search/${keyword}`
+            location.pathname.includes("/mentors")
               ? `/mentors/${mentor?._id}`
               : `/students/${mentor?._id}`
           }
@@ -45,9 +42,7 @@ const Users = ({ mentor }) => {
           <img
             className="round d-inline"
             src={
-              location.pathname === "/mentors" ||
-              location.pathname?.replace("%20", " ") ===
-                `/mentors/search/${keyword}`
+              location.pathname.includes("/mentors")
                 ? imgPath
                 : mentor?.studentDetails?.image
             }
@@ -60,15 +55,11 @@ const Users = ({ mentor }) => {
           alt="username"
           className="text-gray-500 hover:text-blue-800 my-1"
         >
-          {location.pathname === "/mentors" ||
-          location.pathname?.replace("%20", " ") ===
-            `/mentors/search/${keyword}`
+          {location.pathname.includes("/mentors")
             ? mentor?.mentorDetails?.username
             : mentor?.studentDetails?.username}
         </a>
-        {location.pathname === "/mentors" ||
-        location.pathname?.replace("%20", " ") ===
-          `/mentors/search/${keyword}` ? (
+        {location.pathname.includes("/mentors") ? (
           <p className="py-1 my-0 xs:text-md md:text-lg">
             {mentor?.mentorDetails?.designation}
           </p>

@@ -8,15 +8,18 @@ import { listMentors } from "../../actions/mentorActions";
 import Loader from "../../components/Loader/Loader";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate/Paginate";
 const Mentors = () => {
   const dispatch = useDispatch();
   const mentorList = useSelector((state) => state.mentorList);
-  const { loading, error, mentors } = mentorList;
+  const { loading, error, mentors, page, pages } = mentorList;
   const params = useParams();
   const keyword = params?.keyword;
+  const pageNumber = params?.pageNumber || 1;
+  console.log(pageNumber);
   useEffect(() => {
-    dispatch(listMentors(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listMentors(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
   return (
     <>
       {loading ? (
@@ -39,6 +42,11 @@ const Mentors = () => {
               </Grid>
             ))}
           </Grid>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ""}
+          />
         </div>
       )}
     </>
