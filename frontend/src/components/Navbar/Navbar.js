@@ -69,7 +69,22 @@ const Navbar = () => {
   const { userInfo } = userLogin;
   const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
   const { userUpdatedDetails } = userUpdateDetails;
-  console.log(userUpdatedDetails?.image);
+  const userDetails = useSelector((state) => state.userDetails);
+  const { user } = userDetails;
+  // Getting image
+  var imgPath = "";
+  if (userUpdatedDetails?.mentorDetails?.image.length > 0) {
+    imgPath = "/" + userUpdatedDetails?.mentorDetails?.image;
+  } else if (userDetails?.mentorDetails?.image.length > 0) {
+    imgPath = "/" + userDetails?.mentorDetails?.image;
+  } else {
+    imgPath = userInfo?.image;
+  }
+  console.log(
+    userUpdatedDetails?.mentorDetails?.image,
+    userDetails?.mentorDetails?.image,
+    imgPath
+  );
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
@@ -156,10 +171,8 @@ const Navbar = () => {
                 <img
                   className="rounded-full"
                   src={
-                    userUpdatedDetails
-                      ? "/" + userUpdatedDetails?.image
-                      : userInfo?.image
-                      ? "/" + userInfo?.image
+                    userUpdatedDetails || user || userInfo
+                      ? imgPath
                       : profileImage
                   }
                   style={{ height: "40px", width: "auto" }}
