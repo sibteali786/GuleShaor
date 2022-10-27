@@ -4,7 +4,7 @@ import "./Signup.scss";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../components/Message/Message";
-import { Alert, Typography } from "@mui/material";
+import { Alert, Typography, Tooltip } from "@mui/material";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { register } from "../../actions/userActions";
 import FormLoader from "../../components/MutliStepForms/FormLoader/FormLoader";
@@ -69,13 +69,9 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
     password: yup
       .string()
       .trim()
-      .test(
-        "validation",
-        "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-        (value) => {
-          return rankPassword(value) >= 3;
-        }
-      ),
+      .test("validation", "Password must be strong", (value) => {
+        return rankPassword(value) >= 3;
+      }),
     userType: yup
       .string()
       .trim()
@@ -103,7 +99,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
       name: "",
       email: "",
       password: "",
-      userType: "",
+      userType: "Choose a User-Type",
       confirmPassword: "",
     },
     mode: "all",
@@ -133,7 +129,6 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
       userType: data?.userType,
     });
     if (UserDetails) {
-      console.log("From Signup", name, email, password, userType);
       dispatch(register(name, email, password, userType));
       nextStep();
     }
@@ -146,7 +141,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
             <h1>Create Account</h1>
             {error && <Message variant="outlined">{error}</Message>}
             {loading && <FormLoader />}
-            <div className="social-container">
+            <div className="social-container w-full text-center">
               <a href="#" className="social">
                 <i className="fab fa-facebook-f"></i>
               </a>
@@ -157,16 +152,15 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 <i className="fab fa-linkedin-in"></i>
               </a>
             </div>
-            <Typography variant="body1">
-              or use your email for registration
-            </Typography>
+            <p className="text-md w-full text-center">OR</p>
             <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left">Name</Form.Label>
+              <Form.Label className="w-full text-left text-sm">Name</Form.Label>
               <Form.Control
                 {...registerHook("name", { required: true })}
                 type="text"
                 placeholder="Name"
                 value={name}
+                size="sm"
               />
               {touchedFields.name && errors.name && (
                 <div className="w-full ">
@@ -181,13 +175,16 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               )}
             </FormGroup>
             <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left">Email</Form.Label>
+              <Form.Label className="w-full text-left text-sm">
+                Email
+              </Form.Label>
 
               <Form.Control
                 {...registerHook("email", { required: true })}
                 type="email"
                 placeholder="Email"
                 value={email}
+                size="sm"
               />
               {touchedFields.email && errors.email && (
                 <div className="w-full ">
@@ -202,14 +199,21 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               )}
             </FormGroup>
             <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left">Password</Form.Label>
-
-              <Form.Control
-                {...registerHook("password", { required: true })}
-                type="password"
-                placeholder="Password"
-                value={password}
-              />
+              <Form.Label className="w-full text-left text-sm">
+                Password
+              </Form.Label>
+              <Tooltip
+                title="Password be least 8 chars long, have at least 1 uppercase
+              letter, 1 lowercase letter, 1 number, and 1 special character"
+              >
+                <Form.Control
+                  {...registerHook("password", { required: true })}
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  size="sm"
+                />
+              </Tooltip>
               {touchedFields.password && errors.password && (
                 <div className="w-full ">
                   <Alert
@@ -223,7 +227,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               )}
             </FormGroup>
             <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left">
+              <Form.Label className="w-full text-left text-sm">
                 Confirm Password
               </Form.Label>
 
@@ -232,6 +236,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
+                size="sm"
               />
               {touchedFields.confirmPassword && errors.confirmPassword && (
                 <div className="w-full ">
@@ -245,7 +250,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
                 </div>
               )}
             </FormGroup>
-            <Form.Label>Choose Your User Type</Form.Label>
+            <Form.Label className="text-sm">Choose Your User Type</Form.Label>
             <Form.Select
               aria-label="Mentor"
               {...registerHook("userType", { required: true })}
@@ -253,6 +258,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               value={userType}
               size="sm"
             >
+              <option>Choose a User-Type</option>
               <option value="mentor">Mentor</option>
               <option value="student">Student</option>
             </Form.Select>

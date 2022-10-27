@@ -45,27 +45,6 @@
         justify-content: center;
         flex-direction: column;
         text-align: center;
-
-        p {
-            @include paragraph(small);
-            margin: 0.5rem 0;
-        }
-
-        .selectArea {
-            display: flex;
-            flex-direction: column;
-
-            @media (min-width:400px) {
-                flex-direction: row;
-            }
-        }
-
-        select {
-            border: none;
-            padding: 0.7rem 0.7rem;
-            background-color: #fff;
-            border-radius: 0.4rem;
-        }
     }
 
 

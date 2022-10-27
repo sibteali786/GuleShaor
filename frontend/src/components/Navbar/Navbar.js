@@ -251,7 +251,9 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="logSign-Desktop">
-            <Link to="/login">Log In</Link>
+            <Link to="/login" className="hover:text-orange-300">
+              Log In
+            </Link>
             <Link to="/profile-forms">
               <Button variant="contained">Sign Up</Button>
             </Link>

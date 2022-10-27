@@ -45,7 +45,7 @@ const LogIn = () => {
     defaultValues: {
       email: "",
       password: "",
-      userType: "",
+      userType: "Choose a User-Type",
     },
     mode: "all",
     resolver: yupResolver(schema),
@@ -91,11 +91,14 @@ const LogIn = () => {
               </div>
               <Typography variant="body1">or use your account</Typography>
               <FormGroup className="w-full">
-                <Form.Label className="w-full text-left">Email</Form.Label>
+                <Form.Label className="w-full text-left text-sm">
+                  Email
+                </Form.Label>
                 <Form.Control
                   {...registerHook("email", { required: true })}
                   placeholder="Email"
                   value={email}
+                  size="sm"
                 />
                 {touchedFields.email && errors.email && (
                   <div className="my-2">
@@ -110,12 +113,15 @@ const LogIn = () => {
                 )}
               </FormGroup>
               <FormGroup className="w-full">
-                <Form.Label className="w-full text-left">Password</Form.Label>
+                <Form.Label className="w-full text-left text-sm">
+                  Password
+                </Form.Label>
                 <Form.Control
                   {...registerHook("password", { required: true })}
                   placeholder="Password"
                   type="password"
                   value={password}
+                  size="sm"
                 />
                 {touchedFields.password && errors.password && (
                   <div className="my-2">
@@ -130,13 +136,17 @@ const LogIn = () => {
                 )}
               </FormGroup>
               <FormGroup className="w-full">
-                <Form.Label className="w-full text-left">UserType</Form.Label>
+                <Form.Label className="w-full text-left text-sm">
+                  UserType
+                </Form.Label>
                 <Form.Select
                   aria-label="Mentor"
                   {...registerHook("userType", { required: true })}
                   name="userType"
                   value={userType}
+                  size="sm"
                 >
+                  <option>Choose a User-Type</option>
                   <option value="mentor">Mentor</option>
                   <option value="student">Student</option>
                 </Form.Select>
