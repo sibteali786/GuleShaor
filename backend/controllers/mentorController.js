@@ -7,54 +7,65 @@ const asyncHandler = require("express-async-handler");
 const getMentors = asyncHandler(async (req, res) => {
   const pageSize = 4; // 5 mentors per page
   const page = Number(req?.query?.pageNumber) || 1; // if np page is mentioned then page 1 is default
+  const category = req?.query?.category || "";
   // for name search
-  const keyword = req.query.keyword
-    ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: "i",
-        },
-      }
-    : {};
-
-  // const mentors = await Mentor.find({ ...keyword }); // gets all the mentors from the database
-  const count = await Mentor.aggregate([
-    {
-      $unwind: "$mentorDetails",
-    },
-    {
-      $unwind: "$mentorDetails.designation",
-    },
-    {
-      $match: {
-        "mentorDetails.designation": {
-          $regex: req.query.keyword.trim(),
-          $options: "i",
+  if (category === "Name") {
+    const keyword = req.query.keyword
+      ? {
+          name: {
+            $regex: req.query.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+    const count = await Mentor.countDocuments({ ...keyword });
+    const mentors = await Mentor.find({ ...keyword })
+      .skip(pageSize * (page - 1))
+      .limit(pageSize); // gets all the mentors from the database
+    res.json({ mentors, page, pages: Math.ceil(count / pageSize) });
+  } else if (category === "Designation") {
+    const count = await Mentor.aggregate([
+      {
+        $unwind: "$mentorDetails",
+      },
+      {
+        $unwind: "$mentorDetails.designation",
+      },
+      {
+        $match: {
+          "mentorDetails.designation": {
+            $regex: req.query.keyword.trim(),
+            $options: "i",
+          },
         },
       },
-    },
-    { $count: "Total" },
-  ]);
-  const mentors = await Mentor.aggregate([
-    {
-      $unwind: "$mentorDetails",
-    },
-    {
-      $unwind: "$mentorDetails.designation",
-    },
-    {
-      $match: {
-        "mentorDetails.designation": {
-          $regex: req.query.keyword.trim(),
-          $options: "i",
+      { $count: "Total" },
+    ]);
+    if (count.length === 0) {
+      res.json({ mentors: [], page, pages: 0 });
+    } else {
+      const mentors = await Mentor.aggregate([
+        {
+          $unwind: "$mentorDetails",
         },
-      },
-    },
-  ])
-    .skip(pageSize * (page - 1))
-    .limit(pageSize);
+        {
+          $unwind: "$mentorDetails.designation",
+        },
+        {
+          $match: {
+            "mentorDetails.designation": {
+              $regex: req.query.keyword.trim(),
+              $options: "i",
+            },
+          },
+        },
+      ])
+        .skip(pageSize * (page - 1))
+        .limit(pageSize);
 
-  res.json({ mentors, page, pages: Math.ceil(count[0].Total / pageSize) });
+      res.json({ mentors, page, pages: Math.ceil(count[0].Total / pageSize) });
+    }
+  }
 });
 
 // @desc    Fetch a specific mentor

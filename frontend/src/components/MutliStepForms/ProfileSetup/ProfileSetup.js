@@ -114,30 +114,26 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     setOpen(false);
   };
   useEffect(() => {
-    if (!user?.name) {
-      dispatch(getUserDetails("profile"));
-    } else {
-      if (
-        UserDetails?.mentorDetails?.technical?.length > 0 &&
-        UserDetails?.mentorDetails?.interpersonal?.length > 0 &&
-        UserDetails?.mentorDetails?.portfolioLink?.length > 0 &&
-        UserDetails?.mentorDetails?.introVideo?.video?.length > 0
-      ) {
-        setValue("technical", UserDetails?.mentorDetails?.technical);
-        setValue("interpersonal", UserDetails?.mentorDetails?.interpersonal);
-        setValue("portfolioLink", UserDetails?.mentorDetails?.portfolioLink);
-        setValue("videoLink", UserDetails?.mentorDetails?.introVideo?.video);
-      } else if (
-        user?.mentorDetails?.technical?.length > 0 ||
-        user?.mentorDetails?.interpersonal?.length > 0 ||
-        user?.mentorDetails?.portfolioLink?.length > 0 ||
-        user?.mentorDetails?.introVideo?.video?.length > 0
-      ) {
-        setValue("technical", user?.mentorDetails?.technical);
-        setValue("interpersonal", user?.mentorDetails?.interpersonal);
-        setValue("portfolioLink", user?.mentorDetails?.portfolioLink);
-        setValue("videoLink", user?.mentorDetails?.introVideo?.video);
-      }
+    if (
+      UserDetails?.mentorDetails?.technical?.length > 0 &&
+      UserDetails?.mentorDetails?.interpersonal?.length > 0 &&
+      UserDetails?.mentorDetails?.portfolioLink?.length > 0 &&
+      UserDetails?.mentorDetails?.introVideo?.video?.length > 0
+    ) {
+      setValue("technical", UserDetails?.mentorDetails?.technical);
+      setValue("interpersonal", UserDetails?.mentorDetails?.interpersonal);
+      setValue("portfolioLink", UserDetails?.mentorDetails?.portfolioLink);
+      setValue("videoLink", UserDetails?.mentorDetails?.introVideo?.video);
+    } else if (
+      user?.mentorDetails?.technical?.length > 0 ||
+      user?.mentorDetails?.interpersonal?.length > 0 ||
+      user?.mentorDetails?.portfolioLink?.length > 0 ||
+      user?.mentorDetails?.introVideo?.video?.length > 0
+    ) {
+      setValue("technical", user?.mentorDetails?.technical);
+      setValue("interpersonal", user?.mentorDetails?.interpersonal);
+      setValue("portfolioLink", user?.mentorDetails?.portfolioLink);
+      setValue("videoLink", user?.mentorDetails?.introVideo?.video);
     }
     if (Object.keys(errors).length !== 0) {
       handleClick();

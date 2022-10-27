@@ -13,22 +13,33 @@ const Mentors = () => {
   const dispatch = useDispatch();
   const mentorList = useSelector((state) => state.mentorList);
   const { loading, error, mentors, page, pages } = mentorList;
+  var errorMentor = "";
+  if (mentors.length === 0) {
+    errorMentor = "No mentors found";
+  }
   const params = useParams();
   const keyword = params?.keyword;
   const pageNumber = params?.pageNumber || 1;
-  console.log(pageNumber);
+  const [optionValue, setOptionValue] = React.useState("Name");
   useEffect(() => {
-    dispatch(listMentors(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    if (optionValue) {
+      dispatch(listMentors(keyword, pageNumber, optionValue));
+    }
+  }, [dispatch, keyword, pageNumber, optionValue]);
   return (
     <>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message>{error}</Message>
-      ) : (
+        <div className="pt-[5rem] h-[500px] flex flex-col justify-center content-center">
+          <Message>{error}</Message>
+        </div>
+      ) : !errorMentor ? (
         <div className="flex flex-col justify-center content-center p-[4rem]">
-          <SearchBox />
+          <SearchBox
+            optionValue={optionValue}
+            setOptionValue={setOptionValue}
+          />
           <Grid
             container
             spacing={2}
@@ -42,6 +53,19 @@ const Mentors = () => {
               </Grid>
             ))}
           </Grid>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ""}
+          />
+        </div>
+      ) : (
+        <div className="pt-[4rem] h-[500px] flex flex-col justify-start content-center">
+          <SearchBox
+            optionValue={optionValue}
+            setOptionValue={setOptionValue}
+          />
+          <Message severity="warning">{errorMentor}</Message>
           <Paginate
             pages={pages}
             page={page}

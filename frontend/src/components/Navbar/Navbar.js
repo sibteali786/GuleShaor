@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { ReactComponent as Logo } from "./../../Assets/LandingPage/logo.svg";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -65,6 +65,7 @@ const Navbar = () => {
   const [state, setState] = React.useState({
     right: false,
   });
+  const [imgPath, setImgPath] = useState(profileImage);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const userUpdateDetails = useSelector((state) => state.userUpdateDetails);
@@ -72,23 +73,26 @@ const Navbar = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { user } = userDetails;
   // Getting image
-  var imgPath = "";
-  if (userUpdatedDetails?.mentorDetails?.image.length > 0) {
-    imgPath = "/" + userUpdatedDetails?.mentorDetails?.image;
-  } else if (userDetails?.mentorDetails?.image.length > 0) {
-    imgPath = "/" + userDetails?.mentorDetails?.image;
-  } else {
-    imgPath = userInfo?.image;
-  }
+  useEffect(() => {
+    var imgPath = "";
+    if (userUpdatedDetails?.mentorDetails?.image.length > 0) {
+      console.log("User Details Updated Image");
+      imgPath = "/" + userUpdatedDetails?.image;
+      setImgPath(imgPath);
+    } else if (user?.image?.length > 0) {
+      imgPath = "/" + user?.image;
+      setImgPath(imgPath);
+    } else {
+      imgPath = userInfo?.image;
+      setImgPath(imgPath);
+    }
+    if (!imgPath?.includes("/", 0)) {
+      imgPath = `/${imgPath}`;
+      setImgPath(imgPath);
+    }
+    console.log("Image path from navbar", imgPath);
+  }, [userUpdatedDetails, user, userInfo, imgPath]);
 
-  if (!imgPath.includes("/", 0)) {
-    imgPath = `/${imgPath}`;
-  }
-  console.log(
-    userUpdatedDetails?.mentorDetails?.image,
-    userDetails?.mentorDetails?.image,
-    imgPath
-  );
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
@@ -174,11 +178,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={
-                    userUpdatedDetails || user || userInfo
-                      ? imgPath
-                      : profileImage
-                  }
+                  src={!imgPath.includes("undefined") ? imgPath : profileImage}
                   style={{ height: "40px", width: "auto" }}
                   alt="profile pic"
                 />

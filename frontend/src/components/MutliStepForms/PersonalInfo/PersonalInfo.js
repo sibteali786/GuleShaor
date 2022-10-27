@@ -298,7 +298,11 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     if (!user?.name) {
       dispatch(getUserDetails("profile"));
     } else {
-      if (UserDetails?.mentorDetails?.username && UserDetails?.about) {
+      if (
+        UserDetails?.mentorDetails?.username ||
+        UserDetails?.about?.details ||
+        UserDetails?.about?.contact?.mobile
+      ) {
         setValue("name", UserDetails.name);
         setValue("email", UserDetails.email);
         setValue("mobile", UserDetails?.about?.contact?.mobile);

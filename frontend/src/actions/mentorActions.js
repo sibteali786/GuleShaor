@@ -12,12 +12,12 @@ import {
 } from "../constants/mentorConstants";
 
 export const listMentors =
-  (keyword = "", pageNumber = "") =>
+  (keyword = "", pageNumber = "", optionValue = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: MENTOR_LIST_REQUEST });
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}api/mentors?keyword=${keyword}&pageNumber=${pageNumber}`
+        `${process.env.REACT_APP_API_URL}api/mentors?keyword=${keyword}&pageNumber=${pageNumber}&category=${optionValue}`
       );
       dispatch({
         type: MENTOR_LIST_SUCCESS,
