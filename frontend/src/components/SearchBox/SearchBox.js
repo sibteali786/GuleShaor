@@ -1,18 +1,26 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SelectMenu from "../SelectMenu/SelectMenu";
 const SearchBox = ({ setOptionValue, optionValue }) => {
   const history = useNavigate();
+  const location = useLocation();
   const [keyword, setKeyword] = React.useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    if (keyword.trim()) {
-      history(`/mentors/search/${keyword}`);
-    } else {
-      history(`/mentors`);
+    if (location.pathname?.includes("mentors")) {
+      if (keyword.trim()) {
+        history(`/mentors/search/${keyword}`);
+      } else {
+        history(`/mentors`);
+      }
+    } else if (location.pathname?.includes("students")) {
+      if (keyword.trim()) {
+        history(`/students/search/${keyword}`);
+      } else {
+        history(`/students`);
+      }
     }
   };
-
   return (
     <form
       className="flex items-center self-center shadow-md w-[80%]"

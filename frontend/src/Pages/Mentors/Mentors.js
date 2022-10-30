@@ -27,7 +27,8 @@ const Mentors = () => {
     }
   }, [dispatch, keyword, pageNumber, optionValue]);
   return (
-    <>
+    <div className="pt-[4rem] flex flex-col justify-center content-center px-[4rem]">
+      <SearchBox optionValue={optionValue} setOptionValue={setOptionValue} />
       {loading ? (
         <Loader />
       ) : error ? (
@@ -35,16 +36,12 @@ const Mentors = () => {
           <Message>{error}</Message>
         </div>
       ) : !errorMentor ? (
-        <div className="flex flex-col justify-center content-center p-[4rem]">
-          <SearchBox
-            optionValue={optionValue}
-            setOptionValue={setOptionValue}
-          />
+        <div className="flex flex-col justify-center content-center">
           <Grid
             container
             spacing={2}
             rowSpacing={4}
-            // className="px-[4rem] pt-[4rem] pb-5"
+            className="px-[4rem] pt-[2rem] pb-4"
             style={{ marginTop: "0" }}
           >
             {mentors.map((mentor) => (
@@ -78,7 +75,7 @@ const Mentors = () => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

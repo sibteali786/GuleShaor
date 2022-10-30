@@ -69,7 +69,13 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/students" element={<Students />} />
+        <Route path="/students/search/:keyword" element={<Students />} />
+        <Route path="/students/page/:pageNumber" element={<Students />} />
         <Route path="/students/:id" element={<StudentProfile />} />
+        <Route
+          path="/students/search/:keyword/page/:pageNumber"
+          element={<Students />}
+        />
         <Route path="/mentors" element={<Mentors />} />
         <Route path="/mentors/search/:keyword" element={<Mentors />} />
         <Route path="/mentors/page/:pageNumber" element={<Mentors />} />
