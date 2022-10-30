@@ -1,7 +1,7 @@
 @import "./../../Utils/config.scss";
 
 .filepond--root {
-    width: 100px;
+    width: 100px !important;
     height: 100px !important;
     font-size: 0.7rem !important;
 
@@ -10,13 +10,13 @@
     }
 
     @media (min-width:500px) {
-        width: 150px;
+        width: 150px !important;
         height: 150px !important;
         font-size: 1rem !important;
     }
 
     @media (min-width:768px) {
-        width: 200px;
+        width: 200px !important;
         height: 200px !important;
         font-size: 1.2rem !important;
     }
