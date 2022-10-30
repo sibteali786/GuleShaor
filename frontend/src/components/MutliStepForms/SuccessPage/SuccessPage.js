@@ -14,7 +14,6 @@ const SuccessPage = () => {
   useEffect(() => {
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
-  console.log(user);
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="p-1 rounded shadow-lg bg-gradient-to-r from-purple-500 via-green-500 to-blue-500">
@@ -41,7 +40,11 @@ const SuccessPage = () => {
             profile...
           </p>
           <Link
-            to={`/mentors/${user?._id}`}
+            to={
+              user?.mentorDetails
+                ? `/mentors/${user?._id}`
+                : `/students/${user?._id}`
+            }
             className="inline-flex items-center px-4 py-2 text-white bg-indigo-600 border border-indigo-600 rounded rounded-full hover:bg-indigo-700 focus:outline-none focus:ring"
           >
             <svg

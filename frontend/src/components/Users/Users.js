@@ -9,7 +9,7 @@ const Users = ({ mentor }) => {
   const params = useParams();
   const keyword = params?.keyword;
   var imgPath = mentor?.mentorDetails?.image;
-  if (!imgPath.includes("/", 0)) {
+  if (!imgPath?.includes("/", 0)) {
     imgPath = `/${imgPath}`;
   }
   return (

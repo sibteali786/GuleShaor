@@ -28,12 +28,15 @@ var studentSchema = new mongoose.Schema(
       },
       designation: {
         type: String,
-        default: "MBA",
+        default: "Jr. Web Developer",
       },
       image: {
         type: String,
         default: "",
       },
+      interpersonal: [{ type: String, default: "" }],
+      technical: [{ type: String, default: "" }],
+      portfolioLink: { type: String, default: "" },
       otherImages: [
         {
           type: String,
@@ -104,13 +107,13 @@ var studentSchema = new mongoose.Schema(
       },
       contact: {
         mobile: { type: String, default: "" },
-        whatsapp: { type: String, default: "" },
       },
       socialMedia: {
         facebook: { type: String, default: "" },
         twitter: { type: String, default: "" },
         instagram: { type: String, default: "" },
         linkedin: { type: String, default: "" },
+        medium: { type: String, default: "" },
         devto: { type: String, default: "" },
         dribble: { type: String, default: "" },
         behance: { type: String, default: "" },

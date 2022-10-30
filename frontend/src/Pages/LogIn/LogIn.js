@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Form, FormGroup } from "react-bootstrap";
 import FormContainer from "../../components/MutliStepForms/FromContainer/FormContainer";
+import SnakBar from "../../components/SnakBar/SnakBar";
 const LogIn = () => {
   const location = useLocation();
   const history = useNavigate();
@@ -64,19 +65,40 @@ const LogIn = () => {
     // Dispatch Login
     dispatch(login(email, password, userType));
   };
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   useEffect(() => {
     if (userInfo) {
       history(redirect);
     }
-  }, [history, userInfo, redirect]);
+    if (error) {
+      handleClick();
+    }
+  }, [history, userInfo, redirect, error]);
   return (
     <FormContainer>
+      <SnakBar
+        open={open}
+        handleClose={handleClose}
+        typeOfAlert="error"
+        message={error}
+      />
       <div className="logInSignIn-container pt-16 w-full h-screen">
         <div>
           <div className="form-container">
             <form onSubmit={handleSubmit(submitHandler)} className="form-login">
               <h1>Sign in</h1>
-              {error && <Message>{error}</Message>}
               {loading && <FormLoader />}
               <div className="social-container">
                 <a href="#" className="social">
@@ -175,7 +197,7 @@ const LogIn = () => {
               >
                 Sign In
               </SubmitButton>
-              <NavLink to="/signup">
+              <NavLink to="/profile-forms">
                 New Customer?{" "}
                 <SubmitButton variant="text">Register</SubmitButton>
               </NavLink>

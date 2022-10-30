@@ -3,7 +3,7 @@ import React from "react";
 import "./Message.scss";
 const Message = ({ children, variant, severity }) => {
   return (
-    <div className="containerMessage w-1/2 self-center">
+    <div className="containerMessage w-full self-center">
       <Alert variant={variant || "filled"} severity={severity || "error"}>
         {children}
       </Alert>

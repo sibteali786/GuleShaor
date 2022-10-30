@@ -75,11 +75,7 @@ const Navbar = () => {
   // Getting image
   useEffect(() => {
     var imgPath = "";
-    if (userUpdatedDetails?.mentorDetails?.image.length > 0) {
-      console.log("User Details Updated Image");
-      imgPath = "/" + userUpdatedDetails?.image;
-      setImgPath(imgPath);
-    } else if (user?.image?.length > 0) {
+    if (user?.image?.length > 0) {
       imgPath = "/" + user?.image;
       setImgPath(imgPath);
     } else {
@@ -90,8 +86,7 @@ const Navbar = () => {
       imgPath = `/${imgPath}`;
       setImgPath(imgPath);
     }
-    console.log("Image path from navbar", imgPath);
-  }, [userUpdatedDetails, user, userInfo, imgPath]);
+  }, [user, userInfo, imgPath]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
@@ -251,11 +246,15 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="logSign-Desktop">
-            <Link to="/login" className="hover:text-orange-300">
-              Log In
+            <Link to="/login">
+              <button className="hover:bg-orange-200 py-1 px-2 rounded-md transition-color ease-out delay-100 hover:text-black">
+                Log In
+              </button>
             </Link>
             <Link to="/profile-forms">
-              <Button variant="contained">Sign Up</Button>
+              <button className="hover:bg-orange-200 hover:text-black py-1 px-2 rounded-md transition-color ease-out delay-100">
+                Sign Up
+              </button>
             </Link>
           </div>
         )}

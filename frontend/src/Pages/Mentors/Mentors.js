@@ -14,7 +14,7 @@ const Mentors = () => {
   const mentorList = useSelector((state) => state.mentorList);
   const { loading, error, mentors, page, pages } = mentorList;
   var errorMentor = "";
-  if (mentors.length === 0) {
+  if (mentors?.length === 0) {
     errorMentor = "No mentors found";
   }
   const params = useParams();

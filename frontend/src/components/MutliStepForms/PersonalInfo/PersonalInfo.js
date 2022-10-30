@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../../actions/userActions";
 import axios from "axios";
 import SnakBar from "../../SnakBar/SnakBar";
+import Message from "../../Message/Message";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
@@ -249,12 +250,14 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   };
   const submitHandler = async (data) => {
     // TODO: add submit handler
-
+    const type = user?.mentorDetails
+      ? "mentor"
+      : user?.studentDetails?.userType;
     UserDetails = {
       name: data?.name,
-      email: data?.email,
-      mentorDetails: {
-        userType: "mentor",
+      email: data?.email?.toLowerCase(),
+      userDetails: {
+        userType: type,
         username: userName,
         image: data?.image?.path.substring(16, data?.image?.path.length),
         designation: data?.designation,
@@ -299,7 +302,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       dispatch(getUserDetails("profile"));
     } else {
       if (
-        UserDetails?.mentorDetails?.username ||
+        UserDetails?.userDetails?.username ||
         UserDetails?.about?.details ||
         UserDetails?.about?.contact?.mobile
       ) {
@@ -307,7 +310,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         setValue("email", UserDetails.email);
         setValue("mobile", UserDetails?.about?.contact?.mobile);
         setValue("about", UserDetails?.about?.details);
-        setValue("userName", UserDetails?.mentorDetails?.username);
+        setValue("userName", UserDetails?.userDetails?.username);
         setValue("facebook", UserDetails?.about?.socialMedia?.facebook);
         setValue("twitter", UserDetails?.about?.socialMedia?.twitter);
         setValue("instagram", UserDetails?.about?.socialMedia?.instagram);
@@ -368,80 +371,69 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                 <Card.Body>
                   <div className="e-profile">
                     <Form onSubmit={handleSubmit(submitHandler)}>
-                      <Row>
-                        <Col xs={12} className="mb-3 ">
-                          <div>
-                            <FilePond
-                              {...register("image", { required: true })}
-                              id="imageFile"
-                              files={files}
-                              onupdatefiles={onFilesUpdate}
-                              imagePreviewHeight={170}
-                              imageCropAspectRatio="1:1"
-                              imageResizeTargetWidth={200}
-                              imageResizeTargetHeight={200}
-                              stylePanelLayout="compact circle"
-                              styleLoadIndicatorPosition="center bottom"
-                              styleButtonRemoveItemPosition="center bottom"
-                              styleProgressIndicatorPosition="right bottom"
-                              styleButtonProcessItemPosition="right bottom"
-                              allowMultiple={false}
-                              maxFiles={1}
-                              maxFileSize="1MB"
-                              name="image"
-                              credits={false}
-                              allowFileTypeValidation={true}
-                              allowFileSizeValidation={true}
-                              minFileSize="1MB"
-                              acceptedFileTypes={["image/*"]}
-                              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-                              className="filepond--root filepond--panel-root"
-                              server={{
-                                process: (fieldName, file, metadata, load) => {
-                                  const formData = new FormData();
-                                  formData.append(fieldName, file, file.name);
-
-                                  axios
-                                    .post(
-                                      `${process.env.REACT_APP_API_URL}api/upload`,
-                                      formData
-                                    )
-                                    .then((response) => {
-                                      load(JSON.stringify(response.data));
-                                      setValue("image", response?.data, {
-                                        shouldTouch: true,
-                                        shouldValidate: true,
-                                        shouldDirty: true,
-                                      });
-                                    })
-                                    .catch((error) => {
-                                      console.log(error);
-                                    });
-                                },
-                              }}
-                            />
-                            <small className="form-text text-muted">
-                              For e.g : Your selfie or passport sized picture
-                              etc
-                            </small>
-                            {errors.image && (
-                              <div className="">
-                                <Alert
-                                  severity="error"
-                                  variant="outlined"
-                                  className="py-0 border-0"
-                                  style={{ fontSize: "0.8rem" }}
-                                >
-                                  {errors.image.message}
-                                </Alert>
-                              </div>
-                            )}
-                          </div>
-                          {
-                            // TODO: data from backend for given user would go here
-                          }
-                        </Col>
-                      </Row>
+                      <FilePond
+                        {...register("image", { required: true })}
+                        id="imageFile"
+                        files={files}
+                        onupdatefiles={onFilesUpdate}
+                        allowMultiple={false}
+                        name="image"
+                        stylePanelLayout="compact circle"
+                        imagePreviewHeight={170}
+                        imageCropAspectRatio="1:1"
+                        imageResizeTargetWidth={150}
+                        imageResizeTargetHeight={150}
+                        allowFileTypeValidation={true}
+                        allowFileSizeValidation={true}
+                        maxFileSize="1MB"
+                        labelMaxFileSizeExceeded={
+                          "File must be lesser than 1MB"
+                        }
+                        credits={false}
+                        className="w-1/2 text-sm"
+                        acceptedFileTypes={["image/*"]}
+                        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                        server={{
+                          process: (fieldName, file, metadata, load) => {
+                            const formData = new FormData();
+                            formData.append(fieldName, file, file.name);
+                            axios
+                              .post(
+                                `${process.env.REACT_APP_API_URL}api/upload`,
+                                formData
+                              )
+                              .then((response) => {
+                                load(JSON.stringify(response.data));
+                                setValue("image", response?.data, {
+                                  shouldTouch: true,
+                                  shouldValidate: true,
+                                  shouldDirty: true,
+                                });
+                              })
+                              .catch((error) => {
+                                throw new Error(error.message);
+                              });
+                          },
+                        }}
+                      />
+                      <small className="form-text text-muted">
+                        For e.g : Your selfie or passport sized picture etc
+                      </small>
+                      {errors.image && (
+                        <div className="">
+                          <Alert
+                            severity="error"
+                            variant="outlined"
+                            className="py-0 border-0"
+                            style={{ fontSize: "0.8rem" }}
+                          >
+                            {errors.image.message}
+                          </Alert>
+                        </div>
+                      )}
+                      {
+                        // TODO: data from backend for given user would go here
+                      }
                       <Row>
                         <Col xs={12} sm={6}>
                           <h4 className="pt-sm-2 pb-1 mb-0 text-nowrap">
@@ -842,7 +834,9 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                           type="submit"
                           onClick={() => {
                             setValue("name", name, { shouldTouch: true });
-                            setValue("email", email, { shouldTouch: true });
+                            setValue("email", email.toLowerCase(), {
+                              shouldTouch: true,
+                            });
                             setValue("userName", userName, {
                               shouldTouch: true,
                             });

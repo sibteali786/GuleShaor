@@ -39,8 +39,7 @@ const InstructorProfile = () => {
   useEffect(() => {
     dispatch(listMentorDetails(match.id));
     dispatch(listStudentsOfMentor(match.id));
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch, match]);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 
@@ -49,7 +48,7 @@ const InstructorProfile = () => {
   };
   return (
     <div>
-      {Object.keys(mentor).length === 0 ? (
+      {Object.keys(mentor)?.length === 0 ? (
         <Loader />
       ) : loading && loadingStudents ? (
         <Loader />
@@ -64,10 +63,10 @@ const InstructorProfile = () => {
                   <div className="backgroundPicture"></div>
                   <Col xs={12} className="px-4">
                     <Row style={{ height: "50px" }}>
-                      <Avatar
+                      <img
                         alt={mentor.name}
-                        src={"/" + mentor.mentorDetails.image}
-                        className="profileImage"
+                        src="/images/profilePic.png"
+                        className="profileImage "
                         style={{
                           transform: "translateY(-50px)",
                           width: "fit-content",
@@ -314,6 +313,7 @@ const InstructorProfile = () => {
                         if (index <= 4) {
                           return (
                             <Avatar
+                              key={index}
                               src={student.studentDetails.image}
                               alt={student.name}
                               sx={{

@@ -31,16 +31,16 @@
       font-size: clamp(0.8rem, 1vw, 1.2rem);
     }
 
-    button {
-      border-radius: 1.2rem;
-      background-color: $tertiaryColor;
-      transition: 300ms ease-out;
+    // button {
+    //   border-radius: 1.2rem;
+    //   background-color: $tertiaryColor;
+    //   transition: 300ms ease-out;
 
-      &:hover {
-        background-color: $primaryColor;
-        color: $textColor2;
-      }
-    }
+    //   &:hover {
+    //     background-color: $primaryColor;
+    //     color: $textColor2;
+    //   }
+    // }
 
     @media (max-width:900px) {
       display: none;

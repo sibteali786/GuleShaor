@@ -78,20 +78,20 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     // TODO: add submit handler
     setUserDetails({
       ...UserDetails,
-      mentorDetails: {
-        ...UserDetails.mentorDetails,
+      userDetails: {
+        ...UserDetails.userDetails,
         technical: data?.technical.split(","),
         interpersonal: data?.interpersonal.split(","),
         portfolioLink: data?.portfolioLink,
       },
       introVideo: {
-        ...UserDetails.mentorDetails.introVideo,
+        ...UserDetails.userDetails.introVideo,
         video: data?.videoLink,
       },
     });
     if (
-      UserDetails?.mentorDetails?.technical?.length > 0 &&
-      UserDetails?.mentorDetails?.interpersonal?.length > 0
+      UserDetails?.userDetails?.technical?.length > 0 &&
+      UserDetails?.userDetails?.interpersonal?.length > 0
     ) {
       try {
         dispatch(updateUserDetails(UserDetails));
@@ -115,15 +115,15 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   };
   useEffect(() => {
     if (
-      UserDetails?.mentorDetails?.technical?.length > 0 &&
-      UserDetails?.mentorDetails?.interpersonal?.length > 0 &&
-      UserDetails?.mentorDetails?.portfolioLink?.length > 0 &&
-      UserDetails?.mentorDetails?.introVideo?.video?.length > 0
+      UserDetails?.userDetails?.technical?.length > 0 &&
+      UserDetails?.userDetails?.interpersonal?.length > 0 &&
+      UserDetails?.userDetails?.portfolioLink?.length > 0 &&
+      UserDetails?.userDetails?.introVideo?.video?.length > 0
     ) {
-      setValue("technical", UserDetails?.mentorDetails?.technical);
-      setValue("interpersonal", UserDetails?.mentorDetails?.interpersonal);
-      setValue("portfolioLink", UserDetails?.mentorDetails?.portfolioLink);
-      setValue("videoLink", UserDetails?.mentorDetails?.introVideo?.video);
+      setValue("technical", UserDetails?.userDetails?.technical);
+      setValue("interpersonal", UserDetails?.userDetails?.interpersonal);
+      setValue("portfolioLink", UserDetails?.userDetails?.portfolioLink);
+      setValue("videoLink", UserDetails?.userDetails?.introVideo?.video);
     } else if (
       user?.mentorDetails?.technical?.length > 0 ||
       user?.mentorDetails?.interpersonal?.length > 0 ||

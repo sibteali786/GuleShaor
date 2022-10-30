@@ -122,6 +122,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
   const submitHandler = (data) => {
+    console.log("From submit Button", data?.email);
     setUserDetails({
       name: data?.name,
       email: data?.email,
@@ -129,7 +130,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
       userType: data?.userType,
     });
     if (UserDetails) {
-      dispatch(register(name, email, password, userType));
+      dispatch(register(name, email.toLowerCase(), password, userType));
       nextStep();
     }
   };
@@ -281,7 +282,7 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
               onClick={() => {
                 setValue("name", name, { shouldTouch: true });
-                setValue("email", email, { shouldTouch: true });
+                setValue("email", email.toLowerCase(), { shouldTouch: true });
                 setValue("password", password, { shouldTouch: true });
               }}
             >

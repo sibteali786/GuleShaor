@@ -39,6 +39,7 @@ import QualificationForm from "./components/MutliStepForms/Qualification/Qualifi
 import ProfileSetup from "./components/MutliStepForms/ProfileSetup/ProfileSetup";
 import SearchBox from "./components/SearchBox/SearchBox";
 import Users from "./components/Users/Users";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 // Register the plugins
 registerPlugin(
@@ -46,7 +47,8 @@ registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageResize,
   FilePondPluginImageCrop,
-  FilePondPluginImageTransform
+  FilePondPluginImageTransform,
+  FilePondPluginFileValidateSize
 );
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
