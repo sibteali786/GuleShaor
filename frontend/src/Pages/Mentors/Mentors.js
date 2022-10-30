@@ -36,7 +36,7 @@ const Mentors = () => {
           <Message>{error}</Message>
         </div>
       ) : !errorMentor ? (
-        <div className="flex flex-col justify-center content-center">
+        <div className="flex flex-col justify-center content-center mb-4">
           <Grid
             container
             spacing={2}

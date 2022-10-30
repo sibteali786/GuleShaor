@@ -41,9 +41,9 @@ const getStudents = asyncHandler(async (req, res) => {
       { $count: "Total" },
     ]);
     if (count.length === 0) {
-      res.json({ mentors: [], page, pages: 0 });
+      res.json({ students: [], page, pages: 0 });
     } else {
-      const mentors = await Mentor.aggregate([
+      const students = await Student.aggregate([
         {
           $unwind: "$studentDetails",
         },

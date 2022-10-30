@@ -34,7 +34,7 @@ const Students = () => {
       ) : error ? (
         <Message>{error}</Message>
       ) : !errorStudent ? (
-        <div className="flex flex-col justify-center content-center ">
+        <div className="flex flex-col justify-center content-center mb-4 ">
           <Grid
             container
             spacing={2}
