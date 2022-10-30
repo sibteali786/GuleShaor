@@ -40,6 +40,7 @@ const InstructorProfile = () => {
     dispatch(listMentorDetails(match.id));
     dispatch(listStudentsOfMentor(match.id));
   }, [dispatch, match]);
+  console.log(mentor, mentor?.introVideo?.video?.length > 0);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 
@@ -141,7 +142,7 @@ const InstructorProfile = () => {
                           ) : null}
                         </div>
                       </Col>
-                      {mentor?.about?.contact ? (
+                      {mentor?.about?.contact?.mobile?.length > 0 ? (
                         <Col xs={12}>
                           <Accordion className="shadow-none w-1/2 ">
                             <AccordionSummary
@@ -232,7 +233,7 @@ const InstructorProfile = () => {
                 </Row>
               ) : null}
 
-              {mentor?.about?.education ? (
+              {mentor?.about?.education?.school?.name?.length > 0 ? (
                 <div
                   className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full -mr-[1rem] -ml-[0.75rem] "
                   style={{ backgroundColor: "#F1F1F1" }}
@@ -296,87 +297,91 @@ const InstructorProfile = () => {
                 </Row>
               ) : null}
 
-              <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
-                <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    <h2 className="mb-4">Students</h2>
-                  </Grid>
-                  <Grid container item xs={12} alignItems="center">
-                    <AvatarGroup
-                      total={
-                        Math.abs(5 - students.length) < 5
-                          ? students.length + Math.abs(5 - students.length)
-                          : Math.abs(5 - students.length)
-                      }
-                    >
-                      {students.map((student, index) => {
-                        if (index <= 4) {
-                          return (
-                            <Avatar
-                              key={index}
-                              src={student.studentDetails.image}
-                              alt={student.name}
-                              sx={{
-                                width: 50,
-                                height: 50,
-                              }}
-                            />
-                          );
-                        } else {
-                          return false;
+              {students?.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                      <h2 className="mb-4">Students</h2>
+                    </Grid>
+                    <Grid container item xs={12} alignItems="center">
+                      <AvatarGroup
+                        total={
+                          Math.abs(5 - students.length) < 5
+                            ? students.length + Math.abs(5 - students.length)
+                            : Math.abs(5 - students.length)
                         }
-                      })}
-                    </AvatarGroup>
-                  </Grid>
-                  <Grid item xs={12}>
-                    {mentor.aboutStudents ? (
-                      <Typography
-                        variant="body2"
-                        style={{
-                          fontFamily: "Montserrat",
-                          color: "#5F5F5F",
-                          fontWeight: "bold",
-                        }}
                       >
-                        {mentor.aboutStudents}
-                      </Typography>
-                    ) : null}
+                        {students.map((student, index) => {
+                          if (index <= 4) {
+                            return (
+                              <Avatar
+                                key={index}
+                                src={student.studentDetails.image}
+                                alt={student.name}
+                                sx={{
+                                  width: 50,
+                                  height: 50,
+                                }}
+                              />
+                            );
+                          } else {
+                            return false;
+                          }
+                        })}
+                      </AvatarGroup>
+                    </Grid>
+                    <Grid item xs={12}>
+                      {mentor.aboutStudents ? (
+                        <Typography
+                          variant="body2"
+                          style={{
+                            fontFamily: "Montserrat",
+                            color: "#5F5F5F",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {mentor.aboutStudents}
+                        </Typography>
+                      ) : null}
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Row>
+                </Row>
+              ) : null}
 
-              <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
-                <Col xs={12} lg={6} className="span-4">
-                  <h3>Videos</h3>
-                  <ReactPlayer url={mentor.introVideo.video} />
-                </Col>
+              {mentor?.introVideo?.video?.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Col xs={12} lg={6} className="span-4">
+                    <h3>Videos</h3>
+                    <ReactPlayer url={mentor.introVideo.video} />
+                  </Col>
+                </Row>
+              ) : null}
 
-                <Col xs={12} lg={6} className="span-2">
-                  {mentor.mentorDetails.otherImages.length > 0 ? (
-                    <>
-                      <h3>Photos</h3>
-                      <ImageList cols={2} rowHeight={164}>
-                        {mentor.mentorDetails.otherImages.map((image, idx) => (
-                          <ImageListItem key={idx}>
-                            <img
-                              src={image}
-                              srcSet={image}
-                              alt={mentor.name}
-                              loading="lazy"
-                            />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
-                      <Button
-                        variant="text"
-                        style={{ fontWeight: "bold", color: "#196AA0" }}
-                      >
-                        More +
-                      </Button>
-                    </>
-                  ) : null}
-                </Col>
-              </Row>
+              {mentor.mentorDetails.otherImages.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Col xs={12} lg={6} className="span-2">
+                    <h3>Photos</h3>
+                    <ImageList cols={2} rowHeight={164}>
+                      {mentor.mentorDetails.otherImages.map((image, idx) => (
+                        <ImageListItem key={idx}>
+                          <img
+                            src={image}
+                            srcSet={image}
+                            alt={mentor.name}
+                            loading="lazy"
+                          />
+                        </ImageListItem>
+                      ))}
+                    </ImageList>
+                    <Button
+                      variant="text"
+                      style={{ fontWeight: "bold", color: "#196AA0" }}
+                    >
+                      More +
+                    </Button>
+                  </Col>
+                </Row>
+              ) : null}
             </div>
           </div>
         </>
