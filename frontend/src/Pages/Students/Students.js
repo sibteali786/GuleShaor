@@ -56,10 +56,6 @@ const Students = () => {
         </div>
       ) : (
         <div className="pt-[4rem] h-[100vh] flex flex-col justify-start content-center">
-          <SearchBox
-            optionValue={optionValue}
-            setOptionValue={setOptionValue}
-          />
           <div className="flex h-full justify-center content-center ">
             <div className="flex justify-center gap-3 items-center divide-x-2 divide-gray-600">
               <h2 className="text-gray-500 text-lg">404</h2>
