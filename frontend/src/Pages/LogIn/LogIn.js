@@ -94,6 +94,7 @@ const LogIn = () => {
         typeOfAlert="error"
         message={error}
       />
+
       <>
         <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -104,7 +105,10 @@ const LogIn = () => {
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form className="space-y-6" action="#" method="POST">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(submitHandler)}
+              >
                 <FormGroup className="w-full">
                   <Form.Label className="w-full text-left text-xs">
                     Email
