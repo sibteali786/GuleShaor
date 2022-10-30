@@ -1,13 +1,9 @@
 import { Pagination, PaginationItem } from "@mui/material";
 import React from "react";
-import {
-  Link,
-  MemoryRouter,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
+  const location = useLocation();
+  const path = location.pathname;
   return (
     pages > 1 && (
       <Pagination
@@ -18,9 +14,13 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
           <PaginationItem
             component={Link}
             to={
-              keyword
-                ? `/mentors/search/${keyword}/page/${item.page}`
-                : `/mentors/page/${item.page}`
+              path?.includes("mentors")
+                ? keyword
+                  ? `/mentors/search/${keyword}/page/${item.page}`
+                  : `/mentors/page/${item.page}`
+                : keyword
+                ? `/students/search/${keyword}/page/${item.page}`
+                : `/students/page/${item.page}`
             }
             {...item}
           />

@@ -63,11 +63,14 @@ const InstructorProfile = () => {
                 <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
                   <div className="backgroundPicture"></div>
                   <Col xs={12} className="px-4">
-                    <Row style={{ height: "50px" }}>
+                    <Row style={{ height: "70px" }}>
                       <img
                         alt={mentor.name}
-                        src="/images/profilePic.png"
-                        className="profileImage "
+                        src={
+                          !mentor?.mentorDetails?.image?.includes("/", 0)
+                            ? "/" + mentor?.mentorDetails?.image
+                            : mentor?.mentorDetails?.image}
+                        className="profileImage rounded-full"
                         style={{
                           transform: "translateY(-50px)",
                           width: "fit-content",

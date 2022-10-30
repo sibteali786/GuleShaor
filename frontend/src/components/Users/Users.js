@@ -3,15 +3,18 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import "./Users.scss";
 import { useLocation } from "react-router-dom";
-import Paginate from "../Paginate/Paginate";
 const Users = ({ mentor }) => {
   const location = useLocation();
   const params = useParams();
   const keyword = params?.keyword;
-  var imgPath = mentor?.mentorDetails?.image;
+  var imgPath = mentor?.mentorDetails
+    ? mentor?.mentorDetails?.image
+    : mentor?.studentDetails?.image;
+  console.log(imgPath);
   if (!imgPath?.includes("/", 0)) {
     imgPath = `/${imgPath}`;
   }
+  console.log(imgPath);
   return (
     <div>
       <div className="card-container border rounded-2 shadow">
@@ -39,15 +42,7 @@ const Users = ({ mentor }) => {
               : `/students/${mentor?._id}`
           }
         >
-          <img
-            className="round d-inline"
-            src={
-              location.pathname.includes("/mentors")
-                ? imgPath
-                : mentor?.studentDetails?.image
-            }
-            alt={mentor?.name}
-          />
+          <img className="round d-inline" src={imgPath} alt={mentor?.name} />
         </Link>
         <h5 className="xs:text-lg md:text-xl my-1">{mentor?.name}</h5>
         <a

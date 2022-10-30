@@ -26,6 +26,7 @@ const Mentors = () => {
       dispatch(listMentors(keyword, pageNumber, optionValue));
     }
   }, [dispatch, keyword, pageNumber, optionValue]);
+
   return (
     <div className="pt-[4rem] flex flex-col justify-center content-center px-[4rem]">
       <SearchBox optionValue={optionValue} setOptionValue={setOptionValue} />
