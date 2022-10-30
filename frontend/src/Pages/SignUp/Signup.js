@@ -135,170 +135,177 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
     }
   };
   return (
-    <div className="SignUp-container w-full">
-      <div className="container-signup" id="container1">
-        <div className="sign-up-container">
-          <form className="form-signup" onSubmit={handleSubmit(submitHandler)}>
-            <h1>Create Account</h1>
-            {error && <Message variant="outlined">{error}</Message>}
-            {loading && <FormLoader />}
-            <div className="social-container w-full text-center">
-              <a href="#" className="social">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="social">
-                <i className="fab fa-google-plus-g"></i>
-              </a>
-              <a href="#" className="social">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-            <p className="text-md w-full text-center">OR</p>
-            <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left text-sm">Name</Form.Label>
-              <Form.Control
-                {...registerHook("name", { required: true })}
-                type="text"
-                placeholder="Name"
-                value={name}
-                size="sm"
-              />
-              {touchedFields.name && errors.name && (
-                <div className="w-full ">
-                  <Alert
-                    severity="error"
-                    variant="outlined"
-                    className="py-0 border-0"
-                  >
-                    {errors.name.message}
-                  </Alert>
-                </div>
-              )}
-            </FormGroup>
-            <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left text-sm">
-                Email
-              </Form.Label>
-
-              <Form.Control
-                {...registerHook("email", { required: true })}
-                type="email"
-                placeholder="Email"
-                value={email}
-                size="sm"
-              />
-              {touchedFields.email && errors.email && (
-                <div className="w-full ">
-                  <Alert
-                    severity="error"
-                    variant="outlined"
-                    className="py-0 border-0"
-                  >
-                    {errors.email.message}
-                  </Alert>
-                </div>
-              )}
-            </FormGroup>
-            <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left text-sm">
-                Password
-              </Form.Label>
-              <Tooltip
-                title="Password be least 8 chars long, have at least 1 uppercase
-              letter, 1 lowercase letter, 1 number, and 1 special character"
-              >
-                <Form.Control
-                  {...registerHook("password", { required: true })}
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  size="sm"
-                />
-              </Tooltip>
-              {touchedFields.password && errors.password && (
-                <div className="w-full ">
-                  <Alert
-                    severity="error"
-                    variant="outlined"
-                    className="py-0 border-0"
-                  >
-                    {errors.password.message}
-                  </Alert>
-                </div>
-              )}
-            </FormGroup>
-            <FormGroup className="w-full ">
-              <Form.Label className="w-full text-left text-sm">
-                Confirm Password
-              </Form.Label>
-
-              <Form.Control
-                {...registerHook("confirmPassword", { required: true })}
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                size="sm"
-              />
-              {touchedFields.confirmPassword && errors.confirmPassword && (
-                <div className="w-full ">
-                  <Alert
-                    severity="error"
-                    variant="outlined"
-                    className="py-0 border-0"
-                  >
-                    {errors.confirmPassword.message}
-                  </Alert>
-                </div>
-              )}
-            </FormGroup>
-            <Form.Label className="text-sm">Choose Your User Type</Form.Label>
-            <Form.Select
-              aria-label="Mentor"
-              {...registerHook("userType", { required: true })}
-              name="userType"
-              value={userType}
-              size="sm"
+    <>
+      <h1 className="text-gray-700 w-full text-center">Create Account</h1>
+      <div className="SignUp-container w-full">
+        <div className="container-signup" id="container1">
+          <div className="sign-up-container">
+            <form
+              className="form-signup"
+              onSubmit={handleSubmit(submitHandler)}
             >
-              <option>Choose a User-Type</option>
-              <option value="mentor">Mentor</option>
-              <option value="student">Student</option>
-            </Form.Select>
-            {touchedFields.userType && errors.userType && (
-              <div className="w-full ">
-                <Alert
-                  severity="error"
-                  variant="outlined"
-                  className="py-0 border-0"
-                >
-                  {errors.userType.message}
-                </Alert>
+              {error && <Message variant="outlined">{error}</Message>}
+              {loading && <FormLoader />}
+              <div className="social-container w-full text-center">
+                <a href="#" className="social">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" className="social">
+                  <i className="fab fa-google-plus-g"></i>
+                </a>
+                <a href="#" className="social">
+                  <i className="fab fa-linkedin-in"></i>
+                </a>
               </div>
-            )}
-            <a href="#">Forgot your password?</a>
-            <SubmitButton
-              type="submit"
-              variant="contained"
-              size="small"
-              styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
-              onClick={() => {
-                setValue("name", name, { shouldTouch: true });
-                setValue("email", email.toLowerCase(), { shouldTouch: true });
-                setValue("password", password, { shouldTouch: true });
-              }}
-            >
-              Sign Up
-            </SubmitButton>
-            <span className="my-4 ">
-              {" "}
-              Already a user? <NavLink to="/login"> Sign In</NavLink>
-            </span>
-          </form>
+              <p className="text-md w-full text-center">OR</p>
+              <FormGroup className="w-full ">
+                <Form.Label className="w-full text-left text-xs">
+                  Name
+                </Form.Label>
+                <Form.Control
+                  {...registerHook("name", { required: true })}
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  size="md"
+                />
+                {touchedFields.name && errors.name && (
+                  <div className="w-full ">
+                    <Alert
+                      severity="error"
+                      variant="outlined"
+                      className="py-0 border-0"
+                    >
+                      {errors.name.message}
+                    </Alert>
+                  </div>
+                )}
+              </FormGroup>
+              <FormGroup className="w-full ">
+                <Form.Label className="w-full text-left text-xs">
+                  Email
+                </Form.Label>
+
+                <Form.Control
+                  {...registerHook("email", { required: true })}
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  size="md"
+                />
+                {touchedFields.email && errors.email && (
+                  <div className="w-full ">
+                    <Alert
+                      severity="error"
+                      variant="outlined"
+                      className="py-0 border-0"
+                    >
+                      {errors.email.message}
+                    </Alert>
+                  </div>
+                )}
+              </FormGroup>
+              <FormGroup className="w-full ">
+                <Form.Label className="w-full text-left text-xs">
+                  Password
+                </Form.Label>
+                <Tooltip
+                  title="Password be least 8 chars long, have at least 1 uppercase
+              letter, 1 lowercase letter, 1 number, and 1 special character"
+                >
+                  <Form.Control
+                    {...registerHook("password", { required: true })}
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    size="md"
+                  />
+                </Tooltip>
+                {touchedFields.password && errors.password && (
+                  <div className="w-full ">
+                    <Alert
+                      severity="error"
+                      variant="outlined"
+                      className="py-0 border-0"
+                    >
+                      {errors.password.message}
+                    </Alert>
+                  </div>
+                )}
+              </FormGroup>
+              <FormGroup className="w-full ">
+                <Form.Label className="w-full text-left text-xs">
+                  Confirm Password
+                </Form.Label>
+
+                <Form.Control
+                  {...registerHook("confirmPassword", { required: true })}
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  size="md"
+                />
+                {touchedFields.confirmPassword && errors.confirmPassword && (
+                  <div className="w-full ">
+                    <Alert
+                      severity="error"
+                      variant="outlined"
+                      className="py-0 border-0"
+                    >
+                      {errors.confirmPassword.message}
+                    </Alert>
+                  </div>
+                )}
+              </FormGroup>
+              <Form.Label className="text-xs">Choose Your User Type</Form.Label>
+              <Form.Select
+                aria-label="Mentor"
+                {...registerHook("userType", { required: true })}
+                name="userType"
+                value={userType}
+                size="md"
+              >
+                <option>Choose a User-Type</option>
+                <option value="mentor">Mentor</option>
+                <option value="student">Student</option>
+              </Form.Select>
+              {touchedFields.userType && errors.userType && (
+                <div className="w-full ">
+                  <Alert
+                    severity="error"
+                    variant="outlined"
+                    className="py-0 border-0"
+                  >
+                    {errors.userType.message}
+                  </Alert>
+                </div>
+              )}
+              <a href="#">Forgot your password?</a>
+              <SubmitButton
+                type="submit"
+                variant="contained"
+                size="small"
+                styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
+                onClick={() => {
+                  setValue("name", name, { shouldTouch: true });
+                  setValue("email", email.toLowerCase(), { shouldTouch: true });
+                  setValue("password", password, { shouldTouch: true });
+                }}
+              >
+                Sign Up
+              </SubmitButton>
+              <span className="my-4 ">
+                {" "}
+                Already a user? <NavLink to="/login"> Sign In</NavLink>
+              </span>
+            </form>
+          </div>
+        </div>
+        <div className="svg">
+          <img src="/images/signup.svg" alt="form svg" />
         </div>
       </div>
-      <div className="svg">
-        <img src="/images/signup.svg" alt="form svg" />
-      </div>
-    </div>
+    </>
   );
 };
 

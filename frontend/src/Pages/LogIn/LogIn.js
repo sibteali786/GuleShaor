@@ -94,120 +94,163 @@ const LogIn = () => {
         typeOfAlert="error"
         message={error}
       />
-      <div className="logInSignIn-container pt-16 w-full h-screen">
-        <div>
-          <div className="form-container">
-            <form onSubmit={handleSubmit(submitHandler)} className="form-login">
-              <h1>Sign in</h1>
-              {loading && <FormLoader />}
-              <div className="social-container">
-                <a href="#" className="social">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-google-plus-g"></i>
-                </a>
-                <a href="#" className="social">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-              <Typography variant="body1">or use your account</Typography>
-              <FormGroup className="w-full">
-                <Form.Label className="w-full text-left text-sm">
-                  Email
-                </Form.Label>
-                <Form.Control
-                  {...registerHook("email", { required: true })}
-                  placeholder="Email"
-                  value={email}
-                  size="sm"
-                />
-                {touchedFields.email && errors.email && (
-                  <div className="my-2">
-                    <Alert
-                      severity="error"
-                      variant="outlined"
-                      className="py-0 border-0"
-                    >
-                      {errors.email.message}
-                    </Alert>
-                  </div>
-                )}
-              </FormGroup>
-              <FormGroup className="w-full">
-                <Form.Label className="w-full text-left text-sm">
-                  Password
-                </Form.Label>
-                <Form.Control
-                  {...registerHook("password", { required: true })}
-                  placeholder="Password"
-                  type="password"
-                  value={password}
-                  size="sm"
-                />
-                {touchedFields.password && errors.password && (
-                  <div className="my-2">
-                    <Alert
-                      severity="error"
-                      variant="outlined"
-                      className="py-0 border-0"
-                    >
-                      {errors.password.message}
-                    </Alert>
-                  </div>
-                )}
-              </FormGroup>
-              <FormGroup className="w-full">
-                <Form.Label className="w-full text-left text-sm">
-                  UserType
-                </Form.Label>
-                <Form.Select
-                  aria-label="Mentor"
-                  {...registerHook("userType", { required: true })}
-                  name="userType"
-                  value={userType}
-                  size="sm"
+      <>
+        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-700">
+              Sign in to your account
+            </h2>
+          </div>
+
+          <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+              <form className="space-y-6" action="#" method="POST">
+                <FormGroup className="w-full">
+                  <Form.Label className="w-full text-left text-xs">
+                    Email
+                  </Form.Label>
+                  <input
+                    {...registerHook("email", { required: true })}
+                    placeholder="Email"
+                    value={email}
+                    size="md"
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-700 focus:outline-none focus:ring-gray-700 sm:text-sm"
+                  />
+                  {touchedFields.email && errors.email && (
+                    <div className="my-2">
+                      <Alert
+                        severity="error"
+                        variant="outlined"
+                        className="py-0 border-0"
+                      >
+                        {errors.email.message}
+                      </Alert>
+                    </div>
+                  )}
+                </FormGroup>
+                <FormGroup className="w-full">
+                  <Form.Label className="w-full text-left text-xs">
+                    Password
+                  </Form.Label>
+                  <Form.Control
+                    {...registerHook("password", { required: true })}
+                    placeholder="Password"
+                    type="password"
+                    value={password}
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-700 focus:outline-none focus:ring-gray-700 sm:text-sm"
+                    size="md"
+                  />
+                  {touchedFields.password && errors.password && (
+                    <div className="my-2">
+                      <Alert
+                        severity="error"
+                        variant="outlined"
+                        className="py-0 border-0"
+                      >
+                        {errors.password.message}
+                      </Alert>
+                    </div>
+                  )}
+                </FormGroup>
+                <FormGroup className="w-full">
+                  <Form.Label className="w-full text-left text-xs">
+                    UserType
+                  </Form.Label>
+                  <select
+                    aria-label="Mentor"
+                    {...registerHook("userType", { required: true })}
+                    name="userType"
+                    value={userType}
+                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-gray-700 focus:outline-none focus:ring-gray-700 sm:text-sm"
+                    size="md"
+                  >
+                    <option>Choose a User-Type</option>
+                    <option value="mentor">Mentor</option>
+                    <option value="student">Student</option>
+                  </select>
+                  {touchedFields.userType && errors.userType && (
+                    <div className="my-2">
+                      <Alert
+                        severity="error"
+                        variant="outlined"
+                        className="py-0 border-0"
+                      >
+                        {errors.userType.message}
+                      </Alert>
+                    </div>
+                  )}
+                </FormGroup>
+
+                <div>
+                  <SubmitButton
+                    type="submit"
+                    variant="contained"
+                    size="small"
+                    styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
+                    onClick={() => {
+                      setValue("email", email, { shouldTouch: true });
+                      setValue("password", password, { shouldTouch: true });
+                    }}
+                  >
+                    Sign In
+                  </SubmitButton>
+                </div>
+                <NavLink
+                  to="/profile-forms"
+                  className="text-gray-600 hover:text-gray-900 no-underline text-sm "
                 >
-                  <option>Choose a User-Type</option>
-                  <option value="mentor">Mentor</option>
-                  <option value="student">Student</option>
-                </Form.Select>
-                {touchedFields.userType && errors.userType && (
-                  <div className="my-2">
-                    <Alert
-                      severity="error"
-                      variant="outlined"
-                      className="py-0 border-0"
-                    >
-                      {errors.userType.message}
-                    </Alert>
+                  New Customer? Register
+                </NavLink>
+              </form>
+
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
                   </div>
-                )}
-              </FormGroup>
-              <a href="#">Forgot your password?</a>
-              <SubmitButton
-                type="submit"
-                variant="contained"
-                size="small"
-                styleCode={{ padding: "0.3rem 2rem", fontSize: "0.8rem" }}
-                onClick={() => {
-                  setValue("email", email, { shouldTouch: true });
-                  setValue("password", password, { shouldTouch: true });
-                }}
-              >
-                Sign In
-              </SubmitButton>
-              <NavLink to="/profile-forms">
-                New Customer?{" "}
-                <SubmitButton variant="text">Register</SubmitButton>
-              </NavLink>
-            </form>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="bg-white px-2 text-gray-500">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  <div>
+                    <a
+                      href="#"
+                      className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50 no-underline"
+                    >
+                      <span className="sr-only">Sign in with Facebook</span>
+                      <i className="fab fa-facebook-f"></i>
+                    </a>
+                  </div>
+
+                  <div>
+                    <a
+                      href="#"
+                      className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50 no-underline"
+                    >
+                      <span className="sr-only">Sign in with Gmail</span>
+                      <i className="fab fa-google-plus-g h-5 w-5"></i>
+                    </a>
+                  </div>
+
+                  <div>
+                    <a
+                      href="#"
+                      className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50 no-underline"
+                    >
+                      <span className="sr-only">Sign in with GitHub</span>
+                      <i className="fab fa-linkedin-in h-5 w-5"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="svg">
-          <img src="/images/form.svg" alt="form svg" />
-        </div>
-      </div>
+      </>
     </FormContainer>
   );
 };

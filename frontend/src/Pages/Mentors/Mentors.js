@@ -31,7 +31,7 @@ const Mentors = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <div className="pt-[5rem] h-[500px] flex flex-col justify-center content-center">
+        <div className="pt-[5rem] h-[100vh] px-[4rem] flex flex-col justify-center content-center">
           <Message>{error}</Message>
         </div>
       ) : !errorMentor ? (
@@ -60,12 +60,17 @@ const Mentors = () => {
           />
         </div>
       ) : (
-        <div className="pt-[4rem] h-[500px] flex flex-col justify-start content-center">
+        <div className="pt-[4rem] h-[100vh] flex flex-col justify-start content-center">
           <SearchBox
             optionValue={optionValue}
             setOptionValue={setOptionValue}
           />
-          <Message severity="warning">{errorMentor}</Message>
+          <div className="flex h-full justify-center content-center ">
+            <div className="flex justify-center gap-3 items-center divide-x-2 divide-gray-600">
+              <h2 className="text-gray-500 text-lg">404</h2>
+              <h2 className="pl-3 text-2xl">{errorMentor}</h2>
+            </div>
+          </div>
           <Paginate
             pages={pages}
             page={page}

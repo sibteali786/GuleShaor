@@ -4,7 +4,11 @@ import "./Message.scss";
 const Message = ({ children, variant, severity }) => {
   return (
     <div className="containerMessage w-full self-center">
-      <Alert variant={variant || "filled"} severity={severity || "error"}>
+      <Alert
+        className="self-center"
+        variant={variant || "filled"}
+        severity={severity || "error"}
+      >
         {children}
       </Alert>
     </div>

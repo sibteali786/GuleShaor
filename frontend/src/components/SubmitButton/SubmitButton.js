@@ -12,10 +12,10 @@ const SubmitButton = ({
   disabled,
 }) => {
   return (
-    <span className="submitButton mx-1">
+    <span className="submitButton mx-1 ">
       <Button
         variant={variant}
-        className={variant === "text" ? "" : "buttonRegister"}
+        className={variant === "text w-full" ? "" : "buttonRegister w-full"}
         type={type || ""}
         size={size}
         style={styleCode}
