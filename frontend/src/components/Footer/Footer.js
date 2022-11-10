@@ -142,7 +142,9 @@ const Footer = ({ isForm }) => {
       >
         {isForm ? (
           <div className="form-footer">
-            <p id="headingStylish">work with us</p>
+            <p id="headingStylish" className="font-bold my-4 pb-10">
+              Work With Us
+            </p>
             <div className="form-div">
               <IconButton aria-label="form-icon">
                 <EmailIcon />
