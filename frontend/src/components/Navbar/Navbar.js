@@ -50,16 +50,16 @@ const items = [
 ];
 const Navbar = () => {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
-  var prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
-    var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      document.getElementById("navbar").style.top = "0";
-    } else {
-      document.getElementById("navbar").style.top = "-70px";
-    }
-    prevScrollpos = currentScrollPos;
-  };
+  // var prevScrollpos = window.pageYOffset;
+  // window.onscroll = function () {
+  //   var currentScrollPos = window.pageYOffset;
+  //   if (prevScrollpos > currentScrollPos) {
+  //     document.getElementById("navbar").style.top = "0";
+  //   } else {
+  //     document.getElementById("navbar").style.top = "-70px";
+  //   }
+  //   prevScrollpos = currentScrollPos;
+  // };
   const [active, setActive] = useState(0);
   const location = useLocation();
   const [state, setState] = React.useState({
@@ -157,7 +157,7 @@ const Navbar = () => {
               .map((item, index) => (
                 <NavLink
                   key={item.name}
-                  className={`item`}
+                  className={`item text-sm`}
                   onClick={() => {
                     setActive(index);
                   }}
@@ -262,7 +262,7 @@ const Navbar = () => {
         ) : (
           <div className="logSign-Desktop">
             <Link to="/login">
-              <button className="hover:bg-orange-200 text-tertiaryColor py-1 px-2 rounded-md transition-color ease-out delay-100 hover:text-black">
+              <button className="hover:bg-orange-200 text-tertiaryColor text-md py-1 px-2 rounded-md transition-color ease-out delay-100 hover:text-black">
                 Log In
               </button>
             </Link>
