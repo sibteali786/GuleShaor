@@ -5,10 +5,12 @@ module.exports = {
     extend: {
       backgroundColor: {
         secondaryColor: "var(--secondaryColor)",
+        tertiaryColor: "var(--bg-tertiary-color)",
       },
       textColor: {
         primaryColor: "var(--textColor1)",
         secondaryColor: "var(--tertiaryColor)",
+        tertiaryColor: "var(--bg-tertiary-color)",
       },
       borderColor: {
         default: "var(--color-border-default)",

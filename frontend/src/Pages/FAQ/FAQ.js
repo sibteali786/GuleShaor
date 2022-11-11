@@ -9,7 +9,9 @@ const FAQ = () => {
   return (
     <div className="faq-container">
       <div className="svg-container">
-        <h2>Frequently Asked Questions</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+          Frequently Asked Questions
+        </h2>
         <div className="custom-shape-divider-top-1653762327">
           <svg
             data-name="Layer 1"

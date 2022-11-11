@@ -12,13 +12,13 @@ import Flicking from "@egjs/react-flicking";
 import resource from "../../Assets/Service/service2.jpg";
 const Resources = () => {
   return (
-    <div className="resource-container">
+    <div className="resource-container py-[8rem]">
       <Grid container spacing={2} alignItems="center" className="headers">
         <Grid item xs={12} md={6}>
           <h1>Free Student Resources</h1>
         </Grid>
         <Grid item xs={12} md={6}>
-          <p>
+          <p className="text-sm sm:text-md">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             dolore facilis impedit veritatis itaque labore totam sunt officiis
             vitae corporis voluptatum veniam, amet tempore cumque dolorem,

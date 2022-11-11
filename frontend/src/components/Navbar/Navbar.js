@@ -50,16 +50,16 @@ const items = [
 ];
 const Navbar = () => {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
-  var prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
-    var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      document.getElementById("navbar").style.top = "0";
-    } else {
-      document.getElementById("navbar").style.top = "-70px";
-    }
-    prevScrollpos = currentScrollPos;
-  };
+  // var prevScrollpos = window.pageYOffset;
+  // window.onscroll = function () {
+  //   var currentScrollPos = window.pageYOffset;
+  //   if (prevScrollpos > currentScrollPos) {
+  //     document.getElementById("navbar").style.top = "0";
+  //   } else {
+  //     document.getElementById("navbar").style.top = "-70px";
+  //   }
+  //   prevScrollpos = currentScrollPos;
+  // };
   const [active, setActive] = useState(0);
   const location = useLocation();
   const [state, setState] = React.useState({
@@ -111,9 +111,24 @@ const Navbar = () => {
     setAnchorEl(null);
   };
   return (
-    <div className="navContainer px-[4rem] py-2" id="navbar">
+    <div className="navContainer px-[4rem] bg-white py-2" id="navbar">
       <Link to="/">
-        <Logo className="logo" />
+        <svg
+          width="42"
+          height="37"
+          viewBox="0 0 42 37"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.7376 11.8126C12.7376 11.8126 8.83193 13.7734 12.7376 21.8557C12.7376 21.8557 7.5885 19.7036 4.36834 10.2503L3.20462 5.38819C3.20462 5.38819 2.48725 0.0478242 0.127925 0C0.127925 0 -2.74153 24.9642 18.6997 37C18.6997 37 19.6561 23.9918 17.0258 20.405C17.0418 20.4209 12.4985 13.0879 12.7376 11.8126Z"
+            fill="#252C33"
+          />
+          <path
+            d="M28.8703 11.8126C28.8703 11.8126 32.776 13.7734 28.8703 21.8557C28.8703 21.8557 34.0194 19.7036 37.2395 10.2503L38.4033 5.38819C38.4033 5.38819 39.1206 0.0478242 41.48 0C41.48 0 44.3494 24.9642 22.9082 37C22.9082 37 21.9517 23.9918 24.5821 20.405C24.5661 20.4209 29.1094 13.0879 28.8703 11.8126Z"
+            fill="#252C33"
+          />
+        </svg>
       </Link>
       <div className="menu">
         {userInfo
@@ -142,7 +157,7 @@ const Navbar = () => {
               .map((item, index) => (
                 <NavLink
                   key={item.name}
-                  className={`item`}
+                  className={`item text-sm`}
                   onClick={() => {
                     setActive(index);
                   }}
@@ -247,12 +262,12 @@ const Navbar = () => {
         ) : (
           <div className="logSign-Desktop">
             <Link to="/login">
-              <button className="hover:bg-orange-200 py-1 px-2 rounded-md transition-color ease-out delay-100 hover:text-black">
+              <button className="hover:bg-orange-200 text-tertiaryColor text-md py-1 px-2 rounded-md transition-color ease-out delay-100 hover:text-black">
                 Log In
               </button>
             </Link>
             <Link to="/profile-forms">
-              <button className="hover:bg-orange-200 hover:text-black py-1 px-2 rounded-md transition-color ease-out delay-100">
+              <button className="hover:bg-orange-200 text-tertiaryColor hover:text-black py-1 px-2 rounded-md transition-color ease-out delay-100">
                 Sign Up
               </button>
             </Link>
@@ -261,7 +276,7 @@ const Navbar = () => {
       </div>
       <div id="webapp_cover" onClick={toggleDrawer("right", true)}>
         <div id="menu_button">
-          <i className="fas fa-bars"></i>
+          <i className="fas fa-bars text-[#252c33] cursor-pointer"></i>
         </div>
       </div>
       <Drawer
