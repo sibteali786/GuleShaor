@@ -13,6 +13,8 @@ import { getUserDetails } from "../../../actions/userActions";
 import axios from "axios";
 import SnakBar from "../../SnakBar/SnakBar";
 import Message from "../../Message/Message";
+import { storage } from "../../../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
@@ -259,7 +261,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       userDetails: {
         userType: type,
         username: userName,
-        image: data?.image?.path.substring(16, data?.image?.path.length),
+        image: data?.image,
         designation: data?.designation,
       },
       about: {
@@ -280,6 +282,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         },
       },
     };
+
     setUserDetails({
       ...UserDetails,
     });
@@ -355,6 +358,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     const section = document.querySelector("#imageFile");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
   return (
     <>
       <SnakBar
@@ -391,25 +395,37 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                         }
                         credits={false}
                         className="w-1/2 text-sm"
-                        acceptedFileTypes={["image/*"]}
+                        acceptedFileTypes={["image/*", "file/*"]}
                         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                         server={{
                           process: (fieldName, file, metadata, load) => {
-                            const formData = new FormData();
-                            formData.append(fieldName, file, file.name);
-                            axios
-                              .post(
-                                `${process.env.REACT_APP_API_URL}api/upload`,
-                                formData
-                              )
+                            const imageRef = ref(
+                              storage,
+                              `profile_pictures/${file.name}`
+                            );
+                            const metaData = {
+                              contentType: file?.type,
+                            };
+                            uploadBytes(imageRef, file, metaData)
                               .then((response) => {
-                                load(JSON.stringify(response.data));
-                                setValue("image", response?.data, {
-                                  shouldTouch: true,
-                                  shouldValidate: true,
-                                  shouldDirty: true,
+                                load(JSON.stringify(response.metadata));
+                                getDownloadURL(imageRef).then((url) => {
+                                  setValue("image", url);
                                 });
                               })
+                              // axios
+                              //   .post(
+                              //     `${process.env.REACT_APP_API_URL}api/upload`,
+                              //     formData
+                              //   )
+                              //   .then((response) => {
+                              //     load(JSON.stringify(response.data));
+                              //     setValue("image", response?.data, {
+                              //       shouldTouch: true,
+                              //       shouldValidate: true,
+                              //       shouldDirty: true,
+                              //     });
+                              //   })
                               .catch((error) => {
                                 throw new Error(error.message);
                               });
