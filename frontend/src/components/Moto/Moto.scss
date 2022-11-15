@@ -9,150 +9,8 @@
     text-align: center;
   }
 
-  .WhoWeAre {
-    display: grid;
-    grid-template-columns: 0.1fr 0.4fr 0.4fr 0.1fr;
-    align-items: center;
-    row-gap: 0.5rem;
-    padding: 2rem;
-
-    p {
-      margin: 0 0;
-    }
-
-    .span-1 {
-      grid-column: 2/4;
-      position: relative;
-
-      @media (min-width: 650px) {
-        grid-column: 2/3;
-        grid-row: 1/2;
-      }
-
-      @media (min-width: 967px) {
-        grid-column: 2/3;
-        grid-row: 1/3;
-      }
-
-      @media (min-width: 1124px) {
-        grid-row: 1/4;
-      }
-
-      h3 {
-        font-family: "Without You";
-        @include headings(normal);
-        letter-spacing: 0.2rem;
-        position: relative;
-        left: 45px;
-        top: 10px;
-        z-index: 10;
-        font-weight: lighter;
-        margin: 0 0;
-
-        @media (max-width: 650px) {
-          left: 0;
-          top: 0;
-        }
-      }
-
-      .imageDiv {
-        @media (max-width: 650px) {
-          display: none;
-        }
-
-        img {
-          border-radius: 0.7rem;
-        }
-
-        &:after {
-          content: "";
-          position: absolute;
-          top: 2vh;
-          left: 2vw;
-          width: 140px;
-          height: 30vh;
-          border-radius: 0.7rem;
-          background-color: #fad5a5;
-        }
-      }
-
-      img {
-        z-index: 5;
-        width: 80%;
-        height: auto;
-        position: relative;
-        top: -18px;
-      }
-    }
-
-    .span-2 {
-      grid-column: 2/4;
-
-      @media (min-width: 650px) {
-        grid-column: 3/4;
-        grid-row: 1/2;
-      }
-
-      @media (min-width: 967px) {
-        grid-column: 3/4;
-        grid-row: 1/2;
-      }
-
-      h4 {
-        color: $textColorHeadings;
-        font-size: clamp(0.8rem, 3vw, 1.6rem);
-        font-weight: 500;
-        text-transform: uppercase;
-        margin: 1rem 0;
-      }
-
-      p {
-        text-align: justify;
-        font-family: $fontfamily2;
-        color: #4140429c;
-        font-weight: 600;
-        font-size: clamp(0.4rem, 2vw, 1rem);
-      }
-    }
-
-    .span-3 {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      grid-column: 2/4;
-
-      @media (min-width: 650px) {
-        grid-column: 2/4;
-        grid-row: 2/3;
-      }
-
-      @media (min-width: 967px) {
-        grid-column: 3/4;
-        grid-row: 2/3;
-        align-items: flex-start;
-      }
-
-      button {
-        background-color: $secondaryColor;
-        border-radius: 0.2rem;
-        font-family: $fontfamily2;
-        font-weight: 400;
-        color: $textColor2;
-        margin-top: 1rem;
-      }
-
-      p {
-        text-align: justify;
-        font-family: $fontfamily2;
-        color: #4140429c;
-        font-weight: 600;
-        font-size: clamp(0.4rem, 2vw, 1rem);
-      }
-    }
-  }
 
   .WhatWeDo {
-    padding: 0 4rem;
     margin: 2rem 0;
 
     h3 {
@@ -240,7 +98,6 @@
   }
 
   .letsColloborate {
-    padding: 2rem;
 
     h3 {
       font-family: "Without You";

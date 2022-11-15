@@ -3,7 +3,7 @@ import "./Courses.scss";
 const Courses = ({ course, mentor }) => {
   return (
     <>
-      <div id="container">
+      <div id="container" className="xs:shadow-md md:shadow-lg">
         <div className="product-details">
           <h1>{course.name}</h1>
           <span className="hint-star star">
@@ -17,7 +17,7 @@ const Courses = ({ course, mentor }) => {
           <p className="information">{course.details}</p>
 
           <div className="control">
-            <button className="btn">
+            <button className="buttonCourse">
               <span className="price">$250</span>
               <span className="shopping-cart">
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>

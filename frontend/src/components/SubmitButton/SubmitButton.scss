@@ -6,6 +6,7 @@
         background-color: $textColor2;
         color: $secondaryColor;
         transition: transform 80ms ease-in;
+        border: 1px solid $secondaryColor;
 
         &:active {
             transform: scale(0.95);
@@ -15,6 +16,7 @@
             transform: scale(1.05);
             background: $secondaryColor;
             color: $textColor2;
+            border: 1px solid $textColor2;
         }
     }
 }

@@ -3,15 +3,14 @@
 .navContainer {
   z-index: 10;
   margin: 0 0;
-  background-color: #252c33;
+  background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
-  padding: 0.6rem 0;
   transition: all 0.3s ease-in-out;
 
   a {
@@ -22,36 +21,22 @@
     letter-spacing: 0.1rem;
   }
 
-  .logo {
-    margin-left: 2rem;
-  }
 
   .logSign-Desktop {
     display: flex;
     align-items: center;
-    margin-right: 2rem;
-
-    a {
-      margin: 0 0.5rem;
-      font-size: clamp(0.8rem, 1vw, 1.2rem);
-    }
-
-    button {
-      border-radius: 1.2rem;
-      background-color: $tertiaryColor;
-      transition: 300ms ease-out;
-
-      &:hover {
-        background-color: $primaryColor;
-        color: $textColor2;
-      }
-    }
 
     @media (max-width:900px) {
       display: none;
     }
   }
 
+  .MuiMenuItem-root {
+    a {
+      text-decoration: none;
+      color: #252c33;
+    }
+  }
 
 }
 
@@ -94,8 +79,8 @@
   }
 
   .active {
-    background-color: #fff;
-    color: #252c33 !important;
+    background-color: #252c33;
+    color: #fff !important;
 
     &:before {
       content: '';
@@ -104,7 +89,7 @@
       right: 0;
       width: 0;
       height: 2px;
-      background-color: #252c33 !important;
+      background-color: #fff !important;
       transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -122,7 +107,7 @@
     cursor: pointer;
     transition: color .3s ease-out;
     text-decoration: none;
-    color: #fff;
+    color: #252C33;
     text-transform: uppercase;
     font-size: clamp(0.7rem, 0.5vw, 1rem);
     position: relative;
@@ -134,7 +119,7 @@
       right: 0;
       width: 0;
       height: 2px;
-      background-color: $secondaryColor;
+      background-color: $tertiaryColor;
       transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 

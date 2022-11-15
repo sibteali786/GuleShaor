@@ -1,15 +1,17 @@
 import {
-  Container,
   Button,
   Typography,
-  TextField,
-  IconButton,
   Grid,
   Collapse,
   Stack,
   Avatar,
   AvatarGroup,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Col, Container, Row } from "react-bootstrap";
 import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
 import "./InstructorProfile.scss";
@@ -18,7 +20,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
 import AddIcon from "@mui/icons-material/Add";
 import { Link, useParams } from "react-router-dom";
-import { Player, BigPlayButton } from "video-react";
+import ReactPlayer from "react-player/youtube";
 import Courses from "../../components/Courses/Courses";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -33,25 +35,11 @@ const InstructorProfile = () => {
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
   const { loadingStudents, errorStudents, students } = studentsOfMentors;
-  console.log(students);
   const match = useParams();
   useEffect(() => {
     dispatch(listMentorDetails(match.id));
     dispatch(listStudentsOfMentor(match.id));
-    if (Object.keys(mentor).length !== 0) {
-      setInputFields(mentor.about.skills);
-    }
-    // eslint-disable-next-line
-  }, []);
-  const [inputFields, setInputFields] = useState([]);
-  const [inputValue, setinputValue] = useState("");
-  const handleAddFields = () => {
-    if (inputValue === "") {
-      console.log("Not Allowed");
-    } else {
-      setInputFields([...inputFields, inputValue]);
-    }
-  };
+  }, [dispatch, match]);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 
@@ -60,213 +48,346 @@ const InstructorProfile = () => {
   };
   return (
     <div>
-      {Object.keys(mentor).length === 0 ? (
+      {Object.keys(mentor)?.length === 0 ? (
         <Loader />
       ) : loading && loadingStudents ? (
         <Loader />
       ) : error && errorStudents ? (
         <Message>{error}</Message>
       ) : (
-        <div className="Instrcutor-container">
-          <div className="backgroundPicture"></div>
-          <Container maxWidth="lg" className="grids">
-            <Grid
-              container
-              spacing={2}
-              alignItems="flex-start"
-              justifyContent="space-between"
-              style={{ marginTop: "0px" }}
-              className="span-1"
-            >
-              <Grid item className="instName">
-                <Avatar
-                  alt={mentor.name}
-                  src={mentor.mentorDetails.profilePicture}
-                  sx={{
-                    width: 120,
-                    height: 120,
-                    position: "relative",
-                    top: "-10vh",
-                  }}
-                />
-                <Grid
-                  item
-                  style={{ marginLeft: "2rem", height: "fit-content" }}
+        <>
+          <div className="px-[4rem] profileContainer">
+            <div className="w-4/6 pt-[6rem]">
+              {mentor?.name && mentor?.mentorDetails ? (
+                <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
+                  <div className="backgroundPicture"></div>
+                  <Col xs={12} className="px-4">
+                    <Row style={{ height: "70px" }}>
+                      <img
+                        alt={mentor.name}
+                        src={
+                          !mentor?.mentorDetails?.image?.includes("/", 0)
+                            ? "/" + mentor?.mentorDetails?.image
+                            : mentor?.mentorDetails?.image
+                        }
+                        className="profileImage border-4 border-white rounded-full p-0"
+                        style={{
+                          transform: "translateY(-50px)",
+                          width: "fit-content",
+                          height: "100px",
+                        }}
+                      />
+                    </Row>
+                    <Row>
+                      <Col xs={12} className="instName">
+                        <div style={{ height: "fit-content" }}>
+                          <h3 className="xs:text-xl md:text-2xl">
+                            {mentor.name}
+                          </h3>
+                          <a href="email:johnDoe" className="no-underline">
+                            {mentor.mentorDetails.username}
+                          </a>
+                          {mentor?.mentorDetails?.interpersonal.length > 0 ? (
+                            <div>
+                              <Accordion className="shadow-none w-1/2 ">
+                                <AccordionSummary
+                                  className="p-0 m-0"
+                                  expandIcon={<ExpandMoreIcon />}
+                                  aria-controls="panel1a-content"
+                                  id="panel1a-header"
+                                >
+                                  <h6 className="m-0 text-gray-600">
+                                    Technical Skills
+                                  </h6>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  {mentor?.mentorDetails?.technical.map(
+                                    (skill, idx) => (
+                                      <p
+                                        className="text-gray-500 my-0"
+                                        key={idx}
+                                      >
+                                        {skill}
+                                      </p>
+                                    )
+                                  )}
+                                </AccordionDetails>
+                              </Accordion>
+                            </div>
+                          ) : null}
+                          {mentor?.mentorDetails?.interpersonal.length > 0 ? (
+                            <div>
+                              <Accordion className="shadow-none w-1/2 ">
+                                <AccordionSummary
+                                  className="p-0"
+                                  expandIcon={<ExpandMoreIcon />}
+                                  aria-controls="panel1a-content"
+                                  id="panel1a-header"
+                                >
+                                  <h6 className="m-0 text-gray-600">
+                                    Interpersonal Skills
+                                  </h6>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                  {mentor?.mentorDetails?.interpersonal.map(
+                                    (skill, idx) => (
+                                      <p
+                                        className="text-gray-500 my-0"
+                                        key={idx}
+                                      >
+                                        {skill}
+                                      </p>
+                                    )
+                                  )}
+                                </AccordionDetails>
+                              </Accordion>
+                            </div>
+                          ) : null}
+                        </div>
+                      </Col>
+                      {mentor?.about?.contact?.mobile?.length > 0 ? (
+                        <Col xs={12}>
+                          <Accordion className="shadow-none w-1/2 ">
+                            <AccordionSummary
+                              className="p-0 m-0"
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                            >
+                              <h6 className="text-blue-600">Contact Info</h6>
+                            </AccordionSummary>
+                            <AccordionDetails className="py-0 px-1">
+                              <div className="my-2">
+                                <i className="fas fa-phone text-2xl"></i>{" "}
+                                {mentor?.about?.contact?.mobile}
+                              </div>
+                            </AccordionDetails>
+                          </Accordion>
+                        </Col>
+                      ) : null}
+                      <Col
+                        xs={12}
+                        className="d-flex justify-start align-start mt-2 mb-4"
+                      >
+                        <Button
+                          variant="contained"
+                          className="py-1 hover:text-black "
+                          style={{
+                            backgroundColor: "#196AA0",
+                            borderRadius: "1.3rem",
+                          }}
+                        >
+                          Follow
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              ) : null}
+
+              {mentor?.about ? (
+                <Row
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-2"
+                  style={{ backgroundColor: "#F1F1F1" }}
                 >
-                  <h3>{mentor.name}</h3>
-                  <a href="email:johnDoe">{mentor.mentorDetails.username}</a>
-                  {mentor.about.hobbies.map((hobby, idx) => (
-                    <p key={idx}>{hobby}</p>
-                  ))}
-                </Grid>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  style={{ backgroundColor: "#196AA0", borderRadius: "1.3rem" }}
-                >
-                  Follow
-                </Button>
-              </Grid>
-            </Grid>
-            <Container
-              maxWidth="md"
-              style={{ backgroundColor: "#F1F1F1", borderRadius: "1rem" }}
-              className="span-3"
-            >
-              <Collapse in={checked} collapsedSize={150}>
-                <h2>{mentor.about.heading}</h2>
-                <Typography variant="body2">{mentor.about.details}</Typography>
-              </Collapse>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                }}
-              >
-                {inputFields.map((inputField, index) => (
-                  <Button
-                    key={index}
-                    variant="contained"
-                    size="small"
-                    style={{
-                      color: "#76A4CE",
-                      backgroundColor: "#FFF",
-                      borderRadius: "1rem",
-                      margin: "0.2rem",
-                    }}
-                  >
-                    #{inputField}
-                  </Button>
-                ))}
-                <TextField
-                  label="Skill"
-                  onChange={(e) => {
-                    setinputValue(e.target.value);
-                  }}
-                  size="small"
-                />
-                <IconButton
-                  onClick={() => handleAddFields()}
-                  style={{
-                    color: "#76A4CE",
-                    backgroundColor: "#FFF",
-                    borderRadius: "2rem",
-                    margin: "0.5rem",
-                  }}
-                >
-                  <AddIcon />
-                </IconButton>
-                <Button
-                  variant="text"
-                  style={{ fontWeight: "bold", color: "#196AA0" }}
-                  onClick={handleChange}
-                >
-                  Read More
-                </Button>
-              </div>
-              <Link to="/profile" style={{ textDecoration: "none" }}>
-                <Button
-                  variant="text"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#196AA0",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  More Posts by {mentor.name}
-                </Button>
-              </Link>
-            </Container>
-            <Container maxWidth="md" className="span-5">
-              <h2>Offered Courses</h2>
-              <Stack spacing={1}>
-                {mentor.courses.map((course) => (
-                  <Courses key={course._id} course={course} mentor={mentor} />
-                ))}
-              </Stack>
-            </Container>
-            <Container maxWidth="md" className="span-6">
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <h2>Students</h2>
-                </Grid>
-                <Grid container item xs={12} alignItems="center">
-                  <AvatarGroup
-                    total={
-                      Math.abs(5 - students.length) < 5
-                        ? students.length + Math.abs(5 - students.length)
-                        : Math.abs(5 - students.length)
-                    }
-                  >
-                    {students.map((student, index) => {
-                      if (index <= 4) {
-                        return (
-                          <Avatar
-                            src={student.studentDetails.profilePicture}
-                            alt={student.name}
-                            sx={{
-                              width: 50,
-                              height: 50,
-                            }}
-                          />
-                        );
-                      } else {
-                        return false;
+                  {mentor.about.details ? (
+                    <>
+                      {
+                        // TODO: resolve skills box disappear when reload mentor page
                       }
-                    })}
-                  </AvatarGroup>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography
-                    variant="body2"
-                    style={{
-                      fontFamily: "Montserrat",
-                      color: "#5F5F5F",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {mentor.studentDescription}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Container>
-            <Container maxWidth="sm" className="span-4">
-              <h2>Videos</h2>
-              <Player
-                playsInline
-                poster={mentor.introVideo.videoPoster}
-                src={mentor.introVideo.video}
-              >
-                <BigPlayButton position="center" />
-              </Player>
-            </Container>
-            <Container maxWidth="sm" className="span-2">
-              <h4>Photos</h4>
-              <ImageList cols={2} rowHeight={164}>
-                {mentor.mentorDetails.otherImages.map((image, idx) => (
-                  <ImageListItem key={idx}>
-                    <img
-                      src={image}
-                      srcSet={image}
-                      alt={mentor.name}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-              <Button
-                variant="text"
-                style={{ fontWeight: "bold", color: "#196AA0" }}
-              >
-                More +
-              </Button>
-            </Container>
-          </Container>
-        </div>
+                      <Collapse in={checked} collapsedSize={120}>
+                        <h3 className="mb-4">About</h3>
+                        <Typography variant="body2">
+                          {mentor.about.details}
+                        </Typography>
+                      </Collapse>
+                      <div
+                        className="my-3"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "flex-start",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <Button
+                          variant="text"
+                          style={{ fontWeight: "bold", color: "#196AA0" }}
+                          onClick={handleChange}
+                        >
+                          Read More
+                        </Button>
+                      </div>
+                      <Link to="/profile" style={{ textDecoration: "none" }}>
+                        <Button
+                          variant="text"
+                          style={{
+                            fontWeight: "bold",
+                            color: "#196AA0",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          More Posts by {mentor.name}
+                        </Button>
+                      </Link>
+                    </>
+                  ) : null}
+                </Row>
+              ) : null}
+
+              {mentor?.about?.education?.school?.name?.length > 0 ? (
+                <div
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full -mr-[1rem] -ml-[0.75rem] "
+                  style={{ backgroundColor: "#F1F1F1" }}
+                >
+                  <h3 className="mb-4">Education</h3>
+                  <div className="border-b-2 border-gray-200 mx-4 p-0">
+                    <h5 className="ml-2">School</h5>
+                    <div className="ml-2 mt-3">
+                      <h6 className="m-0 mt-1">
+                        {mentor?.about?.education?.school?.name}
+                      </h6>
+                      <p className="text-gray-700 m-0 mb-3 text-sm">
+                        Passing Grade: {mentor?.about?.education?.school?.grade}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border-b-2 border-gray-200 mx-4 p-0">
+                    <h5 className="ml-2 mt-4">College</h5>
+                    <div className="ml-2 mt-3">
+                      <h6 className="m-0 mt-1">
+                        {mentor?.about?.education?.college?.name}
+                      </h6>
+                      <p className="text-gray-700 m-0 mb-3 text-sm">
+                        Passing Grade:{" "}
+                        {mentor?.about?.education?.college?.grade}
+                      </p>
+                    </div>
+                  </div>
+                  <div className=" mx-4 p-0">
+                    <h5 className="ml-2 mt-4">University</h5>
+                    <div className="ml-2 mt-3">
+                      <h6 className="m-0 mt-1">
+                        {mentor?.about?.education?.university?.name}
+                      </h6>
+                      <p className="text-gray-500 m-0">
+                        {mentor?.about?.education?.university?.degree}
+                      </p>
+                      <p className="text-gray-700 m-0 mb-3 text-sm">
+                        Passing Cumulative GPA:{" "}
+                        {mentor?.about?.education?.university?.cgpa}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {mentor.courses.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4">
+                  <>
+                    <h3 className="mb-5">Offered Courses</h3>
+                    <Stack spacing={1}>
+                      {mentor.courses.map((course) => (
+                        <Courses
+                          key={course._id}
+                          course={course}
+                          mentor={mentor}
+                        />
+                      ))}
+                    </Stack>
+                  </>
+                </Row>
+              ) : null}
+
+              {students?.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                      <h2 className="mb-4">Students</h2>
+                    </Grid>
+                    <Grid container item xs={12} alignItems="center">
+                      <AvatarGroup
+                        total={
+                          Math.abs(5 - students.length) < 5
+                            ? students.length + Math.abs(5 - students.length)
+                            : Math.abs(5 - students.length)
+                        }
+                      >
+                        {students.map((student, index) => {
+                          if (index <= 4) {
+                            return (
+                              <Avatar
+                                key={index}
+                                src={student.studentDetails.image}
+                                alt={student.name}
+                                sx={{
+                                  width: 50,
+                                  height: 50,
+                                }}
+                              />
+                            );
+                          } else {
+                            return false;
+                          }
+                        })}
+                      </AvatarGroup>
+                    </Grid>
+                    <Grid item xs={12}>
+                      {mentor.aboutStudents ? (
+                        <Typography
+                          variant="body2"
+                          style={{
+                            fontFamily: "Montserrat",
+                            color: "#5F5F5F",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {mentor.aboutStudents}
+                        </Typography>
+                      ) : null}
+                    </Grid>
+                  </Grid>
+                </Row>
+              ) : null}
+
+              {mentor?.introVideo?.video?.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Col xs={12} lg={6} className="span-4">
+                    <h3>Videos</h3>
+                    <ReactPlayer url={mentor.introVideo.video} />
+                  </Col>
+                </Row>
+              ) : null}
+
+              {mentor.mentorDetails.otherImages.length > 0 ? (
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                  <Col xs={12} lg={6} className="span-2">
+                    <h3>Photos</h3>
+                    <ImageList cols={2} rowHeight={164}>
+                      {mentor.mentorDetails.otherImages.map((image, idx) => (
+                        <ImageListItem key={idx}>
+                          <img
+                            src={image}
+                            srcSet={image}
+                            alt={mentor.name}
+                            loading="lazy"
+                          />
+                        </ImageListItem>
+                      ))}
+                    </ImageList>
+                    <Button
+                      variant="text"
+                      style={{ fontWeight: "bold", color: "#196AA0" }}
+                    >
+                      More +
+                    </Button>
+                  </Col>
+                </Row>
+              ) : null}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

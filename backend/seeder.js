@@ -1,11 +1,11 @@
-import  mongoose from 'mongoose';
-import dotenv from 'dotenv'
-import colors from 'colors'
-import mentors from './data/mentors.js';
-import Mentor from "./models/mentorModel.js";
-import connectDB from './config/db.js';
-import Student from './models/studentModel.js';
-import students from './data/student.js';
+const  mongoose =   require('mongoose')
+const dotenv =   require('dotenv')
+const colors =   require('colors')
+const mentors =   require('./data/mentors.js')
+const Mentor =   require("./models/mentorModel.js")
+const connectDB =   require('./config/db.js')
+const Student =   require('./models/studentModel.js')
+const students =   require('./data/student.js')
 
 dotenv.config();
 connectDB();
