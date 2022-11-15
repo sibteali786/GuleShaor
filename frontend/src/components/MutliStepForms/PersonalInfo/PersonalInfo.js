@@ -823,12 +823,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                         </Col>
                       </Row>
                       <div className="col d-flex justify-content-end mt-5">
-                        <button
-                          className="py-1 px-3 bg-gradient bg-dark rounded-1"
-                          onClick={() => prevStep()}
-                        >
-                          Previous
-                        </button>
                         <SubmitButton
                           variant="outlined"
                           type="submit"

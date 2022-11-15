@@ -439,10 +439,10 @@ const QualificationForm = ({
                       <div>
                         <div className="col d-flex justify-content-end mt-5">
                           <button
-                            className="py-1 px-3 bg-gradient bg-dark rounded-1"
+                            className="py-1 px-3 hover:bg-white hover:text-black hover:border-2 hover:border-black bg-[#252C33] border-2 border-white text-primaryColor rounded-1 transition-all hover:scale-105 ease-in-out delay-80 "
                             onClick={() => prevStep()}
                           >
-                            Previous
+                            Previous Step
                           </button>
                           <SubmitButton
                             variant="outlined"
