@@ -86,6 +86,7 @@ const Navbar = () => {
       imgPath = userInfo?.image;
       setImgPath(imgPath);
     }
+
     // In case User details not fetched
     if (imgPath?.length === 0) {
       if (userUpdatedDetails?.image) {

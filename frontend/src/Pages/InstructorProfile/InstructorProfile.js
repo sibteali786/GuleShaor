@@ -40,7 +40,6 @@ const InstructorProfile = () => {
     dispatch(listMentorDetails(match.id));
     dispatch(listStudentsOfMentor(match.id));
   }, [dispatch, match]);
-  console.log(mentor, mentor?.introVideo?.video?.length > 0);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 
@@ -69,8 +68,9 @@ const InstructorProfile = () => {
                         src={
                           !mentor?.mentorDetails?.image?.includes("/", 0)
                             ? "/" + mentor?.mentorDetails?.image
-                            : mentor?.mentorDetails?.image}
-                        className="profileImage rounded-full"
+                            : mentor?.mentorDetails?.image
+                        }
+                        className="profileImage border-4 border-white rounded-full p-0"
                         style={{
                           transform: "translateY(-50px)",
                           width: "fit-content",
