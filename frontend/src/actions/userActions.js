@@ -160,11 +160,6 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
       type: UPDATE_USER_DETAILS_SUCCESS,
       payload: data,
     });
-
-    dispatch({
-      type: USER_DETAILS_SUCCESS,
-      payload: data,
-    });
     // saving user in the local storage so as to restore session / page when it comes again after some time
     // localStorage.setItem("userUpdatedDetails", JSON.stringify(data));
   } catch (error) {
