@@ -94,12 +94,7 @@ const Navbar = () => {
         setImgPath(imgPath);
       }
     }
-    //making sure it is relative
-    if (!imgPath?.includes("/", 0)) {
-      imgPath = `/${imgPath}`;
-      setImgPath(imgPath);
-    }
-  }, [user, userInfo, imgPath]);
+  }, [user, userInfo, imgPath, userUpdateDetails]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
