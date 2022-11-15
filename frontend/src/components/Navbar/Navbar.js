@@ -75,13 +75,25 @@ const Navbar = () => {
   // Getting image
   useEffect(() => {
     var imgPath = "";
-    if (user?.image?.length > 0) {
-      imgPath = "/" + user?.image;
+    if (user) {
+      if (userInfo?.userType === "student") {
+        imgPath = user?.studentDetails?.image;
+      } else if (userInfo?.userType === "mentor") {
+        imgPath = user?.mentorDetails?.image;
+      }
       setImgPath(imgPath);
-    } else {
+    } else if (userInfo?.image) {
       imgPath = userInfo?.image;
       setImgPath(imgPath);
     }
+    // In case User details not fetched
+    if (imgPath?.length === 0) {
+      if (userUpdatedDetails?.image) {
+        imgPath = userUpdatedDetails?.image;
+        setImgPath(imgPath);
+      }
+    }
+    //making sure it is relative
     if (!imgPath?.includes("/", 0)) {
       imgPath = `/${imgPath}`;
       setImgPath(imgPath);
