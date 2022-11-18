@@ -18,6 +18,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
+import store from "../../store";
 const items = [
   {
     name: "Mentors",
@@ -72,10 +73,18 @@ const Navbar = () => {
   const { userUpdatedDetails } = userUpdateDetails;
   const userDetails = useSelector((state) => state.userDetails);
   const { user } = userDetails;
-  // Getting image
+  const profileImageDetails = useSelector((state) => state.profileImage);
+  const { userProfileImage } = profileImageDetails;
+
+  store.subscribe(() => {
+    return store.getState();
+  });
+
   useEffect(() => {
     var imgPath = "";
-    if (user) {
+    if (userProfileImage) {
+      setImgPath(userProfileImage);
+    } else if (user) {
       if (userInfo?.userType === "student") {
         imgPath = user?.studentDetails?.image;
       } else if (userInfo?.userType === "mentor") {
@@ -94,7 +103,7 @@ const Navbar = () => {
         setImgPath(imgPath);
       }
     }
-  }, [user, userInfo, imgPath, userUpdateDetails]);
+  }, [user, userInfo, imgPath, userUpdatedDetails, userProfileImage]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {

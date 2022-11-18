@@ -16,6 +16,7 @@ import {
   userLoginReducer,
   userRegisterReducer,
 } from "./Reducers/userReducer";
+import { imageUploadReducer } from "./Reducers/imageReducer";
 
 const reducer = combineReducers({
   mentorList: mentorListReducer,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateDetails: updateUserDetailsReducer,
+  profileImage: imageUploadReducer,
 });
 
 const composeEnhancers = composeWithDevTools({
@@ -45,11 +47,14 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 const UserDetailsFromStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
-
+const profileImageFromStorage = localStorage.getItem("profileImage")
+  ? localStorage.getItem("profileImage")
+  : null;
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
-  // userUpdateDetails: { userUpdatedDetails: userDetailsFromStorage },
+  userUpdateDetails: { userUpdatedDetails: UserDetailsFromStorage },
   userDetails: { user: UserDetailsFromStorage },
+  profileImage: { userProfileImage: profileImageFromStorage },
 };
 const store = legacy_createStore(
   reducer,

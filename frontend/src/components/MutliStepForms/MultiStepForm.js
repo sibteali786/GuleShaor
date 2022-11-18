@@ -7,6 +7,8 @@ import ProfileSetup from "./ProfileSetup/ProfileSetup";
 import QualificationForm from "./Qualification/QualificationForm";
 import { useDispatch, useSelector } from "react-redux";
 import SuccessPage from "./SuccessPage/SuccessPage";
+
+// TODO: when user already exists should not move to next screen
 const MultiStepForm = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);

@@ -15,6 +15,7 @@ import SnakBar from "../../SnakBar/SnakBar";
 import Message from "../../Message/Message";
 import { storage } from "../../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { setProfileImage } from "../../../actions/imageActions";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
@@ -282,11 +283,11 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         },
       },
     };
-
+    dispatch(setProfileImage(data?.image));
     setUserDetails({
       ...UserDetails,
     });
-    nextStep();
+    // nextStep();
   };
   // user Details
   const userDetails = useSelector((state) => state.userDetails);
