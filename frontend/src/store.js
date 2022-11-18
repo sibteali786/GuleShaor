@@ -56,6 +56,7 @@ const initialState = {
   userDetails: { user: UserDetailsFromStorage },
   profileImage: { userProfileImage: profileImageFromStorage },
 };
+console.log(profileImageFromStorage);
 const store = legacy_createStore(
   reducer,
   initialState,

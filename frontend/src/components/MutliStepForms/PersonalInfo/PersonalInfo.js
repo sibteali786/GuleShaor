@@ -412,21 +412,9 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                 load(JSON.stringify(response.metadata));
                                 getDownloadURL(imageRef).then((url) => {
                                   setValue("image", url);
+                                  dispatch(setProfileImage(url));
                                 });
                               })
-                              // axios
-                              //   .post(
-                              //     `${process.env.REACT_APP_API_URL}api/upload`,
-                              //     formData
-                              //   )
-                              //   .then((response) => {
-                              //     load(JSON.stringify(response.data));
-                              //     setValue("image", response?.data, {
-                              //       shouldTouch: true,
-                              //       shouldValidate: true,
-                              //       shouldDirty: true,
-                              //     });
-                              //   })
                               .catch((error) => {
                                 throw new Error(error.message);
                               });

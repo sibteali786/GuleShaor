@@ -74,16 +74,13 @@ const Navbar = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { user } = userDetails;
   const profileImageDetails = useSelector((state) => state.profileImage);
-  const { userProfileImage } = profileImageDetails;
-
-  store.subscribe(() => {
-    return store.getState();
-  });
+  const { loading, imageUrl } = profileImageDetails;
 
   useEffect(() => {
     var imgPath = "";
-    if (userProfileImage) {
-      setImgPath(userProfileImage);
+    console.log("Profile Image", imageUrl);
+    if (imageUrl) {
+      setImgPath(imageUrl);
     } else if (user) {
       if (userInfo?.userType === "student") {
         imgPath = user?.studentDetails?.image;
@@ -103,7 +100,10 @@ const Navbar = () => {
         setImgPath(imgPath);
       }
     }
-  }, [user, userInfo, imgPath, userUpdatedDetails, userProfileImage]);
+    store.subscribe(() => {
+      console.log("An Action was dispatched");
+    });
+  }, [user, userInfo, imgPath, userUpdatedDetails, imageUrl]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
