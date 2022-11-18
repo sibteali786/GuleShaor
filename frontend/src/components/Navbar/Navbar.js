@@ -205,7 +205,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={!imgPath.includes("undefined") ? imgPath : profileImage}
+                  src={imgPath?.length > 0 ? imgPath : profileImage}
                   style={{ height: "40px", width: "auto" }}
                   alt="profile pic"
                 />
@@ -327,13 +327,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={
-                    userUpdatedDetails
-                      ? "/" + userUpdatedDetails?.image
-                      : userInfo?.image
-                      ? "/" + userInfo?.image
-                      : profileImage
-                  }
+                  src={imgPath?.length > 0 ? imgPath : profileImage}
                   style={{ height: "50px", width: "auto" }}
                   alt="profile pic"
                 />
