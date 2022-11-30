@@ -287,7 +287,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     setUserDetails({
       ...UserDetails,
     });
-    // nextStep();
+    nextStep();
   };
   // user Details
   const userDetails = useSelector((state) => state.userDetails);

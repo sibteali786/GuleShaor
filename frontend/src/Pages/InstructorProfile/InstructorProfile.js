@@ -59,7 +59,7 @@ const InstructorProfile = () => {
           <div className="px-[4rem] profileContainer">
             <div className="w-4/6 pt-[6rem]">
               {mentor?.name && mentor?.mentorDetails ? (
-                <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
+                <Row className="mt-0 bg-white rounded-md border-[1px] mx-0 border-slate-300 ">
                   <div className="backgroundPicture"></div>
                   <Col xs={12} className="px-4">
                     <Row style={{ height: "70px" }}>
@@ -171,7 +171,7 @@ const InstructorProfile = () => {
                       >
                         <Button
                           variant="contained"
-                          className="py-1 hover:text-black "
+                          className="px-[1rem] my-0 py-[0.2rem] capitalize font-extrabold text-md"
                           style={{
                             backgroundColor: "#196AA0",
                             borderRadius: "1.3rem",
@@ -186,8 +186,8 @@ const InstructorProfile = () => {
               ) : null}
 
               {mentor?.about ? (
-                <Row
-                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-2"
+                <div
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4"
                   style={{ backgroundColor: "#F1F1F1" }}
                 >
                   {mentor.about.details ? (
@@ -195,96 +195,94 @@ const InstructorProfile = () => {
                       {
                         // TODO: resolve skills box disappear when reload mentor page
                       }
-                      <Collapse in={checked} collapsedSize={120}>
-                        <h3 className="mb-4">About</h3>
-                        <Typography variant="body2">
+                      <Collapse in={checked} collapsedSize={90}>
+                        <h3 className="mb-2">About</h3>
+                        <p className="text-gray-800 text-md">
                           {mentor.about.details}
-                        </Typography>
+                        </p>
                       </Collapse>
-                      <div
-                        className="my-3"
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "flex-start",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <Button
-                          variant="text"
-                          style={{ fontWeight: "bold", color: "#196AA0" }}
+                      {mentor?.about?.details.length > 100 ? (
+                        <p
                           onClick={handleChange}
+                          className="text-blue-500 hover:text-blue-700 hover:cursor-pointer"
                         >
                           Read More
-                        </Button>
-                      </div>
-                      <Link to="/profile" style={{ textDecoration: "none" }}>
-                        <Button
-                          variant="text"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#196AA0",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          More Posts by {mentor.name}
-                        </Button>
+                        </p>
+                      ) : null}
+                      <Link
+                        to="/profile"
+                        style={{ textDecoration: "none" }}
+                        className="text-blue-500 hover:text-blue-700"
+                      >
+                        More Posts by {mentor.name}
                       </Link>
                     </>
                   ) : null}
-                </Row>
+                </div>
               ) : null}
 
               {mentor?.about?.education?.school?.name?.length > 0 ? (
                 <div
-                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full -mr-[1rem] -ml-[0.75rem] "
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full  "
                   style={{ backgroundColor: "#F1F1F1" }}
                 >
                   <h3 className="mb-4">Education</h3>
-                  <div className="border-b-2 border-gray-200 mx-4 p-0">
-                    <h5 className="ml-2">School</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.school?.name}
-                      </h6>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Grade: {mentor?.about?.education?.school?.grade}
-                      </p>
+                  <div className="border-b-2 border-gray-200 mr-4 p-0 pb-2">
+                    <div className="ml-2 mt-3 flex content-center justify-start">
+                      <i className="fas fa-school text-4xl"></i>
+                      <div className="ml-3">
+                        <h6 className="m-0 mt-1">
+                          {mentor?.about?.education?.school?.name}
+                        </h6>
+                        <p className="text-gray-700 m-0 mb-1 text-sm">
+                          Passing Grade:{" "}
+                          {mentor?.about?.education?.school?.grade}
+                        </p>
+                        <p className="my-0 text-xs text-gray-600">
+                          Karachi, Pakistan
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="border-b-2 border-gray-200 mx-4 p-0">
-                    <h5 className="ml-2 mt-4">College</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.college?.name}
-                      </h6>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Grade:{" "}
-                        {mentor?.about?.education?.college?.grade}
-                      </p>
+                  <div className="border-b-2 border-gray-200 mr-4 p-0 pb-2">
+                    <div className="ml-2 mt-3 flex content-center justify-start">
+                      <i className="fas fa-school text-4xl"></i>
+                      <div className="ml-3">
+                        <h6 className="m-0 mt-1">
+                          {mentor?.about?.education?.college?.name}
+                        </h6>
+                        <p className="text-gray-700 m-0 mb-1 text-sm">
+                          Passing Grade:{" "}
+                          {mentor?.about?.education?.college?.grade}
+                        </p>
+                        <p className="my-0 text-xs text-gray-600">
+                          Karachi, Pakistan
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className=" mx-4 p-0">
-                    <h5 className="ml-2 mt-4">University</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.university?.name}
-                      </h6>
-                      <p className="text-gray-500 m-0">
-                        {mentor?.about?.education?.university?.degree}
-                      </p>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Cumulative GPA:{" "}
-                        {mentor?.about?.education?.university?.cgpa}
-                      </p>
+                  <div className=" mr-4 p-0 pb-2">
+                    <div className="ml-2 mt-3 flex content-center justify-start">
+                      <i className="fas fa-school text-4xl"></i>
+                      <div className="ml-3">
+                        <h6 className="m-0 mt-1">
+                          {mentor?.about?.education?.university?.name}
+                        </h6>
+                        <p className="text-gray-700 m-0 mb-1 text-sm">
+                          Passing Grade:{" "}
+                          {mentor?.about?.education?.college?.grade}
+                        </p>
+                        <p className="my-0 text-xs text-gray-600">
+                          Rawalpindi, Pakistan
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               ) : null}
 
               {mentor.courses.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4">
+                <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
                   <>
                     <h3 className="mb-5">Offered Courses</h3>
                     <Stack spacing={1}>
@@ -297,11 +295,11 @@ const InstructorProfile = () => {
                       ))}
                     </Stack>
                   </>
-                </Row>
+                </div>
               ) : null}
 
               {students?.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4 my-2">
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
                       <h2 className="mb-4">Students</h2>
@@ -348,11 +346,11 @@ const InstructorProfile = () => {
                       ) : null}
                     </Grid>
                   </Grid>
-                </Row>
+                </div>
               ) : null}
 
               {mentor?.introVideo?.video?.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 mx-0 px-4 py-4 my-2">
                   <Col xs={12} lg={6} className="span-4">
                     <h3>Videos</h3>
                     <ReactPlayer url={mentor.introVideo.video} />
@@ -361,7 +359,7 @@ const InstructorProfile = () => {
               ) : null}
 
               {mentor.mentorDetails.otherImages.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-4 mx-0 py-4 my-2">
                   <Col xs={12} lg={6} className="span-2">
                     <h3>Photos</h3>
                     <ImageList cols={2} rowHeight={164}>
