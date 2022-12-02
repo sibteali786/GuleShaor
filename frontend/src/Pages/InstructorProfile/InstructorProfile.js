@@ -27,6 +27,7 @@ import {
 } from "../../actions/mentorActions";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
+import ReactScheduler from "../../components/Scheduler/ReactScheduler";
 const InstructorProfile = () => {
   const dispatch = useDispatch();
   const mentorDetail = useSelector((state) => state.mentorDetail);
@@ -54,8 +55,8 @@ const InstructorProfile = () => {
         <Message>{error}</Message>
       ) : (
         <>
-          <div className="px-[4rem] profileContainer">
-            <div className="w-4/6 pt-[6rem]">
+          <div className="px-[2rem] space-x-3 pt-[6rem] profileContainer flex justify-between">
+            <div className="w-[60%] ">
               {mentor?.name && mentor?.mentorDetails ? (
                 <Row className="mt-0 bg-white rounded-md border-[1px] mx-0 border-slate-300 ">
                   <div className="backgroundPicture"></div>
@@ -381,6 +382,11 @@ const InstructorProfile = () => {
                   </Col>
                 </Row>
               ) : null}
+            </div>
+            <div className="w-[40%]">
+              <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
+                <ReactScheduler />
+              </div>
             </div>
           </div>
         </>
