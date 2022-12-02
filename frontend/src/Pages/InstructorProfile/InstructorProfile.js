@@ -11,14 +11,12 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Col, Container, Row } from "react-bootstrap";
-import "./../../../node_modules/video-react/dist/video-react.css";
-import React, { useState, useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import React, { useEffect } from "react";
 import "./InstructorProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
-import AddIcon from "@mui/icons-material/Add";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import Courses from "../../components/Courses/Courses";

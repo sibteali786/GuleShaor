@@ -1,7 +1,6 @@
 import {
   Button,
   Typography,
-  Grid,
   Collapse,
   Avatar,
   Accordion,
@@ -9,15 +8,13 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import "./../../../node_modules/video-react/dist/video-react.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
 import profileImage from "../../Assets/ProfilesImages/Profile Pic.png";
 import user1 from "../../Assets/ProfilesImages/Ellipse1.png";
-import user2 from "../../Assets/ProfilesImages/Ellipse2.png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
