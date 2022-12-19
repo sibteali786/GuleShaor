@@ -151,6 +151,24 @@ const mentorSchema = new mongoose.Schema(
       default:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
     },
+    timeSlots: [
+      {
+        date: { type: String, default: "" },
+        time: { type: String, default: "" },
+      },
+    ],
+    appointments: [
+      {
+        subject: { type: String, default: "" },
+        description: { type: String, default: "" },
+        date: { type: String, default: "" },
+        startTime: { type: String, default: "" },
+        endTime: { type: String, default: "" },
+        studentId: { type: String, default: "" },
+        platform: [{ name: { type: String, default: "" } }],
+        meetingLink: { type: String, default: "" },
+      },
+    ],
     feedback: [
       {
         studentName: { type: String, default: "" },

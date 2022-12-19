@@ -45,6 +45,7 @@ const InstructorProfile = () => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
+  console.log(mentor);
   return (
     <div>
       {Object.keys(mentor)?.length === 0 ? (
@@ -55,8 +56,8 @@ const InstructorProfile = () => {
         <Message>{error}</Message>
       ) : (
         <>
-          <div className="px-[2rem] space-x-3 pt-[6rem] profileContainer flex justify-between">
-            <div className="w-[60%] ">
+          <div className="px-[2rem] space-x-3 pt-[6rem] profileContainer flex flex-col lg:flex-row lg:justify-between">
+            <div className="w-[80%] lg:w-[60%] ">
               {mentor?.name && mentor?.mentorDetails ? (
                 <Row className="mt-0 bg-white rounded-md border-[1px] mx-0 border-slate-300 ">
                   <div className="backgroundPicture"></div>
@@ -383,9 +384,15 @@ const InstructorProfile = () => {
                 </Row>
               ) : null}
             </div>
-            <div className="w-[40%]">
+            <div className=" w-[100%] lg:w-[40%]">
               <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
+                <h2 className="text-gray-600 text-2xl mb-2">Book a Schedule</h2>
                 <ReactScheduler />
+                <Link to={`/mentors/${mentor?._id}/timeslots`}>
+                  <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                    Add Time Slots
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

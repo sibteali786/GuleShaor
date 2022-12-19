@@ -1,4 +1,7 @@
 import {
+  MENTOR_ADD_TIMESLOTS_FAIL,
+  MENTOR_ADD_TIMESLOTS_REQUEST,
+  MENTOR_ADD_TIMESLOTS_SUCCESS,
   MENTOR_DETAILS_FAIL,
   MENTOR_DETAILS_REQUEST,
   MENTOR_DETAILS_SUCCESS,
@@ -51,6 +54,22 @@ export const studentsOfMentorReducer = (state = { students: [] }, action) => {
       return { loadingStudents: false, students: action.payload };
     case STUDENTS_OF_MENTOR_FAIL:
       return { loadingStudents: false, errorStudents: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const mentorAddTimeslotsReducer = (
+  state = { timeSlots: [] },
+  action
+) => {
+  switch (action.type) {
+    case MENTOR_ADD_TIMESLOTS_REQUEST:
+      return { loading: true };
+    case MENTOR_ADD_TIMESLOTS_SUCCESS:
+      return { loading: false, success: true, timeSlots: action.payload };
+    case MENTOR_ADD_TIMESLOTS_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
