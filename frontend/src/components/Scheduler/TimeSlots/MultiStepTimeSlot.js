@@ -5,12 +5,12 @@ import FormSteps from "../../MutliStepForms/FormSteps/FormSteps";
 import FormContainer from "../../MutliStepForms/FromContainer/FormContainer";
 import Choice from "./Choice/Choice";
 import DayChoiceConsecutive from "./DayChoice/DayChoiceConsecutive";
-import DayChoice from "./DayChoice/DayChoiceConsecutive";
 import DayChoiceSeperate from "./DayChoice/DayChoiceSeperate";
+import Success from "./SuccessPage/Success";
 
 const MultiStepTimeSlots = () => {
   const [step, setStep] = React.useState(1);
-  const { mentor } = useSelector((state) => state.mentorDetail);
+  const userInfo = useSelector((state) => state?.userLogin?.userInfo);
   const dispatch = useDispatch();
   const nextStep = () => {
     setStep(step + 1);
@@ -26,9 +26,9 @@ const MultiStepTimeSlots = () => {
   const [timeSlots, setTimeSlots] = useState([]);
   useEffect(() => {
     if (choice === "consecutive") {
-      dispatch(addTimeslots("consecutive", mentor?._id, timeSlots));
+      dispatch(addTimeslots("consecutive", timeSlots));
     } else {
-      dispatch(addTimeslots("separate", mentor?._id, timeSlots));
+      dispatch(addTimeslots("separate", timeSlots));
     }
   }, [choice, timeSlots, dispatch]);
 
@@ -51,6 +51,7 @@ const MultiStepTimeSlots = () => {
               setTimeSlots={setTimeSlots}
             />
           ))}
+        {step === 3 && <Success id={userInfo?._id} />}
       </FormContainer>
     </div>
   );

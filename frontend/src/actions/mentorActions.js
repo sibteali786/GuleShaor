@@ -80,30 +80,32 @@ export const listStudentsOfMentor = (id) => async (dispatch) => {
   }
 };
 
-export const addTimeslots = (type, mentorId, timeslots) => async (dispatch) => {
+export const addTimeslots = (type, timeSlots) => async (dispatch) => {
   try {
     dispatch({ type: MENTOR_ADD_TIMESLOTS_REQUEST });
-    // const { data } = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}api/addTimeSlots/${mentorId}`,
-    //   timeslots
-    // );
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}api/mentors/addtimeslots`,
+      { timeSlots: timeSlots },
+      config
+    );
     // saving user in the local storage so as to restore session / page when it comes again after some time
     if (type === "separate") {
-      // const date = moment(timeslots.date).format("L");
-      // const time = moment(timeslots.time).format("LT");
-      // const dateAndTime = {
-      //   date,
-      //   time,
-      // };
-      console.log("From the addTime Slot Action", mentorId, timeslots);
+      console.log("From the addTime Slot Action", data);
     } else {
-      console.log("From the addTime Slot Action", mentorId, timeslots);
+      console.log("From the addTime Slot Action", data);
     }
-    // localStorage.setItem("timeSlots", JSON.stringify(data));
-    // dispatch({
-    //   type: MENTOR_ADD_TIMESLOTS_SUCCESS,
-    //   payload: dateAndTime,
-    // });
+    localStorage.setItem("timeSlots", JSON.stringify(data));
+    dispatch({
+      type: MENTOR_ADD_TIMESLOTS_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: MENTOR_ADD_TIMESLOTS_FAIL,

@@ -5,6 +5,7 @@ const Student = require("../models/studentModel.js");
 
 const protect = expressAsyncHandler(async (req, res, next) => {
   // console.log(req.headers.authorization);  // to check our authorization header
+
   let token;
   if (
     req.headers.authorization &&
@@ -25,6 +26,11 @@ const protect = expressAsyncHandler(async (req, res, next) => {
       ) {
         req.user = await Student.findById(decoded.id).select("-password");
         req.user = { ...req.user._doc, userType: "student" };
+      } else {
+        req.body = {
+          ...req.body,
+          id: decoded?.id,
+        };
       }
       next();
     } catch (error) {

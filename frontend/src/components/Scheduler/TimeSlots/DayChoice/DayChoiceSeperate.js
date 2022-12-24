@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
-const DayChoiceSeperate = ({ prevStep, setTimeSlots }) => {
+const DayChoiceSeperate = ({ prevStep, setTimeSlots, nextStep }) => {
   const [formValues, setFormValues] = useState([
     { date: moment().format(), time: moment().format() },
   ]);
@@ -102,6 +102,7 @@ const DayChoiceSeperate = ({ prevStep, setTimeSlots }) => {
           </button>
           <button
             type="submit"
+            onClick={() => nextStep()}
             className="ml-4 py-1 px-4 border-2 border-gray-800 rounded-md mt-[3rem] bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80 "
           >
             Submit
