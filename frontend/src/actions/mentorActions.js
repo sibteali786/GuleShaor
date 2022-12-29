@@ -96,11 +96,6 @@ export const addTimeslots = (type, timeSlots) => async (dispatch) => {
       config
     );
     // saving user in the local storage so as to restore session / page when it comes again after some time
-    if (type === "separate") {
-      console.log("From the addTime Slot Action", data);
-    } else {
-      console.log("From the addTime Slot Action", data);
-    }
     localStorage.setItem("timeSlots", JSON.stringify(data));
     dispatch({
       type: MENTOR_ADD_TIMESLOTS_SUCCESS,

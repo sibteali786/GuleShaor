@@ -59,15 +59,12 @@ export const studentsOfMentorReducer = (state = { students: [] }, action) => {
   }
 };
 
-export const mentorAddTimeslotsReducer = (
-  state = { timeSlots: [] },
-  action
-) => {
+export const mentorAddTimeslotsReducer = (state = { slots: [] }, action) => {
   switch (action.type) {
     case MENTOR_ADD_TIMESLOTS_REQUEST:
       return { loading: true };
     case MENTOR_ADD_TIMESLOTS_SUCCESS:
-      return { loading: false, success: true, timeSlots: action.payload };
+      return { loading: false, success: true, slots: action.payload };
     case MENTOR_ADD_TIMESLOTS_FAIL:
       return { loading: false, error: action.payload };
     default:

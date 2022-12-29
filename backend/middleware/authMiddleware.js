@@ -13,7 +13,17 @@ const protect = expressAsyncHandler(async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET,
+        function (err, decoded) {
+          if (err) {
+            console.log(err);
+            throw new Error(`Not Authorized and ${err}`);
+          }
+          return decoded;
+        }
+      );
       if (
         req.body?.userDetails?.userType === "mentor" ||
         req.query?.userType === "mentor"
@@ -34,9 +44,8 @@ const protect = expressAsyncHandler(async (req, res, next) => {
       }
       next();
     } catch (error) {
-      console.error(error);
       res.status(401);
-      throw new Error("Not Authorized, token failed");
+      throw new Error(`Not Authorized, ${error}`);
     }
   }
 

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import enumerateDaysBetweenDates from "../../../Utils/dateRangesCalc";
-const DayChoiceConsecutive = ({ prevStep, setTimeSlots }) => {
+const DayChoiceConsecutive = ({ prevStep, setTimeSlots, nextStep }) => {
   // TODO: add dynamic filed addition for time slots as well
   const [start, setStart] = React.useState(moment().format("L"));
   const [end, setEnd] = React.useState(moment().format("L"));
@@ -29,8 +29,8 @@ const DayChoiceConsecutive = ({ prevStep, setTimeSlots }) => {
       date: moment(end).format("L"),
       time: moment(time).format("LT"),
     });
-    console.log("Time Slots from component", timeSlots);
     setTimeSlots(timeSlots);
+    nextStep();
   };
   return (
     <div className="h-screen font-[Montserrat]">

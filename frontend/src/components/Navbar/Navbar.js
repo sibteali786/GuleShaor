@@ -100,9 +100,6 @@ const Navbar = () => {
         setImgPath(imgPath);
       }
     }
-    store.subscribe(() => {
-      console.log("An Action was dispatched");
-    });
   }, [user, userInfo, imgPath, userUpdatedDetails, imageUrl]);
 
   const dispatch = useDispatch();

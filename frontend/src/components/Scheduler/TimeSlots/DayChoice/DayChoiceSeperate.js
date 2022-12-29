@@ -43,6 +43,7 @@ const DayChoiceSeperate = ({ prevStep, setTimeSlots, nextStep }) => {
     } else {
       setTimeSlots(timeSlots);
     }
+    nextStep();
   };
 
   // TODO: add dynamic filed addition for time slots as well
@@ -102,7 +103,6 @@ const DayChoiceSeperate = ({ prevStep, setTimeSlots, nextStep }) => {
           </button>
           <button
             type="submit"
-            onClick={() => nextStep()}
             className="ml-4 py-1 px-4 border-2 border-gray-800 rounded-md mt-[3rem] bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80 "
           >
             Submit

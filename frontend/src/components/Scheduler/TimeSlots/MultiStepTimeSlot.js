@@ -25,9 +25,10 @@ const MultiStepTimeSlots = () => {
   const [choice, setChoice] = useState("");
   const [timeSlots, setTimeSlots] = useState([]);
   useEffect(() => {
-    if (choice === "consecutive") {
+    console.log(choice, timeSlots);
+    if (choice === "consecutive" && timeSlots.length > 0) {
       dispatch(addTimeslots("consecutive", timeSlots));
-    } else {
+    } else if (choice === "separate" && timeSlots.length > 0) {
       dispatch(addTimeslots("separate", timeSlots));
     }
   }, [choice, timeSlots, dispatch]);

@@ -2,6 +2,7 @@ import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
+  mentorAddTimeslotsReducer,
   mentorDetailsReducer,
   mentorListReducer,
   studentsOfMentorReducer,
@@ -18,6 +19,9 @@ import {
 } from "./Reducers/userReducer";
 import { imageUploadReducer } from "./Reducers/imageReducer";
 
+function lastAction(state = null, action) {
+  return action;
+}
 const reducer = combineReducers({
   mentorList: mentorListReducer,
   mentorDetail: mentorDetailsReducer,
@@ -29,6 +33,8 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdateDetails: updateUserDetailsReducer,
   profileImage: imageUploadReducer,
+  mentorSlots: mentorAddTimeslotsReducer,
+  lastAction,
 });
 
 const composeEnhancers = composeWithDevTools({
@@ -50,13 +56,16 @@ const UserDetailsFromStorage = localStorage.getItem("user")
 const profileImageFromStorage = localStorage.getItem("profileImage")
   ? localStorage.getItem("profileImage")
   : null;
+const mentorTimeSlotsFromStorage = localStorage.getItem("timeSlots")
+  ? JSON.parse(localStorage.getItem("timeSlots"))
+  : null;
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   userUpdateDetails: { userUpdatedDetails: UserDetailsFromStorage },
   userDetails: { user: UserDetailsFromStorage },
   profileImage: { userProfileImage: profileImageFromStorage },
+  mentorSlots: mentorTimeSlotsFromStorage,
 };
-console.log(profileImageFromStorage);
 const store = legacy_createStore(
   reducer,
   initialState,
