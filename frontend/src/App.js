@@ -43,6 +43,7 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import Users from "./components/Users/Users";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSlot";
+import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
 
 // Register the plugins
 registerPlugin(
@@ -92,6 +93,10 @@ function App() {
           element={<InstructorProfile />}
         />
         <Route path="/mentors/:id/timeslots" element={<MultiStepTimeSlots />} />
+        <Route
+          path="/mentors/:id/addappointment"
+          element={<MultiStepAppointment />}
+        />
         <Route path="profile-forms" element={<MultiStepForm />} />
 
         <Route path="*" element={<NotFound404 />} />

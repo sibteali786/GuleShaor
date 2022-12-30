@@ -28,9 +28,14 @@ import {
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import ReactScheduler from "../../components/Scheduler/ReactScheduler";
-import store from "../../store";
 const InstructorProfile = () => {
   const dispatch = useDispatch();
+  const studentDetail = useSelector((state) => state.studentDetail);
+  const {
+    loading: loadingStudentDetails,
+    error: errorStudentDetails,
+    student,
+  } = studentDetail;
   const mentorDetail = useSelector((state) => state.mentorDetail);
   const { slots } = useSelector((state) => state.mentorSlots);
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
@@ -386,21 +391,25 @@ const InstructorProfile = () => {
                 </Row>
               ) : null}
             </div>
-            {slots?.timeSlots.length > 0 ? (
-              <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2">
-                <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
-                  <h2 className="text-gray-600 text-2xl mb-2">
-                    Book a Schedule
-                  </h2>
-                  <ReactScheduler />
+            <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2">
+              <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
+                <h2 className="text-gray-600 text-2xl mb-2">Book a Schedule</h2>
+                <ReactScheduler />
+                {Object.keys(student).length > 0 ? (
+                  <Link to={`/mentors/${mentor?._id}/addappointment`}>
+                    <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                      Book Appointment
+                    </button>
+                  </Link>
+                ) : (
                   <Link to={`/mentors/${mentor?._id}/timeslots`}>
                     <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
                       Add Time Slots
                     </button>
                   </Link>
-                </div>
+                )}
               </div>
-            ) : null}
+            </div>
           </div>
         </>
       )}

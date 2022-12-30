@@ -165,8 +165,6 @@ const mentorSchema = new mongoose.Schema(
         startTime: { type: String, default: "" },
         endTime: { type: String, default: "" },
         studentId: { type: String, default: "" },
-        platform: [{ name: { type: String, default: "" } }],
-        meetingLink: { type: String, default: "" },
       },
     ],
     feedback: [

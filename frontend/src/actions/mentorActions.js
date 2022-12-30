@@ -1,6 +1,9 @@
 import moment from "moment";
 import axios from "axios";
 import {
+  MENTOR_ADD_APPOINTMENT_FAIL,
+  MENTOR_ADD_APPOINTMENT_REQUEST,
+  MENTOR_ADD_APPOINTMENT_SUCCESS,
   MENTOR_ADD_TIMESLOTS_FAIL,
   MENTOR_ADD_TIMESLOTS_REQUEST,
   MENTOR_ADD_TIMESLOTS_SUCCESS,
@@ -104,6 +107,38 @@ export const addTimeslots = (type, timeSlots) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: MENTOR_ADD_TIMESLOTS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const addAppointmentAction = (appointment) => async (dispatch) => {
+  try {
+    dispatch({ type: MENTOR_ADD_APPOINTMENT_REQUEST });
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}api/mentors/addtimeslots`,
+      { appointments: appointment },
+      config
+    );
+    // saving user in the local storage so as to restore session / page when it comes again after some time
+    localStorage.setItem("timeSlots", JSON.stringify(data));
+    dispatch({
+      type: MENTOR_ADD_APPOINTMENT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: MENTOR_ADD_APPOINTMENT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

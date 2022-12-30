@@ -83,7 +83,7 @@ const getMentorById = asyncHandler(async (req, res) => {
 
 // @desc    Create Time Slots
 // @route   POST /api/mentors/addtimeslots
-// @access  Public
+// @access  private
 const addTimeSlots = asyncHandler(async (req, res) => {
   const mentor = await Mentor.findById(req.body.id);
   if (mentor) {
@@ -101,4 +101,25 @@ const addTimeSlots = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getMentors, getMentorById, addTimeSlots };
+// @desc    Create Time Slots
+// @route   POST /api/mentors/addAppointments
+// @access  private
+const addAppointments = asyncHandler(async (req, res) => {
+  const mentor = await Mentor.findById(req.body.id);
+  console.log(req.body);
+  if (mentor) {
+    mentor.appointments = req.body?.appointments;
+    const updatedMentor = await mentor.save();
+    res.json({
+      _id: updatedMentor?._id,
+      name: updatedMentor?.name,
+      email: updatedMentor?.email,
+      appointments: updatedMentor?.appointments,
+    });
+  } else {
+    res.status(404);
+    throw new Error("Mentor not Found");
+  }
+});
+
+module.exports = { getMentors, getMentorById, addTimeSlots, addAppointments };

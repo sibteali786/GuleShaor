@@ -94,12 +94,12 @@ const Navbar = () => {
     }
 
     // In case User details not fetched
-    if (imgPath?.length === 0) {
-      if (userUpdatedDetails?.image) {
-        imgPath = userUpdatedDetails?.image;
-        setImgPath(imgPath);
-      }
-    }
+    // if (imgPath?.length === 0) {
+    //   if (userUpdatedDetails?.image) {
+    //     imgPath = userUpdatedDetails?.image;
+    //     setImgPath(imgPath);
+    //   }
+    // }
   }, [user, userInfo, imgPath, userUpdatedDetails, imageUrl]);
 
   const dispatch = useDispatch();
