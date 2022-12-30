@@ -9,7 +9,7 @@ import getTimeRange from "../Utils/timeRangeCalc";
 
 const ReactScheduler = () => {
   const [currentDate, setCurrentDate] = React.useState(moment());
-  const { slots } = useSelector((state) => state.mentorSlots);
+  const mentorSlots = useSelector((state) => state.mentorSlots);
   const [timeSlots, setTimeSlots] = React.useState([]);
   const [startHour, setStartHour] = React.useState(0);
   const [endHour, setEndHour] = React.useState(0);
@@ -32,7 +32,10 @@ const ReactScheduler = () => {
   };
   React.useEffect(() => {
     console.log("Min Date", minDate, "\n", "Max Date ", maxDate);
-    setTimeSlots(slots?.timeSlots);
+    if (mentorSlots !== null) {
+      const { slots } = mentorSlots;
+      setTimeSlots(slots?.timeSlots);
+    }
     console.log(timeSlots);
     if (timeSlots?.length > 0) {
       const arr = getTimeRange(timeSlots);

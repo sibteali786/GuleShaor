@@ -37,7 +37,6 @@ const InstructorProfile = () => {
     student,
   } = studentDetail;
   const mentorDetail = useSelector((state) => state.mentorDetail);
-  const { slots } = useSelector((state) => state.mentorSlots);
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
   const { loadingStudents, errorStudents, students } = studentsOfMentors;
