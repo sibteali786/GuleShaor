@@ -11,14 +11,12 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Col, Container, Row } from "react-bootstrap";
-import "./../../../node_modules/video-react/dist/video-react.css";
-import React, { useState, useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import "./InstructorProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
-import AddIcon from "@mui/icons-material/Add";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import Courses from "../../components/Courses/Courses";
@@ -29,8 +27,15 @@ import {
 } from "../../actions/mentorActions";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
+import ReactScheduler from "../../components/Scheduler/ReactScheduler";
 const InstructorProfile = () => {
   const dispatch = useDispatch();
+  const studentDetail = useSelector((state) => state.studentDetail);
+  const {
+    loading: loadingStudentDetails,
+    error: errorStudentDetails,
+    student,
+  } = studentDetail;
   const mentorDetail = useSelector((state) => state.mentorDetail);
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
@@ -56,8 +61,8 @@ const InstructorProfile = () => {
         <Message>{error}</Message>
       ) : (
         <>
-          <div className="px-[4rem] profileContainer">
-            <div className="w-4/6 pt-[6rem]">
+          <div className="px-[2rem] space-x-3 pt-[6rem] profileContainer flex flex-col lg:flex-row lg:justify-between">
+            <div className="w-[100%] lg:w-[60%] xl:w-[60%]">
               {mentor?.name && mentor?.mentorDetails ? (
                 <Row className="mt-0 bg-white rounded-md border-[1px] mx-0 border-slate-300 ">
                   <div className="backgroundPicture"></div>
@@ -78,6 +83,7 @@ const InstructorProfile = () => {
                         }}
                       />
                     </Row>
+
                     <Row>
                       <Col xs={12} className="instName">
                         <div style={{ height: "fit-content" }}>
@@ -383,6 +389,25 @@ const InstructorProfile = () => {
                   </Col>
                 </Row>
               ) : null}
+            </div>
+            <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2">
+              <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
+                <h2 className="text-gray-600 text-2xl mb-2">Book a Schedule</h2>
+                <ReactScheduler />
+                {Object.keys(student).length > 0 ? (
+                  <Link to={`/mentors/${mentor?._id}/addappointment`}>
+                    <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                      Book Appointment
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to={`/mentors/${mentor?._id}/timeslots`}>
+                    <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                      Add Time Slots
+                    </button>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </>

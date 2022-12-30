@@ -1,3 +1,5 @@
+import "devextreme/dist/css/dx.common.css";
+import "devextreme/dist/css/dx.light.css";
 import "./App.scss";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
@@ -40,6 +42,8 @@ import ProfileSetup from "./components/MutliStepForms/ProfileSetup/ProfileSetup"
 import SearchBox from "./components/SearchBox/SearchBox";
 import Users from "./components/Users/Users";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSlot";
+import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
 
 // Register the plugins
 registerPlugin(
@@ -88,7 +92,13 @@ function App() {
           className="px-[4rem]"
           element={<InstructorProfile />}
         />
+        <Route path="/mentors/:id/timeslots" element={<MultiStepTimeSlots />} />
+        <Route
+          path="/mentors/:id/addappointment"
+          element={<MultiStepAppointment />}
+        />
         <Route path="profile-forms" element={<MultiStepForm />} />
+
         <Route path="*" element={<NotFound404 />} />
       </Routes>
       <Footer isForm={location.pathname === "/" ? true : false} />

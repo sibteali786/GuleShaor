@@ -32,11 +32,16 @@ const MultiStepForm = () => {
       setStep(2);
     }
   }, [userInfo, UserDetails, step]);
-  console.log(UserDetails);
-  console.log("Step No : ", step);
+  const stepsArray = [
+    { name: "Sign Up", to: "/signup" },
+    { name: "Personal Info", to: "/personalinfo" },
+    { name: "Qualification", to: "/qualification" },
+    { name: "Profile Setup", to: "/profileSetup" },
+    { name: "Success", to: "/success" },
+  ];
   return (
     <FormContainer>
-      <FormSteps step={step} />
+      <FormSteps step={step} stepsArray={stepsArray} />
       {step === 1 && (
         <Signup
           nextStep={nextStep}
