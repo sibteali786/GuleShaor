@@ -51,7 +51,7 @@ const settings = {
 const Moto = () => {
   return (
     <div className="moto-container">
-      <div className="WhoWeAre">
+      <div className="WhoWeAre py-[2rem]">
         <div className="span-1">
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
             who we are
@@ -61,30 +61,45 @@ const Moto = () => {
           </div>
         </div>
         <div className="span-2">
-          <h4>Our philosophy</h4>
+          <h3>Our philosophy</h3>
           <p>
-            Pakistan has an extraordinary asset in the shape of a youth bulge,
-            which means that the largest segment of our population consists of
-            young people - around 63%. This youth bulge can translate into
-            economic gains only if the youth have skills consistent with the
-            requirements of a modern economy. Because of increasing population
-            growth, Pakistan is facing difficulty in providing sufficient
-            employment opportunities. The issue is becoming more serious with
-            rapidly changing economies that require more innovative skills.
+            At Guleshaoor, we strive to equip you with the latest IT skills and
+            stay up-to-date with the ever-evolving world of technology. Our
+            mission is to provide you with hands-on projects, expert guidance,
+            and mentorship from top industry professionals, so you can land your
+            dream job.
+          </p>
+          <p>
+            Our team consists of experienced professionals in the tech industry
+            who understand the importance of staying ahead of the curve in a
+            fast-paced and competitive market. We believe in providing
+            practical, real-world training that will not only enhance your
+            technical abilities but also prepare you for success in the
+            workplace.
+          </p>
+          <p>
+            We are passionate about technology and dedicated to helping you
+            achieve your goals. Whether you're a beginner or a seasoned
+            professional, our system is well designed to cater to your
+            individual needs and provide a personalized learning experience.
+            With our expert guidance, you will learn not just the theory but
+            also the application of cutting-edge technologies in real-world
+            scenarios.
+          </p>
+          <p>
+            Our mentors are top industry experts who bring a wealth of
+            experience and knowledge to the table. They are dedicated to
+            supporting you throughout your learning journey and providing you
+            with the resources you need to succeed.
           </p>
         </div>
         <div className="span-3">
           <p>
-            Our students getting professional education need to be updated about
-            the latest market trends, their personalities need to be flexible
-            and adaptive in order to exploit the market opportunities both at
-            national and international level. So we are creating a demand-driven
-            training system responsive to requirements of the job market that
-            will enable youth to not depend on the government but make a living
-            through freelancing and entrepreneurship. The system provides not
-            only expert industrial mentorship and career counseling but also the
-            awareness of free high quality learning resources over the internet
-            and career opportunities.
+            At Guleshaoor, we believe in the power of education and strive to
+            provide accessible, quality training that will help you reach your
+            full potential. So, join us today and take the first step towards a
+            successful career in the tech industry. We're excited to have you on
+            board and can't wait to help you achieve your dreams
           </p>
           <Button variant="contained">Learn More</Button>
         </div>

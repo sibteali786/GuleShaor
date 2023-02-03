@@ -14,7 +14,6 @@
     grid-template-columns: 0.1fr 0.4fr 0.4fr 0.1fr;
     align-items: center;
     row-gap: 0.5rem;
-    padding: 2rem;
 
     p {
       margin: 0 0;
@@ -95,13 +94,14 @@
         grid-row: 1/2;
       }
 
-      h4 {
+      h3 {
         color: $textColorHeadings;
         font-size: clamp(0.8rem, 3vw, 1.6rem);
         font-family: $fontfamily2;
         font-weight: 500;
         text-transform: uppercase;
         margin: 1rem 0;
+        letter-spacing: 0.1rem;
       }
 
       p {
