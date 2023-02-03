@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Col, Container, Row } from "react-bootstrap";
-import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
 import "./InstructorProfile.scss";
 import ImageList from "@mui/material/ImageList";

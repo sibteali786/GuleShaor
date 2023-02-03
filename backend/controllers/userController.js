@@ -18,6 +18,7 @@ const authUser = asyncHandler(async (req, res) => {
   } else {
     user = await Student.findOne({ email });
   }
+
   // if user exists then we have to match email and pass ( which is plain while the one in db is encrypted )
   if (user && (await user.matchPassword(password))) {
     if (userType === "mentor") {
@@ -25,7 +26,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        image: user.mentorDetails.image,
+        profilePicture: user.mentorDetails.profilePicture,
         token: generateToken(user._id), // not defined till now
         userType,
       });
@@ -34,7 +35,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        image: user.studentDetails.image,
+        profilePicture: user.studentDetails.profilePicture,
         token: generateToken(user._id), // not defined till now
         userType,
       });
@@ -53,34 +54,23 @@ const getUserProfile = asyncHandler(async (req, res) => {
   } else {
     user = await Student.findById(req.user._id);
   }
+
   if (user) {
     if (userType === "mentor") {
       res.json({
-        _id: user?._id,
-        name: user?.name,
-        email: user?.email,
-        mentorDetails: {
-          ...user?.mentorDetails,
-        },
-        about: {
-          ...user?.about,
-        },
-        introVideo: user?.introVideo,
-        token: generateToken(user._id),
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profilePicture: user.mentorDetails.profilePicture,
+        userType,
       });
     } else {
       res.json({
-        _id: user?._id,
-        name: user?.name,
-        email: user?.email,
-        studentDetails: {
-          ...user?.studentDetails,
-        },
-        about: {
-          ...user?.about,
-        },
-        introVideo: user?.introVideo,
-        token: generateToken(user._id),
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profilePicture: user.studentDetails.profilePicture,
+        userType,
       });
     }
   } else {
@@ -114,18 +104,12 @@ const registerUser = asyncHandler(async (req, res) => {
       name,
       email,
       password,
-      mentorDetails: {
-        userType,
-      },
     });
   } else {
     user = await Student.create({
       name,
       email,
       password,
-      studentDetails: {
-        userType,
-      },
     });
   }
 
@@ -137,7 +121,6 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
-        userType,
       });
     } else {
       res.status(201).json({
@@ -146,7 +129,6 @@ const registerUser = asyncHandler(async (req, res) => {
         email: user.email,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
-        userType,
       });
     }
   } else {
@@ -155,62 +137,4 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Updating or creating profile for mentor and student
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
-
-const updateUserProfile = asyncHandler(async (req, res) => {
-  const userType = req.body?.userDetails?.userType;
-  let user;
-  if (userType === "mentor") {
-    user = await Mentor.findById(req.user._id);
-  } else if (userType === "student") {
-    user = await Student.findById(req.user._id);
-  }
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    if (req.body?.password) {
-      user.password = req.body?.password;
-    }
-    if (userType === "mentor") {
-      user.mentorDetails = req.body?.userDetails || user?.mentorDetails;
-      user.introVideo = req.body?.introVideo || user?.introVideo;
-      // TODO:Mutate this array to retain previous values
-      user.about = req.body?.about || user?.about;
-      user.courses = req.body?.courses || user?.courses;
-      user.certifications = req.body?.certifications || user?.certifications;
-      user.experiences = req.body?.experiences || user?.experiences;
-      user.aboutStudents = req.body?.aboutStudents || user?.aboutStudents;
-      user.feedback = req.body?.feedback || user?.feedback;
-    } else if (userType === "student") {
-      user.studentDetails = req.body?.userDetails || user?.studentDetails;
-      // TODO:Mutate this array to retain previous values
-      user.about = req.body?.about || user?.about;
-      user.certifications = req.body?.certifications || user?.certifications;
-      user.experiences = req.body?.experiences || user?.experiences;
-      user.endorsement = req.body?.endorsement || user?.endorsement;
-    }
-
-    const updatedUser = await user.save();
-    if (userType === "mentor") {
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        image: updatedUser.mentorDetails.image,
-        userType,
-      });
-    } else if (userType === "student") {
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        image: updatedUser.studentDetails.image,
-        userType,
-      });
-    }
-  }
-});
-module.exports = { authUser, getUserProfile, registerUser, updateUserProfile };
+module.exports = { authUser, getUserProfile, registerUser };

@@ -7,7 +7,6 @@ const connectDB = require("./config/db.js");
 const mentorRoutes = require("./api/mentorRoutes.js");
 const studentRoutes = require("./api/studentRoutes.js");
 const userRoutes = require("./api/userRoutes.js");
-const products = require("./api/products");
 const uploadRoutes = require("./api/uploadRoutes.js");
 const studentsMentorRoutes = require("./api/studentsMentorRoutes.js");
 const { errorHandler, notFound } = require("./middleware/errorMiddleware.js");
@@ -25,7 +24,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/mentors", mentorRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/getAllStudents", studentsMentorRoutes);
-app.use("/api/products", products);
 app.use("/api/upload", uploadRoutes);
 app.get("/", (req, res) => {
   res.send("Api is Running......");
@@ -33,19 +31,6 @@ app.get("/", (req, res) => {
 app.use("/uploads", express.static(path.join(path.resolve(), "/uploads"))); // * so as to access it in browser
 app.use(notFound);
 app.use(errorHandler);
-
-const __dirname = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-  app.get("/*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("Api is Running......");
-  });
-}
 
 const PORT = process.env.PORT || 5000;
 app.listen(

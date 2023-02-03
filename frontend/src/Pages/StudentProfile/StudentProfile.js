@@ -9,7 +9,6 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
 import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";

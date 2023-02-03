@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 
 const students = [
   {
@@ -6,21 +6,22 @@ const students = [
     studentDetails: {
       userType: "Free",
       username: "@farhan",
-      designation: "Computer Engineer Undergrad",
-      image: "/images/profilePic.png",
+      career: "Computer Engineer Undergrad",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Computing"],
+      favouriteSubjects: ["Computing"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
@@ -34,21 +35,22 @@ const students = [
     studentDetails: {
       userType: "Pro",
       username: "@ali",
-      designation: "Mechanical Engineer Undergrad",
-      image: "/images/profilePic.png",
+      career: "Mechanical Engineer Undergrad",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Mechanics of Machines"],
+      favouriteSubjects: ["Mechanics of Machines"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Cricket", "Volunteering"],
@@ -62,21 +64,22 @@ const students = [
     studentDetails: {
       userType: "Free",
       username: "@junaid",
-      designation: "Charted Accountant",
-      image: "/images/profilePic.png",
+      career: "Charted Accountant",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Internation Relations", "Merchantile Law"],
+      favouriteSubjects: ["Internation Relations", "Merchantile Law"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Community Collaboration", "Travelling"],
@@ -90,21 +93,22 @@ const students = [
     studentDetails: {
       userType: "Free",
       username: "@noman",
-      designation: "Political Science",
-      image: "/images/profilePic.png",
+      career: "Political Science",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Politics", "People Realtions"],
+      favouriteSubjects: ["Politics", "People Realtions"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Volunteering", "Community Collaboration"],
@@ -118,21 +122,22 @@ const students = [
     studentDetails: {
       userType: "Pro",
       username: "@rizwan",
-      designation: "Envoirmental Engineering",
-      image: "/images/profilePic.png",
+      career: "Envoirmental Engineering",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Politics", "People Realtions"],
+      favouriteSubjects: ["Politics", "People Realtions"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Volunteering", "Community Collaboration"],
@@ -146,21 +151,22 @@ const students = [
     studentDetails: {
       userType: "Pro",
       username: "@rabia",
-      designation: "Medical Sciences",
-      image: "/images/profilePic.png",
+      career: "Medical Sciences",
+      profilePicture: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
         "/images/Rectangle2.jpg",
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
-      preferredSubjects: ["Nephrology", "People Realtions"],
+      favouriteSubjects: ["Nephrology", "People Realtions"],
     },
     introVideo: {
       video: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4",
       videoPoster: "/images/Rectangle5.jpg",
     },
     about: {
+      heading: "Introduction",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Volunteering", "Community Collaboration"],
@@ -171,5 +177,5 @@ const students = [
   },
 ];
 
-module.exports = students;
+export default students;
 // TODO: modify required and optional fields in the schema

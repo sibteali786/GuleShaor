@@ -6,10 +6,13 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="hero-Container px-[4rem]">
-      <h3>EMPOWERING YOUTH FOR FINANCIAL INDEPENDENCE.</h3>
-      <p>
-        Providing a demand-driven training system responsive to latest
-        industrial trends.
+      <h2>Get Expertise You Need</h2>
+      <p className="text-md">
+        Get registered with guleshaoor to Acquire latest IT skills in demand,
+        update on changing trends in the fast-paced world of technology, and
+        land your dream job with our hands-on projects and expert guidance. Our
+        mentors are top industry professionals ready to support you in your
+        journey
       </p>
       <Link to="/profile-forms">
         <Button variant="contained">Register</Button>
