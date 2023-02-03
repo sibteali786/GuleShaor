@@ -92,26 +92,19 @@ const Moto = () => {
             also the application of cutting-edge technologies in real-world
             scenarios.
           </p>
+        </div>
+        <div className="span-3">
           <p>
             Our mentors are top industry experts who bring a wealth of
             experience and knowledge to the table. They are dedicated to
             supporting you throughout your learning journey and providing you
             with the resources you need to succeed.
           </p>
-        </div>
-        <div className="span-3">
-          <p>
-            At Guleshaoor, we believe in the power of education and strive to
-            provide accessible, quality training that will help you reach your
-            full potential. So, join us today and take the first step towards a
-            successful career in the tech industry. We're excited to have you on
-            board and can't wait to help you achieve your dreams
-          </p>
           <Button variant="contained">Learn More</Button>
         </div>
       </div>
       <div className="WhatWeDo px-[8rem]">
-        <h3>what we do</h3>
+        <h3>Our Mentors</h3>
         <h2>DIRECT, MENTOR & BUILD THE LEADERS OF TOMORROW</h2>
         <Slider {...settings} style={{ padding: "0 0" }}>
           <div>

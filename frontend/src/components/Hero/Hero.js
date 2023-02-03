@@ -15,7 +15,12 @@ const Hero = () => {
         journey
       </p>
       <Link to="/profile-forms">
-        <Button variant="contained">Register</Button>
+        <Button
+          variant="contained"
+          className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300"
+        >
+          Register
+        </Button>
       </Link>
     </div>
   );
