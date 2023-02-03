@@ -1,19 +1,13 @@
 import React, { useEffect } from "react";
-import { Card, Col, Form, FormGroup, Nav, Row } from "react-bootstrap";
-import FormSteps from "../FormSteps/FormSteps";
-import FormContainer from "../FromContainer/FormContainer";
+import { Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import "./QualificationForm.scss";
 import * as yup from "yup";
-import { LinkContainer } from "react-router-bootstrap";
-import { Alert, Button } from "@mui/material";
+import { Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import {
-  getUserDetails,
-  updateUserDetails,
-} from "../../../actions/userActions";
+import { getUserDetails } from "../../../actions/userActions";
 import SnakBar from "../../SnakBar/SnakBar";
 const QualificationForm = ({
   nextStep,
@@ -99,7 +93,6 @@ const QualificationForm = ({
   const cgpa = watch("cgpa", 0.0);
   const degree = watch("degree", "");
   // steps state
-  const [step, setStep] = React.useState(false);
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const {
@@ -246,17 +239,18 @@ const QualificationForm = ({
                             <small className="form-text text-muted">
                               For e.g : A-one
                             </small>
-                            {touchedFields.schoolGrade && errors.schoolGrade && (
-                              <div className="my-2">
-                                <Alert
-                                  severity="error"
-                                  variant="outlined"
-                                  className="py-0 border-0"
-                                >
-                                  {errors.schoolGrade.message}
-                                </Alert>
-                              </div>
-                            )}
+                            {touchedFields.schoolGrade &&
+                              errors.schoolGrade && (
+                                <div className="my-2">
+                                  <Alert
+                                    severity="error"
+                                    variant="outlined"
+                                    className="py-0 border-0"
+                                  >
+                                    {errors.schoolGrade.message}
+                                  </Alert>
+                                </div>
+                              )}
                           </FormGroup>
                         </Col>
                       </Row>

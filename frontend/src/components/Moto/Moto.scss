@@ -161,6 +161,7 @@
     h2 {
       text-align: center;
       font-weight: 500;
+      font-family: $fontfamily2;
       @include headings(medium);
     }
 

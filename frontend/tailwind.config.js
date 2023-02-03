@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -18,6 +19,10 @@ module.exports = {
       borderColor: {
         default: "var(--color-border-default)",
       },
+    },
+    screens: {
+      xs: { max: "570px" },
+      ...defaultTheme.screens,
     },
   },
   plugins: [require("@tailwindcss/forms")],

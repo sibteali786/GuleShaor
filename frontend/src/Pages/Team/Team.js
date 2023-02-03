@@ -15,19 +15,6 @@ import { EffectCards } from "swiper";
 const Team = () => {
   const teams = [
     {
-      name: "Sibteali Baqar",
-      designation: "Mern Stack and Finance",
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, provident? Amet ut porro libero nam!",
-      profilePic: sibteali,
-      socialMedia: [
-        "https://github.com/sibteali786",
-        "https://www.linkedin.com/in/syed-sibteali-baqar-03167a17a/",
-        "https://medium.com/@sibteali786",
-        "https://sibtealibaqar.me",
-      ],
-    },
-    {
       name: "Izza Gul Awan",
       designation: "Founder, Marketing and Core Operations",
       about:
@@ -39,12 +26,17 @@ const Team = () => {
       ],
     },
     {
-      name: "Abdullah Wasi",
-      designation: "UI/UX and Content Writer",
+      name: "Sibteali Baqar",
+      designation: "Mern Stack and Finance",
       about:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, provident? Amet ut porro libero nam!",
-      profilePic: profile,
-      socialMedia: ["https://abdullahwasi.com/"],
+      profilePic: sibteali,
+      socialMedia: [
+        "https://github.com/sibteali786",
+        "https://www.linkedin.com/in/syed-sibteali-baqar-03167a17a/",
+        "https://medium.com/@sibteali786",
+        "https://sibtealibaqar.me",
+      ],
     },
   ];
   return (
