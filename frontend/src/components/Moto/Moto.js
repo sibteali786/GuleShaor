@@ -2,7 +2,13 @@ import React from "react";
 import "./Moto.scss";
 import Button from "@mui/material/Button";
 import motoAsset1 from "./../../Assets/Moto_Assets/Image.jpg";
-import carousel1 from "./../../Assets/Moto_Assets/Rectangle 5 (2).jpg";
+import carousel1 from "./../../Assets/Moto_Assets/drsa.jpg";
+import carousel2 from "./../../Assets/Moto_Assets/sk.jpg";
+import carousel3 from "./../../Assets/Moto_Assets/ak.jpg";
+import carousel4 from "./../../Assets/Moto_Assets/bk.jpg";
+import carousel5 from "./../../Assets/Moto_Assets/mab.jpg";
+import carousel6 from "./../../Assets/Moto_Assets/ua.jpg";
+import carousel7 from "./../../Assets/Moto_Assets/saira.PNG";
 // carousel imports
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -112,16 +118,22 @@ const Moto = () => {
             <img src={carousel1} alt="purpose" />
           </div>
           <div>
-            <img src={carousel1} alt="purpose" />
+            <img src={carousel2} alt="purpose" />
           </div>
           <div>
-            <img src={carousel1} alt="purpose" />
+            <img src={carousel3} alt="purpose" />
           </div>
           <div>
-            <img src={carousel1} alt="purpose" />
+            <img src={carousel4} alt="purpose" />
           </div>
           <div>
-            <img src={carousel1} alt="purpose" />
+            <img src={carousel5} alt="purpose" />
+          </div>
+          <div>
+            <img src={carousel6} alt="purpose" />
+          </div>
+          <div>
+            <img src={carousel7} alt="purpose" />
           </div>
         </Slider>
       </div>
