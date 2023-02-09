@@ -504,7 +504,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   {...register("city", {
                                     required: true,
                                   })}
-                                  placeholder="+92-312...."
+                                  placeholder="Karachi"
                                   name="city"
                                 />
                                 {touchedFields.city && errors.city && (
@@ -527,7 +527,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   {...register("country", {
                                     required: true,
                                   })}
-                                  placeholder="Female"
+                                  placeholder="Pakistan"
                                   name="country"
                                 />
                                 {touchedFields.country && errors.country && (
@@ -577,7 +577,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                   {...register("company", {
                                     required: true,
                                   })}
-                                  placeholder="+92-312...."
                                   name="company"
                                 />
                                 {touchedFields.company && errors.company && (
