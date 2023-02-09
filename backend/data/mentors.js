@@ -4,9 +4,10 @@ const users = [
   {
     name: "Admin User",
     mentorDetails: {
-      userType: "Pro",
+      userType: "mentor",
       username: "@admin",
       designation: "UI/UX Designer and Computer Engineer",
+      category: "UI/UX",
       image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
@@ -14,6 +15,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Astrology"],
     },
     introVideo: {
@@ -56,10 +59,19 @@ const users = [
       },
     ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Islamabad",
+      country: "Pakistan",
+      dob: "1999-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+      education: {
+        degree: "Bachelors of Computer Engineering",
+        university: "FAST NUCES",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -68,11 +80,11 @@ const users = [
     isAdmin: true,
   },
   {
-    name: "Sibteali Baqar",
+    name: "Ali Baqar",
     mentorDetails: {
-      userType: "Free",
-      username: "@sibteali",
-      designation: "Web Developer and Computer Engineer",
+      userType: "mentor",
+      username: "@aliBaqar",
+      designation: "Computer Engineer",
       image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
@@ -80,6 +92,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["Coding", "writing", "singing", "travelling"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["History", "Software", "AI and ML"],
     },
     introVideo: {
@@ -118,22 +132,37 @@ const users = [
         },
       },
     ],
+    certifications: [
+      {
+        name: "Python For Everybody",
+        issuingOrg: "Coursera",
+      },
+    ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Karachi",
+      country: "Pakistan",
+      dob: "1999-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Programmer", "Gamer", "Reader"],
-      skills: ["Coding", "writing", "singing", "travelling"],
+      education: {
+        degree: "Bachelors of Computer Engineering",
+        university: "FAST NUCES",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
-    email: "sibteali@example.com",
+    email: "ali@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
     isAdmin: false,
   },
   {
-    name: "Izza Gul Awan",
+    name: "Rabia Awan",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@izza",
       designation: "Content Writer and Computer Engineer",
       image: "/images/profilePic.png",
@@ -143,6 +172,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["Writer", "Singing", "programming", "cricket"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Leadership"],
     },
     introVideo: {
@@ -173,24 +204,39 @@ const users = [
         },
       },
     ],
+    certifications: [
+      {
+        name: "Project Management",
+        issuingOrg: "United Nations",
+      },
+    ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Female",
+      city: "Peshawar",
+      country: "Pakistan",
+      dob: "1998-02-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Content Writing", "Qirat"],
-      skills: ["Writer", "Singing", "programming", "cricket"],
+      education: {
+        degree: "Bachelors of Electrical Engineering",
+        university: "UET Peshawar",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
-    email: "izza@example.com",
+    email: "rabiaa@example.com",
     password: bcrypt.hashSync("123456", 10), // password will be generated using bcrypt library
     isAdmin: false,
   },
   {
     name: "Abdullah Wasi",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@wasi",
-      designation: "UI/UX Designer and Computer Engineer",
+      designation: "UI/UX Designer",
       image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
@@ -198,6 +244,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Astrology"],
     },
     introVideo: {
@@ -239,11 +287,26 @@ const users = [
         },
       },
     ],
+    certifications: [
+      {
+        name: "Google UI/UX",
+        issuingOrg: "Google, Coursera",
+      },
+    ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Islamabad",
+      country: "Pakistan",
+      dob: "2001-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+      education: {
+        degree: "Bachelors of Computer Engineering",
+        university: "NUST",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -254,7 +317,7 @@ const users = [
   {
     name: "Ahmad Khan",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@akhan",
       designation: "Bussinessman and Volunteer",
       image: "/images/profilePic.png",
@@ -264,6 +327,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Frienship"],
     },
     introVideo: {
@@ -284,10 +349,19 @@ const users = [
       },
     ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Karachi",
+      country: "Pakistan",
+      dob: "2000-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+      education: {
+        degree: "Bachelors of Bussiness and Administration",
+        university: "UOK",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -298,7 +372,7 @@ const users = [
   {
     name: "Daniyal Rao",
     mentorDetails: {
-      userType: "Pro",
+      userType: "mentor",
       username: "@admin",
       designation: "Web and Android Developer and CS graduate",
       image: "/images/profilePic.png",
@@ -308,6 +382,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Programming"],
     },
     introVideo: {
@@ -331,7 +407,6 @@ const users = [
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -342,7 +417,7 @@ const users = [
   {
     name: "Adila",
     mentorDetails: {
-      userType: "Pro",
+      userType: "mentor",
       username: "@admin",
       designation: "UI/UX Designer and Computer Engineer",
       image: "/images/profilePic.png",
@@ -352,6 +427,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Astrology"],
     },
     introVideo: {
@@ -397,7 +474,6 @@ const users = [
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -408,7 +484,7 @@ const users = [
   {
     name: "Ali Riyad",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@sibteali",
       designation: "Web Developer and Computer Engineer",
       image: "/images/profilePic.png",
@@ -418,6 +494,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["History", "Software", "AI and ML"],
     },
     introVideo: {
@@ -460,7 +538,6 @@ const users = [
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Programmer", "Gamer", "Reader"],
-      skills: ["Coding", "writing", "singing", "travelling"],
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -471,7 +548,7 @@ const users = [
   {
     name: "Yousra Qureshi",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@izza",
       designation: "Content Writer and Computer Engineer",
       image: "/images/profilePic.png",
@@ -481,6 +558,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Leadership"],
     },
     introVideo: {
@@ -515,7 +594,6 @@ const users = [
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Content Writing", "Qirat"],
-      skills: ["Writer", "Singing", "programming", "cricket"],
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -526,9 +604,9 @@ const users = [
   {
     name: "Wasif Riyaz",
     mentorDetails: {
-      userType: "Free",
-      username: "@wasi",
-      designation: "UI/UX Designer and Computer Engineer",
+      userType: "mentor",
+      username: "@wasif",
+      designation: "UI/UX Designer",
       image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
@@ -536,6 +614,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Astrology"],
     },
     introVideo: {
@@ -578,10 +658,20 @@ const users = [
       },
     ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Multan",
+      country: "Pakistan",
+      dob: "2002-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+
+      education: {
+        degree: "Bachelors of Computer Science",
+        university: "PUCIT",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -592,7 +682,7 @@ const users = [
   {
     name: "Ahsan Ali",
     mentorDetails: {
-      userType: "Free",
+      userType: "mentor",
       username: "@akhan",
       designation: "Bussinessman and Volunteer",
       image: "/images/profilePic.png",
@@ -602,6 +692,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Frienship"],
     },
     introVideo: {
@@ -622,10 +714,19 @@ const users = [
       },
     ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Lahore",
+      country: "Pakistan",
+      dob: "2001-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+      education: {
+        degree: "Bachelors of Arts",
+        university: "FAST",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",
@@ -636,9 +737,9 @@ const users = [
   {
     name: "Daniyal Majeed",
     mentorDetails: {
-      userType: "Pro",
+      userType: "mentor",
       username: "@admin",
-      designation: "Web and Android Developer and CS graduate",
+      designation: "Web and Android Developer",
       image: "/images/profilePic.png",
       otherImages: [
         "/images/Rectangle1.jpg",
@@ -646,6 +747,8 @@ const users = [
         "/images/Rectangle3.jpg",
         "/images/Rectangle4.jpg",
       ],
+      technical: ["astrology", "painting", "programming", "writing"],
+      interpersonal: ["communication", "teamwork", "leadership"],
       preferredSubjects: ["Programming"],
     },
     introVideo: {
@@ -666,10 +769,19 @@ const users = [
       },
     ],
     about: {
+      randomAchievement:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia",
+      gender: "Male",
+      city: "Haripur",
+      country: "Pakistan",
+      dob: "1997-01-01",
       details:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus ipsam suscipit tempore facere officia fuga laboriosam adipisci, libero et quo harum quasi obcaecati molestias illo quas placeat aut sapiente dolorum!",
       hobbies: ["Astrology", "Gamer"],
-      skills: ["astrology", "painting", "programming", "writing"],
+      education: {
+        degree: "Bachelors of Computer Science",
+        university: "FAST",
+      },
     },
     aboutStudents:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sequi facere corrupti dolores quis natus aliquid tempore cumque eaque unde.",

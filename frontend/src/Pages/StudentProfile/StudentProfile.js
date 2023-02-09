@@ -58,11 +58,13 @@ const UserProfile = () => {
                           ? "/" + student?.studentDetails?.image
                           : student?.studentDetails?.image
                       }
-                      className="profileImage rounded-full"
+                      className="profileImage rounded-full p-0"
                       style={{
                         transform: "translateY(-50px)",
-                        width: "fit-content",
-                        height: "100px",
+                        height: "120px",
+                        width: "120px",
+                        borderRadius: "50%",
+                        border: "4px solid white",
                       }}
                     />
                   </Row>

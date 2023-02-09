@@ -248,16 +248,39 @@ const Navbar = () => {
               }}
             >
               <MenuItem>
-                <Avatar /> Profile
+                {userInfo ? (
+                  userInfo?.userType === "mentor" ? (
+                    <Link
+                      to={`/mentors/${userInfo?._id}`}
+                      className="text-black no-underline flex items-center"
+                    >
+                      <Avatar />
+                      Profile
+                    </Link>
+                  ) : (
+                    <Link
+                      to={`/students/${userInfo?._id}`}
+                      className="text-black no-underline flex"
+                    >
+                      <Avatar />
+                      Profile
+                    </Link>
+                  )
+                ) : (
+                  <div>
+                    <Avatar />
+                    Profile
+                  </div>
+                )}
               </MenuItem>
-              <MenuItem>
+              <MenuItem className="text-gray-900">
                 <Avatar /> My account
               </MenuItem>
               <Divider />
               <MenuItem>
                 <Link
                   to="/settings"
-                  className="text-gray-500 no-underline flex"
+                  className="text-gray-900 no-underline flex items-center"
                 >
                   <ListItemIcon>
                     <SettingsIcon />

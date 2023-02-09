@@ -87,30 +87,47 @@ const InstructorProfile = () => {
                     <Row>
                       <Col xs={12} className="instName">
                         <div style={{ height: "fit-content" }}>
-                          <h3 className="xs:text-xl md:text-2xl">
-                            {mentor.name}
-                          </h3>
-                          <a href="email:johnDoe" className="no-underline">
-                            {mentor.mentorDetails.username}
+                          <div className="flex justify-between items-baseline">
+                            <h3 className="xs:text-md md:text-lg my-0">
+                              {mentor.name}
+                            </h3>
+                            <Button
+                              variant="contained"
+                              className="px-[1rem] my-0 py-[0.2rem] capitalize font-semibold items-center bg-transparent text-blue-600"
+                              startIcon={
+                                <i className="fas fa-plus text-md"></i>
+                              }
+                            >
+                              Follow
+                            </Button>
+                          </div>
+                          <a
+                            href="email:johnDoe"
+                            className="no-underline text-sm my-0"
+                          >
+                            {mentor.mentorDetails?.username}
                           </a>
+                          <p className="text-gray-800 text-xs tracking-wide mb-1">
+                            {mentor?.about?.city}, {mentor?.about?.country}
+                          </p>
                           {mentor?.mentorDetails?.interpersonal.length > 0 ? (
                             <div>
-                              <Accordion className="shadow-none w-1/2 ">
+                              <Accordion className="shadow-none w-1/3 ">
                                 <AccordionSummary
                                   className="p-0 m-0"
                                   expandIcon={<ExpandMoreIcon />}
                                   aria-controls="panel1a-content"
                                   id="panel1a-header"
                                 >
-                                  <h6 className="m-0 text-gray-600">
+                                  <h6 className="m-0 sm:text-xs text-sm">
                                     Technical Skills
                                   </h6>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails className="p-0">
                                   {mentor?.mentorDetails?.technical.map(
                                     (skill, idx) => (
                                       <p
-                                        className="text-gray-500 my-0"
+                                        className="text-gray-700 my-0 text-sm"
                                         key={idx}
                                       >
                                         {skill}
@@ -123,22 +140,22 @@ const InstructorProfile = () => {
                           ) : null}
                           {mentor?.mentorDetails?.interpersonal.length > 0 ? (
                             <div>
-                              <Accordion className="shadow-none w-1/2 ">
+                              <Accordion className="shadow-none w-1/3  mb-2">
                                 <AccordionSummary
                                   className="p-0"
                                   expandIcon={<ExpandMoreIcon />}
                                   aria-controls="panel1a-content"
                                   id="panel1a-header"
                                 >
-                                  <h6 className="m-0 text-gray-600">
+                                  <h6 className="m-0 sm:text-xs text-sm">
                                     Interpersonal Skills
                                   </h6>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails className="p-0">
                                   {mentor?.mentorDetails?.interpersonal.map(
                                     (skill, idx) => (
                                       <p
-                                        className="text-gray-500 my-0"
+                                        className="text-gray-700 my-0 text-sm"
                                         key={idx}
                                       >
                                         {skill}
@@ -171,21 +188,6 @@ const InstructorProfile = () => {
                           </Accordion>
                         </Col>
                       ) : null}
-                      <Col
-                        xs={12}
-                        className="d-flex justify-start align-start mt-2 mb-4"
-                      >
-                        <Button
-                          variant="contained"
-                          className="px-[1rem] my-0 py-[0.2rem] capitalize font-extrabold text-md"
-                          style={{
-                            backgroundColor: "#196AA0",
-                            borderRadius: "1.3rem",
-                          }}
-                        >
-                          Follow
-                        </Button>
-                      </Col>
                     </Row>
                   </Col>
                 </Row>
@@ -201,92 +203,70 @@ const InstructorProfile = () => {
                       {
                         // TODO: resolve skills box disappear when reload mentor page
                       }
-                      <Collapse in={checked} collapsedSize={90}>
+                      <Collapse in={checked} collapsedSize={80}>
                         <h3 className="mb-2">About</h3>
-                        <p className="text-gray-800 text-md">
+                        <p className="text-gray-800 text-sm">
                           {mentor.about.details}
                         </p>
                       </Collapse>
                       {mentor?.about?.details.length > 100 ? (
-                        <p
+                        <Button
                           onClick={handleChange}
-                          className="text-blue-500 hover:text-blue-700 hover:cursor-pointer"
+                          className="text-blue-500 hover:text-blue-700 hover:cursor-pointer text-xs capitalize inline-block"
+                          endIcon={
+                            <i className="fas fa-chevron-down text-xs"></i>
+                          }
                         >
                           Read More
-                        </p>
+                        </Button>
                       ) : null}
-                      <Link
-                        to="/profile"
-                        style={{ textDecoration: "none" }}
-                        className="text-blue-500 hover:text-blue-700"
-                      >
-                        More Posts by {mentor.name}
-                      </Link>
                     </>
                   ) : null}
                 </div>
               ) : null}
 
-              {mentor?.about?.education?.school?.name?.length > 0 ? (
+              {mentor?.about?.education?.degree.length > 0 ? (
                 <div
                   className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full  "
                   style={{ backgroundColor: "#F1F1F1" }}
                 >
                   <h3 className="mb-4">Education</h3>
-                  <div className="border-b-2 border-gray-200 mr-4 p-0 pb-2">
-                    <div className="ml-2 mt-3 flex content-center justify-start">
-                      <i className="fas fa-school text-4xl"></i>
-                      <div className="ml-3">
-                        <h6 className="m-0 mt-1">
-                          {mentor?.about?.education?.school?.name}
-                        </h6>
-                        <p className="text-gray-700 m-0 mb-1 text-sm">
-                          Passing Grade:{" "}
-                          {mentor?.about?.education?.school?.grade}
-                        </p>
-                        <p className="my-0 text-xs text-gray-600">
-                          Karachi, Pakistan
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="border-b-2 border-gray-200 mr-4 p-0 pb-2">
-                    <div className="ml-2 mt-3 flex content-center justify-start">
-                      <i className="fas fa-school text-4xl"></i>
-                      <div className="ml-3">
-                        <h6 className="m-0 mt-1">
-                          {mentor?.about?.education?.college?.name}
-                        </h6>
-                        <p className="text-gray-700 m-0 mb-1 text-sm">
-                          Passing Grade:{" "}
-                          {mentor?.about?.education?.college?.grade}
-                        </p>
-                        <p className="my-0 text-xs text-gray-600">
-                          Karachi, Pakistan
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                   <div className=" mr-4 p-0 pb-2">
                     <div className="ml-2 mt-3 flex content-center justify-start">
                       <i className="fas fa-school text-4xl"></i>
                       <div className="ml-3">
                         <h6 className="m-0 mt-1">
-                          {mentor?.about?.education?.university?.name}
+                          {mentor?.about?.education?.university}
                         </h6>
                         <p className="text-gray-700 m-0 mb-1 text-sm">
-                          Passing Grade:{" "}
-                          {mentor?.about?.education?.college?.grade}
-                        </p>
-                        <p className="my-0 text-xs text-gray-600">
-                          Rawalpindi, Pakistan
+                          Degree: {mentor?.about?.education?.degree}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               ) : null}
-
+              {mentor?.certifications.length > 0 ? (
+                <div
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full  "
+                  style={{ backgroundColor: "#F1F1F1" }}
+                >
+                  <h3 className="mb-4">Certifications</h3>
+                  {mentor?.certifications.map((cert, idx) => (
+                    <div className=" mr-4 p-0 pb-2">
+                      <div className="ml-2 mt-3 flex content-center justify-start">
+                        <i className="fas fa-certificate text-4xl"></i>
+                        <div className="ml-3">
+                          <h6 className="m-0 mt-1">{cert?.name}</h6>
+                          <p className="text-gray-700 m-0 mb-1 text-sm">
+                            {cert?.issuingOrg}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
               {mentor.courses.length > 0 ? (
                 <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
                   <>
@@ -341,10 +321,9 @@ const InstructorProfile = () => {
                       {mentor.aboutStudents ? (
                         <Typography
                           variant="body2"
+                          className="text-sm"
                           style={{
                             fontFamily: "Montserrat",
-                            color: "#5F5F5F",
-                            fontWeight: "bold",
                           }}
                         >
                           {mentor.aboutStudents}
@@ -356,12 +335,14 @@ const InstructorProfile = () => {
               ) : null}
 
               {mentor?.introVideo?.video?.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 mx-0 px-4 py-4 my-2">
-                  <Col xs={12} lg={6} className="span-4">
-                    <h3>Videos</h3>
-                    <ReactPlayer url={mentor.introVideo.video} />
-                  </Col>
-                </Row>
+                mentor?.introVideo?.video.includes("youtube") ? (
+                  <Row className="bg-white rounded-md border-[1px] border-slate-300 mx-0 px-4 py-4 my-2">
+                    <Col xs={12} lg={6} className="span-4">
+                      <h3>Videos</h3>
+                      <ReactPlayer url={mentor.introVideo.video} />
+                    </Col>
+                  </Row>
+                ) : null
               ) : null}
 
               {mentor.mentorDetails.otherImages.length > 0 ? (

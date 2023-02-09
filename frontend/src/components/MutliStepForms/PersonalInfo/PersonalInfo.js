@@ -4,9 +4,10 @@ import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Alert } from "@mui/material";
+import { Alert, TextField } from "@mui/material";
 import { FilePond } from "react-filepond";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../../actions/userActions";
@@ -16,163 +17,55 @@ import Message from "../../Message/Message";
 import { storage } from "../../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { setProfileImage } from "../../../actions/imageActions";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import moment from "moment";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
   const [files, setFiles] = useState([]);
   // yup validation schema
   // TODO:improve the size of image
-  const schema = yup.object().shape(
-    {
-      name: yup
-        .string()
-        .required("First Name is required")
-        .min(3, "Must be greater than 3 characters")
-        .max(20, "Must be less than 20 characters"),
-      email: yup.string().email().required("Email is required"),
-      designation: yup
-        .string()
-        .required("Designation is required")
-        .min("3", "Must be greater than 3 characters")
-        .max("30", "Must be less than 30 characters"),
-      mobile: yup
-        .string()
-        .trim()
-        .required("Required")
-        .matches(
-          /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d+)\)?)[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?)+)(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
-          "Format is not correct"
-        ),
-      userName: yup
-        .string()
-        .required("User Name is required")
-        .max(20, "Must be less than 20 characters")
-        .min(3, "Must be at least 3 characters"),
-      image: yup
-        .mixed()
-        .required("Required")
-        .test("maxSize", "Image size must be less than 1 MB", (value) => {
-          return true;
-        }),
-      about: yup
-        .string()
-        .required("About is required")
-        .min(5, "Must be at least 30 characters"),
-      twitter: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("twitter", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(/^([^\/\s?#]+)$/, "Must be a valid twitter handle"),
-        }),
-      facebook: yup
-        .string()
-        .trim()
-        .notRequired()
-        .nullable()
-        .when("facebook", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /(?:https?:\/\/)?(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w\-\.]*\/)*([\w\-\.]*)/,
-              "Must be a valid facebook id url"
-            ),
-        }),
-      instagram: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("instagram", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/,
-              "Must be a valid Instagram username"
-            ),
-        }),
-      medium: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("medium", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /^@[A-Za-z0-9]+/,
-              "Must be a valid Medium Username starting with @ "
-            ),
-        }),
-      linkedIn: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("linkedIn", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /([a-zA-Z0-9À-ž_.-]+)/,
-              "Must be a valid LinkedIn Username"
-            ),
-        }),
-      github: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("instagram", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/,
-              "Must be a valid GitHub Username"
-            ),
-        }),
-      behance: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("behance", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /^(http(s?):\/\/)?(www\.)?behance\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/,
-              "Must be a valid Behance Username"
-            ),
-        }),
-      dribble: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("dribble", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(
-              /(?:http?:\/\/|https?:\/\/)?(?:www\.)?dribbble\.com\/(?:\/*)([\w\-\.]*)/,
-              "Must be a valid Dribble Username"
-            ),
-        }),
-      devto: yup
-        .string()
-        .trim()
-        .notRequired()
-        .when("devto", {
-          is: (value) => value?.length,
-          then: (rule) =>
-            rule.matches(/^@[A-Za-z0-9]+/, "Must be a valid DevTo Username"),
-        }),
-    },
-    [
-      // Add Cyclic deps here because when require itself
-      ["twitter", "twitter"],
-      ["facebook", "facebook"],
-      ["instagram", "instagram"],
-      ["medium", "medium"],
-      ["linkedIn", "linkedIn"],
-      ["github", "github"],
-      ["behance", "behance"],
-      ["dribble", "dribble"],
-      ["devto", "devto"],
-    ]
-  );
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("First Name is required")
+      .min(3, "Must be greater than 3 characters")
+      .max(20, "Must be less than 20 characters"),
+    email: yup.string().email().required("Email is required"),
+    designation: yup
+      .string()
+      .required("Designation is required")
+      .min("3", "Must be greater than 3 characters")
+      .max("30", "Must be less than 30 characters"),
+    mobile: yup
+      .string()
+      .trim()
+      .required("Required")
+      .matches(
+        /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d+)\)?)[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?)+)(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
+        "Format is not correct"
+      ),
+    userName: yup
+      .string()
+      .required("User Name is required")
+      .max(20, "Must be less than 20 characters")
+      .min(3, "Must be at least 3 characters"),
+    image: yup
+      .mixed()
+      .required("Required")
+      .test("maxSize", "Image size must be less than 1 MB", (value) => {
+        return true;
+      }),
+    gender: yup.string().required("Gender is required").max(8).min(4),
+    company: yup.string().notRequired(),
+    city: yup.string().required("City is required").max(20).min(4),
+    country: yup.string().required("Country is required").max(20).min(4),
+    dob: yup
+      .string()
+      .nullable()
+      .test("dob", "You must be 18 years or older", function (value) {
+        return moment().diff(moment(value, "YYYY-MM-DD"), "years") >= 18;
+      })
+      .required("Please enter your age"),
+  });
 
   const form = useForm({
     defaultValues: {
@@ -182,16 +75,11 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       userName: "",
       image: null,
       mobile: "",
-      about: "",
-      twitter: "",
-      facebook: "",
-      instagram: "",
-      medium: "",
-      linkedIn: "",
-      github: "",
-      behance: "",
-      dribble: "",
-      devto: "",
+      dob: moment().format(),
+      city: "",
+      country: "",
+      gender: "",
+      company: "",
     },
     mode: "all",
     resolver: yupResolver(schema),
@@ -204,25 +92,20 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     setFocus,
     formState: { touchedFields, errors },
     watch,
+    control,
   } = form;
 
   const name = watch("name", "");
-  const about = watch("about", "");
   const email = watch("email", "");
   const designation = watch("designation", "");
+  const city = watch("city", "");
+  const country = watch("country", "");
+  const gender = watch("gender", "");
+  const dob = watch("dob", "");
+  const company = watch("company", "");
   const image = watch("image", null);
   const userName = watch("userName", "");
   const mobile = watch("mobile", "");
-  const twitter = watch("twitter", "");
-  const facebook = watch("facebook", "");
-  const instagram = watch("instagram", "");
-  const medium = watch("medium", "");
-  const linkedIn = watch("linkedIn", "");
-  const github = watch("github", "");
-  const behance = watch("behance", "");
-  const dribble = watch("dribble", "");
-  const devto = watch("devto", "");
-
   // handling image inputs
   const [imageFile, setImageFile] = useState(null);
   const onFilesUpdate = (e) => {
@@ -266,20 +149,13 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         designation: data?.designation,
       },
       about: {
-        details: data?.about,
+        city: data?.city,
+        country: data?.country,
+        dob: data?.dob,
+        gender: data?.gender,
+        company: data?.company,
         contact: {
           mobile: data?.mobile,
-        },
-        socialMedia: {
-          twitter: data?.twitter,
-          facebook: data?.facebook,
-          instagram: data?.instagram,
-          medium: data?.medium,
-          linkedin: data?.linkedIn,
-          github: data?.github,
-          behance: data?.behance,
-          dribble: data?.dribble,
-          devto: data?.devto,
         },
       },
     };
@@ -312,18 +188,14 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       ) {
         setValue("name", UserDetails.name);
         setValue("email", UserDetails.email);
+        setValue("designation", UserDetails?.userDetails?.designation);
+        setValue("gender", UserDetails?.about?.gender);
+        setValue("company", UserDetails?.about?.company);
+        setValue("city", UserDetails?.about?.city);
+        setValue("country", UserDetails?.about?.country);
+        setValue("dob", UserDetails?.about?.dob);
         setValue("mobile", UserDetails?.about?.contact?.mobile);
-        setValue("about", UserDetails?.about?.details);
         setValue("userName", UserDetails?.userDetails?.username);
-        setValue("facebook", UserDetails?.about?.socialMedia?.facebook);
-        setValue("twitter", UserDetails?.about?.socialMedia?.twitter);
-        setValue("instagram", UserDetails?.about?.socialMedia?.instagram);
-        setValue("medium", UserDetails?.about?.socialMedia?.medium);
-        setValue("linkedIn", UserDetails?.about?.socialMedia?.linkedin);
-        setValue("github", UserDetails?.about?.socialMedia?.github);
-        setValue("behance", UserDetails?.about?.socialMedia?.behance);
-        setValue("dribble", UserDetails?.about?.socialMedia?.dribble);
-        setValue("devto", UserDetails?.about?.socialMedia?.devto);
       } else if (
         user?.name ||
         user?.about?.username ||
@@ -331,20 +203,16 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
         user?.about?.contact?.mobile ||
         user?.mentorDetails?.designation
       ) {
-        setValue("name", user?.name);
-        setValue("email", user?.email);
+        setValue("name", user.name);
+        setValue("email", user.email);
+        setValue("designation", user?.userDetails?.designation);
+        setValue("gender", user?.about?.gender);
+        setValue("company", user?.about?.company);
+        setValue("city", user?.about?.city);
+        setValue("country", user?.about?.country);
+        setValue("dob", user?.about?.dob);
         setValue("mobile", user?.about?.contact?.mobile);
-        setValue("about", user?.about?.details);
-        setValue("userName", user?.mentorDetails?.username);
-        setValue("facebook", user?.about?.socialMedia?.facebook);
-        setValue("twitter", user?.about?.socialMedia?.twitter);
-        setValue("instagram", user?.about?.socialMedia?.instagram);
-        setValue("medium", user?.about?.socialMedia?.medium);
-        setValue("linkedIn", user?.about?.socialMedia?.linkedin);
-        setValue("github", user?.about?.socialMedia?.github);
-        setValue("behance", user?.about?.socialMedia?.behance);
-        setValue("dribble", user?.about?.socialMedia?.dribble);
-        setValue("devto", user?.about?.socialMedia?.devto);
+        setValue("userName", user?.userDetails?.username);
       }
     }
 
@@ -533,7 +401,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             </Col>
                             <Col xs={12} sm={6}>
                               <FormGroup>
-                                <Form.Label>Designation</Form.Label>
+                                <Form.Label>Current Job Title</Form.Label>
                                 <Form.Control
                                   {...register("designation", {
                                     required: true,
@@ -557,53 +425,162 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             </Col>
                           </Row>
                           <Row>
-                            <Col xs={12} className="mb-3">
-                              <Row>
-                                <Col xs={12} sm={6}>
-                                  <FormGroup>
-                                    <Form.Label>Contact</Form.Label>
-                                    <Form.Control
-                                      {...register("mobile", {
-                                        required: true,
-                                      })}
-                                      placeholder="+92-312...."
-                                      name="mobile"
-                                    />
-                                    {touchedFields.mobile && errors.mobile && (
-                                      <div className="">
-                                        <Alert
-                                          severity="error"
-                                          variant="outlined"
-                                          className="py-0 border-0"
-                                        >
-                                          {errors.mobile.message}
-                                        </Alert>
-                                      </div>
-                                    )}
-                                  </FormGroup>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col className="mb-3">
+                            <Col xs={12} sm={6}>
                               <FormGroup>
-                                <Form.Label>About</Form.Label>
+                                <Form.Label>Phone Number</Form.Label>
                                 <Form.Control
-                                  {...register("about", { required: true })}
-                                  as="textarea"
-                                  rows="5"
-                                  placeholder="My Bio"
-                                  name="about"
-                                ></Form.Control>
-                                {touchedFields.about && errors.about && (
+                                  {...register("mobile", {
+                                    required: true,
+                                  })}
+                                  placeholder="+92-312...."
+                                  name="mobile"
+                                />
+                                {touchedFields.mobile && errors.mobile && (
                                   <div className="">
                                     <Alert
                                       severity="error"
                                       variant="outlined"
                                       className="py-0 border-0"
                                     >
-                                      {errors.about.message}
+                                      {errors.mobile.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Gender</Form.Label>
+                                <Form.Control
+                                  {...register("gender", {
+                                    required: true,
+                                  })}
+                                  placeholder="Female"
+                                  name="gender"
+                                />
+                                {touchedFields.gender && errors.gender && (
+                                  <div className="">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.gender.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>City</Form.Label>
+                                <Form.Control
+                                  {...register("city", {
+                                    required: true,
+                                  })}
+                                  placeholder="+92-312...."
+                                  name="city"
+                                />
+                                {touchedFields.city && errors.city && (
+                                  <div className="">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.city.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup>
+                                <Form.Label>Country</Form.Label>
+                                <Form.Control
+                                  {...register("country", {
+                                    required: true,
+                                  })}
+                                  placeholder="Female"
+                                  name="country"
+                                />
+                                {touchedFields.country && errors.country && (
+                                  <div className="">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.country.message}
+                                    </Alert>
+                                  </div>
+                                )}
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}>
+                              <FormGroup>
+                                <Form.Label>Date of Birth</Form.Label>
+                                <Controller
+                                  name="dob"
+                                  control={control}
+                                  defaultValue={null}
+                                  render={({
+                                    field: { onChange, value },
+                                    fieldState: { error, invalid },
+                                  }) => (
+                                    <DatePicker
+                                      disableFuture
+                                      value={dob}
+                                      onChange={(value) =>
+                                        onChange(
+                                          moment(value).format("YYYY-MM-DD")
+                                        )
+                                      }
+                                      renderInput={(params) => (
+                                        <TextField
+                                          {...register("dob", {
+                                            required: true,
+                                          })}
+                                          error={invalid}
+                                          helperText={
+                                            invalid ? error.message : null
+                                          }
+                                          id="dob"
+                                          margin="dense"
+                                          color="primary"
+                                          autoComplete="bday"
+                                          {...params}
+                                        />
+                                      )}
+                                    />
+                                  )}
+                                />
+                              </FormGroup>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col xs={6}>
+                              <FormGroup>
+                                <Form.Label>Company</Form.Label>
+                                <Form.Control
+                                  {...register("company", {
+                                    required: true,
+                                  })}
+                                  placeholder="+92-312...."
+                                  name="company"
+                                />
+                                {touchedFields.company && errors.company && (
+                                  <div className="">
+                                    <Alert
+                                      severity="error"
+                                      variant="outlined"
+                                      className="py-0 border-0"
+                                    >
+                                      {errors.company.message}
                                     </Alert>
                                   </div>
                                 )}
@@ -613,220 +590,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                         </Col>
                       </Row>
 
-                      <Row>
-                        <Col xs={12} className="mb-3">
-                          <div className="mb-2 form-text d-flex flex-column">
-                            <b className="text-lg text-gray-500">
-                              Social Media
-                            </b>
-                            <small>
-                              *All the fields are optional, leave them empty if
-                              they are not applicable for you
-                            </small>
-                          </div>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Facebook</Form.Label>
-                                <Form.Control
-                                  {...register("facebook")}
-                                  placeholder="https://www.facebook/Ali786"
-                                  name="facebook"
-                                />
-                                {touchedFields.facebook && errors.facebook && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.facebook.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>LinkedIn</Form.Label>
-                                <Form.Control
-                                  {...register("linkedIn")}
-                                  placeholder="https://www.linekdin/Ali786"
-                                  name="linkedIn"
-                                />
-                                {touchedFields.linkedIn && errors.linkedIn && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.linkedIn.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Dev To</Form.Label>
-                                <Form.Control
-                                  {...register("devto")}
-                                  placeholder="https://www.devto/ali786"
-                                  name="devto"
-                                />
-                                {touchedFields.devto && errors.devto && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.devto.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                            <Col>
-                              <FormGroup>
-                                <Form.Label>Medium</Form.Label>
-                                <Form.Control
-                                  {...register("medium")}
-                                  placeholder="https://www.medium/Ali786"
-                                  name="medium"
-                                />
-                                {touchedFields.medium && errors.medium && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.medium.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col>
-                              <FormGroup>
-                                <Form.Label>Behance</Form.Label>
-                                <Form.Control
-                                  {...register("behance")}
-                                  placeholder="https://www.behance/Ali786"
-                                  name="behance"
-                                />
-                                {touchedFields.behance && errors.behance && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.behance.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Dribble</Form.Label>
-                                <Form.Control
-                                  {...register("dribble")}
-                                  placeholder="https://www.dribble/Ali786"
-                                  name="dribble"
-                                />
-                                {touchedFields.dribble && errors.dribble && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.dribble.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Github</Form.Label>
-                                <Form.Control
-                                  {...register("github")}
-                                  placeholder="https://www.github/Ali786"
-                                  name="github"
-                                />
-                                {touchedFields.github && errors.github && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.github.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Instagram</Form.Label>
-                                <Form.Control
-                                  {...register("instagram")}
-                                  placeholder="https://www.Instagram/Ali786"
-                                  name="instagram"
-                                />
-                                {touchedFields.instagram && errors.instagram && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.instagram.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                        </Col>
-                        <Col xs={12} sm={6}>
-                          <Row>
-                            <Col>
-                              <FormGroup>
-                                <Form.Label>Twitter</Form.Label>
-                                <Form.Control
-                                  {...register("twitter")}
-                                  placeholder="https://www.twitter/Ali786"
-                                  name="twitter"
-                                />
-                                {touchedFields.twitter && errors.twitter && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.twitter.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
                       <div className="col d-flex justify-content-end mt-5">
                         <SubmitButton
                           variant="outlined"
@@ -842,37 +605,12 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             setValue("designation", designation, {
                               shouldTouch: true,
                             });
-                            setValue("about", about, {
-                              shouldTouch: true,
-                            });
+                            setValue("dob", dob, { shouldTouch: true });
                             setValue("mobile", mobile, { shouldTouch: true });
-                            setValue("twitter", twitter, {
-                              shouldTouch: true,
-                            });
-                            setValue("medium", medium, {
-                              shouldTouch: true,
-                            });
-                            setValue("facebook", facebook, {
-                              shouldTouch: true,
-                            });
-                            setValue("instagram", instagram, {
-                              shouldTouch: true,
-                            });
-                            setValue("linkedIn", linkedIn, {
-                              shouldTouch: true,
-                            });
-                            setValue("devto", devto, {
-                              shouldTouch: true,
-                            });
-                            setValue("dribble", dribble, {
-                              shouldTouch: true,
-                            });
-                            setValue("behance", behance, {
-                              shouldTouch: true,
-                            });
-                            setValue("github", github, {
-                              shouldTouch: true,
-                            });
+                            setValue("city", city, { shouldTouch: true });
+                            setValue("gender", gender, { shouldTouch: true });
+                            setValue("country", country, { shouldTouch: true });
+                            setValue("company", company, { shouldTouch: true });
                           }}
                         >
                           Submit

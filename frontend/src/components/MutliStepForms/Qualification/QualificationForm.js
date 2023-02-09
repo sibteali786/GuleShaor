@@ -16,40 +16,6 @@ const QualificationForm = ({
   setUserDetails,
 }) => {
   const schema = yup.object().shape({
-    schoolName: yup
-      .string()
-      .required("School Name is required")
-      .min(3, "There must be at least 3 characters")
-      .max(50, "There must be at most 50 characters"),
-
-    schoolGrade: yup
-      .string()
-      .required("Matric / O-Levels Grade is required")
-      .min(1, "There must be at least 1 characters")
-      .max(50, "There must be at most 50 characters"),
-    highSchool: yup
-      .string()
-      .required("High School Name is required")
-      .min(3, "There must be at least 3 characters")
-      .max(50, "There must be at most 50 characters"),
-    highSchoolGrade: yup
-      .string()
-      .required("Matric / O-Levels Grade is required")
-      .min(1, "There must be at least 1 characters")
-      .max(50, "There must be at most 50 characters"),
-    gpa: yup
-      .number()
-      .required("GPA is required")
-      .min(1, "There must be at least 1 characters")
-      .max(4, "There must be at most 4 characters")
-      .positive(),
-    cgpa: yup
-      .number()
-      .required("CGPA is required")
-      .min(1, "There must be at least 1 characters")
-      .max(4, "There must be at most 4 characters")
-      .positive(),
-
     universityName: yup
       .string()
       .required("University Name is required")
@@ -60,6 +26,10 @@ const QualificationForm = ({
       .required("Degree Name is required")
       .min(4, "There must be at least 4 characters")
       .max(50, "There must be at most 50 characters"),
+    certificateTitle: yup.string().notRequired(),
+    issuedBy: yup.string().notRequired(),
+    achievementTitle: yup.string().notRequired(),
+    awardedBy: yup.string().notRequired(),
   });
   const form = useForm({
     defaultValues: {
@@ -84,14 +54,12 @@ const QualificationForm = ({
     watch,
   } = form;
 
-  const schoolName = watch("schoolName", "");
-  const schoolGrade = watch("schoolGrade", "");
-  const highSchool = watch("highSchool", "");
   const universityName = watch("universityName", "");
-  const highSchoolGrade = watch("highSchoolGrade", "");
-  const gpa = watch("gpa", 0.0);
-  const cgpa = watch("cgpa", 0.0);
   const degree = watch("degree", "");
+  const certificateTitle = watch("certificateTitle", "");
+  const issuedBy = watch("issuedBy", "");
+  const achievementTitle = watch("achievementTitle", "");
+  const awardedBy = watch("awardedBy", "");
   // steps state
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
@@ -109,16 +77,23 @@ const QualificationForm = ({
       about: {
         ...UserDetails.about,
         education: {
-          school: { name: data?.schoolName, grade: data?.schoolGrade },
-          college: { name: data?.highSchool, grade: data?.highSchoolGrade },
-          university: {
-            name: data?.universityName,
-            gpa: data?.gpa,
-            cgpa: data?.cgpa,
-            degree: data?.degree,
-          },
+          university: data?.universityName,
+          degree: data?.degree,
         },
+        // TODO: convert in to an array from along with certifications
+        achievements: [
+          {
+            title: data?.achievementTitle,
+            awardedBy: data?.awardedBy,
+          },
+        ],
       },
+      certifications: [
+        {
+          title: data?.certificateTitle,
+          issuedBy: data?.issuedBy,
+        },
+      ],
     });
     nextStep();
   };
@@ -127,40 +102,16 @@ const QualificationForm = ({
       dispatch(getUserDetails("profile"));
     } else {
       if (
-        UserDetails?.about?.education?.school?.name &&
-        UserDetails?.about?.education?.school?.grade
+        UserDetails?.about?.education?.university &&
+        UserDetails?.about?.education?.degree
       ) {
-        setValue("schoolName", UserDetails?.about?.education?.school?.name);
-        setValue("schoolGrade", UserDetails?.about?.education?.school?.grade);
-        setValue("highSchool", UserDetails?.about?.education?.college?.name);
-        setValue(
-          "highSchoolGrade",
-          UserDetails?.about?.education?.college?.grade
-        );
-        setValue(
-          "universityName",
-          UserDetails?.about?.education?.university?.name
-        );
-        setValue("gpa", UserDetails?.about?.education?.university?.gpa);
-        setValue("cgpa", UserDetails?.about?.education?.university?.cgpa);
+        setValue("universityName", UserDetails?.about?.education?.university);
         setValue("degree", UserDetails?.about?.education?.university?.degree);
       } else if (
-        user?.about?.education?.school?.name ||
-        user?.about?.education?.school?.grade ||
-        user?.about?.education?.college?.name ||
-        user?.about?.education?.college?.grade ||
-        user?.about?.education?.university?.name ||
-        user?.about?.education?.university?.gpa ||
-        user?.about?.education?.university?.cgpa ||
+        user?.about?.education?.university ||
         user?.about?.education?.university?.degree
       ) {
-        setValue("schoolName", user?.about?.education?.school?.name);
-        setValue("schoolGrade", user?.about?.education?.school?.grade);
-        setValue("highSchool", user?.about?.education?.college?.name);
-        setValue("highSchoolGrade", user?.about?.education?.college?.grade);
         setValue("universityName", user?.about?.education?.university?.name);
-        setValue("gpa", user?.about?.education?.university?.gpa);
-        setValue("cgpa", user?.about?.education?.university?.cgpa);
         setValue("degree", user?.about?.education?.university?.degree);
       }
     }
@@ -197,122 +148,7 @@ const QualificationForm = ({
                 <Card.Body>
                   <div className="e-profile">
                     <Form onSubmit={handleSubmit(submitHandler)}>
-                      <div className="mb-1 form-text text-muted d-flex flex-column">
-                        <h5>Schooling</h5>
-                      </div>
-                      <Row>
-                        <Col xs={12} sm={6}>
-                          <FormGroup>
-                            <Form.Label>School Name</Form.Label>
-                            <Form.Control
-                              {...register("schoolName", { required: true })}
-                              type="text"
-                              name="schoolName"
-                              placeholder="Beaconhouse.."
-                            />
-                            <small className="form-text text-muted">
-                              For e.g : Army Public School
-                            </small>
-                            {touchedFields.schoolName && errors.schoolName && (
-                              <div className="my-2">
-                                <Alert
-                                  severity="error"
-                                  variant="outlined"
-                                  className="py-0 border-0"
-                                >
-                                  {errors.schoolName.message}
-                                </Alert>
-                              </div>
-                            )}
-                          </FormGroup>
-                        </Col>
-
-                        <Col xs={12} sm={6}>
-                          <FormGroup>
-                            <Form.Label>Matric / O-Levels Grade</Form.Label>
-                            <Form.Control
-                              {...register("schoolGrade", { required: true })}
-                              type="text"
-                              name="schoolGrade"
-                              placeholder="A+"
-                            />
-                            <small className="form-text text-muted">
-                              For e.g : A-one
-                            </small>
-                            {touchedFields.schoolGrade &&
-                              errors.schoolGrade && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.schoolGrade.message}
-                                  </Alert>
-                                </div>
-                              )}
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <div className="mb-1 mt-3 form-text text-muted d-flex flex-column">
-                        <h5>Fsc / I-Com / FA / A-Levels</h5>
-                      </div>
-                      <Row>
-                        <Col xs={12} sm={6}>
-                          <FormGroup>
-                            <Form.Label>High School Name</Form.Label>
-                            <Form.Control
-                              {...register("highSchool", { required: true })}
-                              type="text"
-                              placeholder="Army Public School/ College"
-                              name="highSchool"
-                            />
-                            <small className="form-text text-muted">
-                              For e.g : Government Degree College
-                            </small>
-                            {touchedFields.highSchool && errors.highSchool && (
-                              <div className="my-2">
-                                <Alert
-                                  severity="error"
-                                  variant="outlined"
-                                  className="py-0 border-0"
-                                >
-                                  {errors.highSchool.message}
-                                </Alert>
-                              </div>
-                            )}
-                          </FormGroup>
-                        </Col>
-                        <Col xs={12} sm={6}>
-                          <FormGroup>
-                            <Form.Label>Grade</Form.Label>
-                            <Form.Control
-                              {...register("highSchoolGrade", {
-                                required: true,
-                              })}
-                              type="text"
-                              placeholder="A-"
-                              name="highSchoolGrade"
-                            />
-                            <small className="form-text text-muted">
-                              For e.g : B
-                            </small>
-                            {touchedFields.highSchoolGrade &&
-                              errors.highSchoolGrade && (
-                                <div className="my-2">
-                                  <Alert
-                                    severity="error"
-                                    variant="outlined"
-                                    className="py-0 border-0"
-                                  >
-                                    {errors.highSchoolGrade.message}
-                                  </Alert>
-                                </div>
-                              )}
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <div className="mb-2 mt-3 form-text tex-muted d-flex flex-column">
+                      <div className="mb-2 mt-3 form-text d-flex flex-column">
                         <h5>Undergraduate Studies</h5>
                       </div>
                       <Row>
@@ -327,7 +163,7 @@ const QualificationForm = ({
                               placeholder="Nust"
                               name="universityName"
                             />
-                            <small className="form-text text-muted">
+                            <small className="form-text text-muted text-xs line leading-none">
                               For e.g : National University of Sciences and
                               Technology
                             </small>
@@ -355,7 +191,7 @@ const QualificationForm = ({
                               placeholder="Bachelor of Science"
                               name="degree"
                             />
-                            <small className="form-text text-muted">
+                            <small className="form-text text-muted text-xs">
                               For e.g : Bachelor of Physics
                             </small>
                             {touchedFields.degree && errors.degree && (
@@ -372,58 +208,96 @@ const QualificationForm = ({
                           </FormGroup>
                         </Col>
                       </Row>
+                      <div className="mb-1 mt-2 form-text d-flex flex-column">
+                        <h5>Certifications</h5>
+                      </div>
                       <Row className="mb-5">
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>GPA last semester</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control
-                              {...register("gpa", { required: true })}
-                              type="number"
-                              placeholder="2.8"
-                              step="0.1"
-                              min="0"
-                              max="4"
-                              name="gpa"
+                              {...register("certificateTitle")}
+                              placeholder="Intro to Statistics"
+                              name="certificateTitle"
                             />
-                            <small className="form-text text-muted">
-                              For e.g : 3.6
-                            </small>
-                            {touchedFields.gpa && errors.gpa && (
+                            {touchedFields.certificateTitle &&
+                              errors.certificateTitle && (
+                                <div className="my-2">
+                                  <Alert
+                                    severity="error"
+                                    variant="outlined"
+                                    className="py-0 border-0"
+                                  >
+                                    {errors.certificateTitle.message}
+                                  </Alert>
+                                </div>
+                              )}
+                          </FormGroup>
+                        </Col>
+                        <Col xs={12} sm={6}>
+                          <FormGroup>
+                            <Form.Label>Issued By</Form.Label>
+                            <Form.Control
+                              {...register("issuedBy")}
+                              placeholder="Coursera"
+                              name="issuedBy"
+                            />
+                            {touchedFields.issuedBy && errors.issuedBy && (
                               <div className="my-2">
                                 <Alert
                                   severity="error"
                                   variant="outlined"
                                   className="py-0 border-0"
                                 >
-                                  {errors.gpa.message}
+                                  {errors.issuedBy.message}
                                 </Alert>
                               </div>
                             )}
                           </FormGroup>
                         </Col>
+                      </Row>
+                      <div className="my-1 form-text d-flex flex-column">
+                        <h5>Achievements</h5>
+                      </div>
+                      <Row className="mb-5">
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>Cumulative GPA/ CGPA</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control
-                              {...register("cgpa", { required: true })}
-                              type="number"
-                              placeholder="2.8"
-                              step="0.1"
-                              min="0"
-                              max="4"
-                              name="cgpa"
+                              {...register("achievementTitle")}
+                              placeholder="Best Speaker"
+                              name="achievementTitle"
                             />
-                            <small className="form-text text-muted">
-                              For e.g : 2.9
-                            </small>
-                            {touchedFields.cgpa && errors.cgpa && (
+                            {touchedFields.achievementTitle &&
+                              errors.achievementTitle && (
+                                <div className="my-2">
+                                  <Alert
+                                    severity="error"
+                                    variant="outlined"
+                                    className="py-0 border-0"
+                                  >
+                                    {errors.achievementTitle.message}
+                                  </Alert>
+                                </div>
+                              )}
+                          </FormGroup>
+                        </Col>
+                        <Col xs={12} sm={6}>
+                          <FormGroup>
+                            <Form.Label>Awarded By</Form.Label>
+                            <Form.Control
+                              {...register("awardedBy")}
+                              placeholder="UOK"
+                              name="awardedBy"
+                            />
+                            {touchedFields.awardedBy && errors.awardedBy && (
                               <div className="my-2">
                                 <Alert
                                   severity="error"
                                   variant="outlined"
                                   className="py-0 border-0"
                                 >
-                                  {errors.cgpa.message}
+                                  {errors.awardedBy.message}
                                 </Alert>
                               </div>
                             )}
@@ -442,24 +316,16 @@ const QualificationForm = ({
                             variant="outlined"
                             type="submit"
                             onClick={() => {
-                              setValue("schoolName", schoolName, {
+                              setValue("certificateTitle", certificateTitle, {
                                 shouldTouch: true,
                               });
-                              setValue("schoolGrade", schoolGrade, {
-                                shouldTouch: true,
-                              });
-                              setValue("highSchool", highSchool, {
-                                shouldTouch: true,
-                              });
-                              setValue("highSchoolGrade", highSchoolGrade, {
-                                shouldTouch: true,
-                              });
+                              setValue("issuedBy", issuedBy);
+                              setValue("achievementTitle", achievementTitle);
+                              setValue("awardedBy", awardedBy);
                               setValue("universityName", universityName, {
                                 shouldTouch: true,
                               });
                               setValue("degree", degree, { shouldTouch: true });
-                              setValue("gpa", gpa, { shouldTouch: true });
-                              setValue("cgpa", cgpa, { shouldTouch: true });
                             }}
                           >
                             Submit
