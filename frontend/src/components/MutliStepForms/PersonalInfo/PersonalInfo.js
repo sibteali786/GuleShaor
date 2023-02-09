@@ -320,7 +320,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                           className="text-end text-sm-right pt-sm-2"
                         >
                           <small className="text-muted fw-bold">
-                            Joined 09 Dec 2017
+                            {moment().format("DDDD-MMMM-YYYY")}
                           </small>
                         </Col>
                       </Row>
@@ -401,32 +401,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             </Col>
                             <Col xs={12} sm={6}>
                               <FormGroup>
-                                <Form.Label>Current Job Title</Form.Label>
-                                <Form.Control
-                                  {...register("designation", {
-                                    required: true,
-                                  })}
-                                  name="designation"
-                                  placeholder="Software Engineer"
-                                ></Form.Control>
-                                {touchedFields.designation &&
-                                  errors.designation && (
-                                    <div className="">
-                                      <Alert
-                                        severity="error"
-                                        variant="outlined"
-                                        className="py-0 border-0"
-                                      >
-                                        {errors.designation.message}
-                                      </Alert>
-                                    </div>
-                                  )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
                                 <Form.Label>Phone Number</Form.Label>
                                 <Form.Control
                                   {...register("mobile", {
@@ -448,16 +422,23 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                 )}
                               </FormGroup>
                             </Col>
+                          </Row>
+                          <Row>
                             <Col xs={12} sm={6}>
                               <FormGroup>
                                 <Form.Label>Gender</Form.Label>
-                                <Form.Control
-                                  {...register("gender", {
-                                    required: true,
-                                  })}
-                                  placeholder="Female"
+                                <Form.Select
+                                  aria-label="Mentor"
+                                  {...register("gender", { required: true })}
                                   name="gender"
-                                />
+                                  value={gender}
+                                  size="md"
+                                >
+                                  <option>Choose a Gender</option>
+                                  <option value="mentor">Male</option>
+                                  <option value="student">Female</option>
+                                  <option value="student">Other</option>
+                                </Form.Select>
                                 {touchedFields.gender && errors.gender && (
                                   <div className="">
                                     <Alert
@@ -469,6 +450,49 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                                     </Alert>
                                   </div>
                                 )}
+                              </FormGroup>
+                            </Col>
+                            <Col xs={12} sm={6}>
+                              <FormGroup className="flex flex-col justify-center">
+                                <Form.Label className="my-0">
+                                  Date of Birth
+                                </Form.Label>
+                                <Controller
+                                  name="dob"
+                                  control={control}
+                                  defaultValue={null}
+                                  render={({
+                                    field: { onChange, value },
+                                    fieldState: { error, invalid },
+                                  }) => (
+                                    <DatePicker
+                                      disableFuture
+                                      value={dob}
+                                      onChange={(value) =>
+                                        onChange(
+                                          moment(value).format("YYYY-MM-DD")
+                                        )
+                                      }
+                                      renderInput={(params) => (
+                                        <TextField
+                                          size="small"
+                                          {...register("dob", {
+                                            required: true,
+                                          })}
+                                          error={invalid}
+                                          helperText={
+                                            invalid ? error.message : null
+                                          }
+                                          id="dob"
+                                          margin="dense"
+                                          color="primary"
+                                          autoComplete="bday"
+                                          {...params}
+                                        />
+                                      )}
+                                    />
+                                  )}
+                                />
                               </FormGroup>
                             </Col>
                           </Row>
@@ -520,49 +544,32 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                               </FormGroup>
                             </Col>
                           </Row>
+                          <Row></Row>
                           <Row>
-                            <Col xs={6}>
+                            <Col xs={12} sm={6}>
                               <FormGroup>
-                                <Form.Label>Date of Birth</Form.Label>
-                                <Controller
-                                  name="dob"
-                                  control={control}
-                                  defaultValue={null}
-                                  render={({
-                                    field: { onChange, value },
-                                    fieldState: { error, invalid },
-                                  }) => (
-                                    <DatePicker
-                                      disableFuture
-                                      value={dob}
-                                      onChange={(value) =>
-                                        onChange(
-                                          moment(value).format("YYYY-MM-DD")
-                                        )
-                                      }
-                                      renderInput={(params) => (
-                                        <TextField
-                                          {...register("dob", {
-                                            required: true,
-                                          })}
-                                          error={invalid}
-                                          helperText={
-                                            invalid ? error.message : null
-                                          }
-                                          id="dob"
-                                          margin="dense"
-                                          color="primary"
-                                          autoComplete="bday"
-                                          {...params}
-                                        />
-                                      )}
-                                    />
+                                <Form.Label>Current Job Title</Form.Label>
+                                <Form.Control
+                                  {...register("designation", {
+                                    required: true,
+                                  })}
+                                  name="designation"
+                                  placeholder="Software Engineer"
+                                ></Form.Control>
+                                {touchedFields.designation &&
+                                  errors.designation && (
+                                    <div className="">
+                                      <Alert
+                                        severity="error"
+                                        variant="outlined"
+                                        className="py-0 border-0"
+                                      >
+                                        {errors.designation.message}
+                                      </Alert>
+                                    </div>
                                   )}
-                                />
                               </FormGroup>
                             </Col>
-                          </Row>
-                          <Row>
                             <Col xs={6}>
                               <FormGroup>
                                 <Form.Label>Company</Form.Label>
