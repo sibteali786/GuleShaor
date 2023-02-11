@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Col, Row, FormGroup, Form, Nav } from "react-bootstrap";
+import { Col, Row, FormGroup, Form, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { LinkContainer } from "react-router-bootstrap";
@@ -36,7 +36,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
           (website) =>
             !website ||
             /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/.test(
-              website
+              "https://" + website
             )
         ),
       twitter: yup
@@ -105,6 +105,9 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   } = userDetails;
   // Form Submission
   const submitHandler = (data) => {
+    const twitter = "https://twitter.com/" + data?.twitter;
+    const linkedIn = "https://www.linekdin/" + data?.linkedIn;
+    const portfolioLink = "https://" + data?.portfolioLink;
     // TODO: add submit handler
     setUserDetails({
       ...UserDetails,
@@ -112,7 +115,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
         ...UserDetails.userDetails,
         technical: data?.technical.split(","),
         category: data?.category,
-        portfolioLink: data?.portfolioLink,
+        portfolioLink,
       },
       about: {
         ...UserDetails.about,
@@ -120,19 +123,20 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
         details: data?.about,
         randomAchievement: data?.achievement,
         socialMedia: {
-          twitter: data?.twitter,
-          linkedIn: data?.linkedIn,
+          twitter,
+          linkedIn,
         },
       },
     });
-    if (UserDetails?.userDetails?.technical?.length > 0) {
-      try {
-        dispatch(updateUserDetails(UserDetails));
-        nextStep();
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
+    console.log(UserDetails);
+    // if (UserDetails?.userDetails?.technical?.length > 0) {
+    //   try {
+    //     dispatch(updateUserDetails(UserDetails));
+    //     nextStep();
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // }
   };
   const [open, setOpen] = React.useState(false);
 
@@ -314,13 +318,16 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
                 // TODO: Add specific component for redenring skills inpout using laracast skills api
               }
               <Form.Label>Personal Website</Form.Label>
-              <Form.Control
-                {...register("portfolioLink")}
-                type="text"
-                name="portfolioLink"
-              />
+              <InputGroup>
+                <InputGroup.Text id="basic-addon1">https://</InputGroup.Text>
+                <Form.Control
+                  {...register("portfolioLink")}
+                  type="text"
+                  name="portfolioLink"
+                />
+              </InputGroup>
               <small className="form-text text-muted">
-                For e.g : https://www.adrian.com
+                For e.g : www.adrian.com
               </small>
               {touchedFields.portfolioLink && errors.portfolioLink && (
                 <div className="my-2">
@@ -342,14 +349,17 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
                 // TODO: Add specific component for redenring skills inpout using laracast skills api
               }
               <Form.Label>LinkedIn Id</Form.Label>
-              <Form.Control
-                {...register("linkedIn")}
-                type="text"
-                name="linkedIn"
-              />
-              <small className="form-text text-muted">
-                For e.g : https://www.linekdin/Ali786
-              </small>
+              <InputGroup>
+                <InputGroup.Text id="basic-addon1">
+                  https://www.linekdin/
+                </InputGroup.Text>
+                <Form.Control
+                  {...register("linkedIn")}
+                  type="text"
+                  name="linkedIn"
+                />
+              </InputGroup>
+              <small className="form-text text-muted">For e.g : Ali786</small>
               {touchedFields.linkedIn && errors.linkedIn && (
                 <div className="my-2">
                   <Alert
@@ -369,14 +379,17 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
                 // TODO: Add specific component for redenring skills inpout using laracast skills api
               }
               <Form.Label>Twitter Handle</Form.Label>
-              <Form.Control
-                {...register("twitter")}
-                type="text"
-                name="twitter"
-              />
-              <small className="form-text text-muted">
-                For e.g : https://www.twitter/Ali786
-              </small>
+              <InputGroup>
+                <InputGroup.Text id="basic-addon1">
+                  https://twitter.com/
+                </InputGroup.Text>
+                <Form.Control
+                  {...register("twitter")}
+                  type="text"
+                  name="twitter"
+                />
+              </InputGroup>
+              <small className="form-text text-muted">For e.g : Ali786</small>
               {touchedFields.twitter && errors.twitter && (
                 <div className="my-2">
                   <Alert

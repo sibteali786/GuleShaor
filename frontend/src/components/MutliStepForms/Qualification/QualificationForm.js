@@ -19,12 +19,12 @@ const QualificationForm = ({
     universityName: yup
       .string()
       .required("University Name is required")
-      .min(4, "There must be at least 4 characters")
+      .min(2, "There must be at least 2 characters")
       .max(50, "There must be at most 50 characters"),
     degree: yup
       .string()
       .required("Degree Name is required")
-      .min(4, "There must be at least 4 characters")
+      .min(2, "There must be at least 2 characters")
       .max(50, "There must be at most 50 characters"),
     certificateTitle: yup.string().notRequired(),
     issuedBy: yup.string().notRequired(),

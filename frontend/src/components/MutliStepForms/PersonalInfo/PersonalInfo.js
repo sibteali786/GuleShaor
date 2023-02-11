@@ -28,13 +28,13 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       .string()
       .required("First Name is required")
       .min(3, "Must be greater than 3 characters")
-      .max(20, "Must be less than 20 characters"),
+      .max(50, "Must be less than 50 characters"),
     email: yup.string().email().required("Email is required"),
     designation: yup
       .string()
       .required("Designation is required")
-      .min("3", "Must be greater than 3 characters")
-      .max("30", "Must be less than 30 characters"),
+      .min(3, "Must be greater than 3 characters")
+      .max(50, "Must be less than 30 characters"),
     mobile: yup
       .string()
       .trim()
@@ -54,7 +54,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       .test("maxSize", "Image size must be less than 1 MB", (value) => {
         return true;
       }),
-    gender: yup.string().required("Gender is required").max(8).min(4),
+    gender: yup.string().required("Gender is required").min(4),
     company: yup.string().notRequired(),
     city: yup.string().required("City is required").max(20).min(4),
     country: yup.string().required("Country is required").max(20).min(4),
