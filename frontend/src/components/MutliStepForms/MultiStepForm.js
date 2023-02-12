@@ -13,7 +13,7 @@ const MultiStepForm = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
-  const [step, setStep] = React.useState(4);
+  const [step, setStep] = React.useState(1);
   const [UserDetails, setUserDetails] = useState({});
   const nextStep = () => {
     setStep(step + 1);
