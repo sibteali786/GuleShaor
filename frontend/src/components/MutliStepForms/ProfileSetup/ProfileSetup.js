@@ -17,8 +17,8 @@ import SnakBar from "../../SnakBar/SnakBar";
 const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   const schema = yup.object().shape(
     {
-      category: yup.string().optional().min(4).max(20),
-      technical: yup.string().optional().min(3).max(100),
+      category: yup.string().optional(),
+      technical: yup.string().optional(),
       about: yup
         .string()
         .required("About is required")
@@ -103,41 +103,59 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     error: errorUserDetails,
     user,
   } = userDetails;
+  const userType = user?.mentorDetails
+    ? "mentor"
+    : user?.studentDetails?.userType;
   // Form Submission
   const submitHandler = (data) => {
     const twitter = "https://twitter.com/" + data?.twitter;
     const linkedIn = "https://www.linekdin/" + data?.linkedIn;
     const portfolioLink = "https://" + data?.portfolioLink;
     // TODO: add submit handler
-    setUserDetails({
-      ...UserDetails,
-      userDetails: {
-        ...UserDetails.userDetails,
-        technical: data?.technical.split(","),
-        category: data?.category,
-        portfolioLink,
-      },
-      about: {
-        ...UserDetails.about,
-
-        details: data?.about,
-        randomAchievement: data?.achievement,
-        socialMedia: {
-          twitter,
-          linkedIn,
+    if (userType === "mentor") {
+      setUserDetails({
+        ...UserDetails,
+        userDetails: {
+          ...UserDetails.userDetails,
+          technical: data?.technical.split(","),
+          category: data?.category,
+          portfolioLink,
         },
-      },
-    });
-    console.log(UserDetails);
-    // if (UserDetails?.userDetails?.technical?.length > 0) {
-    //   try {
-    //     dispatch(updateUserDetails(UserDetails));
-    //     nextStep();
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // }
+        about: {
+          ...UserDetails.about,
+          details: data?.about,
+          randomAchievement: data?.achievement,
+          socialMedia: {
+            twitter,
+            linkedIn,
+          },
+        },
+      });
+    } else if (userType === "student") {
+      setUserDetails({
+        ...UserDetails,
+        userDetails: {
+          ...UserDetails.userDetails,
+          portfolioLink,
+        },
+        about: {
+          ...UserDetails.about,
+          randomAchievement: data?.achievement,
+          socialMedia: {
+            twitter,
+            linkedIn,
+          },
+        },
+      });
+    }
+    try {
+      dispatch(updateUserDetails(UserDetails));
+      nextStep();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+  console.log(errors);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -154,8 +172,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     if (
       UserDetails?.userDetails?.technical?.length > 0 &&
       UserDetails?.userDetails?.interpersonal?.length > 0 &&
-      UserDetails?.userDetails?.portfolioLink?.length > 0 &&
-      UserDetails?.userDetails?.introVideo?.video?.length > 0
+      UserDetails?.userDetails?.portfolioLink?.length > 0
     ) {
       setValue("technical", UserDetails?.userDetails?.technical);
       setValue("category", UserDetails?.userDetails?.catgeory);
@@ -167,8 +184,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     } else if (
       user?.mentorDetails?.technical?.length > 0 ||
       user?.mentorDetails?.interpersonal?.length > 0 ||
-      user?.mentorDetails?.portfolioLink?.length > 0 ||
-      user?.mentorDetails?.introVideo?.video?.length > 0
+      user?.mentorDetails?.portfolioLink?.length > 0
     ) {
       setValue("technical", user?.mentorDetails?.technical);
       setValue("category", user?.mentorDetails?.category);
@@ -185,7 +201,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
       handleClick();
     }
   }, [UserDetails, user, dispatch, setValue, errors]);
-  console.log(errors);
+
   return (
     <>
       <SnakBar
@@ -197,59 +213,66 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
       <Form onSubmit={handleSubmit(submitHandler)} className="back">
         <Row>
           <div className="mb-1 form-text text-muted d-flex flex-column">
-            <h5>Tell us about yourself as a Mentor</h5>
+            <h5 className="capitalize">
+              {userType === "mentor"
+                ? "Tell us about yourself as a Mentor"
+                : "Tell us about you"}
+            </h5>
             <small className=" mt-0 pt-0 text-xs text-black">
               *Some of the fields are optional, leave them empty if they are not
               applicable for you
             </small>
           </div>
-          <Col xs={12} sm={6} className="mb-3">
-            <FormGroup>
-              {
-                // TODO: Add specific component for redenring skills inpout using laracast skills api
-              }
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                {...register("category")}
-                type="text"
-                name="category"
-                placeholder="Computer Science"
-              />
-              <small className="form-text text-muted text-xs">
-                We use the category label to put you in a small set of
-                pre-defined buckets.
-              </small>
-            </FormGroup>
-            {touchedFields.category && errors.category && (
-              <div className="my-2">
-                <Alert
-                  severity="error"
-                  variant="outlined"
-                  className="py-0 border-0"
-                >
-                  {errors.category.message}
-                </Alert>
-              </div>
-            )}
-          </Col>
-
-          <Col xs={12} sm={6} className="mb-3">
-            <FormGroup>
-              {
-                // TODO: Add specific component for redenring skills inpout using laracast skills api
-              }
-              <Form.Label>Skills</Form.Label>
-              <Form.Control
-                {...register("technical")}
-                type="text"
-                name="technical"
-                placeholder="Management, Leadership..."
-              />
-              <small className="form-text text-muted">
-                Note: Leadership, Team Management, Java, DevOps etc.
-              </small>
-            </FormGroup>
-          </Col>
+          {userType === "mentor" ? (
+            <Row>
+              <Col xs={12} sm={6} className="mb-3">
+                <FormGroup>
+                  {
+                    // TODO: Add specific component for redenring skills inpout using laracast skills api
+                  }
+                  <Form.Label>Category</Form.Label>
+                  <Form.Control
+                    {...register("category")}
+                    type="text"
+                    name="category"
+                    placeholder="Computer Science"
+                  />
+                  <small className="form-text text-muted text-xs">
+                    We use the category label to put you in a small set of
+                    pre-defined buckets.
+                  </small>
+                </FormGroup>
+                {touchedFields.category && errors.category && (
+                  <div className="my-2">
+                    <Alert
+                      severity="error"
+                      variant="outlined"
+                      className="py-0 border-0"
+                    >
+                      {errors.category.message}
+                    </Alert>
+                  </div>
+                )}
+              </Col>
+              <Col xs={12} sm={6} className="mb-3">
+                <FormGroup>
+                  {
+                    // TODO: Add specific component for redenring skills inpout using laracast skills api
+                  }
+                  <Form.Label>Skills</Form.Label>
+                  <Form.Control
+                    {...register("technical")}
+                    type="text"
+                    name="technical"
+                    placeholder="Management, Leadership..."
+                  />
+                  <small className="form-text text-muted">
+                    Note: Leadership, Team Management, Java, DevOps etc.
+                  </small>
+                </FormGroup>
+              </Col>
+            </Row>
+          ) : null}
         </Row>
         <Row>
           <Col className="mb-3">

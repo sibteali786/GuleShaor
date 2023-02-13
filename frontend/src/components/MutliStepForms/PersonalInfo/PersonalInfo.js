@@ -3,127 +3,65 @@ import "./PersonalInfo.scss";
 import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import SubmitButton from "../../SubmitButton/SubmitButton";
-import { useForm } from "react-hook-form";
 import { Controller } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert, TextField } from "@mui/material";
 import { FilePond } from "react-filepond";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../../actions/userActions";
-import axios from "axios";
 import SnakBar from "../../SnakBar/SnakBar";
-import Message from "../../Message/Message";
 import { storage } from "../../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { setProfileImage } from "../../../actions/imageActions";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment";
+import usePersonalInfo from "../../CustomHooks/Mentors/usePersonalInfo";
+import MuiPhoneNumber from "material-ui-phone-number";
 const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
-  const [files, setFiles] = useState([]);
-  // yup validation schema
-  // TODO:improve the size of image
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("First Name is required")
-      .min(3, "Must be greater than 3 characters")
-      .max(50, "Must be less than 50 characters"),
-    email: yup.string().email().required("Email is required"),
-    designation: yup
-      .string()
-      .required("Designation is required")
-      .min(3, "Must be greater than 3 characters")
-      .max(50, "Must be less than 30 characters"),
-    mobile: yup
-      .string()
-      .trim()
-      .required("Required")
-      .matches(
-        /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d+)\)?)[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?)+)(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/,
-        "Format is not correct"
-      ),
-    userName: yup
-      .string()
-      .required("User Name is required")
-      .max(20, "Must be less than 20 characters")
-      .min(3, "Must be at least 3 characters"),
-    image: yup
-      .mixed()
-      .required("Required")
-      .test("maxSize", "Image size must be less than 1 MB", (value) => {
-        return true;
-      }),
-    gender: yup.string().required("Gender is required").min(4),
-    company: yup.string().notRequired(),
-    city: yup.string().required("City is required").max(20).min(4),
-    country: yup.string().required("Country is required").max(20).min(4),
-    dob: yup
-      .string()
-      .nullable()
-      .test("dob", "You must be 18 years or older", function (value) {
-        return moment().diff(moment(value, "YYYY-MM-DD"), "years") >= 18;
-      })
-      .required("Please enter your age"),
-  });
-
-  const form = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      designation: "",
-      userName: "",
-      image: null,
-      mobile: "",
-      dob: moment().format(),
-      city: "",
-      country: "",
-      gender: "",
-      company: "",
-    },
-    mode: "all",
-    resolver: yupResolver(schema),
-  });
-
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const userDetails = useSelector((state) => state.userDetails);
+  const {
+    loading: loadingUserDetails,
+    error: errorUserDetails,
+    user,
+  } = userDetails;
   const {
     register,
     handleSubmit,
     setValue,
-    setFocus,
     formState: { touchedFields, errors },
     watch,
     control,
-  } = form;
-
+  } = usePersonalInfo({
+    name: "",
+    email: "",
+    designation: "",
+    userName: "",
+    image: null,
+    mobile: "",
+    dob: moment().format(),
+    city: "",
+    country: "",
+    gender: "",
+    company: "",
+    userType: user?.mentorDetails ? "mentor" : user?.studentDetails?.userType,
+  });
   const name = watch("name", "");
   const email = watch("email", "");
-  const designation = watch("designation", "");
   const city = watch("city", "");
   const country = watch("country", "");
   const gender = watch("gender", "");
   const dob = watch("dob", "");
+  const designation = watch("designation", "");
   const company = watch("company", "");
-  const image = watch("image", null);
   const userName = watch("userName", "");
   const mobile = watch("mobile", "");
-  // handling image inputs
-  const [imageFile, setImageFile] = useState(null);
-  const onFilesUpdate = (e) => {
-    const t = new DataTransfer();
-    let loadedImage = null;
-    if (e.length !== 0 && e[0].file) {
-      setFiles(e);
-      t.items.add(e[0].file);
-      delete t.files[0]["_relativePath"];
-      loadedImage = t.files[0];
-    } else {
-      setFiles([]);
-    }
-    setImageFile(loadedImage);
-  };
+  const userType = user?.mentorDetails
+    ? "mentor"
+    : user?.studentDetails?.userType;
+
   // steps state
   const [open, setOpen] = React.useState(false);
-
   const handleClick = () => {
     setOpen(true);
   };
@@ -139,42 +77,55 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     const type = user?.mentorDetails
       ? "mentor"
       : user?.studentDetails?.userType;
-    UserDetails = {
-      name: data?.name,
-      email: data?.email?.toLowerCase(),
-      userDetails: {
-        userType: type,
-        username: userName,
-        image: data?.image,
-        designation: data?.designation,
-      },
-      about: {
-        city: data?.city,
-        country: data?.country,
-        dob: data?.dob,
-        gender: data?.gender,
-        company: data?.company,
-        contact: {
-          mobile: data?.mobile,
-        },
-      },
-    };
+    UserDetails =
+      userType === "mentor"
+        ? {
+            name: data?.name,
+            email: data?.email?.toLowerCase(),
+            userDetails: {
+              userType: type,
+              username: userName,
+              image: data?.image,
+              designation: data?.designation,
+            },
+            about: {
+              city: data?.city,
+              country: data?.country,
+              dob: data?.dob,
+              gender: data?.gender,
+              company: data?.company,
+              contact: {
+                mobile: data?.mobile,
+              },
+            },
+          }
+        : {
+            name: data?.name,
+            email: data?.email?.toLowerCase(),
+            userDetails: {
+              userType: type,
+              username: userName,
+              image: data?.image,
+            },
+            about: {
+              city: data?.city,
+              country: data?.country,
+              dob: data?.dob,
+              gender: data?.gender,
+              contact: {
+                mobile: data?.mobile,
+              },
+            },
+          };
     dispatch(setProfileImage(data?.image));
     setUserDetails({
       ...UserDetails,
     });
+
     nextStep();
   };
   // user Details
-  const userDetails = useSelector((state) => state.userDetails);
-  const {
-    loading: loadingUserDetails,
-    error: errorUserDetails,
-    user,
-  } = userDetails;
   // User login info after we visit it here
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
   useEffect(() => {
     // TODO: if we logout being here we make request to profile which is not there as we have no token so prevent it
@@ -183,14 +134,15 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     } else {
       if (
         UserDetails?.userDetails?.username ||
-        UserDetails?.about?.details ||
         UserDetails?.about?.contact?.mobile
       ) {
         setValue("name", UserDetails.name);
         setValue("email", UserDetails.email);
-        setValue("designation", UserDetails?.userDetails?.designation);
+        if (userType === "mentor") {
+          setValue("designation", UserDetails?.userDetails?.designation);
+          setValue("company", UserDetails?.about?.company);
+        }
         setValue("gender", UserDetails?.about?.gender);
-        setValue("company", UserDetails?.about?.company);
         setValue("city", UserDetails?.about?.city);
         setValue("country", UserDetails?.about?.country);
         setValue("dob", UserDetails?.about?.dob);
@@ -199,15 +151,16 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
       } else if (
         user?.name ||
         user?.about?.username ||
-        user?.about?.details ||
         user?.about?.contact?.mobile ||
         user?.mentorDetails?.designation
       ) {
         setValue("name", user.name);
         setValue("email", user.email);
-        setValue("designation", user?.userDetails?.designation);
         setValue("gender", user?.about?.gender);
-        setValue("company", user?.about?.company);
+        if (userType === "mentor") {
+          setValue("designation", user?.userDetails?.designation);
+          setValue("company", user?.about?.company);
+        }
         setValue("city", user?.about?.city);
         setValue("country", user?.about?.country);
         setValue("dob", user?.about?.dob);
@@ -227,7 +180,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
     const section = document.querySelector("#imageFile");
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
   return (
     <>
       <SnakBar
@@ -247,8 +199,6 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                       <FilePond
                         {...register("image", { required: true })}
                         id="imageFile"
-                        files={files}
-                        onupdatefiles={onFilesUpdate}
                         allowMultiple={false}
                         name="image"
                         stylePanelLayout="compact circle"
@@ -320,7 +270,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                           className="text-end text-sm-right pt-sm-2"
                         >
                           <small className="text-muted fw-bold">
-                            {moment().format("DDDD-MMMM-YYYY")}
+                            {moment().format("DD-MM-YYYY")}
                           </small>
                         </Col>
                       </Row>
@@ -400,14 +350,24 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                               </FormGroup>
                             </Col>
                             <Col xs={12} sm={6}>
-                              <FormGroup>
+                              <FormGroup className="flex flex-col justify-center">
                                 <Form.Label>Phone Number</Form.Label>
-                                <Form.Control
-                                  {...register("mobile", {
-                                    required: true,
-                                  })}
-                                  placeholder="+92-312...."
+                                <Controller
                                   name="mobile"
+                                  control={control}
+                                  defaultValue=""
+                                  render={({ field: { onChange, value } }) => (
+                                    <MuiPhoneNumber
+                                      name={name}
+                                      value={mobile}
+                                      onChange={(value) => onChange(value)}
+                                      id="contactPhoneNumber"
+                                      defaultCountry={"pk"}
+                                      variant="outlined"
+                                      size="small"
+                                      error={Boolean(errors.mobile)}
+                                    />
+                                  )}
                                 />
                                 {touchedFields.mobile && errors.mobile && (
                                   <div className="">
@@ -545,54 +505,56 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                             </Col>
                           </Row>
                           <Row></Row>
-                          <Row>
-                            <Col xs={12} sm={6}>
-                              <FormGroup>
-                                <Form.Label>Current Job Title</Form.Label>
-                                <Form.Control
-                                  {...register("designation", {
-                                    required: true,
-                                  })}
-                                  name="designation"
-                                  placeholder="Software Engineer"
-                                ></Form.Control>
-                                {touchedFields.designation &&
-                                  errors.designation && (
+                          {userType === "mentor" ? (
+                            <Row>
+                              <Col xs={12} sm={6}>
+                                <FormGroup>
+                                  <Form.Label>Current Job Title</Form.Label>
+                                  <Form.Control
+                                    {...register("designation", {
+                                      required: true,
+                                    })}
+                                    name="designation"
+                                    placeholder="Software Engineer"
+                                  ></Form.Control>
+                                  {touchedFields.designation &&
+                                    errors.designation && (
+                                      <div className="">
+                                        <Alert
+                                          severity="error"
+                                          variant="outlined"
+                                          className="py-0 border-0"
+                                        >
+                                          {errors.designation.message}
+                                        </Alert>
+                                      </div>
+                                    )}
+                                </FormGroup>
+                              </Col>
+                              <Col xs={6}>
+                                <FormGroup>
+                                  <Form.Label>Company</Form.Label>
+                                  <Form.Control
+                                    {...register("company", {
+                                      required: true,
+                                    })}
+                                    name="company"
+                                  />
+                                  {touchedFields.company && errors.company && (
                                     <div className="">
                                       <Alert
                                         severity="error"
                                         variant="outlined"
                                         className="py-0 border-0"
                                       >
-                                        {errors.designation.message}
+                                        {errors.company.message}
                                       </Alert>
                                     </div>
                                   )}
-                              </FormGroup>
-                            </Col>
-                            <Col xs={6}>
-                              <FormGroup>
-                                <Form.Label>Company</Form.Label>
-                                <Form.Control
-                                  {...register("company", {
-                                    required: true,
-                                  })}
-                                  name="company"
-                                />
-                                {touchedFields.company && errors.company && (
-                                  <div className="">
-                                    <Alert
-                                      severity="error"
-                                      variant="outlined"
-                                      className="py-0 border-0"
-                                    >
-                                      {errors.company.message}
-                                    </Alert>
-                                  </div>
-                                )}
-                              </FormGroup>
-                            </Col>
-                          </Row>
+                                </FormGroup>
+                              </Col>
+                            </Row>
+                          ) : null}
                         </Col>
                       </Row>
 

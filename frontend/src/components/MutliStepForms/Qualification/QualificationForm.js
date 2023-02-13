@@ -68,6 +68,9 @@ const QualificationForm = ({
     error: errorUserDetails,
     user,
   } = userDetails;
+  const userType = user?.mentorDetails
+    ? "mentor"
+    : user?.studentDetails?.userType;
   // Form Submission
   const submitHandler = (data) => {
     // TODO: add submit handler
@@ -154,7 +157,11 @@ const QualificationForm = ({
                       <Row>
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>University Name</Form.Label>
+                            <Form.Label>
+                              {userType === "mentor"
+                                ? "University Name"
+                                : "Name of Institution"}
+                            </Form.Label>
                             <Form.Control
                               {...register("universityName", {
                                 required: true,
@@ -184,7 +191,11 @@ const QualificationForm = ({
                         </Col>
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>Degree</Form.Label>
+                            <Form.Label>
+                              {userType === "mentor"
+                                ? "Degree"
+                                : "Degree You're enrolled in"}
+                            </Form.Label>
                             <Form.Control
                               {...register("degree", { required: true })}
                               type="text"
@@ -214,7 +225,11 @@ const QualificationForm = ({
                       <Row className="mb-5">
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>
+                              {userType === "mentor"
+                                ? "Title"
+                                : "Certificate Title"}
+                            </Form.Label>
                             <Form.Control
                               {...register("certificateTitle")}
                               placeholder="Intro to Statistics"
@@ -262,7 +277,9 @@ const QualificationForm = ({
                       <Row className="mb-5">
                         <Col xs={12} sm={6}>
                           <FormGroup>
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>
+                              {userType === "mentor" ? "Title" : "Award Title"}
+                            </Form.Label>
                             <Form.Control
                               {...register("achievementTitle")}
                               placeholder="Best Speaker"
