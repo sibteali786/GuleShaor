@@ -21,6 +21,10 @@ import { logout } from "../../actions/userActions";
 import store from "../../store";
 const items = [
   {
+    name: "Home",
+    to: "/",
+  },
+  {
     name: "Mentors",
     to: "/mentors",
   },

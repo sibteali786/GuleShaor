@@ -21,9 +21,15 @@ const defaultValues = {
   message: "",
 };
 const interestedIn_options = [
-  { label: "Engineering", value: "Engineering" },
-  { label: "Commerce", value: "Commerce" },
-  { label: "Medical", value: "Medical" },
+  {
+    label: "Referral and direct partnership ",
+    value: "Referral and direct partnership ",
+  },
+  { label: "Resource alliance", value: "Resource alliance" },
+  {
+    label: "University student ambassador",
+    value: "University student ambassador",
+  },
 ];
 const navigation = {
   guleshaor: [
@@ -117,6 +123,7 @@ const Footer = ({ isForm }) => {
   const location = useLocation();
   const [formValues, setFormValues] = useState(defaultValues);
   const handleInputChange = (e) => {
+    console.log(e.target);
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
@@ -145,7 +152,7 @@ const Footer = ({ isForm }) => {
             <p id="headingStylish" className="font-bold my-4 pb-10">
               Work With Us
             </p>
-            <div className="form-div">
+            <div className="form-div" id="form1">
               <IconButton aria-label="form-icon">
                 <EmailIcon />
               </IconButton>
@@ -218,9 +225,10 @@ const Footer = ({ isForm }) => {
                     <TextField
                       id="interestedin-input"
                       select
+                      name="interestedIn"
                       value={formValues.interestedIn}
                       onChange={handleInputChange}
-                      helperText="Please select your currency"
+                      helperText="Please select your interest"
                       variant="standard"
                       size="small"
                     >

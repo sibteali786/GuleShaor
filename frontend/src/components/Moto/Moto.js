@@ -223,13 +223,12 @@ const Moto = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Resource Alliance
+                  Resource & Placement Aliance
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  We support our students by referring them to our partners for
-                  additional support. They provide them with free learning
-                  resources, such as academic and skill-building courses and
-                  assets.
+                  Organizations which partner with us on delivering high quality
+                  free learning content to our students get free access to
+                  directory of our trained talented graduates
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -256,9 +255,11 @@ const Moto = () => {
           </Card>
         </div>
         <div style={{ textAlign: "center" }}>
-          <Button id="buttonSection3" variant="contained">
-            Collaborate
-          </Button>
+          <a href="#form1" className="no-underline">
+            <Button id="buttonSection3" variant="contained">
+              Collaborate
+            </Button>
+          </a>
         </div>
       </div>
       <SessionCall />

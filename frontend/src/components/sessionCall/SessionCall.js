@@ -57,7 +57,7 @@ const SessionCall = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Unlimited Free Calls</h6>
+              <h6 className="text-sm sm:text-md mt-2">Practical Learning</h6>
             </div>
             <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
               <svg
@@ -80,7 +80,7 @@ const SessionCall = () => {
                   fill="#252c33"
                 />
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Video Library</h6>
+              <h6 className="text-sm sm:text-md mt-2">Resource Library</h6>
             </div>
             <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
               <svg
