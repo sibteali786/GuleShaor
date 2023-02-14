@@ -24,6 +24,7 @@ import card1 from "./../../Assets/Moto_Assets/Rectangle 15.png";
 import card2 from "./../../Assets/Moto_Assets/Rectangle 16.png";
 import card3 from "./../../Assets/Moto_Assets/unsplash_Ox6SW103KtM.png";
 import SessionCall from "../sessionCall/SessionCall";
+import { Link } from "react-router-dom";
 const settings = {
   // dots: true,
   className: "center",
@@ -75,6 +76,7 @@ const Moto = () => {
             and mentorship from top industry professionals, so you can land your
             dream job.
           </p>
+          <br />
           <p>
             Our team consists of experienced professionals in the tech industry
             who understand the importance of staying ahead of the curve in a
@@ -83,6 +85,7 @@ const Moto = () => {
             technical abilities but also prepare you for success in the
             workplace.
           </p>
+          <br />
           <p>
             We are passionate about technology and dedicated to helping you
             achieve your goals. Whether you're a beginner or a seasoned
@@ -100,33 +103,90 @@ const Moto = () => {
             supporting you throughout your learning journey and providing you
             with the resources you need to succeed.
           </p>
-          <Button variant="contained">Learn More</Button>
+          <Link to="/service" className="no-underline">
+            <Button variant="contained">Learn More</Button>
+          </Link>
         </div>
       </div>
       <div className="WhatWeDo px-[8rem]">
         <h3>Our Mentors</h3>
         <h2>DIRECT, MENTOR & BUILD THE LEADERS OF TOMORROW</h2>
         <Slider {...settings} style={{ padding: "0 0" }}>
-          <div>
+          <div class="content">
+            <div class="content-overlay"></div>
             <img src={carousel1} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Dr. Shoab Khan
+              </h6>
+              <p className="text-sm text-white my-0">IT Expert</p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel2} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Miss Saba Kalsoom
+              </h6>
+              <p className="text-sm text-white my-0">Web 3.0 Expert</p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel3} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Mr. Arsalan Khattak
+              </h6>
+              <p className="text-sm text-white my-0">
+                Mern Stack, MLH Coach, MLH Podcast Leader
+              </p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel4} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Mr. Badar Khushnood
+              </h6>
+              <p className="text-sm text-white my-0">
+                Commercialization Expert
+              </p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel5} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Mr. Moazzam Arsalan Bhatti
+              </h6>
+              <p className="text-sm text-white my-0">Innovation expert</p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel6} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Dr. Usman Akram
+              </h6>
+              <p className="text-sm text-white my-0">
+                Among Top 1% AI Researchers
+              </p>
+            </div>
           </div>
-          <div>
+          <div className="content">
+            <div class="content-overlay"></div>
             <img src={carousel7} alt="purpose" />
+            <div class="content-details fadeIn-bottom text-left">
+              <h6 class="content-title md:text-lg text-white my-0">
+                Miss Saira Qayyum
+              </h6>
+              <p className="text-sm text-white my-0">Startup Expert</p>
+            </div>
           </div>
         </Slider>
       </div>
