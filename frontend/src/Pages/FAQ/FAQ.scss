@@ -14,6 +14,10 @@
     align-items: center;
     justify-content: center;
 
+    h2 {
+      font-family: $fontfamily2;
+    }
+
     .custom-shape-divider-top-1653762327 {
       position: absolute;
       top: 50vh;
@@ -45,8 +49,8 @@
     margin: 2rem;
     border-radius: 2rem;
 
-    h3 {
-      font-family: $fontfmily1
+    h2 {
+      font-family: $fontfamily2;
     }
 
     p {

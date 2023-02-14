@@ -7,7 +7,8 @@
 
   h1 {
     @include headings(large);
-    font-family: "Gotham";
+    font-family: $fontfamily2;
+
   }
 
   p {

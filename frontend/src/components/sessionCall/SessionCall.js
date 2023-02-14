@@ -239,7 +239,7 @@ const SessionCall = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Mastermind Groups</h6>
+              <h6 className="text-sm sm:text-md mt-2">Job Placement</h6>
             </div>
           </div>
         </div>

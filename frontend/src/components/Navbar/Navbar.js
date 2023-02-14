@@ -40,18 +40,18 @@ const items = [
     name: "Services",
     to: "/service",
   },
-  {
-    name: "Resources",
-    to: "/resources",
-  },
+  // {
+  //   name: "Resources",
+  //   to: "/resources",
+  // },
   {
     name: "FAQs",
     to: "/faq",
   },
-  {
-    name: "Referrals",
-    to: "/referral",
-  },
+  // {
+  //   name: "Referrals",
+  //   to: "/referral",
+  // },
 ];
 const Navbar = () => {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
