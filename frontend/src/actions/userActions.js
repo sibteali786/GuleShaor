@@ -155,7 +155,6 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
       { ...user },
       config
     );
-
     dispatch({
       type: UPDATE_USER_DETAILS_SUCCESS,
       payload: data,

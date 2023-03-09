@@ -103,14 +103,15 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     error: errorUserDetails,
     user,
   } = userDetails;
-  const userType = user?.mentorDetails
-    ? "mentor"
-    : user?.studentDetails?.userType;
+  const { type } = useSelector((state) => state.lastAction);
+  const userType = user?.userType;
+
   // Form Submission
   const submitHandler = (data) => {
     const twitter = "https://twitter.com/" + data?.twitter;
     const linkedIn = "https://www.linekdin/" + data?.linkedIn;
     const portfolioLink = "https://" + data?.portfolioLink;
+
     // TODO: add submit handler
     if (userType === "mentor") {
       setUserDetails({
@@ -120,6 +121,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
           technical: data?.technical.split(","),
           category: data?.category,
           portfolioLink,
+          userType: user?.userType,
         },
         about: {
           ...UserDetails.about,
@@ -150,12 +152,15 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
     }
     try {
       dispatch(updateUserDetails(UserDetails));
-      nextStep();
+      if (type === "UPDATE_USER_DETAILS_SUCCESS") {
+        nextStep();
+      } else {
+        console.log("error");
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
-  console.log(errors);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {

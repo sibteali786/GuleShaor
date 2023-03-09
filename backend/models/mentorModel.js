@@ -23,7 +23,7 @@ const mentorSchema = new mongoose.Schema(
       },
       image: {
         type: String,
-        default: "",
+        default: "Charted Accountant",
       },
       interpersonal: [{ type: String, default: "" }],
       technical: [{ type: String, default: "" }],
@@ -32,6 +32,9 @@ const mentorSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
+      interpersonal: [{ type: String, default: "" }],
+      technical: [{ type: String, default: "" }],
+      portfolioLink: { type: String, default: "" },
       otherImages: [
         {
           type: String,
@@ -186,22 +189,6 @@ const mentorSchema = new mongoose.Schema(
       default:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
     },
-    timeSlots: [
-      {
-        date: { type: String, default: "" },
-        time: { type: String, default: "" },
-      },
-    ],
-    appointments: [
-      {
-        subject: { type: String, default: "" },
-        description: { type: String, default: "" },
-        date: { type: String, default: "" },
-        startTime: { type: String, default: "" },
-        endTime: { type: String, default: "" },
-        studentId: { type: String, default: "" },
-      },
-    ],
     feedback: [
       {
         studentName: { type: String, default: "" },
