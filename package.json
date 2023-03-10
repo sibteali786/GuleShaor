@@ -16,7 +16,6 @@
   "version": "1.0.0",
   "description": "A Social media App",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --force --prefix frontend && npm run build --prefix frontend",
     "start": "node backend/server.js",

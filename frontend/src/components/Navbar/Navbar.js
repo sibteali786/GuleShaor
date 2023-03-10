@@ -20,6 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 const items = [
   {
+    name: "Home",
+    to: "/",
+  },
+  {
     name: "Mentors",
     to: "/mentors",
   },
@@ -35,20 +39,20 @@ const items = [
     name: "Services",
     to: "/service",
   },
-  {
-    name: "Resources",
-    to: "/resources",
-  },
+  // {
+  //   name: "Resources",
+  //   to: "/resources",
+  // },
   {
     name: "FAQs",
     to: "/faq",
   },
-  {
-    name: "Referrals",
-    to: "/referral",
-  },
+  // {
+  //   name: "Referrals",
+  //   to: "/referral",
+  // },
 ];
-const Navbar = () => {
+const Navbar = ({ setIsAuthenticated }) => {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
   // var prevScrollpos = window.pageYOffset;
   // window.onscroll = function () {
@@ -72,10 +76,15 @@ const Navbar = () => {
   const { userUpdatedDetails } = userUpdateDetails;
   const userDetails = useSelector((state) => state.userDetails);
   const { user } = userDetails;
-  // Getting image
+  const profileImageDetails = useSelector((state) => state.profileImage);
+  const { loading, imageUrl } = profileImageDetails;
+
   useEffect(() => {
     var imgPath = "";
-    if (user) {
+    console.log("Profile Image", imageUrl);
+    if (imageUrl) {
+      setImgPath(imageUrl);
+    } else if (user) {
       if (userInfo?.userType === "student") {
         imgPath = user?.studentDetails?.image;
       } else if (userInfo?.userType === "mentor") {
@@ -86,24 +95,12 @@ const Navbar = () => {
       imgPath = userInfo?.image;
       setImgPath(imgPath);
     }
-
-    // In case User details not fetched
-    if (imgPath?.length === 0) {
-      if (userUpdatedDetails?.image) {
-        imgPath = userUpdatedDetails?.image;
-        setImgPath(imgPath);
-      }
-    }
-    //making sure it is relative
-    if (!imgPath?.includes("/", 0)) {
-      imgPath = `/${imgPath}`;
-      setImgPath(imgPath);
-    }
-  }, [user, userInfo, imgPath]);
+  }, [user, userInfo, imgPath, userUpdatedDetails, imageUrl]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
+    setIsAuthenticated(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -201,7 +198,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={!imgPath.includes("undefined") ? imgPath : profileImage}
+                  src={imgPath?.length > 0 ? imgPath : profileImage}
                   style={{ height: "40px", width: "auto" }}
                   alt="profile pic"
                 />
@@ -247,16 +244,39 @@ const Navbar = () => {
               }}
             >
               <MenuItem>
-                <Avatar /> Profile
+                {userInfo ? (
+                  userInfo?.userType === "mentor" ? (
+                    <Link
+                      to={`/mentors/${userInfo?._id}`}
+                      className="text-black no-underline flex items-center"
+                    >
+                      <Avatar />
+                      Profile
+                    </Link>
+                  ) : (
+                    <Link
+                      to={`/students/${userInfo?._id}`}
+                      className="text-black no-underline flex"
+                    >
+                      <Avatar />
+                      Profile
+                    </Link>
+                  )
+                ) : (
+                  <div>
+                    <Avatar />
+                    Profile
+                  </div>
+                )}
               </MenuItem>
-              <MenuItem>
+              <MenuItem className="text-gray-900">
                 <Avatar /> My account
               </MenuItem>
               <Divider />
               <MenuItem>
                 <Link
                   to="/settings"
-                  className="text-gray-500 no-underline flex"
+                  className="text-gray-900 no-underline flex items-center"
                 >
                   <ListItemIcon>
                     <SettingsIcon />
@@ -323,13 +343,7 @@ const Navbar = () => {
               >
                 <img
                   className="rounded-full"
-                  src={
-                    userUpdatedDetails
-                      ? "/" + userUpdatedDetails?.image
-                      : userInfo?.image
-                      ? "/" + userInfo?.image
-                      : profileImage
-                  }
+                  src={imgPath?.length > 0 ? imgPath : profileImage}
                   style={{ height: "50px", width: "auto" }}
                   alt="profile pic"
                 />

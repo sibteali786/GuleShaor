@@ -1,7 +1,6 @@
 import {
   Button,
   Typography,
-  Grid,
   Collapse,
   Avatar,
   Accordion,
@@ -9,7 +8,6 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import "./../../../node_modules/video-react/dist/video-react.css";
 import React, { useState, useEffect } from "react";
 import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";
@@ -17,7 +15,6 @@ import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
 import profileImage from "../../Assets/ProfilesImages/Profile Pic.png";
 import user1 from "../../Assets/ProfilesImages/Ellipse1.png";
-import user2 from "../../Assets/ProfilesImages/Ellipse2.png";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
@@ -61,11 +58,13 @@ const UserProfile = () => {
                           ? "/" + student?.studentDetails?.image
                           : student?.studentDetails?.image
                       }
-                      className="profileImage rounded-full"
+                      className="profileImage rounded-full p-0"
                       style={{
                         transform: "translateY(-50px)",
-                        width: "fit-content",
-                        height: "100px",
+                        height: "120px",
+                        width: "120px",
+                        borderRadius: "50%",
+                        border: "4px solid white",
                       }}
                     />
                   </Row>

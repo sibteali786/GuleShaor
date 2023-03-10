@@ -28,141 +28,86 @@ const FAQ = () => {
       </div>
       <div style={{ padding: "2rem" }}>
         <div className="lowerDivider">
-          <Typography variant="h3">Unpaid Member Ships</Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec
-            enim diam vulputate ut pharetra sit amet. In mollis nunc sed id
-            semper risus. Purus non enim praesent elementum facilisis leo vel
-            fringilla est. Etiam dignissim diam quis enim lobortis scelerisque.
-            A condimentum vitae sapien pellentesque habitant morbi tristique.
-            Sollicitudin nibh sit amet commodo nulla. Metus vulputate eu
-            scelerisque felis imperdiet. Volutpat blandit aliquam etiam erat
-            velit scelerisque in dictum non. Fusce id velit ut tortor. Tortor id
-            aliquet lectus proin nibh nisl condimentum id. Vitae semper quis
-            lectus nulla at volutpat diam. Sed faucibus turpis in eu. Tellus in
-            metus vulputate eu scelerisque felis imperdiet. Commodo quis
-            imperdiet massa tincidunt nunc pulvinar sapien et. Scelerisque eu
-            ultrices vitae auctor eu augue ut lectus. Netus et malesuada fames
-            ac. Donec pretium vulputate sapien nec sagittis aliquam malesuada
-            bibendum arcu. Sed nisi lacus sed
-          </Typography>
-          <Typography variant="body2">
-            viverra tellus in. Vel quam elementum pulvinar etiam non quam lacus
-            suspendisse. Vestibulum rhoncus est pellentesque elit ullamcorper
-            dignissim cras tincidunt. Felis imperdiet proin fermentum leo.
-            Egestas tellus rutrum tellus pellentesque eu tincidunt tortor
-            aliquam. Tincidunt dui ut ornare lectus sit amet est placerat in.
-            Nisl suscipit adipiscing bibendum est ultricies integer quis auctor.
-            Enim ut sem viverra aliquet eget sit amet tellus. Varius quam
-            quisque id diam vel quam elementum pulvinar etiam. Habitant morbi
-            tristique senectus et netus et malesuada.
-          </Typography>
-          <Typography variant="h3">Marignzx</Typography>
+          <h2>What will you get</h2>
+          <p>
+            We strongly believe that practical learning experiences are key to
+            success in the world of technology. That's why we offer a platform
+            that connects individuals with the resources they need to build
+            real-world projects and develop in-demand tech skills to get placed
+            for highest paying jobs. Here's a quick overview of what we offer:
+          </p>
+          <br />
+          <p>
+            Project-Based Learning: Our platform provides access to a wealth of
+            resources that individuals can use to build real-world projects and
+            develop their skills. Whether you're looking to build a website,
+            create a mobile app, or work on a machine learning project, you'll
+            find the resources you need to get started and complete your
+            project.
+          </p>
+          <br />
+          <p>
+            Resource Library: Our resource library is packed with a wide range
+            of resources, including tutorials, code snippets, project templates,
+            and more. You'll have everything you need to hit the ground running
+            and make meaningful progress on your project
+          </p>
+          <br />
+          <p>
+            Expert Mentorship: Our platform connects individuals with expert
+            mentors who can provide personalized guidance and support as they
+            work on their projects. Our mentors are seasoned professionals who
+            bring a wealth of experience and expertise to the table and are
+            passionate about helping others succeed.
+          </p>
+          <br />
+          <p>
+            Networking Opportunities: As a member of our platform, you'll have
+            the opportunity to connect with industry leaders and experts in your
+            field. Whether you're looking to learn from their experience,
+            collaborate on projects, or explore new career opportunities, our
+            platform provides a wealth of networking opportunities to help you
+            succeed.
+          </p>
+          <br />
+          <p>
+            Placement Opportunity: Upon successful completion of your project,
+            you'll have the opportunity to showcase your skills and experience
+            to potential employers. We have a network of hiring partners who are
+            looking for individuals with the skills and knowledge you've
+            developed through our platform, and we'll work with you to connect
+            you with these opportunities and help you land your dream job.
+          </p>
+          <br />
+          <p>
+            Community: As a member of our platform, you'll be part of a growing
+            community of like-minded individuals who share a passion for
+            technology. Whether you're looking to network, collaborate, or
+            simply connect with others who share your interests, you'll find
+            what you're looking for here.
+          </p>
+          <br />
+          <p>
+            So why wait? Join us today and start exploring the world of
+            technology through project-based learning. With our comprehensive
+            resource library, expert mentorship, networking opportunities, and
+            placement support, we're helping individuals like you gain the
+            skills and knowledge they need to succeed and make a real impact in
+            the world.
+          </p>
+          <Typography variant="h3">FAQs</Typography>
           <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography>Accordion 1</Typography>
+              <Typography>When will you open registration?</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography>Accordion 2</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Typography variant="body2">
-            viverra tellus in. Vel quam elementum pulvinar etiam non quam lacus
-            suspendisse. Vestibulum rhoncus est pellentesque elit ullamcorper
-            dignissim cras tincidunt. Felis imperdiet proin fermentum leo.
-            Egestas tellus rutrum tellus pellentesque eu tincidunt tortor
-            aliquam. Tincidunt dui ut ornare lectus sit amet est placerat in.
-            Nisl suscipit adipiscing bibendum est ultricies integer quis auctor.
-            Enim ut sem viverra aliquet eget sit amet tellus. Varius quam
-            quisque id diam vel quam elementum pulvinar etiam. Habitant morbi
-            tristique senectus et netus et malesuada.
-          </Typography>
-          <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Accordion 3</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography>Accordion 4</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Accordion 5</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion style={{ backgroundColor: "#252C33CC", color: "#F8F9FA" }}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography>Accordion 6</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
+                Our registration for the courses will start by March 1st till
+                March 15th, 2023
               </Typography>
             </AccordionDetails>
           </Accordion>

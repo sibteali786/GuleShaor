@@ -26,6 +26,7 @@ const authUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         image: user.mentorDetails.image,
+        image: user.mentorDetails.image,
         token: generateToken(user._id), // not defined till now
         userType,
       });
@@ -56,16 +57,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     if (userType === "mentor") {
       res.json({
-        _id: user?._id,
-        name: user?.name,
-        email: user?.email,
-        mentorDetails: {
-          ...user?.mentorDetails,
-        },
-        about: {
-          ...user?.about,
-        },
-        introVideo: user?.introVideo,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        image: user.mentorDetails.image,
+        userType,
         token: generateToken(user._id),
       });
     } else {
@@ -73,13 +69,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
         _id: user?._id,
         name: user?.name,
         email: user?.email,
-        studentDetails: {
-          ...user?.studentDetails,
-        },
-        about: {
-          ...user?.about,
-        },
-        introVideo: user?.introVideo,
+        image: user?.studentDetails?.image,
         token: generateToken(user._id),
       });
     }

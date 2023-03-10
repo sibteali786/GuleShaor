@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Form, FormGroup } from "react-bootstrap";
+import SnakBar from "../../components/SnakBar/SnakBar";
 const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
   var rank = {
     TOO_SHORT: 0,
@@ -131,11 +132,37 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
     });
     if (UserDetails) {
       dispatch(register(name, email.toLowerCase(), password, userType));
-      nextStep();
+      if (error?.length === 0) {
+        nextStep();
+      }
     }
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+  useEffect(() => {
+    if (error) {
+      handleClick();
+    }
+  }, [error]);
+
   return (
     <>
+      <SnakBar
+        open={open}
+        handleClose={handleClose}
+        typeOfAlert="error"
+        message={error}
+      />
       <h1 className="text-gray-700 w-full text-center">Create Account</h1>
       <div className="SignUp-container w-full">
         <div className="container-signup" id="container1">
@@ -144,7 +171,6 @@ const Signup = ({ nextStep, setUserDetails, UserDetails }) => {
               className="form-signup"
               onSubmit={handleSubmit(submitHandler)}
             >
-              {error && <Message variant="outlined">{error}</Message>}
               {loading && <FormLoader />}
               <div className="social-container w-full text-center">
                 <a href="#" className="social">

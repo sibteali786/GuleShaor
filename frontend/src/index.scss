@@ -3,7 +3,7 @@
 @tailwind utilities;
 $fontfmily1 : "Gotham";
 $fontfamily2: "Montserrat";
-$fontfamily3: "Without You";
+$fontfamily3: 'Pacifico', cursive;
 $primaryColor: #FFFFFF;
 $secondaryColor: #FAD5A5;
 $tertiaryColor: #252C33;
@@ -31,7 +31,7 @@ code {
 :root {
   --fontfmily1: "Gotham";
   --fontfamily2: "Montserrat";
-  --fontfamily3: "Without You";
+  --fontfamily3: 'Pacifico', cursive;
   --primaryColor: #FFFFFF;
   --secondaryColor: #FAD5A5;
   --bg-tertiary-color: #252C33;

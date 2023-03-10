@@ -10,7 +10,7 @@ const Users = ({ mentor }) => {
   var imgPath = mentor?.mentorDetails
     ? mentor?.mentorDetails?.image
     : mentor?.studentDetails?.image;
-  console.log(imgPath);
+  console.log("Here", imgPath.length > 0);
   if (!imgPath?.includes("/", 0)) {
     imgPath = `/${imgPath}`;
   }
@@ -42,7 +42,17 @@ const Users = ({ mentor }) => {
               : `/students/${mentor?._id}`
           }
         >
-          <img className="round d-inline" src={imgPath} alt={mentor?.name} />
+          <img
+            className="round d-inline"
+            src={
+              imgPath.length > 0
+                ? imgPath.length > 1
+                  ? imgPath
+                  : "./../../../public/images/profilePic.png"
+                : "./../../../public/images/profilePic.png"
+            }
+            alt={mentor?.name}
+          />
         </Link>
         <h5 className="xs:text-lg md:text-xl my-1">{mentor?.name}</h5>
         <a

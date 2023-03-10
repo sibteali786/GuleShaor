@@ -3,41 +3,47 @@ import "./Hero.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-const Hero = () => {
+const Hero = ({ isAuthenticated }) => {
   return (
-    <div className="relative ">
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
-      <div className="mx-auto max-w-10xl ">
-        <div className="relative shadow-xl sm:overflow-hidden ">
-          <div className="absolute inset-0">
-            <img
-              className="h-full w-full object-cover"
-              src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
-              alt="People working on laptops"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-700 mix-blend-multiply" />
-          </div>
-          <div className="relative px-4 py-20 sm:px-6 sm:py-24 lg:py-40 lg:px-8">
-            <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              <span className="block text-white">Empovering Youth For</span>
-              <span className="block text-indigo-200">
-                Financial Independence
-              </span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-100 sm:max-w-3xl">
-              Providing a demand-driven training system responsive to latest
-              industrial trends.
-            </p>
-            <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-              <a
-                href="/profile-forms"
-                className="flex items-center justify-center no-underline rounded-md border border-transparent bg-secondaryColor px-4 py-2 text-base font-medium text-tertiaryColor shadow-sm hover:bg-tertiaryColor hover:text-white sm:px-8"
-              >
-                Register
-              </a>
-            </div>
-          </div>
-        </div>
+    <div className="hero-Container px-[4rem]">
+      {isAuthenticated ? (
+        <h2>Expert Mentorship for Your Success: Ask Your Question Now!</h2>
+      ) : (
+        <h2>Get Expertise You Need</h2>
+      )}
+      {isAuthenticated ? (
+        <p className="text-md">
+          We connect students with experienced mentors who provide personalized
+          advice based on their queries. Ask your question and we'll match you
+          with a mentor who has expertise in your field of interest. Sign up now
+          and take the first step towards a successful future!
+        </p>
+      ) : (
+        <p className="text-md">
+          At Guleshaoor Acquire latest IT skills in demand, update on changing
+          trends in the fast-paced world of technology, and land your dream job
+          with our hands-on projects and expert guidance. Our mentors are top
+          industry professionals ready to support you in your journey
+        </p>
+      )}
+      <div className="flex flex-row space-x-4">
+        {isAuthenticated ? (
+          <Button
+            variant="contained"
+            className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300 font-semibold"
+          >
+            Ask Your Question Now
+          </Button>
+        ) : (
+          <Link to="/profile-forms">
+            <Button
+              variant="contained"
+              className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300"
+            >
+              Start Today
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

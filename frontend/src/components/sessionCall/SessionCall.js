@@ -1,18 +1,19 @@
 import React from "react";
-
+import "./sessionCall.scss";
 const SessionCall = () => {
   return (
     <div className="bg-transparent">
       <div className="mx-auto max-w-7xl py-12 px-[4rem] lg:py-16 lg:px-[4rem]">
         <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-stylish">
               What We Offer
             </h2>
-            <p className="mt-3 max-w-3xl text-lg text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-              egestas tempus tellus etiam sed. Quam a scelerisque amet
-              ullamcorper eu enim et fermentum, augue.
+            <p className="mt-3 max-w-3xl text-md text-gray-800">
+              we strongly believe that practical learning experiences are key to
+              success in the world of technology. That's why we offer a platform
+              that connects individuals with the resources they need to build
+              real-world projects and develop in-demand tech skills.
             </p>
             <div className="mt-8 sm:flex">
               <div className="rounded-md shadow">
@@ -56,7 +57,7 @@ const SessionCall = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Unlimited Free Calls</h6>
+              <h6 className="text-sm sm:text-md mt-2">Practical Learning</h6>
             </div>
             <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
               <svg
@@ -79,7 +80,7 @@ const SessionCall = () => {
                   fill="#252c33"
                 />
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Video Library</h6>
+              <h6 className="text-sm sm:text-md mt-2">Resource Library</h6>
             </div>
             <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
               <svg
@@ -238,7 +239,7 @@ const SessionCall = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <h6 className="text-sm sm:text-md mt-2">Mastermind Groups</h6>
+              <h6 className="text-sm sm:text-md mt-2">Job Placement</h6>
             </div>
           </div>
         </div>

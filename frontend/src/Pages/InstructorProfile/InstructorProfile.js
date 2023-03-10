@@ -11,14 +11,12 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Col, Container, Row } from "react-bootstrap";
-import "./../../../node_modules/video-react/dist/video-react.css";
-import React, { useState, useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import "./InstructorProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 // All the images in the page used
-import AddIcon from "@mui/icons-material/Add";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import Courses from "../../components/Courses/Courses";
@@ -29,8 +27,15 @@ import {
 } from "../../actions/mentorActions";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
+import ReactScheduler from "../../components/Scheduler/ReactScheduler";
 const InstructorProfile = () => {
   const dispatch = useDispatch();
+  const studentDetail = useSelector((state) => state.studentDetail);
+  const {
+    loading: loadingStudentDetails,
+    error: errorStudentDetails,
+    student,
+  } = studentDetail;
   const mentorDetail = useSelector((state) => state.mentorDetail);
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
@@ -56,10 +61,10 @@ const InstructorProfile = () => {
         <Message>{error}</Message>
       ) : (
         <>
-          <div className="px-[4rem] profileContainer">
-            <div className="w-4/6 pt-[6rem]">
+          <div className="px-[2rem] space-x-3 pt-[6rem] profileContainer flex flex-col lg:flex-row lg:justify-between">
+            <div className="w-[100%] lg:w-[60%] xl:w-[60%]">
               {mentor?.name && mentor?.mentorDetails ? (
-                <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
+                <Row className="mt-0 bg-white rounded-md border-[1px] mx-0 border-slate-300 ">
                   <div className="backgroundPicture"></div>
                   <Col xs={12} className="px-4">
                     <Row style={{ height: "70px" }}>
@@ -78,33 +83,51 @@ const InstructorProfile = () => {
                         }}
                       />
                     </Row>
+
                     <Row>
                       <Col xs={12} className="instName">
                         <div style={{ height: "fit-content" }}>
-                          <h3 className="xs:text-xl md:text-2xl">
-                            {mentor.name}
-                          </h3>
-                          <a href="email:johnDoe" className="no-underline">
-                            {mentor.mentorDetails.username}
+                          <div className="flex justify-between items-baseline">
+                            <h3 className="xs:text-md md:text-lg my-0">
+                              {mentor.name}
+                            </h3>
+                            <Button
+                              variant="contained"
+                              className="px-[1rem] my-0 py-[0.2rem] capitalize font-semibold items-center bg-transparent text-blue-600"
+                              startIcon={
+                                <i className="fas fa-plus text-md"></i>
+                              }
+                            >
+                              Follow
+                            </Button>
+                          </div>
+                          <a
+                            href="email:johnDoe"
+                            className="no-underline text-sm my-0"
+                          >
+                            {mentor.mentorDetails?.username}
                           </a>
+                          <p className="text-gray-800 text-xs tracking-wide mb-1">
+                            {mentor?.about?.city}, {mentor?.about?.country}
+                          </p>
                           {mentor?.mentorDetails?.interpersonal.length > 0 ? (
                             <div>
-                              <Accordion className="shadow-none w-1/2 ">
+                              <Accordion className="shadow-none w-1/3 ">
                                 <AccordionSummary
                                   className="p-0 m-0"
                                   expandIcon={<ExpandMoreIcon />}
                                   aria-controls="panel1a-content"
                                   id="panel1a-header"
                                 >
-                                  <h6 className="m-0 text-gray-600">
+                                  <h6 className="m-0 sm:text-xs text-sm">
                                     Technical Skills
                                   </h6>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails className="p-0">
                                   {mentor?.mentorDetails?.technical.map(
                                     (skill, idx) => (
                                       <p
-                                        className="text-gray-500 my-0"
+                                        className="text-gray-700 my-0 text-sm"
                                         key={idx}
                                       >
                                         {skill}
@@ -117,22 +140,22 @@ const InstructorProfile = () => {
                           ) : null}
                           {mentor?.mentorDetails?.interpersonal.length > 0 ? (
                             <div>
-                              <Accordion className="shadow-none w-1/2 ">
+                              <Accordion className="shadow-none w-1/3  mb-2">
                                 <AccordionSummary
                                   className="p-0"
                                   expandIcon={<ExpandMoreIcon />}
                                   aria-controls="panel1a-content"
                                   id="panel1a-header"
                                 >
-                                  <h6 className="m-0 text-gray-600">
+                                  <h6 className="m-0 sm:text-xs text-sm">
                                     Interpersonal Skills
                                   </h6>
                                 </AccordionSummary>
-                                <AccordionDetails>
+                                <AccordionDetails className="p-0">
                                   {mentor?.mentorDetails?.interpersonal.map(
                                     (skill, idx) => (
                                       <p
-                                        className="text-gray-500 my-0"
+                                        className="text-gray-700 my-0 text-sm"
                                         key={idx}
                                       >
                                         {skill}
@@ -165,29 +188,14 @@ const InstructorProfile = () => {
                           </Accordion>
                         </Col>
                       ) : null}
-                      <Col
-                        xs={12}
-                        className="d-flex justify-start align-start mt-2 mb-4"
-                      >
-                        <Button
-                          variant="contained"
-                          className="py-1 hover:text-black "
-                          style={{
-                            backgroundColor: "#196AA0",
-                            borderRadius: "1.3rem",
-                          }}
-                        >
-                          Follow
-                        </Button>
-                      </Col>
                     </Row>
                   </Col>
                 </Row>
               ) : null}
 
               {mentor?.about ? (
-                <Row
-                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-2"
+                <div
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4"
                   style={{ backgroundColor: "#F1F1F1" }}
                 >
                   {mentor.about.details ? (
@@ -195,96 +203,72 @@ const InstructorProfile = () => {
                       {
                         // TODO: resolve skills box disappear when reload mentor page
                       }
-                      <Collapse in={checked} collapsedSize={120}>
-                        <h3 className="mb-4">About</h3>
-                        <Typography variant="body2">
+                      <Collapse in={checked} collapsedSize={80}>
+                        <h3 className="mb-2">About</h3>
+                        <p className="text-gray-800 text-sm">
                           {mentor.about.details}
-                        </Typography>
+                        </p>
                       </Collapse>
-                      <div
-                        className="my-3"
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "flex-start",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                        }}
-                      >
+                      {mentor?.about?.details.length > 100 ? (
                         <Button
-                          variant="text"
-                          style={{ fontWeight: "bold", color: "#196AA0" }}
                           onClick={handleChange}
+                          className="text-blue-500 hover:text-blue-700 hover:cursor-pointer text-xs capitalize inline-block"
+                          endIcon={
+                            <i className="fas fa-chevron-down text-xs"></i>
+                          }
                         >
                           Read More
                         </Button>
-                      </div>
-                      <Link to="/profile" style={{ textDecoration: "none" }}>
-                        <Button
-                          variant="text"
-                          style={{
-                            fontWeight: "bold",
-                            color: "#196AA0",
-                            textTransform: "capitalize",
-                          }}
-                        >
-                          More Posts by {mentor.name}
-                        </Button>
-                      </Link>
+                      ) : null}
                     </>
                   ) : null}
-                </Row>
+                </div>
               ) : null}
 
-              {mentor?.about?.education?.school?.name?.length > 0 ? (
+              {mentor?.about?.education?.degree.length > 0 ? (
                 <div
-                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full -mr-[1rem] -ml-[0.75rem] "
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full  "
                   style={{ backgroundColor: "#F1F1F1" }}
                 >
                   <h3 className="mb-4">Education</h3>
-                  <div className="border-b-2 border-gray-200 mx-4 p-0">
-                    <h5 className="ml-2">School</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.school?.name}
-                      </h6>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Grade: {mentor?.about?.education?.school?.grade}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="border-b-2 border-gray-200 mx-4 p-0">
-                    <h5 className="ml-2 mt-4">College</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.college?.name}
-                      </h6>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Grade:{" "}
-                        {mentor?.about?.education?.college?.grade}
-                      </p>
-                    </div>
-                  </div>
-                  <div className=" mx-4 p-0">
-                    <h5 className="ml-2 mt-4">University</h5>
-                    <div className="ml-2 mt-3">
-                      <h6 className="m-0 mt-1">
-                        {mentor?.about?.education?.university?.name}
-                      </h6>
-                      <p className="text-gray-500 m-0">
-                        {mentor?.about?.education?.university?.degree}
-                      </p>
-                      <p className="text-gray-700 m-0 mb-3 text-sm">
-                        Passing Cumulative GPA:{" "}
-                        {mentor?.about?.education?.university?.cgpa}
-                      </p>
+                  <div className=" mr-4 p-0 pb-2">
+                    <div className="ml-2 mt-3 flex content-center justify-start">
+                      <i className="fas fa-school text-4xl"></i>
+                      <div className="ml-3">
+                        <h6 className="m-0 mt-1">
+                          {mentor?.about?.education?.university}
+                        </h6>
+                        <p className="text-gray-700 m-0 mb-1 text-sm">
+                          Degree: {mentor?.about?.education?.degree}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               ) : null}
-
+              {mentor?.certifications.length > 0 ? (
+                <div
+                  className="bg-white rounded-md border-[1px] border-slate-300 my-2 py-4 px-4 w-full  "
+                  style={{ backgroundColor: "#F1F1F1" }}
+                >
+                  <h3 className="mb-4">Certifications</h3>
+                  {mentor?.certifications.map((cert, idx) => (
+                    <div className=" mr-4 p-0 pb-2">
+                      <div className="ml-2 mt-3 flex content-center justify-start">
+                        <i className="fas fa-certificate text-4xl"></i>
+                        <div className="ml-3">
+                          <h6 className="m-0 mt-1">{cert?.name}</h6>
+                          <p className="text-gray-700 m-0 mb-1 text-sm">
+                            {cert?.issuingOrg}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
               {mentor.courses.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4">
+                <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
                   <>
                     <h3 className="mb-5">Offered Courses</h3>
                     <Stack spacing={1}>
@@ -297,11 +281,11 @@ const InstructorProfile = () => {
                       ))}
                     </Stack>
                   </>
-                </Row>
+                </div>
               ) : null}
 
               {students?.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4 my-2">
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
                       <h2 className="mb-4">Students</h2>
@@ -337,10 +321,9 @@ const InstructorProfile = () => {
                       {mentor.aboutStudents ? (
                         <Typography
                           variant="body2"
+                          className="text-sm"
                           style={{
                             fontFamily: "Montserrat",
-                            color: "#5F5F5F",
-                            fontWeight: "bold",
                           }}
                         >
                           {mentor.aboutStudents}
@@ -348,20 +331,22 @@ const InstructorProfile = () => {
                       ) : null}
                     </Grid>
                   </Grid>
-                </Row>
+                </div>
               ) : null}
 
               {mentor?.introVideo?.video?.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
-                  <Col xs={12} lg={6} className="span-4">
-                    <h3>Videos</h3>
-                    <ReactPlayer url={mentor.introVideo.video} />
-                  </Col>
-                </Row>
+                mentor?.introVideo?.video.includes("youtube") ? (
+                  <Row className="bg-white rounded-md border-[1px] border-slate-300 mx-0 px-4 py-4 my-2">
+                    <Col xs={12} lg={6} className="span-4">
+                      <h3>Videos</h3>
+                      <ReactPlayer url={mentor.introVideo.video} />
+                    </Col>
+                  </Row>
+                ) : null
               ) : null}
 
               {mentor.mentorDetails.otherImages.length > 0 ? (
-                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-2 py-4 my-2">
+                <Row className="bg-white rounded-md border-[1px] border-slate-300 px-4 mx-0 py-4 my-2">
                   <Col xs={12} lg={6} className="span-2">
                     <h3>Photos</h3>
                     <ImageList cols={2} rowHeight={164}>
@@ -385,6 +370,25 @@ const InstructorProfile = () => {
                   </Col>
                 </Row>
               ) : null}
+            </div>
+            <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2">
+              <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
+                <h2 className="text-gray-600 text-2xl mb-2">Book a Schedule</h2>
+                <ReactScheduler />
+                {Object.keys(student).length > 0 ? (
+                  <Link to={`/mentors/${mentor?._id}/addappointment`}>
+                    <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                      Book Appointment
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to={`/mentors/${mentor?._id}/timeslots`}>
+                    <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
+                      Add Time Slots
+                    </button>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </>

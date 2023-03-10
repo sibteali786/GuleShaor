@@ -15,23 +15,10 @@ import { EffectCards } from "swiper";
 const Team = () => {
   const teams = [
     {
-      name: "Sibteali Baqar",
-      designation: "Mern Stack and Finance",
-      about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, provident? Amet ut porro libero nam!",
-      profilePic: sibteali,
-      socialMedia: [
-        "https://github.com/sibteali786",
-        "https://www.linkedin.com/in/syed-sibteali-baqar-03167a17a/",
-        "https://medium.com/@sibteali786",
-        "https://sibtealibaqar.me",
-      ],
-    },
-    {
       name: "Izza Gul Awan",
       designation: "Founder, Marketing and Core Operations",
       about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, provident? Amet ut porro libero nam!",
+        "Our founder Miss Izza Gul Awan is a tech industry veteran who have a passion for helping others succeed. With a wealth of experience in the field, she brings a unique perspective and a deep understanding of the challenges facing individuals as they develop their skills and build their careers.",
       profilePic: izza,
       socialMedia: [
         "https://www.linkedin.com/in/izza-gul-awan-399146197",
@@ -39,19 +26,24 @@ const Team = () => {
       ],
     },
     {
-      name: "Abdullah Wasi",
-      designation: "UI/UX and Content Writer",
+      name: "Sibteali Baqar",
+      designation: "Technical Lead",
       about:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, provident? Amet ut porro libero nam!",
-      profilePic: profile,
-      socialMedia: ["https://abdullahwasi.com/"],
+        "Mern Stack Developer, responsible for managing and developing the product along with communication across our organization regarding technical requirements, applying coding standards, taking care of application of performance, security and deployment stuff altogether",
+      profilePic: sibteali,
+      socialMedia: [
+        "https://github.com/sibteali786",
+        "https://www.linkedin.com/in/syed-sibteali-baqar-03167a17a/",
+        "https://medium.com/@sibteali786",
+        "www.sibtealibaqar.me",
+      ],
     },
   ];
   return (
     <Grid
       container
       justifyContent="center"
-      className="team-container px-[4rem] py-[6rem]"
+      className="team-container px-[4rem] py-[6rem] mb-[2rem]"
       alignItems="center"
       spacing={3}
       style={{ marginTop: "0" }}
@@ -62,10 +54,10 @@ const Team = () => {
         </Grid>
         <Grid item>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-            quia error sequi molestias quidem delectus accusantium porro rerum
-            perspiciatis, minima alias. Excepturi nisi sit laudantium error
-            natus totam sequi doloremque!
+            At Guleshaoor, we believe that success is a team effort. That's why
+            we've brought together a group of talented, dedicated, and
+            passionate individuals who are committed to helping individuals
+            develop their tech skills and achieve their goals.
           </p>
         </Grid>
       </Grid>

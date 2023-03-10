@@ -7,7 +7,6 @@ const connectDB = require("./config/db.js");
 const mentorRoutes = require("./api/mentorRoutes.js");
 const studentRoutes = require("./api/studentRoutes.js");
 const userRoutes = require("./api/userRoutes.js");
-const products = require("./api/products");
 const uploadRoutes = require("./api/uploadRoutes.js");
 const studentsMentorRoutes = require("./api/studentsMentorRoutes.js");
 const { errorHandler, notFound } = require("./middleware/errorMiddleware.js");
@@ -25,8 +24,23 @@ app.use("/api/users", userRoutes);
 app.use("/api/mentors", mentorRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/getAllStudents", studentsMentorRoutes);
-app.use("/api/products", products);
 app.use("/api/upload", uploadRoutes);
+app.get("/", (req, res) => {
+  res.send("Api is Running......");
+});
+app.use("/uploads", express.static(path.join(path.resolve(), "/uploads"))); // * so as to access it in browser
+
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+//   app.get("/*", (req, res) =>
+//     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+//   );
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("Api is Running......");
+//   });
+// }
 app.get("/", (req, res) => {
   res.send("Api is Running......");
 });

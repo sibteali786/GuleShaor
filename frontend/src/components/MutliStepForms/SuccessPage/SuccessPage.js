@@ -41,7 +41,7 @@ const SuccessPage = () => {
           </p>
           <Link
             to={
-              user?.mentorDetails
+              user?.userType === "mentor"
                 ? `/mentors/${user?._id}`
                 : `/students/${user?._id}`
             }
