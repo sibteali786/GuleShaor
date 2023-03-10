@@ -18,7 +18,6 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-import store from "../../store";
 const items = [
   {
     name: "Home",
@@ -53,7 +52,7 @@ const items = [
   //   to: "/referral",
   // },
 ];
-const Navbar = () => {
+const Navbar = ({ setIsAuthenticated }) => {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
   // var prevScrollpos = window.pageYOffset;
   // window.onscroll = function () {
@@ -96,19 +95,12 @@ const Navbar = () => {
       imgPath = userInfo?.image;
       setImgPath(imgPath);
     }
-
-    // In case User details not fetched
-    // if (imgPath?.length === 0) {
-    //   if (userUpdatedDetails?.image) {
-    //     imgPath = userUpdatedDetails?.image;
-    //     setImgPath(imgPath);
-    //   }
-    // }
   }, [user, userInfo, imgPath, userUpdatedDetails, imageUrl]);
 
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(logout());
+    setIsAuthenticated(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
