@@ -9,8 +9,9 @@ import SnakBar from "../../components/SnakBar/SnakBar";
 import LoginForm from "../../components/Forms/LoginForm/LoginForm";
 const LogIn = ({ setIsAuthenticated }) => {
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const redirect = location.search ? location.search.split("=")[1] : "/";
+  console.log("redirect", redirect);
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
@@ -18,6 +19,7 @@ const LogIn = ({ setIsAuthenticated }) => {
   const submitHandler = (data) => {
     // Dispatch Login
     dispatch(login(data?.email, data?.password, data?.userType));
+    navigate(redirect);
     if (!error) {
       setIsAuthenticated(true);
     }
@@ -36,13 +38,10 @@ const LogIn = ({ setIsAuthenticated }) => {
     setOpen(false);
   };
   useEffect(() => {
-    if (userInfo) {
-      history(redirect);
-    }
     if (error) {
       handleClick();
     }
-  }, [history, userInfo, redirect, error]);
+  }, [navigate, userInfo, redirect, error]);
   return (
     <FormContainer>
       <SnakBar

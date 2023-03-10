@@ -2,10 +2,10 @@ import React from "react";
 import Hero from "./../../components/Hero/Hero";
 import Moto from "./../../components/Moto/Moto";
 
-const Home = () => {
+const Home = ({ isAuthenticated }) => {
   return (
     <div className="pt-[3rem]">
-      <Hero />
+      <Hero isAuthenticated={isAuthenticated} />
       <Moto />
     </div>
   );

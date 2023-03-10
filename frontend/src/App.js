@@ -58,7 +58,7 @@ function App() {
     return (
       <div className="App">
         <Favicon url="images/logo.svg"></Favicon>
-        <Navbar />
+        <Navbar setIsAuthenticated={setIsAuthenticated} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -70,7 +70,7 @@ function App() {
           <Route path="/referral" element={<Referrals />} />
           <Route path="/service" element={<Services />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/faq" element={FAQ} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="/team" element={<Team />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
@@ -81,9 +81,9 @@ function App() {
   return (
     <div className="App">
       <Favicon url="images/logo.svg"></Favicon>
-      <Navbar />
+      <Navbar setIsAuthenticated={setIsAuthenticated} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<About />} />
         <Route path="/faq" element={FAQ} />
         <Route path="/referral" element={<Referrals />} />
