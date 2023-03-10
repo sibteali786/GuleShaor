@@ -20,7 +20,7 @@ import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
 // Import React FilePond
-import { FilePond, registerPlugin } from "react-filepond";
+import { registerPlugin } from "react-filepond";
 
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
@@ -34,17 +34,12 @@ import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import NotFound404 from "./Pages/NotFound404/NotFound404";
-import { useSelector } from "react-redux";
 import MultiStepForm from "./components/MutliStepForms/MultiStepForm";
-import PersonalInfo from "./components/MutliStepForms/PersonalInfo/PersonalInfo";
-import QualificationForm from "./components/MutliStepForms/Qualification/QualificationForm";
-import ProfileSetup from "./components/MutliStepForms/ProfileSetup/ProfileSetup";
-import SearchBox from "./components/SearchBox/SearchBox";
-import Users from "./components/Users/Users";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSlot";
 import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
-
+import { useState } from "react";
+import ProtectedRoute from "./ProtectedRoute";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -54,8 +49,10 @@ registerPlugin(
   FilePondPluginImageTransform,
   FilePondPluginFileValidateSize
 );
+
 function App() {
-  const userLogin = useSelector((state) => state.userLogin);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log("Is Auth", isAuthenticated);
   const location = useLocation();
   return (
     <div className="App">
@@ -64,12 +61,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/faq" element={<FAQ />} />
+        <Route
+          path="/faq"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} element={FAQ} />
+          }
+        />
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route
+          path="/login"
+          element={<LogIn setIsAuthenticated={setIsAuthenticated} />}
+        />
         <Route path="/signup" element={<Signup />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/students" element={<Students />} />
