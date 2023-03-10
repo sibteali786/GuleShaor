@@ -44,7 +44,9 @@ import Users from "./components/Users/Users";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSlot";
 import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
-
+import { useState } from "react";
+import ProtectedRoute from "./ProtectedRoute";
+import Queries from "./Pages/Queries/Queries";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -56,6 +58,7 @@ registerPlugin(
 );
 function App() {
   const userLogin = useSelector((state) => state.userLogin);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   return (
     <div className="App">
@@ -72,10 +75,51 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/resources" element={<Resources />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/students/search/:keyword" element={<Students />} />
-        <Route path="/students/page/:pageNumber" element={<Students />} />
-        <Route path="/students/:id" element={<StudentProfile />} />
+        <Route
+          path="/query"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Queries}
+            />
+          }
+        />
+        <Route
+          path="/students"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/search/:keyword"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/page/:pageNumber"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={StudentProfile}
+            />
+          }
+        />
         <Route
           path="/students/search/:keyword/page/:pageNumber"
           element={<Students />}
