@@ -3,7 +3,7 @@ import "./Hero.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-const Hero = () => {
+const Hero = ({ isAuthenticated }) => {
   return (
     <div className="hero-Container px-[4rem]">
       {isAuthenticated ? (
