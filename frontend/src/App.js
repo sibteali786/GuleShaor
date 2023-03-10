@@ -54,6 +54,30 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   console.log("Is Auth", isAuthenticated);
   const location = useLocation();
+  if (!isAuthenticated) {
+    return (
+      <div className="App">
+        <Favicon url="images/logo.svg"></Favicon>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/login"
+            element={<LogIn setIsAuthenticated={setIsAuthenticated} />}
+          />
+          <Route path="profile-forms" element={<MultiStepForm />} />
+          <Route path="/referral" element={<Referrals />} />
+          <Route path="/service" element={<Services />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={FAQ} />
+          <Route path="/team" element={<Team />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+        <Footer isForm={location.pathname === "/" ? true : false} />
+      </div>
+    );
+  }
   return (
     <div className="App">
       <Favicon url="images/logo.svg"></Favicon>
@@ -61,41 +85,102 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/faq"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated} element={FAQ} />
-          }
-        />
+        <Route path="/faq" element={FAQ} />
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/team" element={<Team />} />
-        <Route
-          path="/login"
-          element={<LogIn setIsAuthenticated={setIsAuthenticated} />}
-        />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/resources" element={<Resources />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/students/search/:keyword" element={<Students />} />
-        <Route path="/students/page/:pageNumber" element={<Students />} />
-        <Route path="/students/:id" element={<StudentProfile />} />
+        <Route
+          path="/students"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/search/:keyword"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/page/:pageNumber"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
+        />
+        <Route
+          path="/students/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={StudentProfile}
+            />
+          }
+        />
         <Route
           path="/students/search/:keyword/page/:pageNumber"
-          element={<Students />}
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Students}
+            />
+          }
         />
-        <Route path="/mentors" element={<Mentors />} />
-        <Route path="/mentors/search/:keyword" element={<Mentors />} />
-        <Route path="/mentors/page/:pageNumber" element={<Mentors />} />
+        <Route
+          path="/mentors"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Mentors}
+            />
+          }
+        />
+        <Route
+          path="/mentors/search/:keyword"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Mentors}
+            />
+          }
+        />
+        <Route
+          path="/mentors/page/:pageNumber"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Mentors}
+            />
+          }
+        />
         <Route
           path="/mentors/search/:keyword/page/:pageNumber"
-          element={<Mentors />}
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={Mentors}
+            />
+          }
         />
         <Route
           path="/mentors/:id"
           className="px-[4rem]"
-          element={<InstructorProfile />}
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              element={InstructorProfile}
+            />
+          }
         />
         <Route path="/mentors/:id/timeslots" element={<MultiStepTimeSlots />} />
         <Route
