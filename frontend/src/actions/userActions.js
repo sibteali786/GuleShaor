@@ -39,6 +39,7 @@ export const login = (email, password, userType) => async (dispatch) => {
 
     // saving user in the local storage so as to restore session / page when it comes again after some time
     localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("token", JSON.stringify(data?.token));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,

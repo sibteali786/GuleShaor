@@ -15,7 +15,6 @@ import Mentors from "./Pages/Mentors/Mentors";
 import Students from "./Pages/Students/Students";
 import Team from "./Pages/Team/Team";
 import Resources from "./Pages/Resources/Resources";
-import Signup from "./Pages/SignUp/Signup";
 import LogIn from "./Pages/LogIn/LogIn";
 import Pricing from "./Pages/Pricing/Pricing";
 import Favicon from "react-favicon";
@@ -38,7 +37,7 @@ import MultiStepForm from "./components/MutliStepForms/MultiStepForm";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSlot";
 import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import Queries from "./Pages/Queries/Queries";
 // Register the plugins
@@ -53,7 +52,16 @@ registerPlugin(
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log("Is Auth", isAuthenticated);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
+      localStorage.removeItem("token");
+      setIsAuthenticated(false);
+    }
+  }, []);
+
   const location = useLocation();
   if (!isAuthenticated) {
     return (
