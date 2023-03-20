@@ -10,7 +10,7 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import { useParams } from "react-router-dom";
 import Paginate from "../../components/Paginate/Paginate";
 import useMentors from "../../components/CustomHooks/useMentors";
-const Mentors = () => {
+const Mentors = ({ possiblePathsRef }) => {
   const params = useParams();
   const keyword = params?.keyword;
   const pageNumber = params?.pageNumber || 1;
