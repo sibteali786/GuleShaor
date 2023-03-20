@@ -57,7 +57,6 @@ function App() {
     if (token) {
       setIsAuthenticated(true);
     } else {
-      localStorage.removeItem("token");
       setIsAuthenticated(false);
     }
   }, []);
@@ -94,7 +93,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/faq" element={FAQ} />
+        <Route path="/faq" element={<FAQ />} />
         <Route path="/referral" element={<Referrals />} />
         <Route path="/service" element={<Services />} />
         <Route path="/pricing" element={<Pricing />} />

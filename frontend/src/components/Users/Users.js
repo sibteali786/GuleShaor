@@ -14,7 +14,7 @@ const Users = ({ mentor }) => {
   if (!imgPath?.includes("/", 0)) {
     imgPath = `/${imgPath}`;
   }
-  console.log(imgPath);
+  console.log("location", location.pathname);
   return (
     <div>
       <div className="card-container border rounded-2 shadow">
@@ -22,7 +22,8 @@ const Users = ({ mentor }) => {
           className={
             location.pathname === "/mentors" ||
             location.pathname?.replace("%20", " ") ===
-              `/mentors/search/${keyword}`
+              `/mentors/search/${keyword}` ||
+            location.pathname === "/query"
               ? mentor?.mentorDetails?.userType === "Pro"
                 ? "Pro"
                 : "Free"
