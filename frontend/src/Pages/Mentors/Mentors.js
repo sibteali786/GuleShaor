@@ -9,27 +9,46 @@ import Loader from "../../components/Loader/Loader";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { useParams } from "react-router-dom";
 import Paginate from "../../components/Paginate/Paginate";
-const Mentors = () => {
-  const dispatch = useDispatch();
-  const mentorList = useSelector((state) => state.mentorList);
-  const { loading, error, mentors, page, pages } = mentorList;
-  var errorMentor = "";
-  if (mentors?.length === 0) {
-    errorMentor = "No mentors found";
-  }
+import useMentors from "../../components/CustomHooks/useMentors";
+const Mentors = ({ possiblePathsRef }) => {
   const params = useParams();
   const keyword = params?.keyword;
   const pageNumber = params?.pageNumber || 1;
   const [optionValue, setOptionValue] = React.useState("Name");
-  useEffect(() => {
-    if (optionValue) {
-      dispatch(listMentors(keyword, pageNumber, optionValue));
-    }
-  }, [dispatch, keyword, pageNumber, optionValue]);
-
+  const { loading, error, mentors, page, pages } = useMentors(
+    optionValue,
+    pageNumber,
+    keyword
+  );
+  var errorMentor = "";
+  if (mentors?.length === 0) {
+    errorMentor = "No mentors found";
+  }
+  const handleSectionMove = () => {
+    const section = document.getElementById("search");
+    section.scrollIntoView({ behavior: "smooth" });
+  };
   return (
-    <div className="pt-[4rem] flex flex-col justify-center content-center px-[4rem]">
-      <SearchBox optionValue={optionValue} setOptionValue={setOptionValue} />
+    <div className="pt-[4rem] flex flex-col justify-center items-center px-[4rem]">
+      <div className="flex flex-col justify-center items-center h-[100vh]">
+        <h1 className="text-xl sm:text-4xl md:text-5xl text-center font-bold font-[Montserrat]">
+          Find Your Mentor
+        </h1>
+        <p className="text-center w-2/3 py-6 text-black text-lg">
+          Our AI-powered mentor search page allows you to find experienced
+          mentors based on our profile. Browse their profiles for bio,
+          expertise, and contact info. Additionally, our system suggests mentors
+          based on your profile. Schedule meetings with mentors who can provide
+          guidance and support to achieve your career goals. Choose the best
+          mentor fit for you and take the first step towards career development
+        </p>
+        <button onClick={handleSectionMove}>
+          <i className="fas fa-arrow-down text-xl transform transition hover:scale-125 ease-in-out delay-120 " />
+        </button>
+      </div>
+      <div id="search" className="w-[80%]">
+        <SearchBox optionValue={optionValue} setOptionValue={setOptionValue} />
+      </div>
       {loading ? (
         <Loader />
       ) : error ? (

@@ -101,6 +101,7 @@ const Navbar = ({ setIsAuthenticated }) => {
   const logoutHandler = () => {
     dispatch(logout());
     setIsAuthenticated(false);
+    localStorage.removeItem("token");
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
