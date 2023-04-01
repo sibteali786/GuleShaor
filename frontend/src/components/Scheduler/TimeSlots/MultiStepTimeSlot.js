@@ -7,9 +7,11 @@ import Choice from "./Choice/Choice";
 import DayChoiceConsecutive from "./DayChoice/DayChoiceConsecutive";
 import DayChoiceSeperate from "./DayChoice/DayChoiceSeperate";
 import Success from "./SuccessPage/Success";
+import WhatIsEvent from "../CreateEvent/WhatIsEvent";
+import WhenPeopleCanBook from "../CreateEvent/WhenPeopleCanBook";
 
 const MultiStepTimeSlots = () => {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(2);
   const userInfo = useSelector((state) => state?.userLogin?.userInfo);
   const dispatch = useDispatch();
   const nextStep = () => {
@@ -19,39 +21,16 @@ const MultiStepTimeSlots = () => {
     setStep(step - 1);
   };
   const stepsArray = [
-    { name: "Day Choice", to: "/daychoice" },
-    { name: "Date and Time Slots", to: "/days" },
+    { name: "What is Event", to: "/info" },
+    { name: "When people can book", to: "/details" },
   ];
-  const [choice, setChoice] = useState("");
-  const [timeSlots, setTimeSlots] = useState([]);
-  useEffect(() => {
-    console.log(choice, timeSlots);
-    if (choice === "consecutive" && timeSlots.length > 0) {
-      dispatch(addTimeslots("consecutive", timeSlots));
-    } else if (choice === "separate" && timeSlots.length > 0) {
-      dispatch(addTimeslots("separate", timeSlots));
-    }
-  }, [choice, timeSlots, dispatch]);
 
   return (
     <div>
       <FormContainer>
         <FormSteps step={step} stepsArray={stepsArray} />
-        {step === 1 && <Choice nextStep={nextStep} setChoice={setChoice} />}
-        {step === 2 &&
-          (choice === "consecutive" ? (
-            <DayChoiceConsecutive
-              prevStep={prevStep}
-              nextStep={nextStep}
-              setTimeSlots={setTimeSlots}
-            />
-          ) : (
-            <DayChoiceSeperate
-              prevStep={prevStep}
-              nextStep={nextStep}
-              setTimeSlots={setTimeSlots}
-            />
-          ))}
+        {step === 1 && <WhatIsEvent nextStep={nextStep} />}
+        {step === 2 && <WhenPeopleCanBook nextStep={nextStep} />}
         {step === 3 && <Success id={userInfo?._id} />}
       </FormContainer>
     </div>

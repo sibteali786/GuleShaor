@@ -199,7 +199,7 @@ function App() {
             />
           }
         />
-        <Route path="/mentors/:id/timeslots" element={<MultiStepTimeSlots />} />
+        <Route path="/mentors/:id/edit" element={<MultiStepTimeSlots />} />
         <Route
           path="/mentors/:id/addappointment"
           element={<MultiStepAppointment />}

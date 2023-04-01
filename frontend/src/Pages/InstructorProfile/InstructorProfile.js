@@ -382,7 +382,7 @@ const InstructorProfile = () => {
                     </button>
                   </Link>
                 ) : (
-                  <Link to={`/mentors/${mentor?._id}/timeslots`}>
+                  <Link to={`/mentors/${mentor?._id}/edit`}>
                     <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
                       Add Time Slots
                     </button>
