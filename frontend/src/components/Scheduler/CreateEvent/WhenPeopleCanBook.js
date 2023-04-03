@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import DateRange from "./DateRange";
+import Duration from "./Duration";
 
 const WhenPeopleCanBook = () => {
   const onSubmit = (data) => {
@@ -9,9 +10,10 @@ const WhenPeopleCanBook = () => {
   };
 
   return (
-    <>
+    <div className="p-[2rem] bg-white flex flex-col justify-center border-2 border-gray-600 rounded-sm mb-[2rem] divide-y-2">
       <DateRange />
-    </>
+      <Duration />
+    </div>
   );
 };
 
