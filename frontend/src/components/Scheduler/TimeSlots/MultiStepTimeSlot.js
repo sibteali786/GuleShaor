@@ -11,7 +11,7 @@ import WhatIsEvent from "../CreateEvent/WhatIsEvent";
 import WhenPeopleCanBook from "../CreateEvent/WhenPeopleCanBook";
 
 const MultiStepTimeSlots = () => {
-  const [step, setStep] = React.useState(2);
+  const [step, setStep] = React.useState(1);
   const userInfo = useSelector((state) => state?.userLogin?.userInfo);
   const dispatch = useDispatch();
   const nextStep = () => {

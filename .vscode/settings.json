@@ -18,5 +18,8 @@
     "titleBar.inactiveBackground": "#fad5a599",
     "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.color": "#FAD5A5"
+  "peacock.color": "#FAD5A5",
+  "cSpell.words": [
+    "mentee"
+  ]
 }
