@@ -81,7 +81,6 @@ const Navbar = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     var imgPath = "";
-    console.log("Profile Image", imageUrl);
     if (imageUrl) {
       setImgPath(imageUrl);
     } else if (user) {
@@ -101,7 +100,7 @@ const Navbar = ({ setIsAuthenticated }) => {
   const logoutHandler = () => {
     dispatch(logout());
     setIsAuthenticated(false);
-    localStorage.removeItem("token");
+    localStorage.removeItem("isAuthenticated");
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (

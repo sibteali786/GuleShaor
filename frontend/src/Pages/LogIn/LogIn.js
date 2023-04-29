@@ -21,7 +21,9 @@ const LogIn = ({ setIsAuthenticated }) => {
     dispatch(login(data?.email, data?.password, data?.userType));
     navigate(redirect);
     if (!error) {
+      console.log("I am inside login");
       setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", true);
     }
   };
 

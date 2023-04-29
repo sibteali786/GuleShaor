@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const connectDB = require("./config/db.js");
 const mentorRoutes = require("./api/mentorRoutes.js");
+const eventRoutes = require("./api/eventRoutes.js");
+const scheduleRoutes = require("./api/scheduleRoutes.js");
 const studentRoutes = require("./api/studentRoutes.js");
 const userRoutes = require("./api/userRoutes.js");
 const uploadRoutes = require("./api/uploadRoutes.js");
@@ -23,6 +25,8 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/mentors", mentorRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api/event", eventRoutes);
+app.use("/api/schedule", scheduleRoutes);
 app.use("/api/getAllStudents", studentsMentorRoutes);
 app.use("/api/upload", uploadRoutes);
 app.get("/", (req, res) => {

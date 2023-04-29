@@ -64,7 +64,6 @@ function Duration() {
     setShowCustomFields(showCustom);
   };
   const durationType = watch("durationType");
-  console.log(durationType);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Typography

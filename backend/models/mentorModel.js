@@ -211,6 +211,18 @@ const mentorSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    events: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
+    schedules: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Schedule",
+      },
+    ],
   },
   {
     timestamps: true,

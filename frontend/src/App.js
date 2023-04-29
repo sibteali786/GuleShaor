@@ -51,15 +51,17 @@ registerPlugin(
 );
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    localStorage.getItem("token") ? true : false
+  );
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
+      localStorage.setItem("isAuthenticated", true);
     }
-  }, []);
+    console.log(isAuthenticated);
+  }, [isAuthenticated]);
 
   const location = useLocation();
   if (!isAuthenticated) {
