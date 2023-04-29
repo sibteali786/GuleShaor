@@ -5,6 +5,8 @@ import FormSteps from "../../MutliStepForms/FormSteps/FormSteps";
 import FormContainer from "../../MutliStepForms/FromContainer/FormContainer";
 import DateChoice from "./DateChoice/DateChoice";
 import Success from "./SuccessPage/SuccessPage";
+import DayChoiceConsecutive from "../TimeSlots/DayChoice/DayChoiceConsecutive";
+import DayChoiceSeperate from "../TimeSlots/DayChoice/DayChoiceSeperate";
 
 const MultiStepAppointment = () => {
   const [step, setStep] = React.useState(1);
@@ -21,8 +23,13 @@ const MultiStepAppointment = () => {
     { name: "Details", to: "/appointmentdetails" },
   ];
   const [appointment, setAppointment] = useState({});
+  const [choice, setChoice] = useState("");
+  const setTimeSlots = (timeSlots, choice) => {
+    setAppointment(timeSlots);
+    setChoice(choice);
+  };
+
   useEffect(() => {
-    console.log(appointment);
     if (appointment.length > 0) {
       dispatch(addAppointmentAction(appointment));
     }
@@ -32,24 +39,21 @@ const MultiStepAppointment = () => {
     <div>
       <FormContainer>
         <FormSteps step={step} stepsArray={stepsArray} />
-        {step === 1 && <DateChoice nextStep={nextStep} />}
-        //{" "}
-        {
-          // step === 2 &&
-          //   (choice === "consecutive" ? (
-          //     <DayChoiceConsecutive
-          //       prevStep={prevStep}
-          //       nextStep={nextStep}
-          //       setTimeSlots={setTimeSlots}
-          //     />
-          //   ) : (
-          //     <DayChoiceSeperate
-          //       prevStep={prevStep}
-          //       nextStep={nextStep}
-          //       setTimeSlots={setTimeSlots}
-          //     />
-          //   ))
-        }
+        {step === 1 && <DateChoice nextStep={nextStep} />}{" "}
+        {step === 2 &&
+          (choice === "consecutive" ? (
+            <DayChoiceConsecutive
+              prevStep={prevStep}
+              nextStep={nextStep}
+              setTimeSlots={setTimeSlots}
+            />
+          ) : (
+            <DayChoiceSeperate
+              prevStep={prevStep}
+              nextStep={nextStep}
+              setTimeSlots={setTimeSlots}
+            />
+          ))}
         {step === 3 && <Success id={userInfo?._id} />}
       </FormContainer>
     </div>

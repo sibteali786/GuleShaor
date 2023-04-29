@@ -24,7 +24,7 @@ const schema = yup.object().shape({
     then: yup.number().required(),
     otherwise: yup.number().nullable(),
   }),
-  durationType: yup.string().required(),
+  durationType: yup.string(),
 });
 
 const durations = [
@@ -63,12 +63,13 @@ function Duration() {
     const showCustom = event.target.value === "custom";
     setShowCustomFields(showCustom);
   };
+  console.log(errors);
   const durationType = watch("durationType");
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <Typography
         component="legend"
-        className="text-lg md:text-xl font-semibold"
+        className="text-lg md:text-xl font-semibold my-3"
       >
         Duration
       </Typography>

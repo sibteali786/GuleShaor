@@ -12,25 +12,24 @@ import {
   Select,
   FormHelperText,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { updateStep1 } from "../../../actions/mentorActions";
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
   duration: yup.number().required(),
   location: yup.string().required(),
-  description: yup.string().required(),
 });
 
-function WhatIsEvent({ onSubmit }) {
+function WhatIsEvent({ nextStep }) {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
     formState: { touchedFields, errors },
   } = useForm({
     defaultValues: {
-      name: "",
       duration: "60",
       location: "",
-      description: "",
     },
     mode: "all",
     resolver: yupResolver(schema),
@@ -38,6 +37,8 @@ function WhatIsEvent({ onSubmit }) {
 
   const handleFormSubmit = (data) => {
     console.log(data);
+    dispatch(updateStep1(data));
+    nextStep();
   };
 
   return (
@@ -49,23 +50,6 @@ function WhatIsEvent({ onSubmit }) {
         <Typography variant="h5">Create Event Type</Typography>
       </Box>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Controller
-            name="name"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <TextField
-                label="Name"
-                fullWidth
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                {...field}
-                variant="filled"
-              />
-            )}
-          />
-        </Grid>
         <Grid item xs={6}>
           <Controller
             name="duration"
@@ -101,31 +85,11 @@ function WhatIsEvent({ onSubmit }) {
                 >
                   <MenuItem value="Google Meet">Google Meet</MenuItem>
                   <MenuItem value="Zoom">Zoom</MenuItem>
-                  <MenuItem value="Teams">Teams</MenuItem>
                 </Select>
                 <FormHelperText className="text-red-600">
                   {errors.location?.message}
                 </FormHelperText>
               </>
-            )}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Controller
-            name="description"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <TextField
-                label="Description"
-                fullWidth
-                multiline
-                rows={4}
-                error={!!errors.description}
-                helperText={errors.description?.message}
-                {...field}
-                variant="filled"
-              />
             )}
           />
         </Grid>

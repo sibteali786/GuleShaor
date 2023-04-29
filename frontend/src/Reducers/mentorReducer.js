@@ -1,4 +1,5 @@
 import {
+  ADD_AVAILABILITY_DATA,
   MENTOR_ADD_APPOINTMENT_FAIL,
   MENTOR_ADD_APPOINTMENT_REQUEST,
   MENTOR_ADD_APPOINTMENT_SUCCESS,
@@ -14,6 +15,8 @@ import {
   STUDENTS_OF_MENTOR_FAIL,
   STUDENTS_OF_MENTOR_REQUEST,
   STUDENTS_OF_MENTOR_SUCCESS,
+  UPDATE_AVAILABILITY_DATA_STEP_1,
+  UPDATE_AVAILABILITY_DATA_STEP_2,
 } from "../constants/mentorConstants";
 
 export const mentorListReducer = (state = { mentors: [] }, action) => {
@@ -90,3 +93,44 @@ export const mentorAddAppointmentReducer = (
       return state;
   }
 };
+
+const initialAvailabilityState = {
+  step1: {
+    // initial state of step 1
+  },
+  step2: {
+    // initial state of step 2
+  },
+  // ...
+};
+
+export default function mentorAddAvailabilityReducer(
+  state = initialAvailabilityState,
+  action
+) {
+  switch (action.type) {
+    case UPDATE_AVAILABILITY_DATA_STEP_1:
+      const updatedStep1 = { ...state.step1, ...action.payload };
+      localStorage.setItem(
+        "availabilityData",
+        JSON.stringify({ ...state, step1: updatedStep1 })
+      );
+      return {
+        ...state,
+        step1: updatedStep1,
+      };
+    case UPDATE_AVAILABILITY_DATA_STEP_2:
+      const updatedStep2 = { ...state.step2, ...action.payload };
+      localStorage.setItem(
+        "availabilityData",
+        JSON.stringify({ ...state, step2: updatedStep2 })
+      );
+      return {
+        ...state,
+        step2: updatedStep2,
+      };
+    // ...
+    default:
+      return state;
+  }
+}

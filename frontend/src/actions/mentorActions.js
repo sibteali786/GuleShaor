@@ -16,6 +16,8 @@ import {
   STUDENTS_OF_MENTOR_FAIL,
   STUDENTS_OF_MENTOR_REQUEST,
   STUDENTS_OF_MENTOR_SUCCESS,
+  UPDATE_AVAILABILITY_DATA_STEP_1,
+  UPDATE_AVAILABILITY_DATA_STEP_2,
 } from "../constants/mentorConstants";
 
 export const listMentors =
@@ -146,3 +148,17 @@ export const addAppointmentAction = (appointment) => async (dispatch) => {
     });
   }
 };
+
+export function updateStep1(data) {
+  return {
+    type: UPDATE_AVAILABILITY_DATA_STEP_1,
+    payload: data,
+  };
+}
+
+export function updateStep2(data) {
+  return {
+    type: UPDATE_AVAILABILITY_DATA_STEP_2,
+    payload: data,
+  };
+}

@@ -19,7 +19,7 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 
-const DateRange = () => {
+const DateRange = ({ setData }) => {
   const schema = Yup.object().shape({
     availability: Yup.string().required("Please select availability option"),
     availableDays: Yup.number().when("availability", {
@@ -103,6 +103,7 @@ const DateRange = () => {
       });
     }
     console.log(data);
+    setData(data);
   };
   return (
     <Box
