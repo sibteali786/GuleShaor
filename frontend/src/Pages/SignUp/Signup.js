@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Signup.scss";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../../components/Message/Message";
-import { Alert, Typography, Tooltip } from "@mui/material";
+// import Message from "../../components/Message/Message";
+import { Alert, Tooltip } from "@mui/material";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { register } from "../../actions/userActions";
 import FormLoader from "../../components/MutliStepForms/FormLoader/FormLoader";

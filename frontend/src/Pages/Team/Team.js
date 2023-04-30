@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import "./Team.scss";
-import profile from "../../Assets/Team/Profile Pic.png";
+// import profile from "../../Assets/Team/Profile Pic.png";
 import sibteali from "../../Assets/Team/sibteali.png";
 import izza from "../../Assets/Team/izza.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -50,7 +50,7 @@ const Team = () => {
     >
       <Grid item container xs={12} md={6} alignItems="center">
         <Grid item className="text-left">
-          <h1>The Team</h1>
+          <h1>Who We Are</h1>
         </Grid>
         <Grid item>
           <p>

@@ -42,7 +42,6 @@
     .custom-shape-divider-top-1653762327 .shape-fill {
       fill: #30363c;
     }
-
   }
 
   .cardsDiv {
@@ -120,7 +119,6 @@
 
       .MuiCardContent-root {
         padding: 1rem;
-
       }
 
       .MuiCardMedia-root {
@@ -143,7 +141,7 @@
       color: #414042;
       font-weight: 500;
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
         padding: 1rem;
       }
     }
@@ -163,8 +161,10 @@
   font-family: "Montserrat";
   align-items: flex-start;
   flex-direction: column;
+  margin-top: 1.5rem;
+  padding-top: 2rem;
 
-  @media (min-width:768px) {
+  @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
   }
@@ -180,14 +180,12 @@
     z-index: 8;
     width: 100%;
 
-    @media (min-width:768px) {
+    @media (min-width: 768px) {
       width: 40%;
     }
 
     height: fit-content;
   }
-
-
 
   div {
     font-family: "Montserrat";
@@ -214,7 +212,7 @@
     width: 50%;
     max-width: 500px;
 
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       display: none;
     }
 

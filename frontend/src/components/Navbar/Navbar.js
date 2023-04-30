@@ -79,6 +79,8 @@ const Navbar = ({ setIsAuthenticated }) => {
   const profileImageDetails = useSelector((state) => state.profileImage);
   const { loading, imageUrl } = profileImageDetails;
 
+  // console.log(loading);
+
   useEffect(() => {
     var imgPath = "";
     console.log("Profile Image", imageUrl);
@@ -121,7 +123,7 @@ const Navbar = ({ setIsAuthenticated }) => {
     setAnchorEl(null);
   };
   return (
-    <div className="navContainer px-[4rem] bg-white py-2" id="navbar">
+    <div className="navContainer px-[4rem] bg-[#BCDEFF] py-2" id="navbar">
       <Link to="/">
         <svg
           width="42"

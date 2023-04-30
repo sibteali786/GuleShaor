@@ -3,9 +3,11 @@ import "./Hero.scss";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
+//  image
+
 const Hero = ({ isAuthenticated }) => {
   return (
-    <div className="hero-Container px-[4rem]">
+    <div className="hero-Container px-[4rem]  ">
       {isAuthenticated ? (
         <h2>Expert Mentorship for Your Success: Ask Your Question Now!</h2>
       ) : (
@@ -30,7 +32,9 @@ const Hero = ({ isAuthenticated }) => {
         {isAuthenticated ? (
           <Button
             variant="contained"
-            className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300 font-semibold"
+            // className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300 font-semibold"
+            //   changed
+            className="bg-[#111111] text-white text-[18px] min-[320px]:pt-[.5rem] min-[320px]:px-[2rem] rounded-full mt-[.5rem]"
           >
             Ask Your Question Now
           </Button>
@@ -38,13 +42,17 @@ const Hero = ({ isAuthenticated }) => {
           <Link to="/profile-forms">
             <Button
               variant="contained"
-              className="bg-orange-300 text-gray-700 hover:bg-gray-700 hover:text-orange-300"
+              className="bg-[#111111] text-white text-[18px] min-[320px]:pt-[.5rem] min-[320px]:px-[2rem] rounded-full mt-[.5rem]"
             >
               Start Today
             </Button>
           </Link>
         )}
       </div>
+      {/*         for image */}
+      {/* <div>
+        <image src="../../../public/images/check.jpeg" alt="image" />
+      </div> */}
     </div>
   );
 };

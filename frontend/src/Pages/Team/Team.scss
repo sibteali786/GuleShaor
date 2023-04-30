@@ -4,22 +4,19 @@
 .team-container {
   height: 100vh;
   overflow: hidden;
+  background-color: #f8f9fa;
 
   h1 {
     @include headings(large);
     font-family: $fontfamily2;
-
   }
 
   p {
-    color: #252C33;
+    color: #252c33;
     font-size: clamp(0.8rem, 2vw, 1rem);
     font-weight: 400;
     margin: 0;
-
   }
-
-
 }
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
@@ -63,7 +60,6 @@
     background-repeat: no-repeat;
   }
 
-
   .name {
     padding-top: 100px;
     text-align: center;
@@ -80,7 +76,7 @@
   }
 
   .desc {
-    color: #6E6E6E;
+    color: #6e6e6e;
     text-align: center;
     font-size: 16px;
     padding: 10px 20px;
@@ -116,10 +112,8 @@
         &:hover {
           transform: scale(1.4);
           cursor: pointer;
-
         }
       }
     }
   }
-
 }

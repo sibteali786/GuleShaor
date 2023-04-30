@@ -5,14 +5,14 @@ import FormContainer from "./FromContainer/FormContainer";
 import PersonalInfo from "./PersonalInfo/PersonalInfo";
 import ProfileSetup from "./ProfileSetup/ProfileSetup";
 import QualificationForm from "./Qualification/QualificationForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SuccessPage from "./SuccessPage/SuccessPage";
 
 // TODO: when user already exists should not move to next screen
 const MultiStepForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { userInfo } = userLogin;
   const [step, setStep] = React.useState(1);
   const [UserDetails, setUserDetails] = useState({});
   const nextStep = () => {

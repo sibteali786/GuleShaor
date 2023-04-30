@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./LogIn.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ const LogIn = ({ setIsAuthenticated }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
-
+  console.log(loading);
   const submitHandler = (data) => {
     // Dispatch Login
     dispatch(login(data?.email, data?.password, data?.userType));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./PersonalInfo.scss";
 import { Row, Col, Form, FormGroup, InputGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";

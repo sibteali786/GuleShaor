@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useLocation } from "react-router-dom";
+import Button from "@mui/material/Button";
+// import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import InstagramIcon from "@mui/icons-material/Instagram";
+// import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import IconButton from "@mui/material/IconButton";
 import EmailIcon from "@mui/icons-material/Email";
 import "./Footer.scss";
@@ -33,9 +34,6 @@ const interestedIn_options = [
 ];
 const navigation = {
   guleshaor: [
-    { name: "Home", href: "/" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Referrals", href: "/referral" },
     { name: "Services", href: "/service" },
     { name: "Team", href: "/team" },
     { name: "Pricing", href: "/pricing" },
@@ -43,7 +41,7 @@ const navigation = {
   ],
   collaborate: [
     { name: "Referrals", href: "/referral" },
-    { name: "Exchange", href: "#" },
+
     { name: "Opportunities", href: "#" },
   ],
   account: [
@@ -52,8 +50,7 @@ const navigation = {
   ],
   information: [
     { name: "Terms & Conditions", href: "#" },
-    { name: "Privacy Policy", href: "#" },
-    { name: "Jobs", href: "#" },
+    { name: "FAQ", href: "/faq" },
   ],
   social: [
     {
@@ -148,12 +145,12 @@ const Footer = ({ isForm }) => {
         }
       >
         {isForm ? (
-          <div className="form-footer">
+          <div className="form-footer" id="form1">
             <p id="headingStylish" className="font-bold my-4 pb-10">
               Work With Us
             </p>
-            <div className="form-div" id="form1">
-              <IconButton aria-label="form-icon">
+            <div className="form-div">
+              <IconButton aria-label="form-icon" className="icon-btn">
                 <EmailIcon />
               </IconButton>
               <h4>FOR A BETTER FUTURE OF PAKISTAN.</h4>
@@ -257,6 +254,15 @@ const Footer = ({ isForm }) => {
                   </FormControl>
                 </div>
               </form>
+              <div className="form-center">
+                <Button
+                  id="buttonSection3"
+                  variant="contained"
+                  className="form-btn"
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
           </div>
         ) : (
@@ -375,7 +381,7 @@ const Footer = ({ isForm }) => {
           </div>
           <div className="mt-12 border-t border-default pt-8">
             <p className="text-base text-default xl:text-center">
-              &copy; 2020 Your Company, Inc. All rights reserved.
+              &copy; 2023 Your Company, Inc. All rights reserved.
             </p>
           </div>
         </div>

@@ -23,15 +23,19 @@ import ActionButton from "../../components/ActionButton/ActionButton";
 
 const Services = () => {
   const [cardActivate, setCardActivate] = useState(0);
+  const [moveTo, setMove] = useState(0);
 
   const handleChange = (event) => {
     const indexValue = event.target.getAttribute("index");
     if (+indexValue === 0) {
       setCardActivate(+indexValue);
+      setMove(+indexValue);
     } else if (+indexValue === 1) {
       setCardActivate(+indexValue);
+      setMove(+indexValue);
     } else if (+indexValue === 2) {
       setCardActivate(+indexValue);
+      setMove(+indexValue);
     }
   };
   useEffect(() => {}, [cardActivate]);
@@ -92,16 +96,20 @@ const Services = () => {
                   tailored workshop programme delivered at agreed intervals.
                 </Typography>
               </CardContent>
-
-              <Button
-                variant="text"
-                index={0}
-                onClick={handleChange}
-                style={{ display: "flex", flexDirection: "column" }}
+              <a
+                href={`#${moveTo}`}
+                className="no-underline font-[roboto] flex flex-col justify-center"
               >
-                Expand
-                <i className="fa-solid fa-angle-down"></i>
-              </Button>
+                <Button
+                  variant="text"
+                  index={0}
+                  onClick={handleChange}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  Expand
+                  <i className="fa-solid fa-angle-down block"></i>
+                </Button>
+              </a>
             </Card>
           </SwiperSlide>
           <SwiperSlide>
@@ -123,15 +131,32 @@ const Services = () => {
                   interest in or studying construction.
                 </Typography>
               </CardContent>
-              <Button
+              {/* <Button
                 variant="text"
                 index={1}
                 onClick={handleChange}
                 style={{ display: "flex", flexDirection: "column" }}
               >
-                Expand
-                <i className="fa-solid fa-angle-down"></i>
-              </Button>
+                <a href={`#${moveTo}`} className="no-underline font-[roboto]">
+                  Expand
+                  <i className="fa-solid fa-angle-down block"></i>
+                </a>
+              </Button> */}
+              {/*  Changed */}
+              <a
+                href={`#${moveTo}`}
+                className="no-underline font-[roboto] flex flex-col justify-center"
+              >
+                <Button
+                  variant="text"
+                  index={1}
+                  onClick={handleChange}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  Expand
+                  <i className="fa-solid fa-angle-down block"></i>
+                </Button>
+              </a>
             </Card>
           </SwiperSlide>
           <SwiperSlide>
@@ -152,27 +177,29 @@ const Services = () => {
                   help us to Elevate The Youth.
                 </Typography>
               </CardContent>
-              <Button
-                variant="text"
-                index={2}
-                onClick={handleChange}
-                style={{ display: "flex", flexDirection: "column" }}
+              <a
+                href={`#${moveTo}`}
+                className="no-underline font-[roboto] flex flex-col justify-center"
               >
-                Expand
-                <i className="fa-solid fa-angle-down"></i>
-              </Button>
+                <Button
+                  variant="text"
+                  index={2}
+                  onClick={handleChange}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  Expand
+                  <i className="fa-solid fa-angle-down block"></i>
+                </Button>
+              </a>
             </Card>
           </SwiperSlide>
         </Swiper>
       </div>
-      <div
-        className="cardExpand-Container"
-        style={{ padding: "2rem", height: "100vh" }}
-      >
+      <div className="cardExpand-Container" style={{ height: "100vh" }}>
         {(() => {
-          if (cardActivate === 0) {
+          if (cardActivate === 0 && moveTo === 0) {
             return (
-              <div className="cardExpandSection">
+              <div className="cardExpandSection" id="0">
                 <div className="textPart">
                   <Typography gutterBottom variant="h5" component="div">
                     Referall & Direct Partnerships
@@ -191,9 +218,9 @@ const Services = () => {
                 <img src={card4} alt="service section" />
               </div>
             );
-          } else if (cardActivate === 1) {
+          } else if (cardActivate === 1 && moveTo === 1) {
             return (
-              <div className="cardExpandSection">
+              <div className="cardExpandSection" id="1">
                 <div className="textPart">
                   <Typography gutterBottom variant="h5" component="div">
                     Service Exchange
@@ -212,9 +239,9 @@ const Services = () => {
                 <img src={card4} alt="service section" />
               </div>
             );
-          } else if (cardActivate === 2) {
+          } else if (cardActivate === 2 && moveTo === 2) {
             return (
-              <div className="cardExpandSection">
+              <div className="cardExpandSection" id="2">
                 <div className="textPart">
                   <Typography gutterBottom variant="h5" component="div">
                     Volunteering Opportunities

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Col, Row } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./InstructorProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -51,6 +51,9 @@ const InstructorProfile = () => {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
+  console.log(loadingStudentDetails);
+  console.log(errorStudentDetails);
+
   return (
     <div>
       {Object.keys(mentor)?.length === 0 ? (

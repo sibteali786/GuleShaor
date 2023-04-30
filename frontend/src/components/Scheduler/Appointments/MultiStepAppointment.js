@@ -32,8 +32,7 @@ const MultiStepAppointment = () => {
     <div>
       <FormContainer>
         <FormSteps step={step} stepsArray={stepsArray} />
-        {step === 1 && <DateChoice nextStep={nextStep} />}
-        //{" "}
+        {step === 1 && <DateChoice nextStep={nextStep} />}{" "}
         {
           // step === 2 &&
           //   (choice === "consecutive" ? (

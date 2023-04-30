@@ -52,7 +52,7 @@ registerPlugin(
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  console.log("Is Auth", isAuthenticated);
+  // console.log("Is Auth", isAuthenticated);
   const location = useLocation();
   if (!isAuthenticated) {
     return (
