@@ -7,11 +7,11 @@ const SearchBox = ({ setOptionValue, optionValue }) => {
   const [keyword, setKeyword] = React.useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    if (location.pathname?.includes("mentors")) {
+    if (location.pathname?.includes("query")) {
       if (keyword.trim()) {
-        history(`/mentors/search/${keyword}`);
+        history(`/query/search/${keyword}`);
       } else {
-        history(`/mentors`);
+        history(`/query`);
       }
     } else if (location.pathname?.includes("students")) {
       if (keyword.trim()) {

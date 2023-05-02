@@ -14,10 +14,10 @@ const Paginate = ({ pages, page, isAdmin = false, keyword = "" }) => {
           <PaginationItem
             component={Link}
             to={
-              path?.includes("mentors")
+              path?.includes("query")
                 ? keyword
-                  ? `/mentors/search/${keyword}/page/${item.page}`
-                  : `/mentors/page/${item.page}`
+                  ? `/query/search/${keyword}/page/${item.page}`
+                  : `/query/page/${item.page}`
                 : keyword
                 ? `/students/search/${keyword}/page/${item.page}`
                 : `/students/page/${item.page}`

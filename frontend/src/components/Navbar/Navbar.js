@@ -247,7 +247,7 @@ const Navbar = ({ setIsAuthenticated }) => {
                 {userInfo ? (
                   userInfo?.userType === "mentor" ? (
                     <Link
-                      to={`/mentors/${userInfo?._id}`}
+                      to={`/query/${userInfo?._id}`}
                       className="text-black no-underline flex items-center"
                     >
                       <Avatar />

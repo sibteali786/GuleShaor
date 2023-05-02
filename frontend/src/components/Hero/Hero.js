@@ -7,7 +7,9 @@ const Hero = ({ isAuthenticated }) => {
   return (
     <div className="hero-Container px-[4rem]">
       {isAuthenticated ? (
-        <h2>Expert Mentorship for Your Success: Ask Your Question Now!</h2>
+        <h2 className="text-white">
+          Expert Mentorship for Your Success: Ask Your Question Now!
+        </h2>
       ) : (
         <h2>Get Expertise You Need</h2>
       )}

@@ -155,7 +155,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/search/:keyword"
+          path="/query/search/:keyword"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -164,7 +164,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/page/:pageNumber"
+          path="/query/page/:pageNumber"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -173,7 +173,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/search/:keyword/page/:pageNumber"
+          path="/query/search/:keyword/page/:pageNumber"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -182,7 +182,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/:id"
+          path="/query/:id"
           className="px-[4rem]"
           element={
             <ProtectedRoute
@@ -191,9 +191,9 @@ function App() {
             />
           }
         />
-        <Route path="/mentors/:id/edit" element={<MultiStepTimeSlots />} />
+        <Route path="/query/:id/edit" element={<MultiStepTimeSlots />} />
         <Route
-          path="/mentors/:id/addappointment"
+          path="/query/:id/addappointment"
           element={<MultiStepAppointment />}
         />
         <Route path="profile-forms" element={<MultiStepForm />} />

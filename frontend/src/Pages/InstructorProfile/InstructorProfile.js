@@ -375,13 +375,13 @@ const InstructorProfile = () => {
               <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
                 <h2 className="text-gray-600 text-2xl mb-2">Book a Schedule</h2>
                 {Object.keys(student).length > 0 ? (
-                  <Link to={`/mentors/${mentor?._id}/addappointment`}>
+                  <Link to={`/query/${mentor?._id}/addappointment`}>
                     <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
                       Book Appointment
                     </button>
                   </Link>
                 ) : (
-                  <Link to={`/mentors/${mentor?._id}/edit`}>
+                  <Link to={`/query/${mentor?._id}/edit`}>
                     <button className=" py-1 px-2 border-2 text-gray-700 border-gray-800 rounded-md my-2 bg-orange-300 hover:bg-gray-800 hover:text-white transition ease-in-out delay-80">
                       Add Time Slots
                     </button>
