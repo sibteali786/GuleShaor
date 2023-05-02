@@ -39,7 +39,6 @@ import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSl
 import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./ProtectedRoute";
-import Queries from "./Pages/Queries/Queries";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -102,15 +101,6 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/resources" element={<Resources />} />
         <Route
-          path="/query"
-          element={
-            <ProtectedRoute
-              isAuthenticated={isAuthenticated}
-              element={Queries}
-            />
-          }
-        />
-        <Route
           path="/students"
           element={
             <ProtectedRoute
@@ -156,7 +146,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors"
+          path="/query"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}

@@ -309,7 +309,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -326,7 +326,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -345,7 +345,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -362,7 +362,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>

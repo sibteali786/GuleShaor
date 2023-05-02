@@ -24,8 +24,8 @@ const items = [
     to: "/",
   },
   {
-    name: "Mentors",
-    to: "/mentors",
+    name: "Query",
+    to: "/query",
   },
   {
     name: "Team",

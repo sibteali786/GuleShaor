@@ -94,7 +94,6 @@ const DateRange = ({ setData }) => {
     }
 
     if (data?.availableDays === 0) {
-      console.log(data?.availableDays);
       setError("availableDays", {
         type: {
           required: "This is required",
@@ -102,7 +101,7 @@ const DateRange = ({ setData }) => {
         message: "Please enter the number of available days",
       });
     }
-    console.log(data);
+    console.log("WhenPeopleCanBook", data);
     setData(data);
   };
   return (

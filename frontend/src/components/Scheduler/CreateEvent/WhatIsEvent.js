@@ -36,7 +36,7 @@ function WhatIsEvent({ nextStep }) {
   });
 
   const handleFormSubmit = (data) => {
-    console.log(data);
+    console.log("WhatIsEvnt", data);
     dispatch(updateStep1(data));
     nextStep();
   };

@@ -31,16 +31,15 @@ const Mentors = ({ possiblePathsRef }) => {
   return (
     <div className="pt-[4rem] flex flex-col justify-center items-center px-[4rem]">
       <div className="flex flex-col justify-center items-center h-[100vh]">
-        <h1 className="text-xl sm:text-4xl md:text-5xl text-center font-bold font-[Montserrat]">
-          Find Your Mentor
+        <h1 className="text-xl sm:text-4xl md:text-5xl text-center font-bold w-2/3 font-[Montserrat]">
+          Find Your Perfect Mentor <br /> Get Matched with the Right Expert for
+          You
         </h1>
         <p className="text-center w-2/3 py-6 text-black text-lg">
-          Our AI-powered mentor search page allows you to find experienced
-          mentors based on our profile. Browse their profiles for bio,
-          expertise, and contact info. Additionally, our system suggests mentors
-          based on your profile. Schedule meetings with mentors who can provide
-          guidance and support to achieve your career goals. Choose the best
-          mentor fit for you and take the first step towards career development
+          Looking for a mentor to guide you on your career path? Our platform
+          matches you with the perfect mentor based on your goals and expertise
+          needs. Find your ideal mentor and take the first step towards
+          achieving your career aspirations.
         </p>
         <button onClick={handleSectionMove}>
           <i className="fas fa-arrow-down text-xl transform transition hover:scale-125 ease-in-out delay-120 " />
