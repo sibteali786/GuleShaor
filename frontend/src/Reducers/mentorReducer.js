@@ -12,6 +12,9 @@ import {
   MENTOR_LIST_FAIL,
   MENTOR_LIST_REQUEST,
   MENTOR_LIST_SUCCESS,
+  SCHEDULE_ADD_FAIL,
+  SCHEDULE_ADD_REQUEST,
+  SCHEDULE_ADD_SUCCESS,
   STUDENTS_OF_MENTOR_FAIL,
   STUDENTS_OF_MENTOR_REQUEST,
   STUDENTS_OF_MENTOR_SUCCESS,
@@ -134,3 +137,16 @@ export default function mentorAddAvailabilityReducer(
       return state;
   }
 }
+
+export const mentorAddScheudlesReducer = (state = { schedule: {} }, action) => {
+  switch (action.type) {
+    case SCHEDULE_ADD_REQUEST:
+      return { loading: true };
+    case SCHEDULE_ADD_SUCCESS:
+      return { loading: false, success: true, schedule: action.payload };
+    case SCHEDULE_ADD_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

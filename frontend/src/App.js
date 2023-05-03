@@ -59,7 +59,6 @@ function App() {
       setIsAuthenticated(true);
       localStorage.setItem("isAuthenticated", true);
     }
-    console.log(isAuthenticated);
   }, [isAuthenticated]);
 
   const location = useLocation();

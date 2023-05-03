@@ -18,6 +18,7 @@ import {
   userRegisterReducer,
 } from "./Reducers/userReducer";
 import { imageUploadReducer } from "./Reducers/imageReducer";
+import { schedulerAddReducer } from "./actions/mentorActions";
 
 function lastAction(state = null, action) {
   return action;
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   profileImage: imageUploadReducer,
   mentorSlots: mentorAddTimeslotsReducer,
   availabilityData: mentorAddAvailabilityReducer,
+  schedule: schedulerAddReducer,
   lastAction,
 });
 
@@ -63,6 +65,9 @@ const mentorTimeSlotsFromStorage = localStorage.getItem("timeSlots")
 const availabilityFromStorage = localStorage.getItem("availabilityData")
   ? JSON.parse(localStorage.getItem("availabilityData"))
   : {};
+const scheduleFromStorage = localStorage.getItem("schedule")
+  ? JSON.parse(localStorage.getItem("schedule"))
+  : {};
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   userUpdateDetails: { userUpdatedDetails: UserDetailsFromStorage },
@@ -70,6 +75,7 @@ const initialState = {
   profileImage: { userProfileImage: profileImageFromStorage },
   mentorSlots: mentorTimeSlotsFromStorage,
   availabilityData: availabilityFromStorage,
+  schedule: scheduleFromStorage || {},
 };
 const store = legacy_createStore(
   reducer,

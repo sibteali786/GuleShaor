@@ -19,18 +19,34 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
-  const [data, setData] = useState({});
   const dispatch = useDispatch();
+  const timeSchema = Yup.date()
+    .optional()
+    .typeError("Invalid time format")
+    .test("is-valid-time", "Invalid time format", (value) => {
+      // Check if value is a valid Date object
+
+      if (!(value instanceof Date && !isNaN(value)) && value !== "00:00") {
+        return false;
+      }
+
+      // Check if hours and minutes are within the valid range
+      const hours = value.getHours();
+      const minutes = value.getMinutes();
+      return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
+    });
   const schema = Yup.object().shape({
     availability: Yup.string().required("Please select availability option"),
-    availableDays: Yup.number().when("availability", {
-      is: "days",
-      then: Yup.number().required("Please enter the number of available days"),
-      otherwise: Yup.number().optional(),
+    date: Yup.date().when("availability", {
+      is: "day",
+      then: Yup.date().required("Please enter a valid date"),
+      otherwise: Yup.date().optional(),
     }),
+    dayStart: timeSchema,
+    dayEnd: timeSchema,
     dateRangeOption: Yup.string().optional("Please select date range option"),
     startDate: Yup.date().when("availability", {
       is: "range",
@@ -50,7 +66,7 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
   });
 
   const availabilityOptions = [
-    { label: "For how many days", value: "days" },
+    { label: "Select a Date", value: "day" },
     { label: "Within a date range", value: "range" },
   ];
 
@@ -68,14 +84,16 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
     defaultValues: {
       availability: "",
       dateRangeOption: "",
-      availableDays: 0,
+      date: moment(),
+      dayStart: "00:00",
+      dayEnd: "00:00",
       startDate: moment(),
       endDate: moment(),
     },
     resolver: yupResolver(schema),
   });
   const handleDateRangeOption = (e) => {
-    if (e.target.value === "days") {
+    if (e.target.value === "day") {
       document.getElementById("days").classList.add("block");
       document.getElementById("days").classList.remove("hidden");
       document.getElementById("range").style.display = "none";
@@ -97,22 +115,28 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
       });
     }
 
-    if (data?.availableDays === 0) {
-      setError("availableDays", {
+    if (data?.date === moment()) {
+      setError("date", {
         type: {
           required: "This is required",
         },
         message: "Please enter the number of available days",
       });
     }
+
+    const hours = data?.dayStart.getHours().toString().padStart(2, "0");
+    const minutes = data?.dayStart.getMinutes().toString().padStart(2, "0");
+    const hours_2 = data?.dayEnd.getHours().toString().padStart(2, "0");
+    const minutes_2 = data?.dayEnd.getMinutes().toString().padStart(2, "0");
+    data.dayStart = `${hours}:${minutes}`;
+    data.dayEnd = `${hours_2}:${minutes_2}`;
+    data.date = moment(data?.date).toISOString(true);
+    data.startDate = moment(data?.startDate).toISOString(true);
+    data.endDate = moment(data?.endDate).toISOString(true);
     console.log("WhenPeopleCanBook", data);
-    setData(data);
+    dispatch(updateStep2(data));
+    nextStep();
   };
-  useEffect(() => {
-    if (data) {
-      dispatch(updateStep2(data));
-    }
-  }, [data]);
 
   return (
     <div className="p-[2rem] bg-white flex flex-col justify-center border-2 border-gray-600 rounded-sm mb-[2rem] divide-y-2 space-y-4">
@@ -168,22 +192,24 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
           className="flex items-center space-x-4"
         >
           <Controller
-            name="availableDays"
+            name="date"
             control={control}
-            rules={{ required: true }}
+            defaultValue={null}
             render={({ field }) => (
-              <TextField
+              <DatePicker
                 {...field}
-                label="Available Days"
-                variant="outlined"
-                error={!!errors.availableDays}
-                helperText={errors.availableDays?.message}
+                label="Date"
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    error={!!errors.date}
+                    helperText={errors.date?.message}
+                  />
+                )}
               />
             )}
           />
-          <div>
-            <Typography>days into the future</Typography>
-          </div>
         </Grid>
         <Grid item xs={12} id="range" style={{ display: "none" }}>
           <div className="my-2">
@@ -219,7 +245,7 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
               )}
             />
           </div>
-          <Grid container spacing={2} className="items-center">
+          <Grid container spacing={2} className="items-center my-2">
             <Grid item xs={12} md={5}>
               <Controller
                 name="startDate"
@@ -269,6 +295,52 @@ const WhenPeopleCanBook = ({ nextStep, prevStep }) => {
                 )}
               />
             </Grid>
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} className="items-center my-2">
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name="dayStart"
+              control={control}
+              defaultValue={null}
+              render={({ field }) => (
+                <TimePicker
+                  {...field}
+                  label="DayStart"
+                  inputFormat="hh:mm"
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      fullWidth
+                      error={!!errors.dayStart}
+                      helperText={errors.dayStart?.message}
+                    />
+                  )}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name="dayEnd"
+              control={control}
+              defaultValue={null}
+              render={({ field }) => (
+                <TimePicker
+                  {...field}
+                  label="DayEnd"
+                  inputFormat="hh:mm"
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      fullWidth
+                      error={!!errors.dayEnd}
+                      helperText={errors.dayEnd?.message}
+                    />
+                  )}
+                />
+              )}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12} className="space-x-4">
