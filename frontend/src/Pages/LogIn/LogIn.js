@@ -7,24 +7,18 @@ import { login } from "../../actions/userActions";
 import FormContainer from "../../components/MutliStepForms/FromContainer/FormContainer";
 import SnakBar from "../../components/SnakBar/SnakBar";
 import LoginForm from "../../components/Forms/LoginForm/LoginForm";
+import Loading from "../../components/Loader/Loader";
 const LogIn = ({ setIsAuthenticated }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const redirect = location.search ? location.search.split("=")[1] : "/";
-  console.log("redirect", redirect);
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error, userInfo, success } = userLogin;
 
   const submitHandler = (data) => {
     // Dispatch Login
     dispatch(login(data?.email, data?.password, data?.userType));
-    navigate(redirect);
-    if (!error) {
-      console.log("I am inside login");
-      setIsAuthenticated(true);
-      localStorage.setItem("isAuthenticated", true);
-    }
   };
 
   const [open, setOpen] = React.useState(false);
@@ -40,7 +34,11 @@ const LogIn = ({ setIsAuthenticated }) => {
     setOpen(false);
   };
   useEffect(() => {
-    if (error) {
+    if (success) {
+      navigate(redirect);
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", true);
+    } else if (error) {
       handleClick();
     }
   }, [navigate, userInfo, redirect, error]);
@@ -60,7 +58,7 @@ const LogIn = ({ setIsAuthenticated }) => {
               Sign in to your account
             </h2>
           </div>
-          <LoginForm submitHandler={submitHandler} />
+          {loading ? <Loading /> : <LoginForm submitHandler={submitHandler} />}
         </div>
       </>
     </FormContainer>

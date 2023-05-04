@@ -75,7 +75,7 @@ const initialState = {
   profileImage: { userProfileImage: profileImageFromStorage },
   mentorSlots: mentorTimeSlotsFromStorage,
   availabilityData: availabilityFromStorage,
-  schedule: scheduleFromStorage || {},
+  schedule: scheduleFromStorage,
 };
 const store = legacy_createStore(
   reducer,

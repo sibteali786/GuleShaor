@@ -192,7 +192,6 @@ export const schedulerAddReducer = (availabilityData) => async (dispatch) => {
         console.log(err);
       }
     } else {
-      console.log("Hello");
       try {
         const { startDate, endDate } = availabilityData.step2;
         const start = new Date(startDate);
@@ -205,30 +204,31 @@ export const schedulerAddReducer = (availabilityData) => async (dispatch) => {
             dayStart: availabilityData?.step2?.dayStart,
             dayEnd: availabilityData?.step2?.dayEnd,
             eventDuration: availabilityData.step1.duration,
-            userDetails: {
-              userType: userInfo?.userType,
-            },
           };
           outputArr.push(obj);
         }
-        outputObject = outputArr;
+        outputObject = {
+          data: outputArr,
+          userDetails: {
+            userType: userInfo?.userType,
+          },
+        };
       } catch (err) {
         console.log(err);
       }
     }
     console.log(outputObject);
-
-    // const { data } = await axios.post(
-    //   `${process.env.REACT_APP_API_URL}api/schedule/create`,
-    //   { ...availabilityData, userDetails: { userType: userInfo?.userType } },
-    //   config
-    // );
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}api/schedule/create`,
+      outputObject,
+      config
+    );
     // saving user in the local storage so as to restore session / page when it comes again after some time
-    // localStorage.setItem("schedule", JSON.stringify(data));
-    // dispatch({
-    //   type: SCHEDULE_ADD_SUCCESS,
-    //   payload: data,
-    // });
+    localStorage.setItem("schedule", JSON.stringify(data));
+    dispatch({
+      type: SCHEDULE_ADD_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: SCHEDULE_ADD_FAIL,
