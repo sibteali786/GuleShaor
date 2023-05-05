@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Schedule = require("../models/scheduleModel");
 const Mentor = require("../models/mentorModel");
-
+const { ObjectId } = require("mongoose").Types;
 // @desc    Create Schedule
 // @route   Post /api/schedule/create
 // @access  Private
@@ -162,9 +162,44 @@ const deleteSchedule = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete all Schedules
+// @route   Delete /api/schedule/deleteAll/:userId
+// @access  Private
+
+const deleteAllSchedule = asyncHandler(async (req, res) => {
+  try {
+    const isValidObjectId = ObjectId.isValid(req.user._id);
+    if (!isValidObjectId) {
+      return res.status(400).json({ err: "Invalid user ID" });
+    }
+    const foundUser = await Mentor.findById(req.user._id);
+    if (!foundUser) {
+      return res.status(404).json({ err: "Mentor not found" });
+    }
+    const foundSchedule = await Schedule.find({ mentor: req.user._id });
+
+    if (foundSchedule.length === 0) {
+      return res.status(403).json({ err: "Schedule not found" });
+    }
+    if (foundSchedule.some((s) => s.events.length > 0)) {
+      return res
+        .status(403)
+        .json({ err: "Cannot delete a schedule with events" });
+    }
+
+    await Schedule.deleteMany({ mentor: req.user._id });
+    foundUser.schedules = [];
+    await foundUser.save();
+    res.status(200).json({ msg: "Schedules deleted" });
+  } catch (error) {
+    return res.status(500).json({ err: error.message });
+  }
+});
+
 module.exports = {
   createSchedule,
   getSchedule,
   updateSchedule,
   deleteSchedule,
+  deleteAllSchedule,
 };

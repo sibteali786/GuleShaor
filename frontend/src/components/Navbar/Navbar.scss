@@ -79,8 +79,9 @@
   }
 
   .active {
-    background-color: #252c33;
-    color: #fff !important;
+    background-color: #f4b563;
+    color: #000 !important;
+    border-radius: 1.2rem;
 
     &:before {
       content: '';
@@ -181,7 +182,7 @@
     }
 
     .active {
-      background-color: #252c33;
+      background-color: $secondaryColor;
       color: #fff !important;
 
     }

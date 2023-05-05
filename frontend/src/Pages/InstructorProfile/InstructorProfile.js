@@ -40,6 +40,7 @@ const InstructorProfile = () => {
   const studentsOfMentors = useSelector((state) => state.studentsOfMentors);
   const { loading, error, mentor } = mentorDetail;
   const { loadingStudents, errorStudents, students } = studentsOfMentors;
+  const { userInfo } = useSelector((state) => state.userLogin);
   const match = useParams();
   useEffect(() => {
     dispatch(listMentorDetails(match.id));
@@ -373,7 +374,7 @@ const InstructorProfile = () => {
             </div>
             <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2">
               <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4">
-                {Object.keys(student).length > 0 ? (
+                {userInfo.userType === "student" ? (
                   <>
                     <h2 className="text-gray-600 text-2xl mb-2">
                       Book a Schedule

@@ -5,7 +5,10 @@ import FormContainer from "../../MutliStepForms/FromContainer/FormContainer";
 import Success from "./SuccessPage/Success";
 import WhatIsEvent from "../CreateEvent/WhatIsEvent";
 import WhenPeopleCanBook from "../CreateEvent/WhenPeopleCanBook";
-import { schedulerAddReducer } from "../../../actions/mentorActions";
+import {
+  schedulerAddAction,
+  schedulerAddReducer,
+} from "../../../actions/mentorActions";
 
 const MultiStepTimeSlots = () => {
   const [step, setStep] = React.useState(1);
@@ -24,7 +27,7 @@ const MultiStepTimeSlots = () => {
   ];
   useEffect(() => {
     if (availabilityData) {
-      dispatch(schedulerAddReducer(availabilityData));
+      dispatch(schedulerAddAction(availabilityData));
     }
   });
 

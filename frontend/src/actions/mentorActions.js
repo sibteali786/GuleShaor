@@ -1,6 +1,9 @@
 import moment from "moment";
 import axios from "axios";
 import {
+  GET_MENTOR_SCHEDULES_FAIL,
+  GET_MENTOR_SCHEDULES_REQUEST,
+  GET_MENTOR_SCHEDULES_SUCCESS,
   MENTOR_ADD_APPOINTMENT_FAIL,
   MENTOR_ADD_APPOINTMENT_REQUEST,
   MENTOR_ADD_APPOINTMENT_SUCCESS,
@@ -166,7 +169,7 @@ export function updateStep2(data) {
   };
 }
 
-export const schedulerAddReducer = (availabilityData) => async (dispatch) => {
+export const schedulerAddAction = (availabilityData) => async (dispatch) => {
   try {
     dispatch({ type: SCHEDULE_ADD_REQUEST });
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -232,6 +235,36 @@ export const schedulerAddReducer = (availabilityData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SCHEDULE_ADD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getMentorSchedulesAction = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_MENTOR_SCHEDULES_REQUEST });
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo?.token}`,
+      },
+    };
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}api/schedule/${userId}`,
+      config
+    );
+    // saving user in the local storage so as to restore session / page when it comes again after some time
+    localStorage.setItem("schedules", JSON.stringify(data));
+    dispatch({
+      type: GET_MENTOR_SCHEDULES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_MENTOR_SCHEDULES_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

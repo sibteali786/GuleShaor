@@ -215,7 +215,7 @@ const PersonalInfo = ({ UserDetails, setUserDetails, nextStep, prevStep }) => {
                         credits={false}
                         className="w-1/2 text-sm"
                         acceptedFileTypes={["image/*", "file/*"]}
-                        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+                        labelIdle='Drag & Drop your files or <span className="filepond--label-action">Browse</span>'
                         server={{
                           process: (fieldName, file, metadata, load) => {
                             const imageRef = ref(

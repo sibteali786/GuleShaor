@@ -1,5 +1,6 @@
 import React from "react";
 import "./sessionCall.scss";
+import { NavLink } from "react-router-dom";
 const SessionCall = () => {
   return (
     <div className="bg-transparent">
@@ -16,13 +17,16 @@ const SessionCall = () => {
               real-world projects and develop in-demand tech skills.
             </p>
             <div className="mt-8 sm:flex">
-              <div className="rounded-md shadow">
-                <a
-                  href="/profile-forms"
-                  className="no-underline flex items-center justify-center rounded-md border border-transparent bg-tertiaryColor px-5 py-3 text-base font-medium text-white hover:bg-gray-900"
+              <div className="rounded-md">
+                <NavLink
+                  to="/profile-forms"
+                  className="no-underline flex items-center justify-center  border border-transparent text-black px-5 py-3 text-base font-medium hover:bg-gray-900 hover:text-white rounded-full"
+                  style={{
+                    backgroundColor: "#f4b563",
+                  }}
                 >
                   Schedule Session
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -35,7 +39,7 @@ const SessionCall = () => {
                 viewBox="0 0 33 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_1055_6125)">
+                <g clipPath="url(#clip0_1055_6125)">
                   <path
                     d="M18.8335 5H4.8335C2.62436 5 0.833496 6.79086 0.833496 9V23C0.833496 25.2091 2.62436 27 4.8335 27H18.8335C21.0426 27 22.8335 25.2091 22.8335 23V9C22.8335 6.79086 21.0426 5 18.8335 5Z"
                     fill="#252c33"
@@ -90,7 +94,7 @@ const SessionCall = () => {
                 viewBox="0 0 33 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_1055_4659)">
+                <g clipPath="url(#clip0_1055_4659)">
                   <path
                     d="M16.5 8C18.7091 8 20.5 6.20914 20.5 4C20.5 1.79086 18.7091 0 16.5 0C14.2909 0 12.5 1.79086 12.5 4C12.5 6.20914 14.2909 8 16.5 8Z"
                     fill="#BDB4FE"
@@ -133,7 +137,7 @@ const SessionCall = () => {
                 viewBox="0 0 33 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_1055_6116)">
+                <g clipPath="url(#clip0_1055_6116)">
                   <path
                     d="M28.667 21C28.667 22.933 27.1 24.5 25.167 24.5C23.234 24.5 21.667 22.933 21.667 21C21.667 19.067 23.234 17.5 25.167 17.5C27.1 17.5 28.667 19.067 28.667 21Z"
                     fill="#252c33"
@@ -182,7 +186,7 @@ const SessionCall = () => {
                 viewBox="0 0 33 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_901_9838)">
+                <g clipPath="url(#clip0_901_9838)">
                   <path
                     d="M6.6665 7C8.5995 7 10.1665 5.433 10.1665 3.5C10.1665 1.567 8.5995 0 6.6665 0C4.73351 0 3.1665 1.567 3.1665 3.5C3.1665 5.433 4.73351 7 6.6665 7Z"
                     fill="#252c33"
@@ -218,7 +222,7 @@ const SessionCall = () => {
                 viewBox="0 0 33 32"
                 fill="none"
               >
-                <g clip-path="url(#clip0_901_9842)">
+                <g clipPath="url(#clip0_901_9842)">
                   <path
                     d="M17.8335 15C18.9381 15 19.8335 14.1046 19.8335 13C19.8335 11.8954 18.9381 11 17.8335 11C16.7289 11 15.8335 11.8954 15.8335 13C15.8335 14.1046 16.7289 15 17.8335 15Z"
                     fill="#252c33"

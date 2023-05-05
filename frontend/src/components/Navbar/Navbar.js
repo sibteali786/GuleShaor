@@ -162,7 +162,7 @@ const Navbar = ({ setIsAuthenticated }) => {
             ))
           : items
               .filter(
-                (item) => item.name !== "Mentors" && item.name !== "Students"
+                (item) => item.name !== "Query" && item.name !== "Students"
               )
               .map((item, index) => (
                 <NavLink

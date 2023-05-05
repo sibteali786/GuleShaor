@@ -163,6 +163,10 @@
       width: 90%;
       max-width: 400px;
       margin: auto;
+
+      img {
+        border-radius: 2rem;
+      }
     }
 
     .content .content-overlay {
@@ -191,7 +195,7 @@
       opacity: 1;
     }
 
-    .content:hover .content-details {
+    .slick-center:hover .content-details {
       top: 80%;
       left: 50%;
       opacity: 1;

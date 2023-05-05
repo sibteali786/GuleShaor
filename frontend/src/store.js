@@ -2,6 +2,8 @@ import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import mentorAddAvailabilityReducer, {
+  getMentorSchedules,
+  mentorAddScheudlesReducer,
   mentorAddTimeslotsReducer,
   mentorDetailsReducer,
   mentorListReducer,
@@ -18,7 +20,6 @@ import {
   userRegisterReducer,
 } from "./Reducers/userReducer";
 import { imageUploadReducer } from "./Reducers/imageReducer";
-import { schedulerAddReducer } from "./actions/mentorActions";
 
 function lastAction(state = null, action) {
   return action;
@@ -36,7 +37,8 @@ const reducer = combineReducers({
   profileImage: imageUploadReducer,
   mentorSlots: mentorAddTimeslotsReducer,
   availabilityData: mentorAddAvailabilityReducer,
-  schedule: schedulerAddReducer,
+  mentorSchedules: mentorAddScheudlesReducer,
+  mentorSchedulesGet: getMentorSchedules,
   lastAction,
 });
 
@@ -75,7 +77,7 @@ const initialState = {
   profileImage: { userProfileImage: profileImageFromStorage },
   mentorSlots: mentorTimeSlotsFromStorage,
   availabilityData: availabilityFromStorage,
-  schedule: scheduleFromStorage,
+  mentorSchedules: scheduleFromStorage,
 };
 const store = legacy_createStore(
   reducer,

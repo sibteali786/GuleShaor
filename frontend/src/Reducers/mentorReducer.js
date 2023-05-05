@@ -1,5 +1,8 @@
 import {
   ADD_AVAILABILITY_DATA,
+  GET_MENTOR_SCHEDULES_FAIL,
+  GET_MENTOR_SCHEDULES_REQUEST,
+  GET_MENTOR_SCHEDULES_SUCCESS,
   MENTOR_ADD_APPOINTMENT_FAIL,
   MENTOR_ADD_APPOINTMENT_REQUEST,
   MENTOR_ADD_APPOINTMENT_SUCCESS,
@@ -138,13 +141,26 @@ export default function mentorAddAvailabilityReducer(
   }
 }
 
-export const mentorAddScheudlesReducer = (state = { schedule: {} }, action) => {
+export const mentorAddScheudlesReducer = (state = { schedule: [] }, action) => {
   switch (action.type) {
     case SCHEDULE_ADD_REQUEST:
       return { loading: true };
     case SCHEDULE_ADD_SUCCESS:
       return { loading: false, success: true, schedule: action.payload };
     case SCHEDULE_ADD_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const getMentorSchedules = (state = { schedules: [] }, action) => {
+  switch (action.type) {
+    case GET_MENTOR_SCHEDULES_REQUEST:
+      return { loading: true };
+    case GET_MENTOR_SCHEDULES_SUCCESS:
+      return { loading: false, success: true, schedules: action.payload };
+    case GET_MENTOR_SCHEDULES_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

@@ -46,13 +46,13 @@ const Pricing = () => {
       </h2>
       <div className="types">
         <span>
-          <i class="fa-solid fa-check"></i> Mentorship
+          <i className="fa-solid fa-check"></i> Mentorship
         </span>
         <span>
-          <i class="fa-solid fa-check"></i> Step-by-Step Career Plan
+          <i className="fa-solid fa-check"></i> Step-by-Step Career Plan
         </span>
         <span>
-          <i class="fa-solid fa-check"></i> Cancel Anytime
+          <i className="fa-solid fa-check"></i> Cancel Anytime
         </span>
       </div>
       <Stack
