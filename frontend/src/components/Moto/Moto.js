@@ -104,39 +104,46 @@ const Moto = () => {
             with the resources you need to succeed.
           </p>
           <Link to="/service" className="no-underline">
-            <Button variant="contained">Learn More</Button>
+            <Button
+              variant="contained"
+              className="rounded-full text-black"
+              style={{
+                backgroundColor: "#f4b563",
+              }}
+            >
+              Learn More
+            </Button>
           </Link>
         </div>
       </div>
-      <div className="WhatWeDo px-[8rem]">
+      <div className="WhatWeDo px-[8rem] space-y-10">
         <h3>Our Mentors</h3>
-        <h2>DIRECT, MENTOR & BUILD THE LEADERS OF TOMORROW</h2>
         <Slider {...settings} style={{ padding: "0 0" }}>
-          <div class="content">
-            <div class="content-overlay"></div>
+          <div className="content">
+            <div className="content-overlay"></div>
             <img src={carousel1} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Dr. Shoab Khan
               </h6>
               <p className="text-sm text-white my-0">IT Expert</p>
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel2} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Miss Saba Kalsoom
               </h6>
               <p className="text-sm text-white my-0">Web 3.0 Expert</p>
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel3} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Mr. Arsalan Khattak
               </h6>
               <p className="text-sm text-white my-0">
@@ -145,10 +152,10 @@ const Moto = () => {
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel4} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Mr. Badar Khushnood
               </h6>
               <p className="text-sm text-white my-0">
@@ -157,20 +164,20 @@ const Moto = () => {
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel5} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Mr. Moazzam Arsalan Bhatti
               </h6>
               <p className="text-sm text-white my-0">Innovation expert</p>
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel6} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Dr. Usman Akram
               </h6>
               <p className="text-sm text-white my-0">
@@ -179,10 +186,10 @@ const Moto = () => {
             </div>
           </div>
           <div className="content">
-            <div class="content-overlay"></div>
+            <div className="content-overlay"></div>
             <img src={carousel7} alt="purpose" />
-            <div class="content-details fadeIn-bottom text-left">
-              <h6 class="content-title md:text-lg text-white my-0">
+            <div className="content-details fadeIn-bottom text-left">
+              <h6 className="content-title md:text-lg text-white my-0">
                 Miss Saira Qayyum
               </h6>
               <p className="text-sm text-white my-0">Startup Expert</p>
@@ -190,10 +197,9 @@ const Moto = () => {
           </div>
         </Slider>
       </div>
-      <div className="letsColloborate py-[2rem] px-[4rem] sm:px-[2rem]">
+      <div className="letsColloborate py-[2rem] px-[4rem] sm:px-[2rem] space-y-10">
         {/* Its better to convert the text part to collapse so that it can be accesed if needed. Pending Task */}
         <h3>let’s colloborate</h3>
-        <h2>SUPPORT OUR YOUTH</h2>
         <div className="cards">
           <Card>
             <CardActionArea>
@@ -256,7 +262,14 @@ const Moto = () => {
         </div>
         <div style={{ textAlign: "center" }}>
           <a href="#form1" className="no-underline">
-            <Button id="buttonSection3" variant="contained">
+            <Button
+              id="buttonSection3"
+              variant="contained"
+              className="rounded-full text-black"
+              style={{
+                backgroundColor: "#f4b563",
+              }}
+            >
               Collaborate
             </Button>
           </a>

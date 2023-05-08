@@ -176,6 +176,8 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("user");
   localStorage.removeItem("userUpdatedDetails");
+  localStorage.removeItem("token");
+  localStorage.removeItem("isAuthenticated");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_LOGOUT });
 };

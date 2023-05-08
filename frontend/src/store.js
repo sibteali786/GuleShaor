@@ -1,7 +1,9 @@
 import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import {
+import mentorAddAvailabilityReducer, {
+  getMentorSchedules,
+  mentorAddScheudlesReducer,
   mentorAddTimeslotsReducer,
   mentorDetailsReducer,
   mentorListReducer,
@@ -34,6 +36,9 @@ const reducer = combineReducers({
   userUpdateDetails: updateUserDetailsReducer,
   profileImage: imageUploadReducer,
   mentorSlots: mentorAddTimeslotsReducer,
+  availabilityData: mentorAddAvailabilityReducer,
+  mentorSchedules: mentorAddScheudlesReducer,
+  mentorSchedulesGet: getMentorSchedules,
   lastAction,
 });
 
@@ -59,12 +64,20 @@ const profileImageFromStorage = localStorage.getItem("profileImage")
 const mentorTimeSlotsFromStorage = localStorage.getItem("timeSlots")
   ? JSON.parse(localStorage.getItem("timeSlots"))
   : null;
+const availabilityFromStorage = localStorage.getItem("availabilityData")
+  ? JSON.parse(localStorage.getItem("availabilityData"))
+  : {};
+const scheduleFromStorage = localStorage.getItem("schedule")
+  ? JSON.parse(localStorage.getItem("schedule"))
+  : {};
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   userUpdateDetails: { userUpdatedDetails: UserDetailsFromStorage },
   userDetails: { user: UserDetailsFromStorage },
   profileImage: { userProfileImage: profileImageFromStorage },
   mentorSlots: mentorTimeSlotsFromStorage,
+  availabilityData: availabilityFromStorage,
+  mentorSchedules: scheduleFromStorage,
 };
 const store = legacy_createStore(
   reducer,

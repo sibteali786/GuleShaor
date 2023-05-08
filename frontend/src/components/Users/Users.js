@@ -9,8 +9,8 @@ const Users = ({ mentor }) => {
   const possiblePathsRef = useRef();
   // All possible paths
   possiblePathsRef.current = [
-    "/mentors",
-    `/mentors/search/${params?.keyword}`,
+    "/query",
+    `/query/search/${params?.keyword}`,
     "/query",
   ];
 
@@ -26,9 +26,9 @@ const Users = ({ mentor }) => {
       <div className="card-container border rounded-2 shadow">
         <span
           className={
-            location.pathname === "/mentors" ||
+            location.pathname === "/query" ||
             location.pathname?.replace("%20", " ") ===
-              `/mentors/search/${keyword}` ||
+              `/query/search/${keyword}` ||
             possiblePathsRef.current.includes(location.pathname)
               ? mentor?.mentorDetails?.userType === "Pro"
                 ? "Pro"
@@ -38,16 +38,16 @@ const Users = ({ mentor }) => {
               : "Free"
           }
         >
-          {location.pathname.includes("/mentors") ||
+          {location.pathname.includes("/query") ||
           possiblePathsRef.current.includes(location.pathname)
             ? mentor?.mentorDetails?.userType
             : mentor?.studentDetails?.userType}
         </span>
         <Link
           to={
-            location.pathname.includes("/mentors") ||
+            location.pathname.includes("/query") ||
             possiblePathsRef.current.includes(location.pathname)
-              ? `/mentors/${mentor?._id}`
+              ? `/query/${mentor?._id}`
               : `/students/${mentor?._id}`
           }
         >
@@ -65,16 +65,16 @@ const Users = ({ mentor }) => {
         </Link>
         <h5 className="xs:text-lg md:text-xl my-1">{mentor?.name}</h5>
         <a
-          href={`/mentors/${mentor?._id}`}
+          href={`/query/${mentor?._id}`}
           alt="username"
           className="text-gray-500 hover:text-blue-800 my-1"
         >
-          {location.pathname.includes("/mentors") ||
+          {location.pathname.includes("/query") ||
           possiblePathsRef.current.includes(location.pathname)
             ? mentor?.mentorDetails?.username
             : mentor?.studentDetails?.username}
         </a>
-        {location.pathname.includes("/mentors") ? (
+        {location.pathname.includes("/query") ? (
           <p className="py-1 my-0 xs:text-md md:text-lg">
             {mentor?.mentorDetails?.designation}
           </p>

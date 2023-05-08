@@ -11,7 +11,8 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextField from "@mui/material/TextField";
-import { MenuItem } from "@mui/material";
+import { Button, MenuItem } from "@mui/material";
+import SubmitButton from "../SubmitButton/SubmitButton";
 const defaultValues = {
   name: "",
   email: "",
@@ -153,7 +154,7 @@ const Footer = ({ isForm }) => {
               Work With Us
             </p>
             <div className="form-div" id="form1">
-              <IconButton aria-label="form-icon">
+              <IconButton aria-label="form-icon" className="logoButton">
                 <EmailIcon />
               </IconButton>
               <h4>FOR A BETTER FUTURE OF PAKISTAN.</h4>
@@ -256,6 +257,14 @@ const Footer = ({ isForm }) => {
                     />
                   </FormControl>
                 </div>
+                <div className="span-7 flex justify-center mt-10">
+                  <Button
+                    className="rounded-full bg-black text-white hover:bg-black/90 w-2/6"
+                    variant="contained"
+                  >
+                    Submit
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
@@ -309,7 +318,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -326,7 +335,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -345,7 +354,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>
@@ -362,7 +371,7 @@ const Footer = ({ isForm }) => {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className="text-base text-secondaryColor font-semibold hover:text-gray-900 no-underline"
+                          className="text-base text-black no-underline"
                         >
                           {item.name}
                         </a>

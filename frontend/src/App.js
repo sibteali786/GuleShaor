@@ -39,7 +39,6 @@ import MultiStepTimeSlots from "./components/Scheduler/TimeSlots/MultiStepTimeSl
 import MultiStepAppointment from "./components/Scheduler/Appointments/MultiStepAppointment";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "./ProtectedRoute";
-import Queries from "./Pages/Queries/Queries";
 // Register the plugins
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -51,15 +50,16 @@ registerPlugin(
 );
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    localStorage.getItem("token") ? true : false
+  );
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
+      localStorage.setItem("isAuthenticated", true);
     }
-  }, []);
+  }, [isAuthenticated]);
 
   const location = useLocation();
   if (!isAuthenticated) {
@@ -99,15 +99,6 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/team" element={<Team />} />
         <Route path="/resources" element={<Resources />} />
-        <Route
-          path="/query"
-          element={
-            <ProtectedRoute
-              isAuthenticated={isAuthenticated}
-              element={Queries}
-            />
-          }
-        />
         <Route
           path="/students"
           element={
@@ -154,7 +145,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors"
+          path="/query"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -163,7 +154,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/search/:keyword"
+          path="/query/search/:keyword"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -172,7 +163,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/page/:pageNumber"
+          path="/query/page/:pageNumber"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -181,7 +172,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/search/:keyword/page/:pageNumber"
+          path="/query/search/:keyword/page/:pageNumber"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
@@ -190,7 +181,7 @@ function App() {
           }
         />
         <Route
-          path="/mentors/:id"
+          path="/query/:id"
           className="px-[4rem]"
           element={
             <ProtectedRoute
@@ -199,9 +190,9 @@ function App() {
             />
           }
         />
-        <Route path="/mentors/:id/timeslots" element={<MultiStepTimeSlots />} />
+        <Route path="/query/:id/edit" element={<MultiStepTimeSlots />} />
         <Route
-          path="/mentors/:id/addappointment"
+          path="/query/:id/addappointment"
           element={<MultiStepAppointment />}
         />
         <Route path="profile-forms" element={<MultiStepForm />} />

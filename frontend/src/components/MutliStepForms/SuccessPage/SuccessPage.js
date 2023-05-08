@@ -42,7 +42,7 @@ const SuccessPage = () => {
           <Link
             to={
               user?.userType === "mentor"
-                ? `/mentors/${user?._id}`
+                ? `/query/${user?._id}`
                 : `/students/${user?._id}`
             }
             className="inline-flex items-center px-4 py-2 text-white bg-indigo-600 border border-indigo-600 rounded rounded-full hover:bg-indigo-700 focus:outline-none focus:ring"

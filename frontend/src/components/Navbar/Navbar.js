@@ -24,8 +24,8 @@ const items = [
     to: "/",
   },
   {
-    name: "Mentors",
-    to: "/mentors",
+    name: "Query",
+    to: "/query",
   },
   {
     name: "Team",
@@ -81,7 +81,6 @@ const Navbar = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     var imgPath = "";
-    console.log("Profile Image", imageUrl);
     if (imageUrl) {
       setImgPath(imageUrl);
     } else if (user) {
@@ -101,7 +100,7 @@ const Navbar = ({ setIsAuthenticated }) => {
   const logoutHandler = () => {
     dispatch(logout());
     setIsAuthenticated(false);
-    localStorage.removeItem("token");
+    localStorage.removeItem("isAuthenticated");
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -163,7 +162,7 @@ const Navbar = ({ setIsAuthenticated }) => {
             ))
           : items
               .filter(
-                (item) => item.name !== "Mentors" && item.name !== "Students"
+                (item) => item.name !== "Query" && item.name !== "Students"
               )
               .map((item, index) => (
                 <NavLink
@@ -248,7 +247,7 @@ const Navbar = ({ setIsAuthenticated }) => {
                 {userInfo ? (
                   userInfo?.userType === "mentor" ? (
                     <Link
-                      to={`/mentors/${userInfo?._id}`}
+                      to={`/query/${userInfo?._id}`}
                       className="text-black no-underline flex items-center"
                     >
                       <Avatar />

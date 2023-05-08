@@ -20,7 +20,7 @@ const Success = ({ id }) => {
               </div>
               <div className="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
                 <Link
-                  to={`/mentors/${id}`}
+                  to={`/query/${id}`}
                   className="inline-flex items-center no-underline rounded-md border border-transparent bg-orange-200 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
                 >
                   Go back to Profile

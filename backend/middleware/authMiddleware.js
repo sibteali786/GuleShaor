@@ -4,7 +4,7 @@ const Mentor = require("../models/mentorModel.js");
 const Student = require("../models/studentModel.js");
 
 const protect = expressAsyncHandler(async (req, res, next) => {
-  // console.log(req.headers.authorization);  // to check our authorization header
+  // console.log(req.headers.authorization); // to check our authorization header
   let token;
   if (
     req.headers.authorization &&

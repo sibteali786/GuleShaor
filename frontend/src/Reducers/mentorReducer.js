@@ -1,4 +1,8 @@
 import {
+  ADD_AVAILABILITY_DATA,
+  GET_MENTOR_SCHEDULES_FAIL,
+  GET_MENTOR_SCHEDULES_REQUEST,
+  GET_MENTOR_SCHEDULES_SUCCESS,
   MENTOR_ADD_APPOINTMENT_FAIL,
   MENTOR_ADD_APPOINTMENT_REQUEST,
   MENTOR_ADD_APPOINTMENT_SUCCESS,
@@ -11,9 +15,14 @@ import {
   MENTOR_LIST_FAIL,
   MENTOR_LIST_REQUEST,
   MENTOR_LIST_SUCCESS,
+  SCHEDULE_ADD_FAIL,
+  SCHEDULE_ADD_REQUEST,
+  SCHEDULE_ADD_SUCCESS,
   STUDENTS_OF_MENTOR_FAIL,
   STUDENTS_OF_MENTOR_REQUEST,
   STUDENTS_OF_MENTOR_SUCCESS,
+  UPDATE_AVAILABILITY_DATA_STEP_1,
+  UPDATE_AVAILABILITY_DATA_STEP_2,
 } from "../constants/mentorConstants";
 
 export const mentorListReducer = (state = { mentors: [] }, action) => {
@@ -85,6 +94,73 @@ export const mentorAddAppointmentReducer = (
     case MENTOR_ADD_APPOINTMENT_SUCCESS:
       return { loading: false, success: true, appointments: action.payload };
     case MENTOR_ADD_APPOINTMENT_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+const initialAvailabilityState = {
+  step1: {
+    // initial state of step 1
+  },
+  step2: {
+    // initial state of step 2
+  },
+  // ...
+};
+
+export default function mentorAddAvailabilityReducer(
+  state = initialAvailabilityState,
+  action
+) {
+  switch (action.type) {
+    case UPDATE_AVAILABILITY_DATA_STEP_1:
+      const updatedStep1 = { ...state.step1, ...action.payload };
+      localStorage.setItem(
+        "availabilityData",
+        JSON.stringify({ ...state, step1: updatedStep1 })
+      );
+      return {
+        ...state,
+        step1: updatedStep1,
+      };
+    case UPDATE_AVAILABILITY_DATA_STEP_2:
+      const updatedStep2 = { ...state.step2, ...action.payload };
+      localStorage.setItem(
+        "availabilityData",
+        JSON.stringify({ ...state, step2: updatedStep2 })
+      );
+      return {
+        ...state,
+        step2: updatedStep2,
+      };
+    // ...
+    default:
+      return state;
+  }
+}
+
+export const mentorAddScheudlesReducer = (state = { schedule: [] }, action) => {
+  switch (action.type) {
+    case SCHEDULE_ADD_REQUEST:
+      return { loading: true };
+    case SCHEDULE_ADD_SUCCESS:
+      return { loading: false, success: true, schedule: action.payload };
+    case SCHEDULE_ADD_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const getMentorSchedules = (state = { schedules: [] }, action) => {
+  switch (action.type) {
+    case GET_MENTOR_SCHEDULES_REQUEST:
+      return { loading: true };
+    case GET_MENTOR_SCHEDULES_SUCCESS:
+      return { loading: false, success: true, schedules: action.payload };
+    case GET_MENTOR_SCHEDULES_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
