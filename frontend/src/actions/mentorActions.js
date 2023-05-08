@@ -257,7 +257,7 @@ export const getMentorSchedulesAction = (userId) => async (dispatch) => {
       config
     );
     // saving user in the local storage so as to restore session / page when it comes again after some time
-    localStorage.setItem("schedules", JSON.stringify(data));
+    localStorage.setItem("schedule", JSON.stringify(data));
     dispatch({
       type: GET_MENTOR_SCHEDULES_SUCCESS,
       payload: data,

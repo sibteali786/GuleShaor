@@ -12,9 +12,10 @@ import {
 
 const MultiStepTimeSlots = () => {
   const [step, setStep] = React.useState(1);
-  const userInfo = localStorage.getItem("userInfo");
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const dispatch = useDispatch();
   const availabilityData = useSelector((state) => state.availabilityData);
+  console.log(userInfo);
   const nextStep = () => {
     setStep(step + 1);
   };
@@ -26,7 +27,7 @@ const MultiStepTimeSlots = () => {
     { name: "When people can book", to: "/details" },
   ];
   useEffect(() => {
-    if (availabilityData) {
+    if (availabilityData && step === 3) {
       dispatch(schedulerAddAction(availabilityData));
     }
   });

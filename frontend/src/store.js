@@ -78,6 +78,7 @@ const initialState = {
   mentorSlots: mentorTimeSlotsFromStorage,
   availabilityData: availabilityFromStorage,
   mentorSchedules: scheduleFromStorage,
+  mentorSchedulesGet: scheduleFromStorage,
 };
 const store = legacy_createStore(
   reducer,

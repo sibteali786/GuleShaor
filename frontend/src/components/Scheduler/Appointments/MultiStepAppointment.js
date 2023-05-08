@@ -12,6 +12,8 @@ const MultiStepAppointment = () => {
   const [step, setStep] = React.useState(1);
   const userInfo = useSelector((state) => state?.userLogin?.userInfo);
   const dispatch = useDispatch();
+  const schedules = useSelector((state) => state?.mentorSchedulesGet);
+
   const nextStep = () => {
     setStep(step + 1);
   };
@@ -39,7 +41,9 @@ const MultiStepAppointment = () => {
     <div>
       <FormContainer>
         <FormSteps step={step} stepsArray={stepsArray} />
-        {step === 1 && <DateChoice nextStep={nextStep} />}{" "}
+        {step === 1 && schedules.length !== 0 && (
+          <DateChoice nextStep={nextStep} schedules={schedules} />
+        )}{" "}
         {step === 2 &&
           (choice === "consecutive" ? (
             <DayChoiceConsecutive
