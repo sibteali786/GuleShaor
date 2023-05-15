@@ -38,7 +38,9 @@ const Services = () => {
   return (
     <div className="service-container">
       <div className="svg-container">
-        <h1>Our Services</h1>
+        <h1 className="font-[Montserrat] text-5xl font-bold leading-10 tracking-tight mb-12">
+          Our Services
+        </h1>
         <div className="custom-shape-divider-top-1653762327">
           <svg
             data-name="Layer 1"
