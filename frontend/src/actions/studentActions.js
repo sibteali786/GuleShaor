@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  GET_STUDENT_EVENTS_FAIL,
+  GET_STUDENT_EVENTS_REQUEST,
+  GET_STUDENT_EVENTS_SUCCESS,
   STUDENT_DETAILS_FAIL,
   STUDENT_DETAILS_REQUEST,
   STUDENT_DETAILS_SUCCESS,
@@ -44,6 +47,28 @@ export const listStudentDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: STUDENT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getStudentEventsAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_STUDENT_EVENTS_REQUEST });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}api/students/getEvents/${id}`
+    );
+    localStorage.setItem("eventsOfStudent", JSON.stringify(data));
+    dispatch({
+      type: GET_STUDENT_EVENTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_STUDENT_EVENTS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

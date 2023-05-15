@@ -24,6 +24,9 @@ import {
   STUDENTS_OF_MENTOR_SUCCESS,
   UPDATE_AVAILABILITY_DATA_STEP_1,
   UPDATE_AVAILABILITY_DATA_STEP_2,
+  CREATE_EVENT_REQUEST,
+  CREATE_EVENT_SUCCESS,
+  CREATE_EVENT_FAIL,
 } from "../constants/mentorConstants";
 
 export const listMentors =
@@ -257,7 +260,7 @@ export const getMentorSchedulesAction = (userId) => async (dispatch) => {
       config
     );
     // saving user in the local storage so as to restore session / page when it comes again after some time
-    localStorage.setItem("schedule", JSON.stringify(data));
+    localStorage.setItem("schedules", JSON.stringify(data));
     dispatch({
       type: GET_MENTOR_SCHEDULES_SUCCESS,
       payload: data,
@@ -265,6 +268,37 @@ export const getMentorSchedulesAction = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_MENTOR_SCHEDULES_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createEventAction = (eventData) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_EVENT_REQUEST });
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo?.token}`,
+      },
+    };
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}api/event/create`,
+      eventData,
+      config
+    );
+    // saving user in the local storage so as to restore session / page when it comes again after some time
+    localStorage.setItem("event", JSON.stringify(data));
+    dispatch({
+      type: CREATE_EVENT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: CREATE_EVENT_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

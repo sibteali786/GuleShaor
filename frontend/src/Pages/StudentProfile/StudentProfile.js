@@ -8,7 +8,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./StudentProfile.scss";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -19,16 +19,28 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
-import { listStudentDetails } from "../../actions/studentActions";
+import {
+  getStudentEventsAction,
+  listStudentDetails,
+} from "../../actions/studentActions";
 import { Col, Row } from "react-bootstrap";
+import moment from "moment";
 const UserProfile = () => {
   const dispatch = useDispatch();
   const studentDetail = useSelector((state) => state.studentDetail);
   const { loading, error, student } = studentDetail;
+  const { loading: loadingEvent, events } = useSelector(
+    (state) => state.studentEvents
+  );
+  const { userInfo } = useSelector((state) => state.userLogin);
   const match = useParams();
+
   useEffect(() => {
     dispatch(listStudentDetails(match.id));
-  }, [student, dispatch, match]);
+    dispatch(getStudentEventsAction(match.id));
+
+    return;
+  }, [dispatch, match]);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 
@@ -44,8 +56,8 @@ const UserProfile = () => {
       ) : error ? (
         <Message>{error}</Message>
       ) : (
-        <div className="px-[4rem] student-container">
-          <div className="w-4/6 pt-[6rem]">
+        <div className="px-[2rem] pt-[6rem] student-container flex flex-col lg:flex-row lg:space-x-5 lg:justify-between">
+          <div className="w-[100%] lg:w-[60%] xl:w-[60%]">
             {student?.name && student?.studentDetails ? (
               <Row className="mt-0 bg-white rounded-md border-[1px] border-slate-300 ">
                 <div className="backgroundPicture"></div>
@@ -426,6 +438,75 @@ const UserProfile = () => {
               <div></div>
             </Row>
           </div>
+          {!loadingEvent ? (
+            <div className=" w-[100%] lg:w-[40%] xl:w-[40%] mb-2 ">
+              <div className="bg-white rounded-md border-[1px] border-slate-300 px-4 py-4 h-[80vh] overflow-auto space-y-6 ">
+                <h6 className="text-black text-2xl mb-2 font-bold  md:text-3xl lg:text-4xl">
+                  Booked Events
+                </h6>
+                {student?.email !== userInfo?.email ? (
+                  <>
+                    <h6 className="text-red-600 text-2xl">
+                      Sorry ! No Events to show
+                    </h6>
+                    <p>*Please visit a mentor profile to schedule a meeting</p>
+                  </>
+                ) : events ? (
+                  events.map((event) => (
+                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                      <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                          {event.title}
+                        </h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                          {event.description}
+                        </p>
+                        <div>
+                          <p className="text-gray-900 text-sm font-bold my-0 mb-2">
+                            Date
+                          </p>
+                          <p class="px-3 py-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-200 w-fit">
+                            {moment(event.day).format("dddd-mm-yyyy")}
+                          </p>
+                        </div>
+                        <div className="my-2">
+                          <p className="text-gray-900 text-sm font-bold my-0 mb-2">
+                            Time
+                          </p>
+                          <span class="px-2 py-1 mr-2 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-200">
+                            {event.start}
+                          </span>
+                          {" -> "}
+                          <span class="px-2 py-1 mr-2 text-xs font-semibold text-gray-700 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-200">
+                            {event.end}
+                          </span>
+                        </div>
+                        <a
+                          href="/"
+                          class="inline-flex items-center px-3 py-2 my-3 text-sm font-medium text-center text-white  rounded-full focus:ring-4  ring-blue-300 bg-orange-400/80 no-underline hover:bg-orange-400 focus:ring-orange-300 "
+                        >
+                          Join Meeting
+                          <svg
+                            aria-hidden="true"
+                            class="w-4 h-4 ml-2 -mr-1"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  ))
+                ) : null}
+              </div>
+            </div>
+          ) : null}
         </div>
       )}
     </>

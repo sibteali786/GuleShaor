@@ -22,7 +22,6 @@ const Students = () => {
   const [optionValue, setOptionValue] = React.useState("Name");
   useEffect(() => {
     if (optionValue) {
-      console.log("Hello");
       dispatch(listStudents(keyword, pageNumber, optionValue));
     }
   }, [dispatch, keyword, pageNumber, optionValue]);

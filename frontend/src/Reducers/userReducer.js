@@ -7,8 +7,11 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_LOGIN_FAIL_GOOGLE,
   USER_LOGIN_REQUEST,
+  USER_LOGIN_REQUEST_GOOGLE,
   USER_LOGIN_SUCCESS,
+  USER_LOGIN_SUCCESS_GOOGLE,
   USER_LOGOUT,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
@@ -22,6 +25,21 @@ export const userLoginReducer = (state = {}, action) => {
     case USER_LOGIN_SUCCESS:
       return { loading: false, success: true, userInfo: action.payload };
     case USER_LOGIN_FAIL:
+      return { loading: false, success: false, error: action.payload };
+    case USER_LOGOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const userLoginWithGoogleReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_LOGIN_REQUEST_GOOGLE:
+      return { loading: true };
+    case USER_LOGIN_SUCCESS_GOOGLE:
+      return { loading: false, success: true, userInfo: action.payload };
+    case USER_LOGIN_FAIL_GOOGLE:
       return { loading: false, success: false, error: action.payload };
     case USER_LOGOUT:
       return {};

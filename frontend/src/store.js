@@ -2,6 +2,7 @@ import { legacy_createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import mentorAddAvailabilityReducer, {
+  createEventReducer,
   getMentorSchedules,
   mentorAddScheudlesReducer,
   mentorAddTimeslotsReducer,
@@ -10,6 +11,7 @@ import mentorAddAvailabilityReducer, {
   studentsOfMentorReducer,
 } from "./Reducers/mentorReducer";
 import {
+  getStudentEvents,
   studentDetailsReducer,
   studentListReducer,
 } from "./Reducers/studentReducer";
@@ -17,6 +19,7 @@ import {
   updateUserDetailsReducer,
   userDetailsReducer,
   userLoginReducer,
+  userLoginWithGoogleReducer,
   userRegisterReducer,
 } from "./Reducers/userReducer";
 import { imageUploadReducer } from "./Reducers/imageReducer";
@@ -39,6 +42,9 @@ const reducer = combineReducers({
   availabilityData: mentorAddAvailabilityReducer,
   mentorSchedules: mentorAddScheudlesReducer,
   mentorSchedulesGet: getMentorSchedules,
+  mentorEvent: createEventReducer,
+  studentEvents: getStudentEvents,
+  userLoginGoogle: userLoginWithGoogleReducer,
   lastAction,
 });
 
@@ -70,6 +76,12 @@ const availabilityFromStorage = localStorage.getItem("availabilityData")
 const scheduleFromStorage = localStorage.getItem("schedule")
   ? JSON.parse(localStorage.getItem("schedule"))
   : {};
+const eventFromStorage = localStorage.getItem("event")
+  ? JSON.parse(localStorage.getItem("event"))
+  : {};
+const eventsOfStudentsFromStorage = localStorage.getItem("eventsOfStudent")
+  ? JSON.parse(localStorage.getItem("eventsOfStudent"))
+  : {};
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   userUpdateDetails: { userUpdatedDetails: UserDetailsFromStorage },
@@ -79,6 +91,8 @@ const initialState = {
   availabilityData: availabilityFromStorage,
   mentorSchedules: scheduleFromStorage,
   mentorSchedulesGet: scheduleFromStorage,
+  mentorEvent: eventFromStorage,
+  studentEvents: eventsOfStudentsFromStorage,
 };
 const store = legacy_createStore(
   reducer,

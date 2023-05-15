@@ -2,7 +2,12 @@ const asyncHandler = require("express-async-handler");
 const Student = require("../models/studentModel.js");
 const Mentor = require("../models/mentorModel.js");
 const generateToken = require("../utils/generateToken.js");
+const admin = require("firebase-admin");
+const serviceAccount = require("../utils/serviceAccountKey.json");
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 // Define a type and on basis of it decide which schema to look for user existence.
 
 // @desc    Auth user and get token
@@ -44,6 +49,54 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Invalid Email or Password");
   }
+});
+
+// @desc    Auth user and get token
+// @route   POST /api/user/google
+// @access  Public
+const loginWithGoogle = asyncHandler(async (req, res) => {
+  const { token } = req.body;
+  admin
+    .auth()
+    .verifyIdToken(token)
+    .then((decodedToken) => {
+      // Token is valid, extract the user's email
+      const email = decodedToken.email;
+      // Proceed with the usual login logic or save the user's email in the database
+      console.log(email);
+    })
+    .catch((error) => {
+      // Token verification failed
+      console.error("Error verifying ID token:", error);
+      // Handle the error as per your requirements
+    });
+  // const { email } = ticket.getPayload();
+
+  // // Check if the user exists in the database
+  // let user = await Mentor.findOne({ email });
+
+  // if (!user) {
+  //   // Create a new user if not found
+  //   user = await Mentor.create({
+  //     name: ticket.getPayload().name,
+  //     email: ticket.getPayload().email,
+  //     mentorDetails: {
+  //       userType: "google",
+  //     },
+  //   });
+  // }
+
+  // // Generate and send the authentication token
+  // const authToken = generateToken(user._id);
+
+  // res.json({
+  //   _id: user._id,
+  //   name: user.name,
+  //   email: user.email,
+  //   image: user.mentorDetails.image,
+  //   token: authToken,
+  //   userType: "google",
+  // });
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -203,4 +256,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     }
   }
 });
-module.exports = { authUser, getUserProfile, registerUser, updateUserProfile };
+module.exports = {
+  authUser,
+  getUserProfile,
+  registerUser,
+  updateUserProfile,
+  loginWithGoogle,
+};

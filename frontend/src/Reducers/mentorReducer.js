@@ -1,5 +1,8 @@
 import {
   ADD_AVAILABILITY_DATA,
+  CREATE_EVENT_FAIL,
+  CREATE_EVENT_REQUEST,
+  CREATE_EVENT_SUCCESS,
   GET_MENTOR_SCHEDULES_FAIL,
   GET_MENTOR_SCHEDULES_REQUEST,
   GET_MENTOR_SCHEDULES_SUCCESS,
@@ -161,6 +164,19 @@ export const getMentorSchedules = (state = { schedules: [] }, action) => {
     case GET_MENTOR_SCHEDULES_SUCCESS:
       return { loading: false, success: true, schedules: action.payload };
     case GET_MENTOR_SCHEDULES_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const createEventReducer = (state = { event: {} }, action) => {
+  switch (action.type) {
+    case CREATE_EVENT_REQUEST:
+      return { loading: true };
+    case CREATE_EVENT_SUCCESS:
+      return { loading: false, success: true, event: action.payload };
+    case CREATE_EVENT_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

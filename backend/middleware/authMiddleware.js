@@ -19,10 +19,7 @@ const protect = expressAsyncHandler(async (req, res, next) => {
       ) {
         req.user = await Mentor.findById(decoded.id).select("-password");
         req.user = { ...req.user._doc, userType: "mentor" };
-      } else if (
-        req.body?.userDetails?.userType === "student" ||
-        req.query?.userType === "student"
-      ) {
+      } else {
         req.user = await Student.findById(decoded.id).select("-password");
         req.user = { ...req.user._doc, userType: "student" };
       }

@@ -1,4 +1,7 @@
 import {
+  GET_STUDENT_EVENTS_FAIL,
+  GET_STUDENT_EVENTS_REQUEST,
+  GET_STUDENT_EVENTS_SUCCESS,
   STUDENT_DETAILS_FAIL,
   STUDENT_DETAILS_REQUEST,
   STUDENT_DETAILS_SUCCESS,
@@ -34,6 +37,20 @@ export const studentDetailsReducer = (state = { student: {} }, action) => {
       return { loading: false, student: action.payload };
     case STUDENT_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const getStudentEvents = (state = { events: [] }, action) => {
+  switch (action.type) {
+    case GET_STUDENT_EVENTS_REQUEST:
+      return { loading: true };
+    case GET_STUDENT_EVENTS_SUCCESS:
+      return { loading: false, success: true, events: action.payload };
+    case GET_STUDENT_EVENTS_FAIL:
+      return { loading: false, success: false, error: action.payload };
 
     default:
       return state;

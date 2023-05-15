@@ -5,9 +5,15 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import loginSchema from "../../FormValues/LoginValues/loginValues";
 import SubmitButton from "../../SubmitButton/SubmitButton";
-import SocialLinks from "../../ThirdPartyRegistrations/SocialLinks";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { Button } from "@mui/material";
+import { signInWithGoogle } from "../../../actions/userActions";
+import { useDispatch } from "react-redux";
 
 const LoginForm = ({ submitHandler }) => {
+  const dispatch = useDispatch();
   const schema = loginSchema;
   const form = useForm({
     defaultValues: {
@@ -28,6 +34,8 @@ const LoginForm = ({ submitHandler }) => {
   const email = watch("email", "");
   const password = watch("password", "");
   const userType = watch("userType", "");
+  const isGoogleButtonDisabled =
+    userType === "" || userType === "Choose a User-Type";
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -139,7 +147,25 @@ const LoginForm = ({ submitHandler }) => {
               </span>
             </div>
           </div>
-          <SocialLinks />
+          <div className="mt-6 grid grid-cols-3 gap-3">
+            <Button
+              variant="contained"
+              startIcon={<GoogleIcon />}
+              onClick={() => dispatch(signInWithGoogle(userType))}
+              disabled={isGoogleButtonDisabled}
+            >
+              {" "}
+              Google{" "}
+            </Button>
+            <Button variant="contained" startIcon={<FacebookIcon />}>
+              {" "}
+              Facebook{" "}
+            </Button>
+            <Button variant="contained" startIcon={<GitHubIcon />}>
+              {" "}
+              Github{" "}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
