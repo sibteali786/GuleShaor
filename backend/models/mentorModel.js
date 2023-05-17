@@ -19,11 +19,11 @@ const mentorSchema = new mongoose.Schema(
       },
       designation: {
         type: String,
-        default: "Charted Accountant",
+        default: "",
       },
       image: {
         type: String,
-        default: "Charted Accountant",
+        default: "",
       },
       interpersonal: [{ type: String, default: "" }],
       technical: [{ type: String, default: "" }],
@@ -186,8 +186,7 @@ const mentorSchema = new mongoose.Schema(
     ],
     aboutStudents: {
       type: String,
-      default:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem tempora illo doloremque, a incidunt enim consequuntur at minima, eveniet minus repellat et ipsum ea voluptatem! Ea perferendis quibusdam maiores expedita.",
+      default: "",
     },
     feedback: [
       {
@@ -204,7 +203,6 @@ const mentorSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
     },
 
     isAdmin: {

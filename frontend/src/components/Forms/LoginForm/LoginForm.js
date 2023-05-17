@@ -161,7 +161,11 @@ const LoginForm = ({ submitHandler }) => {
               {" "}
               Facebook{" "}
             </Button>
-            <Button variant="contained" startIcon={<GitHubIcon />}>
+            <Button
+              variant="contained"
+              className="bg-gray-800 text-white hover:bg-gray-900"
+              startIcon={<GitHubIcon />}
+            >
               {" "}
               Github{" "}
             </Button>

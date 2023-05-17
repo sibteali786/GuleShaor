@@ -55,48 +55,88 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/user/google
 // @access  Public
 const loginWithGoogle = asyncHandler(async (req, res) => {
-  const { token } = req.body;
-  admin
-    .auth()
-    .verifyIdToken(token)
-    .then((decodedToken) => {
-      // Token is valid, extract the user's email
-      const email = decodedToken.email;
-      // Proceed with the usual login logic or save the user's email in the database
-      console.log(email);
-    })
-    .catch((error) => {
-      // Token verification failed
-      console.error("Error verifying ID token:", error);
-      // Handle the error as per your requirements
-    });
-  // const { email } = ticket.getPayload();
+  try {
+    const { token, userType } = req.body;
 
-  // // Check if the user exists in the database
-  // let user = await Mentor.findOne({ email });
+    // Verify the token received from the frontend
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    // Token is valid, extract the user's email
+    const { email, picture } = decodedToken;
 
-  // if (!user) {
-  //   // Create a new user if not found
-  //   user = await Mentor.create({
-  //     name: ticket.getPayload().name,
-  //     email: ticket.getPayload().email,
-  //     mentorDetails: {
-  //       userType: "google",
-  //     },
-  //   });
-  // }
+    if (userType === "mentor") {
+      // Check if the user exists in the database
+      let user = await Mentor.findOne({ email });
 
-  // // Generate and send the authentication token
-  // const authToken = generateToken(user._id);
+      if (!user) {
+        let user = await Student.findOne({ email });
+        if (user) {
+          res.status(401);
+          throw new Error(
+            "User already exists as a student with this email, please login with student as userType"
+          );
+        }
+        // Create a new user if not found
+        user = await Mentor.create({
+          name: decodedToken.name,
+          email: decodedToken.email,
+          mentorDetails: {
+            userType,
+            image: picture,
+          },
+        });
+      }
 
-  // res.json({
-  //   _id: user._id,
-  //   name: user.name,
-  //   email: user.email,
-  //   image: user.mentorDetails.image,
-  //   token: authToken,
-  //   userType: "google",
-  // });
+      // Generate and send the authentication token
+      const authToken = generateToken(user._id);
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        image: picture,
+        token: authToken,
+        userType,
+      });
+    } else {
+      // Check if the user exists in the database
+      let user = await Student.findOne({ email });
+
+      if (!user) {
+        let user = await Mentor.findOne({ email });
+        if (user) {
+          res.status(401);
+          throw new Error(
+            "User already exists as a mentor with this email, please login with mentor as userType"
+          );
+        }
+        // Create a new user if not found
+        user = await Student.create({
+          name: decodedToken.name,
+          email: decodedToken.email,
+          mentorDetails: {
+            userType,
+            image: picture,
+          },
+        });
+      }
+      // Generate and send the authentication token
+      const authToken = generateToken(user._id);
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        image: picture,
+        token: authToken,
+        userType,
+      });
+    }
+  } catch (error) {
+    // Token verification failed
+    console.error(error.message);
+    // Handle the error as per your requirements
+    res.status(401).json({ error: error.message });
+  }
 });
 
 const getUserProfile = asyncHandler(async (req, res) => {

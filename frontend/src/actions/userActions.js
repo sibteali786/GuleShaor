@@ -105,10 +105,7 @@ export const loginWithGoogle = (email, userType, token) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error?.response?.data.error,
     });
   }
 };
