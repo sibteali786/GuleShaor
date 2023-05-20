@@ -55,7 +55,7 @@ const Mentors = ({ possiblePathsRef }) => {
           <Message>{error}</Message>
         </div>
       ) : !errorMentor ? (
-        <div className="flex flex-col justify-center content-center mb-4">
+        <div className="flex flex-col justify-center items-center mb-4">
           <Grid
             container
             spacing={2}
@@ -63,11 +63,11 @@ const Mentors = ({ possiblePathsRef }) => {
             className="px-[4rem] pt-[2rem] pb-4"
             style={{ marginTop: "0" }}
           >
-            {mentors.map((mentor) => (
-              <Grid key={mentor._id} item xs={12} sm={6} md={4} lg={3}>
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {mentors.map((mentor) => (
                 <Users mentor={mentor} />
-              </Grid>
-            ))}
+              ))}
+            </ul>
           </Grid>
           <Paginate
             pages={pages}

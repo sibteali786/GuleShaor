@@ -22,27 +22,11 @@ const Users = ({ mentor }) => {
     imgPath = `/${imgPath}`;
   }
   return (
-    <div>
-      <div className="card-container border rounded-2 shadow">
-        <span
-          className={
-            location.pathname === "/query" ||
-            location.pathname?.replace("%20", " ") ===
-              `/query/search/${keyword}` ||
-            possiblePathsRef.current.includes(location.pathname)
-              ? mentor?.mentorDetails?.userType === "Pro"
-                ? "Pro"
-                : "Free"
-              : mentor?.studentDetails?.userType === "Pro"
-              ? "Pro"
-              : "Free"
-          }
-        >
-          {location.pathname.includes("/query") ||
-          possiblePathsRef.current.includes(location.pathname)
-            ? mentor?.mentorDetails?.userType
-            : mentor?.studentDetails?.userType}
-        </span>
+    <li
+      key={mentor.email}
+      className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
+    >
+      <div className="flex flex-1 flex-col p-8">
         <Link
           to={
             location.pathname.includes("/query") ||
@@ -52,7 +36,7 @@ const Users = ({ mentor }) => {
           }
         >
           <img
-            className="round d-inline"
+            className="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
             src={
               imgPath.length > 0
                 ? imgPath.length > 1
@@ -63,49 +47,38 @@ const Users = ({ mentor }) => {
             alt={mentor?.name}
           />
         </Link>
-        <h5 className="xs:text-lg md:text-xl my-1">{mentor?.name}</h5>
-        <a
-          href={`/query/${mentor?._id}`}
-          alt="username"
-          className="text-gray-500 hover:text-blue-800 my-1"
-        >
-          {location.pathname.includes("/query") ||
-          possiblePathsRef.current.includes(location.pathname)
-            ? mentor?.mentorDetails?.username
-            : mentor?.studentDetails?.username}
-        </a>
-        {location.pathname.includes("/query") ? (
-          <p className="py-1 my-0 xs:text-md md:text-lg">
-            {mentor?.mentorDetails?.designation}
-          </p>
-        ) : (
-          <p className="py-1 my-0 xs:text-md md:text-lg">
-            {mentor?.studentDetails?.designation}
-          </p>
-        )}
-        <div className="buttons">
-          <button className="primary mx-2 px-1">Message</button>
-        </div>
-        <div className="skills">
-          <h6>Skills</h6>
-          <ul>
-            {mentor?.mentorDetails?.technical.length > 0
+        <h3 className="mt-6 text-sm font-medium text-gray-900">
+          {mentor.name}
+        </h3>
+        <dl className="mt-1 flex flex-grow flex-col justify-between">
+          <dt className="sr-only">Title</dt>
+          <dd className="text-sm text-gray-500">
+            {location.pathname.includes("/query")
+              ? mentor.mentorDetails.designation
+              : mentor.studentDetails.designation}
+          </dd>
+          <dt className="sr-only">Role</dt>
+          <dd className="mt-3 space-x-2 space-y-2">
+            {location.pathname.includes("/query")
               ? mentor?.mentorDetails?.technical
-                  ?.slice(0, 5)
-                  .map((skill, idx) => (
-                    <li className="py-1 px-2 mx-1 mb-2 rounded-1" key={idx}>
+                  .slice(0, 4)
+                  .map((skill) => (
+                    <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                       {skill}
-                    </li>
+                    </span>
                   ))
-              : mentor?.about?.skills?.slice(0, 5).map((skill, idx) => (
-                  <li className="py-1 px-2 mx-1 mb-2 rounded-1" key={idx}>
-                    {skill}
-                  </li>
-                ))}
-          </ul>
-        </div>
+              : mentor?.studentDetails?.technical
+                  .slice(0, 4)
+                  .map((skill) => (
+                    <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                      {skill}
+                    </span>
+                  ))}
+          </dd>
+        </dl>
       </div>
-    </div>
+      <div></div>
+    </li>
   );
 };
 
