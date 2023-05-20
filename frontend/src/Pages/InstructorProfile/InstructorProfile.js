@@ -26,7 +26,6 @@ import {
   listMentorDetails,
   listStudentsOfMentor,
 } from "../../actions/mentorActions";
-import { InlineWidget } from "react-calendly";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 const InstructorProfile = () => {
