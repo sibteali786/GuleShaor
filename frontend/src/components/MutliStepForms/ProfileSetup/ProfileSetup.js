@@ -97,21 +97,20 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
   const twitter = watch("twitter", "");
   const linkedIn = watch("linkedIn", "");
   const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.userDetails);
   const {
     loading: loadingUserDetails,
     error: errorUserDetails,
-    user,
-  } = userDetails;
+    userInfo,
+  } = useSelector((state) => state.userLogin);
   const { type } = useSelector((state) => state.lastAction);
-  const userType = user?.userType;
+  const userType = userInfo?.userType;
 
   // Form Submission
   const submitHandler = (data) => {
     const twitter = "https://twitter.com/" + data?.twitter;
     const linkedIn = "https://www.linekdin/" + data?.linkedIn;
     const portfolioLink = "https://" + data?.portfolioLink;
-
+    console.log(userType);
     // TODO: add submit handler
     if (userType === "mentor") {
       setUserDetails({
@@ -121,7 +120,7 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
           technical: data?.technical.split(","),
           category: data?.category,
           portfolioLink,
-          userType: user?.userType,
+          userType: userInfo?.userType,
         },
         about: {
           ...UserDetails.about,
@@ -138,10 +137,14 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
         ...UserDetails,
         userDetails: {
           ...UserDetails.userDetails,
+          technical: data?.technical.split(","),
+          category: data?.category,
           portfolioLink,
+          userType: userInfo?.userType,
         },
         about: {
           ...UserDetails.about,
+          details: data?.about,
           randomAchievement: data?.achievement,
           socialMedia: {
             twitter,
@@ -186,26 +189,11 @@ const ProfileSetup = ({ prevStep, nextStep, UserDetails, setUserDetails }) => {
       setValue("randomAchievement", UserDetails?.about?.randomAchievement);
       setValue("twitter", UserDetails?.about?.socialMedia?.twitter);
       setValue("linkedIn", UserDetails?.about?.socialMedia?.linkedin);
-    } else if (
-      user?.mentorDetails?.technical?.length > 0 ||
-      user?.mentorDetails?.interpersonal?.length > 0 ||
-      user?.mentorDetails?.portfolioLink?.length > 0
-    ) {
-      setValue("technical", user?.mentorDetails?.technical);
-      setValue("category", user?.mentorDetails?.category);
-      setValue("portfolioLink", user?.mentorDetails?.portfolioLink);
-      setValue("about", user?.mentorDetails?.about?.details);
-      setValue(
-        "randomAchievement",
-        user?.mentorDetails?.about?.randomAchievement
-      );
-      setValue("twitter", user?.mentorDetails?.about?.socialMedia?.twitter);
-      setValue("linkedIn", user?.mentorDetails?.about?.socialMedia?.linkedin);
     }
     if (Object.keys(errors).length !== 0) {
       handleClick();
     }
-  }, [UserDetails, user, dispatch, setValue, errors]);
+  }, [UserDetails, dispatch, setValue, errors]);
 
   return (
     <>

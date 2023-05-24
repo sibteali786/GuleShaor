@@ -246,6 +246,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   const userType = req.body?.userDetails?.userType;
   let user;
+  console.log(userType);
   if (userType === "mentor") {
     user = await Mentor.findById(req.user._id);
   } else if (userType === "student") {
