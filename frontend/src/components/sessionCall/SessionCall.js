@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const SessionCall = () => {
   return (
     <div className="bg-transparent">
-      <div className="mx-auto max-w-7xl py-12 px-[4rem] lg:py-16 lg:px-[4rem]">
+      <div className=" max-w-7xl py-12 lg:py-16">
         <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-stylish">

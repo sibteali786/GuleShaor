@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Success = ({ id }) => {
+const Success = ({ id, userType }) => {
   return (
     <>
       <div className="h-screen bg-[rgba(136, 134, 138, 0.1)] px-4 sm:px-6 md:grid md:place-items-center lg:px-8">
@@ -20,7 +20,9 @@ const Success = ({ id }) => {
               </div>
               <div className="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6">
                 <Link
-                  to={`/query/${id}`}
+                  to={
+                    userType === "mentor" ? `/query/${id}` : `/students/${id}`
+                  }
                   className="inline-flex items-center no-underline rounded-md border border-transparent bg-orange-200 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
                 >
                   Go back to Profile

@@ -121,7 +121,10 @@ const Navbar = ({ setIsAuthenticated }) => {
     setAnchorEl(null);
   };
   return (
-    <div className="navContainer px-[4rem] bg-white py-2" id="navbar">
+    <div
+      className="navContainer px-[2rem] md:px-[4rem] bg-white py-2"
+      id="navbar"
+    >
       <Link to="/">
         <svg
           width="42"

@@ -57,7 +57,7 @@ const settings = {
 };
 const Moto = () => {
   return (
-    <div className="moto-container">
+    <div className="moto-container px-[2rem] md:px-[4rem">
       <div className="WhoWeAre py-[2rem]">
         <div className="span-1">
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
@@ -116,7 +116,7 @@ const Moto = () => {
           </Link>
         </div>
       </div>
-      <div className="WhatWeDo px-[8rem] space-y-10">
+      <div className="WhatWeDo space-y-10">
         <h3>Our Mentors</h3>
         <Slider {...settings} style={{ padding: "0 0" }}>
           <div className="content">
@@ -197,7 +197,7 @@ const Moto = () => {
           </div>
         </Slider>
       </div>
-      <div className="letsColloborate py-[2rem] px-[4rem] sm:px-[2rem] space-y-10">
+      <div className="letsColloborate py-[2rem] space-y-10">
         {/* Its better to convert the text part to collapse so that it can be accesed if needed. Pending Task */}
         <h3>let’s colloborate</h3>
         <div className="cards">

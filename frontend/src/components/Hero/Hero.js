@@ -52,9 +52,9 @@ const Hero = ({ isAuthenticated }) => {
               />
             </div>
             <div className="overflow-hidden">
-              <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-10">
+              <div className="mx-[2rem] md:mx-[4rem] max-w-7xl pb-32 pt-36 sm:pt-60 lg:pt-10">
                 <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
-                  <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
+                  <div className="w-full max-w-2xl lg:shrink-0 xl:max-w-3xl">
                     {isAuthenticated ? (
                       <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                         Expert Mentorship for Your Success: Ask Your Question

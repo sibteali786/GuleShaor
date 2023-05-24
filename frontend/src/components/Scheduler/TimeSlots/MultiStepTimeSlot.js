@@ -40,7 +40,9 @@ const MultiStepTimeSlots = () => {
         {step === 2 && (
           <WhenPeopleCanBook nextStep={nextStep} prevStep={prevStep} />
         )}
-        {step === 3 && <Success id={userInfo?._id} />}
+        {step === 3 && (
+          <Success id={userInfo?._id} userType={userInfo?.userType} />
+        )}
       </FormContainer>
     </div>
   );
