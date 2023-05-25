@@ -4,7 +4,7 @@ import Moto from "./../../components/Moto/Moto";
 
 const Home = ({ isAuthenticated }) => {
   return (
-    <div className="pt-[3rem]">
+    <div>
       <Hero isAuthenticated={isAuthenticated} />
       <Moto />
     </div>

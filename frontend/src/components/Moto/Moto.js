@@ -57,7 +57,7 @@ const settings = {
 };
 const Moto = () => {
   return (
-    <div className="moto-container px-[2rem] md:px-[4rem">
+    <div className="mx-auto moto-container px-[2rem] md:px-[4rem lg:px-[4rem] max-w-7xl ">
       <div className="WhoWeAre py-[2rem]">
         <div className="span-1">
           <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">

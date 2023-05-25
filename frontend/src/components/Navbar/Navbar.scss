@@ -2,14 +2,12 @@
 
 .navContainer {
   z-index: 10;
-  margin: 0 0;
   background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  top: 0;
   width: 100%;
   transition: all 0.3s ease-in-out;
 
@@ -49,7 +47,6 @@
   }
 
   transform: scale(1.2);
-  margin-right: 2rem;
   border: none;
   background-color: transparent;
 

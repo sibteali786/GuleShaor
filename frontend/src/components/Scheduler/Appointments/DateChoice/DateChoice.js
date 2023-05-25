@@ -89,22 +89,23 @@ const DateChoice = ({ nextStep, schedules }) => {
 
     const startMinutes = startTime * 60;
     const endMinutes = endTime * 60;
-
     let currentMinutes = startMinutes;
-    const hours = Math.floor(currentMinutes / 60);
-    const minutes = currentMinutes % 60;
-    const time = new Date(0, 0, 0, hours, minutes).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    timeSlots.push(time);
-    currentMinutes += eventDuration;
+    while (currentMinutes <= endMinutes) {
+      const hours = Math.floor(currentMinutes / 60);
+      const minutes = currentMinutes % 60;
+      console.log(hours, minutes);
+      const time = new Date(0, 0, 0, hours, minutes).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      timeSlots.push(time);
+      currentMinutes += eventDuration;
+    }
   }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={() => handleSubmit(onSubmit)}
       className="flex flex-col space-y-4 my-6"
     >
       <h5 className="font-[Montserrat] mb-4 text-2xl sm:text-3xl md:text-4xl md:font-semibold text-left">

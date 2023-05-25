@@ -122,7 +122,7 @@ const Navbar = ({ setIsAuthenticated }) => {
   };
   return (
     <div
-      className="navContainer px-[2rem] md:px-[4rem] bg-white py-2"
+      className="mx-auto navContainer md:px-[4rem] bg-white py-2"
       id="navbar"
     >
       <Link to="/">

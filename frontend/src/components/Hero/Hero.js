@@ -52,7 +52,7 @@ const Hero = ({ isAuthenticated }) => {
               />
             </div>
             <div className="overflow-hidden">
-              <div className="mx-[2rem] md:mx-[4rem] max-w-7xl pb-32 pt-36 sm:pt-60 lg:pt-10">
+              <div className="mx-auto px-[2rem] md:px-[4rem]  max-w-7xl pb-32 pt-36 sm:pt-60 lg:pt-10">
                 <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                   <div className="w-full max-w-2xl lg:shrink-0 xl:max-w-3xl">
                     {isAuthenticated ? (
