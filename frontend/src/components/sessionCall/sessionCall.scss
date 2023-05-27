@@ -12,3 +12,17 @@ h6 {
     font-family: $fontfamily2;
     text-transform: capitalize;
 }
+
+.icons {
+    &:hover {
+        background: #252c33 !important;
+        color: white !important;
+        cursor: pointer;
+
+        svg {
+            path {
+                fill: white
+            }
+        }
+    }
+}

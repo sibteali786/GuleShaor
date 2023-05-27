@@ -42,7 +42,7 @@ const Resources = () => {
   return (
     <div className="relative bg-gray-50 pb-16 sm:pb-24 lg:pb-32">
       <div className="relative">
-        <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-[100rem] lg:px-8">
           <h2 className="text-lg font-semibold text-black">
             Let's Collaborate
           </h2>
@@ -55,7 +55,7 @@ const Resources = () => {
             condimentum id viverra nulla.
           </p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-md gap-8 px-4 sm:max-w-lg sm:px-6 lg:max-w-7xl lg:grid-cols-3 lg:px-8">
+        <div className="mx-auto mt-12 grid max-w-md gap-8 px-4 sm:max-w-lg sm:px-6 lg:max-w-[100rem] lg:grid-cols-3 lg:px-8">
           {blogPosts.map((post) => (
             <div
               key={post.id}

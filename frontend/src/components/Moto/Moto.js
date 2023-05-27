@@ -57,10 +57,10 @@ const settings = {
 };
 const Moto = () => {
   return (
-    <div className="mx-auto moto-container px-[2rem] md:px-[4rem lg:px-[4rem] max-w-7xl ">
+    <div className="mx-auto moto-container px-[2rem] md:px-[4rem lg:px-[4rem] max-w-[100rem] ">
       <div className="WhoWeAre py-[2rem]">
         <div className="span-1">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal">
+          <h3 className="text-3xl  sm:text-4xl md:text-5xl lg:text-6xl font-normal">
             who we are
           </h3>
           <div className="imageDiv">
@@ -116,8 +116,8 @@ const Moto = () => {
           </Link>
         </div>
       </div>
-      <div className="WhatWeDo space-y-10">
-        <h3>Our Mentors</h3>
+      <div className="WhatWeDo flex flex-col py-[2rem] space-y-28">
+        <h3 className="sm:text-4xl md:text-5xl lg:text-6xl">Our Mentors</h3>
         <Slider {...settings} style={{ padding: "0 0" }}>
           <div className="content">
             <div className="content-overlay"></div>
@@ -197,9 +197,10 @@ const Moto = () => {
           </div>
         </Slider>
       </div>
-      <div className="letsColloborate py-[2rem] space-y-10">
-        {/* Its better to convert the text part to collapse so that it can be accesed if needed. Pending Task */}
-        <h3>let’s colloborate</h3>
+      <div className="letsColloborate flex flex-col py-[2rem] space-y-28">
+        <h3 className="sm:text-4xl md:text-5xl lg:text-6xl">
+          let’s colloborate
+        </h3>
         <div className="cards">
           <Card>
             <CardActionArea>
