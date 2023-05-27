@@ -22,10 +22,10 @@ import ReactPlayer from "react-player/youtube";
 import Courses from "../../components/Courses/Courses";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getMentorSchedulesAction,
   listMentorDetails,
   listStudentsOfMentor,
 } from "../../actions/mentorActions";
-import { InlineWidget } from "react-calendly";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 const InstructorProfile = () => {
@@ -42,10 +42,12 @@ const InstructorProfile = () => {
   const { loadingStudents, errorStudents, students } = studentsOfMentors;
   const { userInfo } = useSelector((state) => state.userLogin);
   const match = useParams();
+  const { id } = useParams();
   useEffect(() => {
     dispatch(listMentorDetails(match.id));
     dispatch(listStudentsOfMentor(match.id));
-  }, [dispatch, match]);
+    dispatch(getMentorSchedulesAction(id));
+  }, [dispatch, match, id]);
   // For collapsing the read more panel
   const [checked, setChecked] = React.useState(false);
 

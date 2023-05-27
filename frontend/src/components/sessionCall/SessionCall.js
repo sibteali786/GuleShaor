@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 const SessionCall = () => {
   return (
     <div className="bg-transparent">
-      <div className="mx-auto max-w-7xl py-12 px-[4rem] lg:py-16 lg:px-[4rem]">
+      <div className=" max-w-[100rem] py-12 lg:py-16">
         <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl font-stylish">
+          <div className="flex flex-col justify-between">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl font-stylish">
               What We Offer
             </h2>
-            <p className="mt-3 max-w-3xl text-md text-gray-800">
+            <p className="mt-3 max-w-3xl md:text-lg lg:text-xl text-gray-800">
               we strongly believe that practical learning experiences are key to
               success in the world of technology. That's why we offer a platform
               that connects individuals with the resources they need to build
@@ -31,7 +31,7 @@ const SessionCall = () => {
             </div>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-0 lg:grid-cols-2">
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"
@@ -63,7 +63,7 @@ const SessionCall = () => {
               </svg>
               <h6 className="text-sm sm:text-md mt-2">Practical Learning</h6>
             </div>
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"
@@ -86,7 +86,7 @@ const SessionCall = () => {
               </svg>
               <h6 className="text-sm sm:text-md mt-2">Resource Library</h6>
             </div>
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"
@@ -129,7 +129,7 @@ const SessionCall = () => {
               </svg>
               <h6 className="text-sm sm:text-md mt-2">Community Networking</h6>
             </div>
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"
@@ -178,7 +178,7 @@ const SessionCall = () => {
               </svg>
               <h6 className="text-sm sm:text-md mt-2">Mentor Match Making</h6>
             </div>
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"
@@ -214,7 +214,7 @@ const SessionCall = () => {
               </svg>
               <h6 className="text-sm sm:text-md mt-2">Accountability Coach</h6>
             </div>
-            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center">
+            <div className="col-span-1 flex bg-gray-50 py-8 px-8 flex-col justify-center items-center icons">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="33"

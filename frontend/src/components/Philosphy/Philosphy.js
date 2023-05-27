@@ -8,7 +8,7 @@ const stats = [
 const Philosphy = () => {
   return (
     <div className="relative pt-20">
-      <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
+      <div className="lg:mx-auto lg:grid lg:max-w-[100rem] lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
         <div className="relative sm:py-16 lg:py-0">
           <div
             aria-hidden="true"

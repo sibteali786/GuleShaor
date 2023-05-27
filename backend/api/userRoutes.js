@@ -4,12 +4,14 @@ const {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  loginWithGoogle,
 } = require("../controllers/userController.js");
 const { protect } = require("../middleware/authMiddleware.js");
 const router = express.Router();
 // async routes have promises returned by the schema in the database
 router.route("/").post(registerUser);
 router.post("/login", authUser);
+router.post("/google", loginWithGoogle);
 router
   .route("/profile")
   .get(protect, getUserProfile)

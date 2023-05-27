@@ -1,3 +1,4 @@
+const event = require("../models/eventModel.js");
 const Student = require("./../models/studentModel.js");
 const asyncHandler = require("express-async-handler");
 
@@ -80,4 +81,15 @@ const getStudentById = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getStudents, getStudentById };
+const getStudentEventsByEmail = asyncHandler(async (req, res) => {
+  const student = await Student.findById(req.params.id);
+  if (student) {
+    const events = await event.find({ menteeEmail: student.email });
+    res.json(events);
+  } else {
+    res.status(404);
+    throw new Error("Student not Found");
+  }
+});
+
+module.exports = { getStudents, getStudentById, getStudentEventsByEmail };
